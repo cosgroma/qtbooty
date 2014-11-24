@@ -39,57 +39,86 @@
 ****************************************************************************/
 
 //! [imports]
-import Qt 4.7
-import "content"
+import QtQuick 1.1
+import myPyQtGraph 1.0
+// import "content"
 //! [imports]
 
 //! [0]
 Rectangle {
     color: "#545454"
-    width: 300; height: 300
+    width: 1191;
+    height: 670
 
-    // Dial with a slider to adjust it
-    Dial {
-        id: dial
-        anchors.centerIn: parent
-        value: sliderValue //slider.x * 100 / (container.width - 34)
+    Image {
+        source: "background.png"
+        anchors.fill: parent
+        fillMode: Image.Tile
     }
 
-    Rectangle {
-        id: container
-        anchors { bottom: parent.bottom; left: parent.left
-            right: parent.right; leftMargin: 20; rightMargin: 20
-            bottomMargin: 10
+    PyQtGraph {
+        id: angleGraphID
+        anchors{
+            top: parent.top
+            left: parent.left
+            topMargin: 50
+            leftMargin: 50
         }
-        height: 16
-
-        radius: 8
-        opacity: 0.7
-        smooth: true
-        gradient: Gradient {
-            GradientStop { position: 0.0; color: "gray" }
-            GradientStop { position: 1.0; color: "white" }
-        }
-
-        Rectangle {
-            id: slider
-            x: 1; y: 1; width: 30; height: 14
-            radius: 6
-            smooth: true
-            gradient: Gradient {
-                GradientStop { position: 0.0; color: "#424242" }
-                GradientStop { position: 1.0; color: "black" }
-            }
-
-            MouseArea {
-                anchors.fill: parent
-                drag.target: parent
-                drag.axis: Drag.XAxis
-                drag.minimumX: 2
-                drag.maximumX: container.width - 32
-                onClicked: sliderPrint(slider.x)
-            }
-        }
+        width: 800
+        height: 300
+        //color: "#f5deb3"
     }
+
+    Text {
+        id: text_Heading
+        anchors{
+            top: parent.top
+            left: parent.left
+            topMargin: 20
+            leftMargin: 50
+        }
+        text: qsTr("PyqtGraph QML Test")
+        font.pixelSize: 12
+    }
+
+
 }
 //! [0]
+
+
+// Rectangle {
+//         id: container
+//         anchors { bottom: parent.bottom; left: parent.left
+//             right: parent.right; leftMargin: 20; rightMargin: 20
+//             bottomMargin: 10
+//         }
+//         height: 16
+
+//         radius: 8
+//         opacity: 0.7
+//         smooth: true
+//         gradient: Gradient {
+//             GradientStop { position: 0.0; color: "gray" }
+//             GradientStop { position: 1.0; color: "white" }
+//         }
+
+//         Rectangle {
+//             id: slider
+//             x: 1; y: 1; width: 30; height: 14
+//             radius: 6
+//             smooth: true
+//             gradient: Gradient {
+//                 GradientStop { position: 0.0; color: "#424242" }
+//                 GradientStop { position: 1.0; color: "black" }
+//             }
+
+//             MouseArea {
+//                 anchors.fill: parent
+//                 drag.target: parent
+//                 drag.axis: Drag.XAxis
+//                 drag.minimumX: 2
+//                 drag.maximumX: container.width - 32
+//                 onClicked: sliderPrint(slider.x)
+//             }
+//         }
+//     }

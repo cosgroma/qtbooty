@@ -6,7 +6,6 @@
 **
 ** This file is part of the QtDeclarative module of the Qt Toolkit.
 **
-** $QT_BEGIN_LICENSE:BSD$
 ** You may use this file under the terms of the BSD license as follows:
 **
 ** "Redistribution and use in source and binary forms, with or without
@@ -34,62 +33,32 @@
 ** THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 ** (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 ** OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
-** $QT_END_LICENSE$
 **
 ****************************************************************************/
-
-//! [imports]
+//![0]
+import Charts 1.0
 import Qt 4.7
-import "content"
-//! [imports]
 
-//! [0]
-Rectangle {
-    color: "#545454"
-    width: 300; height: 300
+Item {
+    width: 300; height: 200
 
-    // Dial with a slider to adjust it
-    Dial {
-        id: dial
+    PieChart {
+        id: aPieChart
         anchors.centerIn: parent
-        value: sliderValue //slider.x * 100 / (container.width - 34)
+        width: 100; height: 100
+        color: "red"
+
+        onChartCleared: console.log("The chart has been cleared")
     }
 
-    Rectangle {
-        id: container
-        anchors { bottom: parent.bottom; left: parent.left
-            right: parent.right; leftMargin: 20; rightMargin: 20
-            bottomMargin: 10
-        }
-        height: 16
+    MouseArea {
+        anchors.fill: parent
+        onClicked: aPieChart.clearChart()
+    }
 
-        radius: 8
-        opacity: 0.7
-        smooth: true
-        gradient: Gradient {
-            GradientStop { position: 0.0; color: "gray" }
-            GradientStop { position: 1.0; color: "white" }
-        }
-
-        Rectangle {
-            id: slider
-            x: 1; y: 1; width: 30; height: 14
-            radius: 6
-            smooth: true
-            gradient: Gradient {
-                GradientStop { position: 0.0; color: "#424242" }
-                GradientStop { position: 1.0; color: "black" }
-            }
-
-            MouseArea {
-                anchors.fill: parent
-                drag.target: parent
-                drag.axis: Drag.XAxis
-                drag.minimumX: 2
-                drag.maximumX: container.width - 32
-                onClicked: sliderPrint(slider.x)
-            }
-        }
+    Text {
+        anchors { bottom: parent.bottom; horizontalCenter: parent.horizontalCenter; bottomMargin: 20 }
+        text: "Click anywhere to clear the chart"
     }
 }
-//! [0]
+//![0]
