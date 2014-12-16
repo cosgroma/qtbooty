@@ -3,7 +3,7 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-11-25 22:27:47
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2014-11-26 08:00:27
+# @Last Modified time: 2014-12-05 22:25:07
 
 import pyqtgraph as pg
 from pyqtgraph.Qt import QtCore, QtGui
@@ -144,6 +144,7 @@ class LineGraph(pg.PlotWidget):
       data = np.array(self.lines[k][1])
       if data.size > 2:
         artist.setData(x=data[:,0], y=data[:,1])
+
 
 if __name__ == "__main__":
   # Create the App

@@ -1,0 +1,1510 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"QPu",
+				"QPictureIO	class"
+			],
+			[
+				"add",
+				"add_label	function"
+			],
+			[
+				"c",
+				"container"
+			],
+			[
+				"slid",
+				"slider_value_callback	function"
+			],
+			[
+				"con",
+				"config_widget	function"
+			],
+			[
+				"a",
+				"add_widget	function"
+			],
+			[
+				"Qt",
+				"QtCore	import"
+			],
+			[
+				"ni",
+				"nitems_arr"
+			],
+			[
+				"n",
+				"ngroups"
+			],
+			[
+				"io",
+				"io_instance"
+			],
+			[
+				"de",
+				"deepcopy"
+			],
+			[
+				"Tr",
+				"TraceMsg"
+			],
+			[
+				"cosine",
+				"cosine_removed	statement"
+			],
+			[
+				"Time",
+				"TimeSeries	class"
+			],
+			[
+				"rep",
+				"repo_status"
+			],
+			[
+				"forest",
+				"forest_prompt"
+			],
+			[
+				"tra",
+				"transpose	function"
+			],
+			[
+				"Pco",
+				"pcores_install"
+			],
+			[
+				"cor",
+				"coregen_base"
+			],
+			[
+				"pc",
+				"pcores_install"
+			],
+			[
+				"sa",
+				"sample_frequency	param"
+			],
+			[
+				"sam",
+				"sample_frequency"
+			],
+			[
+				"code",
+				"code_phase"
+			],
+			[
+				"cod",
+				"code_phase"
+			],
+			[
+				"read",
+				"readlines	function"
+			],
+			[
+				"if",
+				"ifmain	if __name__ == '__main__'"
+			],
+			[
+				"sergenat",
+				"sergeant_engine"
+			],
+			[
+				"sergea",
+				"sergeant_engine"
+			],
+			[
+				"build_fi",
+				"build_files"
+			],
+			[
+				"project_bu",
+				"project_build_fsbl"
+			],
+			[
+				"proje",
+				"project_build_bsp"
+			],
+			[
+				"proj",
+				"project_build_imp"
+			],
+			[
+				"serg",
+				"sergeant_project"
+			],
+			[
+				"ar",
+				"argsparse_use_option"
+			],
+			[
+				"dbu",
+				"debug_printf"
+			],
+			[
+				"sergean",
+				"sergeant_project_run"
+			],
+			[
+				"ca_",
+				"ca_code_chips"
+			],
+			[
+				"args",
+				"argsparse_use_option"
+			],
+			[
+				"arg",
+				"argsparse_use_option"
+			],
+			[
+				"par",
+				"parameters"
+			],
+			[
+				"tracking_reu",
+				"tracking_results"
+			],
+			[
+				"__",
+				"__init__"
+			],
+			[
+				"remote",
+				"remote_repos"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "app.py",
+			"settings":
+			{
+				"buffer_size": 3673,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+			"settings":
+			{
+				"buffer_size": 3567,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/User/Anaconda.sublime-settings",
+			"settings":
+			{
+				"buffer_size": 15154,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "abstract-rendering\nLinux\nMac\n\n0.5.1\n3rd-clause\nBSD\n\nTrue\napptools\n\n4.2.1\nBSD\nFalse\nargcomplete\n0.8.1\nApache\nSoftware\nLicense\nTrue\nastroid\n1.2.1\nLGPL\n\nFalse\nastropy\n0.4.2\nBSD\nTrue\natom\n\n0.3.9\nBSD\nTrue\nbasemap\n1.0.7\nPSF\nFalse\nbcolz\n0.7.1\nBSD\nFalse\nbeautiful-soup\n\n4.3.2\nPSF/MIT\nTrue\nbinstar\n0.7.1\nBSD\nTrue\nbiopython\n1.64\n\nBSD-like\n\nFalse\nbitarray\n\n0.8.1\nPSF\nTrue\nblaze\n0.6.3\nBSD\nTrue\nblist\n1.3.6\nBSD\nFalse\nblz\n0.6.2\nBSD\nTrue\nbokeh\n0.6.1\nNew\nBSD\nTrue\nboto\n\n2.32.1\n\nMIT\nTrue\nbsddb\nLinux\nMac\n1.0\nPSF\nFalse\nbsdiff4\n1.1.4\nBSD\nFalse\ncairo\nLinux\n1.12.2\n\nLGPL\n2.1\nand\nMPL\n1.1\n\nTrue\ncasuarius\n1.1\nLGPL\n\nTrue\ncdecimal\n\n2.3\nBSD\nTrue\ncffi\n\n0.8.6\nMIT\nTrue\nchaco\n4.4.1\nBSD\nTrue\nchameleon\n2.16\n\nBSD-like\n\nFalse\ncheetah\n2.4.4\nMIT\nFalse\nchrpath\nLinux\n0.13\n\nGPL\nFalse\ncolorama\n\n0.3.1\nBSD\nTrue\nconda\n3.7.0\nBSD\nTrue\nconda-api\n1.1.0\nBSD\nFalse\nconda-build\n1.8.2\nBSD\nTrue\nconfigobj\n5.0.6\nBSD\nTrue\ncoverage\n\n3.7.1\nBSD\nFalse\ncryptography\n\n0.5.4\nApache\n2.0\n\nTrue\ncssselect\n0.9.1\nBSD\nFalse\ncubes\n0.10.2\n\nMIT\nFalse\ncurl\nLinux\nMac\n\n7.38.0\n\nMIT/X\nderivate\n\nTrue\ncython\n\n0.21\n\nApache\n2.0\n\nTrue\ncytoolz\n0.7.0\nBSD\nTrue\ndatashape\n0.3.0\nBSD\nTrue\ndateutil\n\n2.1\nBSD\nTrue\ndb\nLinux\nMac\n\n5.3.28\n\nAGPLv3\n\nFalse\ndecorator\n3.4.0\nBSD\nTrue\ndjango\n\n1.7\nBSD\nFalse\ndnspython\n1.10.0\n\nas-is\nFalse\ndocutils\n\n0.12\n\nPublic-Domain,\nPSF,\n2-clause\nBSD,\nGPL3\n\nTrue\ndynd-python\n0.6.5\nBSD\nTrue\necdsa\n0.11\n\nMIT\nFalse\nenable\n\n4.3.0\nBSD\nTrue\nenaml\n0.9.8\nBSD\nTrue\nenvisage\n\n4.4.0\nBSD\nFalse\nephem\n3.7.5.3\nLGPL\n\nFalse\nfaulthandler\n\n2.3\nBSD\nFalse\nfeedparser\n\n5.1.3\nMIT\nFalse\nfiona\n1.1.6\nBSD\nFalse\nflake8\n\n2.2.3\nMIT\nFalse\nflask\n0.10.1\n\nBSD\nTrue\nfreetype\nLinux\nMac\n\n2.4.10\n\nFreeType\nLicense\n\nTrue\nfuture\n\n0.13.1\n\nMIT\nTrue\nfutures\n2.1.6\nBSD\nTrue\ngdal\n\n1.11.0\n\nMIT\nFalse\ngdata\n2.0.18\n\nApache\n2.0\n\nFalse\ngensim\n\n0.10.2\n\nLGPL\n\nFalse\ngeos\nLinux\nMac\n\n3.3.3\nLGPL\n\nFalse\ngevent\n\n1.0.1\nMIT\nTrue\ngevent-websocket\n\n0.9.3\nApache\n\nTrue\ngooglecl\n\n0.9.12\n\nApache\n2.0\n\nFalse\ngreenlet\n\n0.4.4\nMIT\nTrue\ngrin\n\n1.2.1\nBSD\nTrue\ngunicorn\nLinux\nMac\n\n19.1.0\n\nMIT\nFalse\nh5py\n\n2.3.1\nNew\nBSD\nTrue\nhdf5\nLinux\nMac\n\n1.8.13\n\nBSD-style\nTrue\nhtml5lib\n\n0.999\nMIT\nFalse\nhyde\nLinux\nMac\n\n0.8.5\nMIT\nFalse\niopro\n1.6.7\nproprietary\n-\nContinuum\nAnalytics,\nInc.\nFalse\nipython\n2.2.0\nBSD\nTrue\nitsdangerous\n\n0.24\n\nBSD\nLicense\nTrue\njdcal\n1.0\nBSD\nTrue\njinja2\n\n2.7.3\nBSD\nTrue\njpeg\nLinux\nMac\n\n8d\n\nCustom\nfree\nsoftware\nlicense\n\nTrue\nkiwisolver\n\n0.1.3\nBSD\nTrue\nlauncher\nMac\nWindows\n\n1.0.0\nproprietary\n-\nContinuum\nAnalytics,\nInc.\nTrue\nlcms\nLinux\nMac\n\n1.19\n\nMIT\nTrue\nlibdynd\nLinux\nMac\n0.6.5\nBSD\nTrue\nlibffi\nLinux\n\n3.0.13\n\nMIT\nTrue\nlibnetcdf\nLinux\nMac\n4.3.2\nMIT\nFalse\nlibpng\nLinux\nMac\n\n1.5.13\n\nOpen\nSource\nTrue\nlibsodium\nLinux\nMac\n0.4.5\nMIT\nTrue\nlibtiff\nLinux\nMac\n4.0.2\nas-is\nTrue\nlibxml2\nLinux\nMac\n2.9.0\nMIT\nTrue\nlibxslt\nLinux\nMac\n1.1.28\n\nMIT\nTrue\nllvm\nLinux\nMac\n\n3.3\nOpen\nSource\nTrue\nllvmpy\n\n0.12.7\n\nNew\nBSD\nLicense\nTrue\nlogilab-common\n\n0.62.1\n\nLGPL\n\nFalse\nlxml\n\n3.4.0\nBSD\nTrue\nmarkdown\nLinux\nMac\n\n2.5\nBSD\nFalse\nmarkupsafe\n\n0.23\n\nBSD\nTrue\nmathjax\n2.2\nApache\n\nFalse\nmatplotlib\n\n1.4.0\nPSF-based\nTrue\nmayavi\n\n4.3.1\nBSD\nFalse\nmccabe\n\n0.2.1\nExpat\nFalse\nmdp\n3.3\nBSD\nFalse\nmenuinst\nWindows\n\n1.0.4\nBDF\nTrue\nmercurial\n3.1\nGPLv2\nFalse\nmingw\nWindows\n4.7\nGPL\nTrue\nmock\n\n1.0.1\nBSD\nTrue\nmpi4py\nLinux\n\n1.3\nBSD\nTrue\nmpich2\nLinux\n\n1.4.1p1\nmpich\nlicense\nTrue\nmultimethods\n\n1.0.0\nMIT\nFalse\nmultipledispatch\n\n0.4.7\nBSD\nTrue\nnatsort\n3.5.0\nMIT\nFalse\nnetcdf4\n1.1.1\nMIT\nFalse\nnetworkx\n\n1.9.1\nBSD\nTrue\nnltk\n\n3.0.0\nApache\n2.0\n\nTrue\nnode-webkit\nMac\nWindows\n0.10.1\n\nMIT\nTrue\nnose\n\n1.3.4\nLGPL\n\nTrue\nnumba\n0.14.0\n\nnumba\nlicense\nTrue\nnumexpr\n2.3.1\nMIT\nTrue\nnumpy\n1.9.0\nBSD\nTrue\nnumpydoc\n\n0.4\nBSD\nFalse\nopenpyxl\n\n1.8.5\nMIT/Expat\nTrue\nopenssl\nLinux\nMac\n1.0.1h\n\nApache-style\n\nTrue\npandas\n\n0.14.1\n\nBSD\nTrue\npandasql\n\n0.6.1\nBSD\nFalse\nparamiko\n\n1.14.1\n\nLGPL\n\nFalse\npasslib\n1.6.2\nBSD\nFalse\npastedeploy\nLinux\nMac\n1.5.2\nMIT\nFalse\npatchelf\nLinux\n\n0.6\nGPL3\n\nFalse\npatsy\n0.3.0\nBSD\nLicense\nTrue\npep381client\n\n1.5\nAcademic\nFree\nLicense,\nversion\n3\n\nFalse\npep8\n\n1.5.7\nMIT\nLicense\nTrue\npil\n1.1.7\nPIL\nlicense\nTrue\npillow\nLinux\nMac\n\n2.5.1\nStandard\nPIL\nlicense\n\nFalse\npip\n1.5.6\nMIT\nTrue\npixman\nLinux\n\n0.26.2\n\nMIT\nTrue\nply\n3.4\nBSD\nTrue\npsutil\n\n2.1.1\nBSD\nTrue\npy\n\n1.4.25\n\nMIT\nTrue\npy2cairo\nLinux\n\n1.10.0\n\nLGPL\n2.1\nand\nMPL\n1.1\n\nTrue\npyasn1\nLinux\n\n0.1.6\nBSD\nFalse\npyaudio\nMac\n0.2.7\nMIT\nTrue\npycosat\n0.6.1\nMIT\nTrue\npycparser\n2.10\n\nBSD\nTrue\npycrypto\n\n2.6.1\nPublic\nDomain\nTrue\npycurl\nLinux\nMac\n\n7.19.5\n\nLGPL\nand\nMIT/X\n\nTrue\npyface\n\n4.4.0\nBSD\nTrue\npyflakes\n\n0.8.1\nMIT\nTrue\npygments\n\n1.6\nBSD\nTrue\npylint\n\n1.3.1\nGPL\nFalse\npymc\nLinux\n\n2.3.3\nAcademic\nFree\nLicense\nFalse\npymongo\n2.7.2\nApache\n2.0\n\nFalse\npyodbc\n\n3.0.7\nMIT\nFalse\npyopenssl\n0.14\n\nAPL2\n\nTrue\npyparsing\n2.0.1\nMIT\nTrue\npyqt\n\n4.10.4\n\nGPL\nTrue\npyreadline\nWindows\n\n2.0\nBSD\nTrue\npysal\n1.6.0\nNew\nBSD\nLicense\nFalse\npysam\nLinux\nMac\n0.6\nMIT\nFalse\npyserial\n\n2.7\nPSF\nFalse\npytables\n\n3.1.1\nBSD\nTrue\npytest\n\n2.6.3\nMIT\nTrue\npython\n\n2.7.8\nPSF\nTrue\npytz\n\n2014.7\n\nMIT\nTrue\npywin32\nWindows\n219\nPSF\nTrue\npyyaml\n\n3.11\n\nMIT\nTrue\npyzmq\n14.3.1\n\nLGPL\nand\nBSD\n\nTrue\nqt\nLinux\nMac\n\n4.8.5\nLGPL\n\nTrue\nqueuelib\n\n1.2.2\nBSD\nFalse\nreadline\nLinux\nMac\n\n6.2\nGPL\n3\nTrue\nredis\nLinux\nMac\n2.6.9\n3-clause\nBSD\n\nTrue\nredis-py\nLinux\nMac\n\n2.9.1\nMIT\nTrue\nreportlab\n3.1.8\nBSD\nFalse\nrepoze.lru\n\n0.6\nBSD\nFalse\nrequests\n\n2.4.1\nISC\nTrue\nrope\n\n0.9.4\nGPL\nTrue\nrunipy\n\n0.1.1\nBSD\nTrue\nscikit-bio\nLinux\nMac\n\n0.2.0\nBSD\nFalse\nscikit-image\n\n0.10.1\n\nModified\nBSD\n\nTrue\nscikit-learn\n\n0.15.2\n\n3-clause\nBSD\n\nTrue\nscipy\n0.14.0\n\nBSD\nTrue\nscrapy\n\n0.24.4\n\nBSD\nFalse\nsetuptools\n\n5.8\nPSF\nor\nZPL\n\nTrue\nshapely\nLinux\nMac\n1.4.1\nBSD\nFalse\nsip\nLinux\nMac\n4.15.5\n\nGPL\nTrue\nsix\n1.8.0\nMIT\nTrue\nsockjs-tornado\n\n1.0.1\nMIT\nTrue\nsphinx\n\n1.2.3\nBSD\nTrue\nspyder\n\n2.3.1\nMIT\nTrue\nsqlalchemy\n\n0.9.7\nMIT\nTrue\nsqlite\nLinux\nMac\n\n3.8.4.1\nPublic\nDomain\nTrue\nsqlparse\n\n0.1.12\n\nBSD\nFalse\nssh\n1.8.0\nLGPL\n\nFalse\nssl_match_hostname\n\n3.4.0.2\nPSF\nTrue\nstarcluster\nLinux\n0.93.3\n\nLGPL\n\nFalse\nstatsmodels\n0.5.0\n3-clause\nModified\nBSD\nTrue\nsympy\n0.7.5\nNew\nBSD\nTrue\ntheano\nLinux\n\n0.6.0\nBSD\nTrue\ntk\nLinux\nMac\n\n8.5.15\n\nBSD-style\nTrue\ntoolz\n0.7.0\nBSD\nTrue\ntornado\n4.0.2\nApache\n\nTrue\ntraits\n\n4.4.0\nBSD\nTrue\ntraitsui\n\n4.4.0\nBSD\nTrue\ntwisted\n14.0.2\n\nMIT\nFalse\nujson\n1.33\n\nBSD\nTrue\nunicodecsv\n\n0.9.4\nBSD\nTrue\nunixodbc\nLinux\n\n2.3.1\n???\nFalse\nutil-linux\nLinux\n\n2.21\n\nGPL\nTrue\nuuid\n\n1.30\n\n???\nFalse\nvenusian\n\n1.0\nBSD\nFalse\nvtk\n5.10.1\n\nBSD\nFalse\nw3lib\n1.8.1\nBSD\nFalse\nwerkzeug\n\n0.9.6\nBSD\nTrue\nwhoosh\n\n2.5.7\nBSD\nFalse\nworkerpool\nLinux\n\n0.9.2\nMIT\nFalse\nxlrd\n\n0.9.3\nBSD\nTrue\nxlsxwriter\n\n0.5.7\nBSD\nTrue\nxlutils\n1.7.1\nMIT\nFalse\nxlwings\nWindows\n0.2.2\nBSD\n3-clause\n\nTrue\nxlwt\n\n0.7.5\nBSD\nTrue\nyaml\nLinux\nMac\n\n0.1.4\nMIT\nTrue\nyt\nLinux\nMac\n\n3.0.1\nBSD\nFalse\nzeromq\nLinux\nMac\n\n4.0.4\nLGPL\n\nTrue\nzlib\nLinux\nMac\n\n1.2.7\nzlib\n\nTrue\nzope.interface\n\n4.1.1\nZope\nPublic\nLicense\nFalse",
+			"settings":
+			{
+				"buffer_size": 6616,
+				"line_ending": "Unix",
+				"name": "abstract-rendering"
+			}
+		},
+		{
+			"contents": "winterstone                                                 - Framework for PyQt application\n -- LAME\nfluid-nexus                                                 - PyQt4 application that enables one to share messages and data independent of centralized data networks\n* vincent-qt                                                  - Vincent in QtWidgets applications\n--- LAME bad for realtiem\nqt-graph-helpers                                            - orangeqt ploting library\n* qPyProfiler                                                 - Graphical interface to python profiler in PyQt\n* pyqt-distutils                                              - A set of distutils extension for building Qt ui files\nqt-dataflow                                                 - A base for custom visual programming enviroments\n  -- TIGHT\nqt_backport                                                 - Makes PySide/PyQt4 code work with Qt5 (using PyQt5)\npydiq                                                       - Simple open-source DICOM browser/viewer in Python and Qt4.\npyqode.qt                                                   - Provides an abstraction layer on top of the various Qt bindings (PyQt5, PyQt4 and PySide)\nkabaret.gui                                                 - Qt based GUI package for the kabaret framework.\n-- pyqode.designer                                             - Starts Qt Designer with pyqode plugins---\nqtfaststart                                                 - Quicktime atom positioning in Python for fast streaming.\n--LibQuickUI                                                  - UI Extension to PyQt\n-- wallaby                                                     - Wallaby is a powerful yet simple framework for building Qt-based, cross-platform applications in PyQt/PySide with a CouchDB/CouchBase and Elasticsearch backend.\n--introspeqt                                                  - Simple introspector for PySide applications.\n--pycante                                                     - The hotest way to deal with PyQt\neilat-web-browser                                           - QtWebKit based web browser\nOpenGLContext_qt                                            - PyQt4/PySide context for OpenGLContext\nnyamuk                                                      - Python MQTT Client Library\nPyCon_UK_2007_PyQt_and_Qt_Designer                          - PyQt and Qt Designer examples from PyCon UK 2007.\nqte                                                         - PySide-based GUI toolkit\nqrcgen                                                      - Automated generator of Qt resource files (*.qrc), by recursive scanning of directory trees\npyqode-uic                                                  - pyQode Qt ui compiler\nPyQtdesignerplugins                                         - PyQtdesignerplugins installs Qt Designer plugins for PyQt4\nqgmap                                                       - Google Map widget for PySyde/PyQt4\npyqterm                                                     - Simple terminal/console widget for PyQt4 with vt100 support\nPyPaPi                                                      - PyPaPi                                          - Python and Qt Application Framework (PyQt and SQLAlchemy)\nqonda                                                       - A Model-View framework based on Qt Interview\nQtStuff                                                     - Useful classes for working with PySide\\PyQt . Read the documentation here:  http://qtstuff.readthedocs.org/\nPyCon_Italia_2009_PyQt_for_Desktop_and_Embedded_Devices     - Slides from the PyQt for Desktop and Embedded Devices talk at PyCon Italia 2009.\nqtest                                                       - Graphical User Interface for the unittest framework.\nqpython                                                     - An interactive Python shell with PyQt support.\nmake_qt_ui                                                  - Scripts to simplify conversion of *.ui and *.qrc files to Python\nlogview                                                     - A Qt-based log viewer for Python's standard logging package\neasymodel                                                   - Qt Models and Views made easy with general purpose Model and a Widget delegate.\nEuroPython2006_PyQt4_Examples                               - PyQt4 examples from a talk at EuroPython 2006.\npandas-qt                                                   - catches exceptions inside qt applications and writes them to a message box and into a log file\nWebtrendsQT                                                 - Webtrends SQL query tool\nQtumblr                                                     - Qt Tumblr Client based on Opentumblr\nGetting-Started-With-PyQt4                                  - An introduction to PyQt4 for Python programmers.\ntoga-qt                                                     - A Qt backend for the Toga widget toolkit.\n",
+			"settings":
+			{
+				"buffer_size": 4996,
+				"line_ending": "Unix",
+				"name": "winterstone"
+			}
+		},
+		{
+			"file": "/Users/cosgroma/workspace/libs/python/qt_extenstions/qgmap-0.2/qgmap/api_testing.html",
+			"settings":
+			{
+				"buffer_size": 1873,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "Package Control Messages\n========================\n\nTable Editor:\n------------\n\n  # Table Editor\n  \n  ## Overview\n  \n  *Table Editor* is a package for the *Sublime Text 2* and *Sublime Text 3* \n  editor for edit text tables. \n  *Table Editor* is has almost the same keys as Emacs-org mode table editor. \n  \n  *Table Editor* allow on easy way edit text table, it allows:\n  \n  - navigate with tab/shift tab \n  - insert/delete row\n  - insert/delete column\n  - auto align number cells to right, text cells to left, header cells to center\n  - move column left/right\n  - move row up/down\n  - split long cell\n  - join two rows into one\n  - convert selected CSV region into table\n  - direct support subset of wiki table syntax\n      - Simple\n      - EmacsOrgMode\n      - Pandoc(Grid Tables, Pipe Tables)\n      - Multi Markdown(support colspan in alpha status)\n      - reStructuredText\n      - Textile(support colspan and rowspan in alpha status)\n  - auto detect table syntax by view syntax\n  - switch between different table syntax on the fly\n  - temporary disable/enable table editor for current view\n  - customize table syntax with settings\n  - support CJK : Chinese, Japanese, Korean(alpha status)\n  - show demo film in scratch view\n  \n  \n  For more information see\n  \n  * Sublime Text - Select Preferences->Package Settings->Table Editor->README\n  * Online - https://github.com/vkocubinsky/SublimeTableEditor\n  \n  \n  \n  \n  \n",
+			"settings":
+			{
+				"buffer_size": 1419,
+				"line_ending": "Unix",
+				"name": "Package Control Messages",
+				"scratch": true
+			}
+		}
+	],
+	"build_system": "Anaconda Python Builder",
+	"command_palette":
+	{
+		"height": 231.0,
+		"selected_items":
+		[
+			[
+				"IN Pa",
+				"Package Control: Install Package"
+			],
+			[
+				"wrap",
+				"Word Wrap: Toggle"
+			],
+			[
+				"Tab",
+				"Table Editor: Enable for current view"
+			],
+			[
+				"IN P",
+				"Package Control: Install Package"
+			],
+			[
+				"Pret",
+				"HTMLPrettify"
+			],
+			[
+				"in se",
+				"Increment Selection"
+			],
+			[
+				"tog",
+				"View: Toggle Minimap"
+			],
+			[
+				"INs pa",
+				"Package Control: Install Package"
+			],
+			[
+				"In Pa",
+				"Package Control: Install Package"
+			],
+			[
+				"SNi M",
+				"SnippetManager: List"
+			],
+			[
+				"in p",
+				"Package Control: Install Package"
+			],
+			[
+				"IN PA",
+				"Package Control: Install Package"
+			],
+			[
+				"In P",
+				"Package Control: Install Package"
+			],
+			[
+				"iN",
+				"Package Control: Install Package"
+			],
+			[
+				"sav",
+				"Project: Save As"
+			],
+			[
+				"add f",
+				"Project: Add Folder"
+			],
+			[
+				"add p",
+				"Package Control: Add Repository"
+			],
+			[
+				"Add ",
+				"Project: Add Folder"
+			],
+			[
+				"Ad ",
+				"Project: Add Folder"
+			],
+			[
+				"Add fo",
+				"Project: Add Folder"
+			],
+			[
+				"set sy sh",
+				"Set Syntax: Shell Script (Bash)"
+			],
+			[
+				"Dash",
+				"DashDoc: invoke Dash with selected word"
+			],
+			[
+				"in pa",
+				"Package Control: Install Package"
+			],
+			[
+				"Json P",
+				"Pretty JSON: Format (Pretty Print) JSON"
+			],
+			[
+				"IN SE",
+				"Increment Selection"
+			],
+			[
+				"IN Se",
+				"Increment Selection"
+			],
+			[
+				"",
+				"About"
+			],
+			[
+				"nose",
+				"Snippet: noseboiler"
+			],
+			[
+				"En Pa",
+				"Package Control: Enable Package"
+			],
+			[
+				"SET SY Ma",
+				"Set Syntax: Markdown GFM"
+			],
+			[
+				"ASCII PR",
+				"ASCII Presentation: New Slide"
+			],
+			[
+				"ASCII",
+				"Set Syntax: ASCIIPresentation"
+			],
+			[
+				"ASC",
+				"ASCII Presentation: Add Terminal ASCII"
+			],
+			[
+				"AS",
+				"ASCII Presentation: New Slide"
+			],
+			[
+				"IN pa",
+				"Package Control: Install Package"
+			],
+			[
+				"Ma",
+				"Markmon launch"
+			],
+			[
+				"Mar",
+				"Markmon launch"
+			],
+			[
+				"SEt SY Ma",
+				"Set Syntax: Markdown"
+			],
+			[
+				"SEt Sy Ma",
+				"Set Syntax: MultiMarkdown"
+			],
+			[
+				"SET SY Mar",
+				"Set Syntax: Markdown GFM"
+			],
+			[
+				"Set sy Ma",
+				"Set Syntax: Markdown"
+			],
+			[
+				"IN Pak",
+				"Package Control: Install Package"
+			],
+			[
+				"rm pa",
+				"Package Control: Remove Package"
+			],
+			[
+				"rem P",
+				"Package Control: Remove Package"
+			],
+			[
+				"Rem Pa",
+				"Package Control: Remove Package"
+			],
+			[
+				"Rm P",
+				"Package Control: Remove Package"
+			],
+			[
+				"Re Pa",
+				"Package Control: Remove Package"
+			],
+			[
+				"Mark",
+				"Markmon launch"
+			],
+			[
+				"COp hU",
+				"Scope Hunter: Toggle Instant Scoper"
+			],
+			[
+				"REm Pa",
+				"Package Control: Remove Package"
+			],
+			[
+				"INPa",
+				"Package Control: Install Package"
+			],
+			[
+				"IN Pac",
+				"Package Control: Install Package"
+			],
+			[
+				"IN Pack",
+				"Package Control: Install Package"
+			],
+			[
+				"REmov a",
+				"Package Control: Remove Package"
+			],
+			[
+				"Mark ",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"in Pak",
+				"Package Control: Install Package"
+			],
+			[
+				"Server",
+				"SublimeServer: Start SublimeServer"
+			],
+			[
+				"Bro I",
+				"Browser Integration: Launch Browser"
+			],
+			[
+				"Bro I SE",
+				"Browser Integration: Settings (Default)"
+			],
+			[
+				"REmo Pa",
+				"Package Control: Remove Package"
+			],
+			[
+				"Brew IN SE",
+				"Browser Integration: Settings (Default)"
+			],
+			[
+				"Brwo",
+				"Browser Integration: Main Menu"
+			],
+			[
+				"Brow",
+				"Browser Integration: Launch Browser"
+			],
+			[
+				"Markdow",
+				"Preferences: MarkdownEditing Settings – User"
+			],
+			[
+				"Markd",
+				"Markdown: Open with Mou.app"
+			],
+			[
+				"Pack COn",
+				"Package Control: Discover Packages"
+			],
+			[
+				"IN ap",
+				"Package Control: Install Package"
+			],
+			[
+				"Remo Pa",
+				"Package Control: Remove Package"
+			],
+			[
+				"Pack",
+				"Package Control: Add Repository"
+			],
+			[
+				"Gutter The",
+				"SublimeLinter: Choose Gutter Theme"
+			],
+			[
+				"DI Pa",
+				"Package Control: Disable Package"
+			],
+			[
+				"Linter",
+				"SublimeLinter: Toggle Linter"
+			],
+			[
+				"Ena Pa",
+				"Package Control: Enable Package"
+			],
+			[
+				"Che",
+				"SublimeLinter: Choose Lint Mode"
+			],
+			[
+				"Shell",
+				"SublimeREPL: Shell"
+			],
+			[
+				"IN pak",
+				"Package Control: Install Package"
+			],
+			[
+				"Ena ",
+				"Package Control: Enable Package"
+			],
+			[
+				"JSON",
+				"JSON Reindent: reindent file or selection"
+			],
+			[
+				"PRe J",
+				"Pretty JSON: Minify (compress) JSON"
+			],
+			[
+				"Json",
+				"Pretty JSON: Format (Pretty Print) JSON"
+			],
+			[
+				"in pack",
+				"Package Control: Install Package"
+			],
+			[
+				"set sy she",
+				"Set Syntax: Shell Script (Bash)"
+			],
+			[
+				"set s she",
+				"Set Syntax: Shell Script (Bash)"
+			],
+			[
+				"Prey J",
+				"Pretty JSON: Format (Pretty Print) JSON"
+			],
+			[
+				"J",
+				"Pretty JSON: JSON query with ./jq"
+			],
+			[
+				"git",
+				"Git: Change Branch"
+			],
+			[
+				"Snipp fo",
+				"Snippet: For Loop"
+			],
+			[
+				"snip",
+				"SnippetMaker: Edit Snippet"
+			],
+			[
+				"set sy mak",
+				"Set Syntax: Makefile Improved"
+			],
+			[
+				"User ",
+				"Preferences: Settings - User"
+			],
+			[
+				"set syn sh",
+				"Set Syntax: Shell Script (Bash)"
+			],
+			[
+				"SEt Syn Ma",
+				"Set Syntax: MATLAB"
+			],
+			[
+				"Set Syn VH",
+				"Set Syntax: VHDL"
+			],
+			[
+				"SEt Sy VH",
+				"Set Syntax: VHDL"
+			],
+			[
+				"SEt SY VH",
+				"Set Syntax: VHDL"
+			],
+			[
+				"Do",
+				"DocBlockr: Decorate line comment"
+			],
+			[
+				"Set SY Ma",
+				"Set Syntax: MATLAB"
+			],
+			[
+				"INc",
+				"Increment Selection"
+			],
+			[
+				"Dis Pa",
+				"Package Control: Disable Package"
+			],
+			[
+				"Set SYn Jso",
+				"Set Syntax: JSON"
+			],
+			[
+				"IN Pack ",
+				"Package Control: Install Package"
+			],
+			[
+				"IN Paca",
+				"Package Control: Install Package"
+			],
+			[
+				"IN PAC",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 610.0
+	},
+	"console":
+	{
+		"height": 207.0,
+		"history":
+		[
+			"print range(5)",
+			"range(5)",
+			"xrange(5)",
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)",
+			"print(OpenGL.__version__)",
+			"print OpenGL.__version__",
+			"dir(OpenGL)",
+			"print OpenGL.__version__",
+			"print OpenGL.__version__()",
+			"import OpenGL",
+			"print random.random().__doc__()",
+			"print random.random().__doc__",
+			"print random.__doc__",
+			"dir(random)",
+			"print random.__doc__()",
+			"print random.random.__doc__()",
+			"print random.random.__doc__",
+			"random.random()",
+			"random.random(0, 1)",
+			"random.random()",
+			"random.random(0, 1)",
+			"import random",
+			"sys.version[:3]",
+			"import sys",
+			"sys.version[:3]",
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty"
+	],
+	"file_history":
+	[
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/qtbooty.sublime-project",
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/User/PythonImproved.sublime-settings",
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/User/JSON.sublime-settings",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/fancybrowser/fancybrowser.py",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/webkit/webkit.py",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/webkit/js/t.js",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/webkit/t.py",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/graphs/private_canvas.py",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/fancybrowser/jquery.min.js",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/graphs/line.py",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/webkit/index.html",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/webkit/rotations/index.html",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/webkit/cubehelix.js",
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/User/Default (OSX).sublime-keymap",
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/User/docstring.py",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/framework/tabs.py",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/gallery/WidgetGallery.py",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/framework/io_grid.py",
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/Default/Default (OSX).sublime-keymap",
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/User/FileHeader.sublime-settings",
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/User/Anaconda.sublime-settings",
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/Anaconda/Anaconda.sublime-settings",
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/User/Python.sublime-settings",
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/.gitignore",
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/usr/local/lib/python2.7/site-packages/vispy/examples/demo/gloo/atom.py",
+		"/usr/local/lib/python2.7/site-packages/vispy/examples/demo/gloo/offscreen.py",
+		"/usr/local/lib/python2.7/site-packages/vispy/examples/demo/gloo/shadertoy.py",
+		"/usr/local/lib/python2.7/site-packages/vispy/examples/demo/gloo/boids.py",
+		"/usr/local/lib/python2.7/site-packages/vispy/examples/basics/visuals/modular_mesh.py",
+		"/usr/local/lib/python2.7/site-packages/vispy/examples/demo/gloo/jfa/jfa_vispy.py",
+		"/usr/local/lib/python2.7/site-packages/vispy/examples/basics/scene/colored_line.py",
+		"/usr/local/lib/python2.7/site-packages/vispy/examples/basics/scene/isosurface.py",
+		"/usr/local/lib/python2.7/site-packages/vispy/examples/benchmark/simple_vispy.py",
+		"/Users/cosgroma/workspace/sandbox/2.0.2/World.py",
+		"/Users/cosgroma/workspace/sandbox/2.0.2/objects.py",
+		"/Users/cosgroma/workspace/sandbox/2.0.2/vispy_mesh.py",
+		"/Users/cosgroma/workspace/sandbox/2.0.2/vispy_atom.py",
+		"/Users/cosgroma/workspace/sandbox/2.0.2/vispy_space.py",
+		"/Users/cosgroma/workspace/sandbox/2.0.2/visvisball.py",
+		"/Users/cosgroma/workspace/sandbox/2.0.2/visvis4d.py",
+		"/Users/cosgroma/workspace/sandbox/2.0.2/pygl_spheres.py",
+		"/Users/cosgroma/workspace/pip_update",
+		"/Users/cosgroma/workspace/sandbox/2.0.2/vector_buffer.py",
+		"/Users/cosgroma/workspace/sandbox/2.0.2/data/PointList.txt",
+		"/Users/cosgroma/bdoc",
+		"/Users/cosgroma/.pip/pip.log",
+		"/Users/cosgroma/workspace/sandbox/abyss/log/access.log",
+		"/Users/cosgroma/workspace/sandbox/abyss/conf/mime.types",
+		"/Users/cosgroma/workspace/sandbox/abyss/conf/abyss.conf",
+		"/Users/cosgroma/workspace/sandbox/abyss/htdocs/thematrix/index.html",
+		"/Users/cosgroma/workspace/sandbox/abyss/src/server.c",
+		"/Users/cosgroma/workspace/sandbox/abyss/src/http.c",
+		"/Users/cosgroma/workspace/sandbox/abyss/htdocs/index.html",
+		"/Users/cosgroma/workspace/sergeant/guis/gui_assests/CorporalCore/corporal.py",
+		"/Users/cosgroma/workspace/sergeant/guis/QtBooty/tests/apptest.py",
+		"/Users/cosgroma/workspace/sergeant/guis/QtBooty/tests/sdr_control.py",
+		"/Users/cosgroma/workspace/sergeant/guis/QtBooty/tests/main.py",
+		"/Users/cosgroma/workspace/sergeant/guis/QtBooty/tests/app.qml",
+		"/Users/cosgroma/workspace/sergeant/guis/QtBooty/tests/main.qml",
+		"/Users/cosgroma/workspace/sergeant/guis/QtBooty/ui-components/dialcontrol/dialcontrol.py",
+		"/Users/cosgroma/workspace/sergeant/guis/QtBooty/tests/qtbooty_test.py",
+		"/Users/cosgroma/workspace/sergeant/guis/QtBooty/tests/qtbooty_app_test.py",
+		"/Users/cosgroma/workspace/sergeant/guis/QtBooty/tests/sdrcontrol.qml",
+		"/Users/cosgroma/workspace/sergeant/guis/QtBooty/ui-components/dialcontrol/dialcontrol.qml",
+		"/Users/cosgroma/workspace/sergeant/guis/QtBooty/ui-components/dialcontrol/content/Dial.qml",
+		"/Users/cosgroma/workspace/sergeant/guis/QtBooty/modelviews/objectlistmodel/objectlistmodel.py",
+		"/Users/cosgroma/workspace/sergeant/guis/QtBooty/graphs/line.py",
+		"/Users/cosgroma/workspace/sergeant/guis/QtBooty/app.py",
+		"/Users/cosgroma/workspace/sergeant/guis/QtBooty/tests/app_config.json",
+		"/Users/cosgroma/workspace/sergeant/guis/QtBooty/framework/tabs.py",
+		"/Users/cosgroma/workspace/sergeant/guis/QtBooty/tests/timeseries_test.py",
+		"/Users/cosgroma/workspace/sergeant/guis/QtBooty/utils/cpu_stats.py",
+		"/Users/cosgroma/workspace/sergeant/guis/QtBooty/framework/__init__.py",
+		"/Users/cosgroma/workspace/sergeant/guis/QtBooty/widgets/tabs_widget.py",
+		"/Users/cosgroma/workspace/sergeant/guis/QtBooty/__init__.py",
+		"/Users/cosgroma/workspace/sergeant/guis/QtBooty/test.py",
+		"/Users/cosgroma/workspace/sergeant/guis/QtBooty/graphs/__init__.py",
+		"/Users/cosgroma/workspace/sergeant/guis/QtBooty/App.py",
+		"/Users/cosgroma/workspace/sergeant/guis/QtBooty/graphs/TimeSeries.py",
+		"/Users/cosgroma/workspace/utils/dotfiles/.osxbash",
+		"/Users/cosgroma/workspace/utils/dotfiles/.ps1rc",
+		"/Users/cosgroma/workspace/utils/dotfiles/.bashrc",
+		"/Users/cosgroma/workspace/hip/hip-jackie-learning/my_pythonproject/test.py",
+		"/Users/cosgroma/workspace/hip/hip-jackie-learning/my_pythonproject/cookie_monster.py",
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/MarkdownEditing/Markdown.sublime-settings",
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/User/Markdown.sublime-settings",
+		"/Users/cosgroma/workspace/sergeant/docs/log/project_log.md",
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/MarkdownEditing/README.md",
+		"/Users/cosgroma/workspace/sergeant/docs/presentations/security/security_notes.md",
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/User/Markdown (Standard).sublime-settings",
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/MarkdownEditing/Markdown (Standard).sublime-settings",
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/User/SyntaxMgr.sublime-settings",
+		"/Users/cosgroma/workspace/sergeant/tools/devops/argsparse.sh",
+		"/Users/cosgroma/workspace/sergeant/tools/devops/sergeant_pcores.sh",
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/User/Bold and Italic Markers.tmPreferences",
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/MarkdownEditing/Bold and Italic Markers.tmPreferences",
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/User/Markdown Extended.sublime-settings",
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/User/Plain text.sublime-settings",
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/Markdown Preview/MarkdownPreview.sublime-settings",
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/BrowserIntegration/BrowserIntegration.sublime-settings",
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/User/SublimeServer.sublime-settings",
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Installed Packages/VHDL/Syntaxes/VHDL.tmLanguage",
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/User/Package Control.sublime-settings",
+		"/Users/cosgroma/workspace/sergeant/docs/presentations/security/test.sh",
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/Sublimerge Pro/Sublimerge.sublime-settings",
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/SublimeLinter/SublimeLinter.sublime-settings",
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/User/SublimeREPL.sublime-settings",
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/Super Calculator/Super Calculator.sublime-settings",
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/Super Calculator/Default (OSX).sublime-keymap",
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/SublimeREPL/SublimeREPL.sublime-settings",
+		"/Users/cosgroma/workspace/sandbox/python_qtbooty_testing/src/app_config.json",
+		"/Users/cosgroma/workspace/sandbox/python_qtbooty_testing/src/nmapqt.py",
+		"/Users/cosgroma/workspace/sandbox/python_qtbooty_testing/src/qtbooty_test.py",
+		"/Users/cosgroma/workspace/apps/in-development/git-forest/.dep/git-forest-list.sh",
+		"/Users/cosgroma/workspace/apps/in-development/git-forest/gitf-includes/gitf-list.sh",
+		"/Users/cosgroma/workspace/apps/in-development/git-forest/gitf-includes/gitf-shell.sh",
+		"/Users/cosgroma/workspace/apps/in-development/git-forest/gitf",
+		"/Users/cosgroma/workspace/apps/in-development/git-forest/gitf-includes/gitf-config.sh",
+		"/Users/cosgroma/etc/gitf_config.ini",
+		"/Users/cosgroma/workspace/sergeant/guis/QtBooty/graphs/PolarPlotWidget.py",
+		"/Users/cosgroma/workspace/sergeant/guis/QtBooty/private_canvas.py",
+		"/Users/cosgroma/workspace/sandbox/project-euler/001.py",
+		"/Users/cosgroma/workspace/sandbox/project-euler/002.py",
+		"/Users/cosgroma/workspace/sandbox/project-euler/003.py",
+		"/Users/cosgroma/workspace/sergeant/guis/QtBooty/diagrams/diagramscene.py",
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/Git/Git.sublime-settings"
+	],
+	"find":
+	{
+		"height": 29.0
+	},
+	"find_in_files":
+	{
+		"height": 106.0,
+		"where_history":
+		[
+			"/Users/cosgroma/server_workspace/sergeant/projects/test/fsbl",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"|        ",
+			"- ",
+			" ",
+			"zope",
+			".\n",
+			"Monaco",
+			"Inconsolata",
+			"JavaScript",
+			"jQuery",
+			"TimeSeries",
+			"[2]",
+			"label = QtGui.QLabel(",
+			"[1]",
+			"[0]",
+			"[1]",
+			"def ",
+			"def",
+			"setValue",
+			"QtCore.Qt.Horizontal",
+			"dial_defaults",
+			"deepcopy",
+			"make_dial",
+			"):\n",
+			"def make",
+			"edit",
+			"setBuddy",
+			"dial",
+			"setBuddy",
+			", self.bottomRightGroupBox)",
+			"ScrollBar",
+			"scrollBar",
+			"label",
+			"config",
+			"_instance",
+			"Labe",
+			"test_callback",
+			"partial",
+			"partial(test_callback,",
+			"test_callback",
+			"t",
+			"partial",
+			"\")",
+			"button2",
+			"\")",
+			"button",
+			"[0]",
+			"0",
+			"test_callback",
+			"changePalette",
+			"None",
+			"\"\"",
+			"=",
+			"super+ctrl+d",
+			"super+cntrl+d",
+			"():",
+			"self",
+			"button_",
+			"c",
+			"label",
+			"label0",
+			"label",
+			"class",
+			"label",
+			"\"label\": \"\",",
+			"      }, {",
+			"callback",
+			":",
+			"True",
+			"box_enabled",
+			"config_widget",
+			"get_config_widget",
+			"items",
+			"if",
+			"print",
+			"       \n",
+			"|    ",
+			"      ",
+			"      \n",
+			"\"",
+			"tab",
+			"outlin",
+			"return",
+			"nitems_arr",
+			"ngroups",
+			"nitems",
+			"config",
+			"u_projection",
+			"a_rotation",
+			"_setup_textures",
+			"append",
+			"moonRot",
+			"sun",
+			"earth",
+			"sun",
+			"texture",
+			"rawRefence",
+			"TEXTURE",
+			"Texture",
+			"texture",
+			"in /usr/local/",
+			"Could not find any downloads",
+			"No distributions at all ",
+			"Requirement already up-to-date:",
+			" to allow).",
+			"--allow-external",
+			"Downloading/unpacking",
+			"copyfile",
+			"Permission denied:",
+			"--allow-unverified",
+			"Requirement already up-to-date:",
+			"Cleaning up...",
+			"--allow-unverified",
+			"xlrd",
+			"--allow-unverified ",
+			"Terrain",
+			"é ",
+			"TraceMsg",
+			"Trace",
+			"MIMETypeGuessFromFile",
+			"MIMETypeFromExt",
+			"text/",
+			"304",
+			"x: 400",
+			"368",
+			"86",
+			"440",
+			"450",
+			"// PropertyAction { target: ball; property: \"direction\"; value: \"left\" "
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "app.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3673,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								470,
+								478
+							]
+						],
+						"settings":
+						{
+							"c_time":
+							[
+								128,
+								3,
+								99,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								113,
+								0,
+								67,
+								10,
+								7,
+								222,
+								12,
+								5,
+								20,
+								56,
+								57,
+								0,
+								0,
+								0,
+								113,
+								1,
+								133,
+								113,
+								2,
+								82,
+								113,
+								3,
+								46
+							],
+							"syntax": "Packages/Python Improved/PythonImproved.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 4,
+			"sheets":
+			[
+				{
+					"buffer": 1,
+					"file": "/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3567,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1866,
+								1866
+							]
+						],
+						"settings":
+						{
+							"c_time":
+							[
+								128,
+								3,
+								99,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								113,
+								0,
+								67,
+								10,
+								7,
+								222,
+								12,
+								11,
+								1,
+								2,
+								11,
+								0,
+								0,
+								0,
+								113,
+								1,
+								133,
+								113,
+								2,
+								82,
+								113,
+								3,
+								46
+							],
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1126.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/User/Anaconda.sublime-settings",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 15154,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2217,
+								2217
+							]
+						],
+						"settings":
+						{
+							"c_time":
+							[
+								128,
+								3,
+								99,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								113,
+								0,
+								67,
+								10,
+								7,
+								222,
+								12,
+								5,
+								23,
+								47,
+								7,
+								0,
+								0,
+								0,
+								113,
+								1,
+								133,
+								113,
+								2,
+								82,
+								113,
+								3,
+								46
+							],
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 989.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6616,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								155,
+								155
+							]
+						],
+						"settings":
+						{
+							"auto_name": "abstract-rendering",
+							"enable_table_editor": true,
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4996,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2905,
+								2910
+							]
+						],
+						"settings":
+						{
+							"auto_name": "winterstone",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 143.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/Users/cosgroma/workspace/libs/python/qt_extenstions/qgmap-0.2/qgmap/api_testing.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1873,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								912,
+								912
+							]
+						],
+						"settings":
+						{
+							"c_time":
+							[
+								128,
+								3,
+								99,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								113,
+								0,
+								67,
+								10,
+								7,
+								222,
+								12,
+								11,
+								5,
+								8,
+								59,
+								0,
+								0,
+								0,
+								113,
+								1,
+								133,
+								113,
+								2,
+								82,
+								113,
+								3,
+								46
+							],
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 410.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1419,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1419,
+								1419
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"word_wrap": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 85.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 29.0
+	},
+	"input":
+	{
+		"height": 38.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.264496672019,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.anaconda_documentation":
+	{
+		"height": 53.0
+	},
+	"output.exec":
+	{
+		"height": 345.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.scope_viewer":
+	{
+		"height": 116.0
+	},
+	"project": "qtbooty.sublime-project",
+	"replace":
+	{
+		"height": 54.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"~/workspace/apps/git-forest/git-forest.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 1,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 274.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

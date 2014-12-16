@@ -3,10 +3,10 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-11-25 21:43:42
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2014-11-26 08:14:44
+# @Last Modified time: 2014-12-05 22:18:47
 
 import sys
-sys.path.append('/Users/cosgroma/workspace/sergeant/guis')
+sys.path.append('/Users/cosgroma/workspace')
 
 import psutil
 import time
@@ -18,8 +18,8 @@ from QtBooty import framework
 def test_trigger():
   print("yo")
 
-app = App('app_config.json')
-app.main.menus["View"].actions["CPU Statistics"].triggered.connect()
+app = App('../config/app_config.json')
+# app.main.menus["View"].actions["CPU Statistics"].triggered.connect()
 
 tabs = framework.Tabs()
 app.add_widget(tabs)
@@ -34,11 +34,8 @@ tabs.add_tab(ts_dynamic, 'ts_dynamic')
 ts_dynamic.run_test(interval=50, dynamic=True, freqs=[.1, .2, .3])
 
 
-
-
-
-app.add_timer(500, psutil_data_update)
-cpu_usage.start()
+# app.add_timer(500, psutil_data_update)
+# cpu_usage.start()
 app.run()
 
 

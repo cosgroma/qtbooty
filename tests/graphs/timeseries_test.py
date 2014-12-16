@@ -3,7 +3,7 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-11-25 21:43:42
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2014-11-26 05:45:06
+# @Last Modified time: 2014-12-05 20:55:54
 
 import sys
 sys.path.append('/Users/cosgroma/workspace/sergeant/guis')
@@ -15,7 +15,7 @@ import numpy as np
 
 
 
-app = App('app_config.json')
+app = App('../config/app_config.json')
 
 time_series = graphs.TimeSeries()
 

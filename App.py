@@ -1,17 +1,47 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Author: Mathew Cosgrove
+# @Date:   2014-12-05 20:56:57
+# @Last Modified by:   cosgroma
+# @Last Modified time: 2014-12-11 05:08:17
 
+import os
+from os import path
 import sys
+import logging
+import json
 from PyQt4 import QtCore, QtGui
 
-import json
 
 class App(QtGui.QApplication):
-  def __init__(self, json_file):
+  """
+  @summary:
+  """
+  def __init__(self, json_file=None):
+    """
+    @summary:
+    @param json_file:
+    @result:
+    """
     super(App, self).__init__(sys.argv)
-    self.json_file = json_file
-    self.app_settings = json.load(open(json_file))
-    self.main = MainWindow(self.app_settings)
+    self.resources = path.join(path.dirname(__file__), 'resources')
+    # Setup high level logging for this system
+    logging.basicConfig(format='%(asctime)s %(message)s',
+                        datefmt='%m/%d/%Y %I:%M:%S %p')
+    self.logger = logging.getLogger("app")
     self.timers = []
+    self.widgets = dict()
+    self.app_settings = None
 
+    # Process the app configuration file
+    if json_file is not None and os.path.isfile(json_file):
+      self.json_file = json_file
+      self.app_settings = json.load(open(json_file))
+    else:
+      self.logger.critical('config file fucked up : %s' % (json_file))
+
+    self.main = MainWindow(self.app_settings)
+    self.apply_style("default")
 
   def add_widget(self, widget, params=None):
     self.main.layout.addWidget(widget)
@@ -22,264 +52,72 @@ class App(QtGui.QApplication):
     timer.timeout.connect(callback)
     self.timers.append(timer)
 
+  def apply_style(self, name):
+    with open(path.join(self.resources, 'styles', 'style.css'), "r") as style:
+      self.setStyleSheet(style.read())
+
+  def update_status(self, message):
+    self.main.update_status(message)
+
   def run(self):
     for timer in self.timers:
-        timer.start()
+      timer.start()
     self.main.show()
     sys.exit(self.exec_())
 
 
 class MainWindow(QtGui.QMainWindow):
-  def __init__(self, settings):
+  def __init__(self, settings=None):
     super(MainWindow, self).__init__()
     self.settings = settings
     self.menus = None
+    self.layout = None
+
+    # Setup the minimum structure before you process settings
+    self.central = QtGui.QWidget()
+    self.setCentralWidget(self.central)
+    self.layout = QtGui.QVBoxLayout()
+    self.central.setLayout(self.layout)
+
+    # Process user settings
+    if self.settings is not None:
+      self.apply_settings()
+
+  def apply_settings(self):
+    self.central_setup()
+    self.menu_setup()
+
+  def central_setup(self):
     self.setWindowTitle(self.settings["name"])
-
     if self.settings["size"]["policy"] == "bounded":
-
       self.setMinimumSize(self.settings["size"]["min"][0],
                           self.settings["size"]["min"][1])
       self.resize(self.settings["size"]["max"][0],
                   self.settings["size"]["max"][1])
 
+  def menu_setup(self):
     if self.settings["menu"]["enabled"]:
       self.menus = dict()
       for item in self.settings["menu"]["items"]:
         self.menus[item["name"]] = self.menuBar().addMenu(item["name"])
         self.menus[item["name"]].actions = dict()
         for action in item["actions"]:
-          self.menus[item["name"]].actions[action["name"]] = QtGui.QAction(action["name"],
-                                                                           self,
-                                                                           shortcut=action["shortcut"],
-                                                                           statusTip=action["tip"])
+          act = QtGui.QAction(action["name"], self,
+                              shortcut=action["shortcut"],
+                              statusTip=action["tip"])
+          self.menus[item["name"]].actions[action["name"]] = act
           self.menus[item["name"]].addAction(self.menus[item["name"]].actions[action["name"]])
 
+  def update_status(self):
     if self.settings["status"]["enabled"]:
       self.statusBar().showMessage("")
-
-    self.widget = QtGui.QWidget()
-    self.setCentralWidget(self.widget)
-    self.layout = QtGui.QVBoxLayout()
-    self.widget.setLayout(self.layout)
-
-
-    # vbox = QtGui.QVBoxLayout()
-    # vbox.setMargin(5)
-    # vbox.addWidget(topFiller)
-    # vbox.addWidget(self.infoLabel)
-    # vbox.addWidget(bottomFiller)
-    # widget.setLayout(vbox)
-
-    # self.createActions()
-    # self.createMenus()
-
-    # message = "A context menu is available by right-clicking"
-    #
+    # also by default added the CPU percentage and memory usage
 
 
 
-  # def contextMenuEvent(self, event):
-  #   menu = QtGui.QMenu(self)
-  #   menu.addAction(self.cutAct)
-  #   menu.addAction(self.copyAct)
-  #   menu.addAction(self.pasteAct)
-  #   menu.exec_(event.globalPos())
+if __name__ == '__main__':
+  app = App('tests/config/app_config.json')
+  # app.main.menus["File"].actions["New"].triggered.connect(test_trigger)
+  app.run()
+  print("test", )
 
-  # def newFile(self):
-  #   self.infoLabel.setText("Invoked <b>File|New</b>")
-
-  # def open(self):
-  #   self.infoLabel.setText("Invoked <b>File|Open</b>")
-
-  # def save(self):
-  #   self.infoLabel.setText("Invoked <b>File|Save</b>")
-
-  # def print_(self):
-  #   self.infoLabel.setText("Invoked <b>File|Print</b>")
-
-  # def undo(self):
-  #   self.infoLabel.setText("Invoked <b>Edit|Undo</b>")
-
-  # def redo(self):
-  #   self.infoLabel.setText("Invoked <b>Edit|Redo</b>")
-
-  # def cut(self):
-  #   self.infoLabel.setText("Invoked <b>Edit|Cut</b>")
-
-  # def copy(self):
-  #   self.infoLabel.setText("Invoked <b>Edit|Copy</b>")
-
-  # def paste(self):
-  #   self.infoLabel.setText("Invoked <b>Edit|Paste</b>")
-
-  # def bold(self):
-  #   self.infoLabel.setText("Invoked <b>Edit|Format|Bold</b>")
-
-  # def italic(self):
-  #   self.infoLabel.setText("Invoked <b>Edit|Format|Italic</b>")
-
-  # def leftAlign(self):
-  #   self.infoLabel.setText("Invoked <b>Edit|Format|Left Align</b>")
-
-  # def rightAlign(self):
-  #   self.infoLabel.setText("Invoked <b>Edit|Format|Right Align</b>")
-
-  # def justify(self):
-  #   self.infoLabel.setText("Invoked <b>Edit|Format|Justify</b>")
-
-  # def center(self):
-  #   self.infoLabel.setText("Invoked <b>Edit|Format|Center</b>")
-
-  # def setLineSpacing(self):
-  #   self.infoLabel.setText("Invoked <b>Edit|Format|Set Line Spacing</b>")
-
-  # def setParagraphSpacing(self):
-  #   self.infoLabel.setText("Invoked <b>Edit|Format|Set Paragraph Spacing</b>")
-
-  # def about(self):
-  #   self.infoLabel.setText("Invoked <b>Help|About</b>")
-  #   QtGui.QMessageBox.about(self, "About Menu",
-  #       "The <b>Menu</b> example shows how to create menu-bar menus "
-  #       "and context menus.")
-
-  # def aboutQt(self):
-  #   self.infoLabel.setText("Invoked <b>Help|About Qt</b>")
-
-  # def createActions(self):
-  #   self.newAct = QtGui.QAction("&New", self,
-  #       shortcut=QtGui.QKeySequence.New,
-  #       statusTip="Create a new file", triggered=self.newFile)
-
-  #   self.openAct = QtGui.QAction("&Open...", self,
-  #       shortcut=QtGui.QKeySequence.Open,
-  #       statusTip="Open an existing file", triggered=self.open)
-
-  #   self.saveAct = QtGui.QAction("&Save", self,
-  #       shortcut=QtGui.QKeySequence.Save,
-  #       statusTip="Save the document to disk", triggered=self.save)
-
-  #   self.printAct = QtGui.QAction("&Print...", self,
-  #       shortcut=QtGui.QKeySequence.Print,
-  #       statusTip="Print the document", triggered=self.print_)
-
-  #   self.exitAct = QtGui.QAction("E&xit", self, shortcut="Ctrl+Q",
-  #       statusTip="Exit the application", triggered=self.close)
-
-  #   self.undoAct = QtGui.QAction("&Undo", self,
-  #       shortcut=QtGui.QKeySequence.Undo,
-  #       statusTip="Undo the last operation", triggered=self.undo)
-
-  #   self.redoAct = QtGui.QAction("&Redo", self,
-  #       shortcut=QtGui.QKeySequence.Redo,
-  #       statusTip="Redo the last operation", triggered=self.redo)
-
-  #   self.cutAct = QtGui.QAction("Cu&t", self,
-  #       shortcut=QtGui.QKeySequence.Cut,
-  #       statusTip="Cut the current selection's contents to the clipboard",
-  #       triggered=self.cut)
-
-  #   self.copyAct = QtGui.QAction("&Copy", self,
-  #       shortcut=QtGui.QKeySequence.Copy,
-  #       statusTip="Copy the current selection's contents to the clipboard",
-  #       triggered=self.copy)
-
-  #   self.pasteAct = QtGui.QAction("&Paste", self,
-  #       shortcut=QtGui.QKeySequence.Paste,
-  #       statusTip="Paste the clipboard's contents into the current selection",
-  #       triggered=self.paste)
-
-  #   self.boldAct = QtGui.QAction("&Bold", self, checkable=True,
-  #       shortcut="Ctrl+B", statusTip="Make the text bold",
-  #       triggered=self.bold)
-
-  #   boldFont = self.boldAct.font()
-  #   boldFont.setBold(True)
-  #   self.boldAct.setFont(boldFont)
-
-  #   self.italicAct = QtGui.QAction("&Italic",
-  #                                  self,
-  #                                  checkable=True,
-  #                                  shortcut="Ctrl+I",
-  #                                  statusTip="Make the text italic",
-  #                                  triggered=self.italic)
-
-  #   italicFont = self.italicAct.font()
-  #   italicFont.setItalic(True)
-  #   self.italicAct.setFont(italicFont)
-
-  #   self.setLineSpacingAct = QtGui.QAction("Set &Line Spacing...", self,
-  #       statusTip="Change the gap between the lines of a paragraph",
-  #       triggered=self.setLineSpacing)
-
-  #   self.setParagraphSpacingAct = QtGui.QAction(
-  #       "Set &Paragraph Spacing...", self,
-  #       statusTip="Change the gap between paragraphs",
-  #       triggered=self.setParagraphSpacing)
-
-  #   self.aboutAct = QtGui.QAction("&About", self,
-  #       statusTip="Show the application's About box",
-  #       triggered=self.about)
-
-  #   self.aboutQtAct = QtGui.QAction("About &Qt", self,
-  #       statusTip="Show the Qt library's About box",
-  #       triggered=self.aboutQt)
-  #   self.aboutQtAct.triggered.connect(QtGui.qApp.aboutQt)
-
-  #   self.leftAlignAct = QtGui.QAction("&Left Align", self, checkable=True,
-  #       shortcut="Ctrl+L", statusTip="Left align the selected text",
-  #       triggered=self.leftAlign)
-
-  #   self.rightAlignAct = QtGui.QAction("&Right Align", self,
-  #       checkable=True, shortcut="Ctrl+R",
-  #       statusTip="Right align the selected text",
-  #       triggered=self.rightAlign)
-
-  #   self.justifyAct = QtGui.QAction("&Justify", self, checkable=True,
-  #       shortcut="Ctrl+J", statusTip="Justify the selected text",
-  #       triggered=self.justify)
-
-  #   self.centerAct = QtGui.QAction("&Center", self, checkable=True,
-  #       shortcut="Ctrl+C", statusTip="Center the selected text",
-  #       triggered=self.center)
-
-  #   self.alignmentGroup = QtGui.QActionGroup(self)
-  #   self.alignmentGroup.addAction(self.leftAlignAct)
-  #   self.alignmentGroup.addAction(self.rightAlignAct)
-  #   self.alignmentGroup.addAction(self.justifyAct)
-  #   self.alignmentGroup.addAction(self.centerAct)
-  #   self.leftAlignAct.setChecked(True)
-
-  # def createMenus(self):
-  #   self.fileMenu = self.menuBar().addMenu("&File")
-  #   self.fileMenu.addAction(self.newAct)
-  #   self.fileMenu.addAction(self.openAct)
-  #   self.fileMenu.addAction(self.saveAct)
-  #   self.fileMenu.addAction(self.printAct)
-  #   self.fileMenu.addSeparator()
-  #   self.fileMenu.addAction(self.exitAct)
-
-  #   self.editMenu = self.menuBar().addMenu("&Edit")
-  #   self.editMenu.addAction(self.undoAct)
-  #   self.editMenu.addAction(self.redoAct)
-  #   self.editMenu.addSeparator()
-  #   self.editMenu.addAction(self.cutAct)
-  #   self.editMenu.addAction(self.copyAct)
-  #   self.editMenu.addAction(self.pasteAct)
-  #   self.editMenu.addSeparator()
-
-  #   self.helpMenu = self.menuBar().addMenu("&Help")
-  #   self.helpMenu.addAction(self.aboutAct)
-  #   self.helpMenu.addAction(self.aboutQtAct)
-
-  #   self.formatMenu = self.editMenu.addMenu("&Format")
-  #   self.formatMenu.addAction(self.boldAct)
-  #   self.formatMenu.addAction(self.italicAct)
-  #   self.formatMenu.addSeparator().setText("Alignment")
-  #   self.formatMenu.addAction(self.leftAlignAct)
-  #   self.formatMenu.addAction(self.rightAlignAct)
-  #   self.formatMenu.addAction(self.justifyAct)
-  #   self.formatMenu.addAction(self.centerAct)
-  #   self.formatMenu.addSeparator()
-  #   self.formatMenu.addAction(self.setLineSpacingAct)
-  #   self.formatMenu.addAction(self.setParagraphSpacingAct)
