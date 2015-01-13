@@ -2,6 +2,7 @@
 	"build_systems":
 	[
 		{
+			"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
 			"name": "Anaconda Python Builder",
 			"selector": "source.python",
 			"shell_cmd": "python -u \"$file\""
@@ -12,6 +13,10 @@
 		{
 			"follow_symlinks": true,
 			"path": "."
+		},
+		{
+			"follow_symlinks": true,
+			"path": "/Users/cosgroma/workspace/libs/zguide"
 		}
 	]
 }

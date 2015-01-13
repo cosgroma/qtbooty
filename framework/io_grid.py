@@ -3,8 +3,8 @@
 # -*- coding: utf-8 -*-
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-05 22:26:11
-# @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2014-12-10 01:34:55
+# @Last Modified by:   mac
+# @Last Modified time: 2014-12-30 04:27:28
 
 from PyQt4 import QtGui, QtCore, Qt
 from PyQt4.QtCore import pyqtSignal, pyqtSlot
@@ -31,18 +31,27 @@ dial_defaults = {"label": "", "value": 0, "callback": None, "args": None}
 
 o_map = {"h": QtCore.Qt.Horizontal, "v": QtCore.Qt.Vertical}
 
-def get_layout(name):
+def get_layout(args):
   """
   @summary:
   @param name:
   @result:
   """
+  name = args[0]
+  align = args[1]
+
   if name == "h":
-    return QtGui.QHBoxLayout()
+    layout = QtGui.QHBoxLayout()
   elif name == "v":
-    return QtGui.QVBoxLayout()
+    layout = QtGui.QVBoxLayout()
   elif name == "g":
-    return QtGui.QGridLayout()
+    layout = QtGui.QGridLayout()
+
+  if align == "t":
+    layout.setAlignment(QtCore.Qt.AlignTop)
+
+  return layout
+
 
 
 def make_label(config):
@@ -57,6 +66,8 @@ def make_button(config):
   instance.update(config)
   if instance["type"] == "radio":
     button = QtGui.QRadioButton(instance["label"])
+  elif instance["type"] == "check":
+    button = QtGui.QCheckBox(instance["label"])
   else:
     button = QtGui.QPushButton(instance["label"])
   if instance["callback"] is not None:
@@ -170,7 +181,7 @@ class IOGrid(QtGui.QWidget):
     @result:
     """
     # Set default config layout for self widget
-    config = {"layout": "h"}
+    config = {"layout": ["h", "na"]}
     # populated the default groups, check if well formed
     if not ngroups == len(nitems_arr):
       self.logger.error("nitems_arr length (%d) doest not match ngroups (%d)" % (ngroups, nitems_arr))
@@ -233,7 +244,7 @@ if __name__ == '__main__':
 
   groups[0]["box_enabled"] = False
   groups[0]["box_name"] = "class::label"
-  groups[0]["layout"] = "h"
+  groups[0]["layout"] = ["h", "na"]
 
   # label_defaults = {"label": ""}
   groups[0]["items"] = [{
@@ -246,7 +257,7 @@ if __name__ == '__main__':
 
   groups[1]["box_enabled"] = True
   groups[1]["box_name"] = "class::edit"
-  groups[1]["layout"] = "h"
+  groups[1]["layout"] = ["h", "na"]
 
   # edit_defaults = {"type": "default", "label": None, "default": "", "callback": None, "args": None}
   groups[1]["items"] = [{
@@ -272,7 +283,7 @@ if __name__ == '__main__':
   # button_defaults = {"type": "default", "label": "", "callback": None, "args": None}
   groups[2]["box_enabled"] = True
   groups[2]["box_name"] = "class::button"
-  groups[2]["layout"] = "h"
+  groups[2]["layout"] = ["h", "na"]
 
   groups[2]["items"] = [{
       "class": "button",
@@ -296,7 +307,7 @@ if __name__ == '__main__':
 
   groups[3]["box_enabled"] = True
   groups[3]["box_name"] = "class::slider"
-  groups[3]["layout"] = "v"
+  groups[3]["layout"] = ["v", "na"]
 
   groups[3]["items"] = [{
       "class": "slider",
@@ -314,13 +325,7 @@ if __name__ == '__main__':
   ]
 
   # scroll_defaults = {"label": "", "value": 0, "orientation": "h", "callback": None, "args": None}
-
-
   # dial_defaults = {"label": "", "value": 0, "callback": None, "args": None}
-
-
   io_grid.config_widget(config)
-
   app.add_widget(io_grid)
-
   app.run()

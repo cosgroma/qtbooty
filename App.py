@@ -3,12 +3,15 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-05 20:56:57
 # @Last Modified by:   cosgroma
-# @Last Modified time: 2014-12-11 05:08:17
+# @Last Modified time: 2015-01-12 21:29:27
+
+import logging
+logger = logging.getLogger(__name__)
 
 import os
 from os import path
 import sys
-import logging
+# import logging
 import json
 from PyQt4 import QtCore, QtGui
 
@@ -26,9 +29,8 @@ class App(QtGui.QApplication):
     super(App, self).__init__(sys.argv)
     self.resources = path.join(path.dirname(__file__), 'resources')
     # Setup high level logging for this system
-    logging.basicConfig(format='%(asctime)s %(message)s',
-                        datefmt='%m/%d/%Y %I:%M:%S %p')
-    self.logger = logging.getLogger("app")
+    # logging.basicConfig(format='%(asctime)s %(message)s',
+    #                     datefmt='%m/%d/%Y %I:%M:%S %p')
     self.timers = []
     self.widgets = dict()
     self.app_settings = None
@@ -38,7 +40,7 @@ class App(QtGui.QApplication):
       self.json_file = json_file
       self.app_settings = json.load(open(json_file))
     else:
-      self.logger.critical('config file fucked up : %s' % (json_file))
+      logger.critical('config file fucked up : %s' % (json_file))
 
     self.main = MainWindow(self.app_settings)
     self.apply_style("default")
@@ -51,6 +53,9 @@ class App(QtGui.QApplication):
     timer.setInterval(interval)
     timer.timeout.connect(callback)
     self.timers.append(timer)
+
+  def add_close_callback(self, callback):
+    self.main.set_close_callback(callback)
 
   def apply_style(self, name):
     with open(path.join(self.resources, 'styles', 'style.css'), "r") as style:
@@ -72,6 +77,7 @@ class MainWindow(QtGui.QMainWindow):
     self.settings = settings
     self.menus = None
     self.layout = None
+    self.close_callback = None
 
     # Setup the minimum structure before you process settings
     self.central = QtGui.QWidget()
@@ -108,15 +114,25 @@ class MainWindow(QtGui.QMainWindow):
           self.menus[item["name"]].actions[action["name"]] = act
           self.menus[item["name"]].addAction(self.menus[item["name"]].actions[action["name"]])
 
+  def closeEvent(self, event):
+    if self.close_callback is not None:
+      self.close_callback()
+
   def update_status(self):
     if self.settings["status"]["enabled"]:
       self.statusBar().showMessage("")
     # also by default added the CPU percentage and memory usage
 
+  def set_close_callback(self, callback):
+    self.close_callback = callback
 
+
+def close_test():
+  print("Closed")
 
 if __name__ == '__main__':
   app = App('tests/config/app_config.json')
+  # app.add_close_callback(close_test)
   # app.main.menus["File"].actions["New"].triggered.connect(test_trigger)
   app.run()
   print("test", )

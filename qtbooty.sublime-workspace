@@ -4,12 +4,36 @@
 		"selected_items":
 		[
 			[
-				"QPu",
-				"QPictureIO	class"
+				"add",
+				"add_close_callback	function"
 			],
 			[
-				"add",
-				"add_label	function"
+				"add_",
+				"add_pointset	function"
+			],
+			[
+				"update_",
+				"update_surface_plot	function"
+			],
+			[
+				"graph",
+				"graph_updater	module"
+			],
+			[
+				"M",
+				"MplCanvas	class"
+			],
+			[
+				"ca",
+				"canvas	statement"
+			],
+			[
+				"conf",
+				"config_init	function"
+			],
+			[
+				"QPu",
+				"QPictureIO	class"
 			],
 			[
 				"c",
@@ -180,72 +204,146 @@
 	"buffers":
 	[
 		{
+			"file": "tests/graphs/surf_test.py",
+			"settings":
+			{
+				"buffer_size": 2361,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "graphs/visvis_canvas.py",
+			"settings":
+			{
+				"buffer_size": 7080,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "tests/graphs/polar_test.py",
+			"settings":
+			{
+				"buffer_size": 2287,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "tests/graphs/timeseries_test.py",
+			"settings":
+			{
+				"buffer_size": 1475,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "app.py",
 			"settings":
 			{
-				"buffer_size": 3673,
+				"buffer_size": 4101,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+			"file": "/Users/cosgroma/workspace/libs/zguide/examples/Python/asyncsrv.py",
 			"settings":
 			{
-				"buffer_size": 3567,
+				"buffer_size": 3292,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/User/Anaconda.sublime-settings",
+			"file": "/Users/cosgroma/workspace/libs/zguide/examples/Python/espresso.py",
 			"settings":
 			{
-				"buffer_size": 15154,
+				"buffer_size": 3052,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "abstract-rendering\nLinux\nMac\n\n0.5.1\n3rd-clause\nBSD\n\nTrue\napptools\n\n4.2.1\nBSD\nFalse\nargcomplete\n0.8.1\nApache\nSoftware\nLicense\nTrue\nastroid\n1.2.1\nLGPL\n\nFalse\nastropy\n0.4.2\nBSD\nTrue\natom\n\n0.3.9\nBSD\nTrue\nbasemap\n1.0.7\nPSF\nFalse\nbcolz\n0.7.1\nBSD\nFalse\nbeautiful-soup\n\n4.3.2\nPSF/MIT\nTrue\nbinstar\n0.7.1\nBSD\nTrue\nbiopython\n1.64\n\nBSD-like\n\nFalse\nbitarray\n\n0.8.1\nPSF\nTrue\nblaze\n0.6.3\nBSD\nTrue\nblist\n1.3.6\nBSD\nFalse\nblz\n0.6.2\nBSD\nTrue\nbokeh\n0.6.1\nNew\nBSD\nTrue\nboto\n\n2.32.1\n\nMIT\nTrue\nbsddb\nLinux\nMac\n1.0\nPSF\nFalse\nbsdiff4\n1.1.4\nBSD\nFalse\ncairo\nLinux\n1.12.2\n\nLGPL\n2.1\nand\nMPL\n1.1\n\nTrue\ncasuarius\n1.1\nLGPL\n\nTrue\ncdecimal\n\n2.3\nBSD\nTrue\ncffi\n\n0.8.6\nMIT\nTrue\nchaco\n4.4.1\nBSD\nTrue\nchameleon\n2.16\n\nBSD-like\n\nFalse\ncheetah\n2.4.4\nMIT\nFalse\nchrpath\nLinux\n0.13\n\nGPL\nFalse\ncolorama\n\n0.3.1\nBSD\nTrue\nconda\n3.7.0\nBSD\nTrue\nconda-api\n1.1.0\nBSD\nFalse\nconda-build\n1.8.2\nBSD\nTrue\nconfigobj\n5.0.6\nBSD\nTrue\ncoverage\n\n3.7.1\nBSD\nFalse\ncryptography\n\n0.5.4\nApache\n2.0\n\nTrue\ncssselect\n0.9.1\nBSD\nFalse\ncubes\n0.10.2\n\nMIT\nFalse\ncurl\nLinux\nMac\n\n7.38.0\n\nMIT/X\nderivate\n\nTrue\ncython\n\n0.21\n\nApache\n2.0\n\nTrue\ncytoolz\n0.7.0\nBSD\nTrue\ndatashape\n0.3.0\nBSD\nTrue\ndateutil\n\n2.1\nBSD\nTrue\ndb\nLinux\nMac\n\n5.3.28\n\nAGPLv3\n\nFalse\ndecorator\n3.4.0\nBSD\nTrue\ndjango\n\n1.7\nBSD\nFalse\ndnspython\n1.10.0\n\nas-is\nFalse\ndocutils\n\n0.12\n\nPublic-Domain,\nPSF,\n2-clause\nBSD,\nGPL3\n\nTrue\ndynd-python\n0.6.5\nBSD\nTrue\necdsa\n0.11\n\nMIT\nFalse\nenable\n\n4.3.0\nBSD\nTrue\nenaml\n0.9.8\nBSD\nTrue\nenvisage\n\n4.4.0\nBSD\nFalse\nephem\n3.7.5.3\nLGPL\n\nFalse\nfaulthandler\n\n2.3\nBSD\nFalse\nfeedparser\n\n5.1.3\nMIT\nFalse\nfiona\n1.1.6\nBSD\nFalse\nflake8\n\n2.2.3\nMIT\nFalse\nflask\n0.10.1\n\nBSD\nTrue\nfreetype\nLinux\nMac\n\n2.4.10\n\nFreeType\nLicense\n\nTrue\nfuture\n\n0.13.1\n\nMIT\nTrue\nfutures\n2.1.6\nBSD\nTrue\ngdal\n\n1.11.0\n\nMIT\nFalse\ngdata\n2.0.18\n\nApache\n2.0\n\nFalse\ngensim\n\n0.10.2\n\nLGPL\n\nFalse\ngeos\nLinux\nMac\n\n3.3.3\nLGPL\n\nFalse\ngevent\n\n1.0.1\nMIT\nTrue\ngevent-websocket\n\n0.9.3\nApache\n\nTrue\ngooglecl\n\n0.9.12\n\nApache\n2.0\n\nFalse\ngreenlet\n\n0.4.4\nMIT\nTrue\ngrin\n\n1.2.1\nBSD\nTrue\ngunicorn\nLinux\nMac\n\n19.1.0\n\nMIT\nFalse\nh5py\n\n2.3.1\nNew\nBSD\nTrue\nhdf5\nLinux\nMac\n\n1.8.13\n\nBSD-style\nTrue\nhtml5lib\n\n0.999\nMIT\nFalse\nhyde\nLinux\nMac\n\n0.8.5\nMIT\nFalse\niopro\n1.6.7\nproprietary\n-\nContinuum\nAnalytics,\nInc.\nFalse\nipython\n2.2.0\nBSD\nTrue\nitsdangerous\n\n0.24\n\nBSD\nLicense\nTrue\njdcal\n1.0\nBSD\nTrue\njinja2\n\n2.7.3\nBSD\nTrue\njpeg\nLinux\nMac\n\n8d\n\nCustom\nfree\nsoftware\nlicense\n\nTrue\nkiwisolver\n\n0.1.3\nBSD\nTrue\nlauncher\nMac\nWindows\n\n1.0.0\nproprietary\n-\nContinuum\nAnalytics,\nInc.\nTrue\nlcms\nLinux\nMac\n\n1.19\n\nMIT\nTrue\nlibdynd\nLinux\nMac\n0.6.5\nBSD\nTrue\nlibffi\nLinux\n\n3.0.13\n\nMIT\nTrue\nlibnetcdf\nLinux\nMac\n4.3.2\nMIT\nFalse\nlibpng\nLinux\nMac\n\n1.5.13\n\nOpen\nSource\nTrue\nlibsodium\nLinux\nMac\n0.4.5\nMIT\nTrue\nlibtiff\nLinux\nMac\n4.0.2\nas-is\nTrue\nlibxml2\nLinux\nMac\n2.9.0\nMIT\nTrue\nlibxslt\nLinux\nMac\n1.1.28\n\nMIT\nTrue\nllvm\nLinux\nMac\n\n3.3\nOpen\nSource\nTrue\nllvmpy\n\n0.12.7\n\nNew\nBSD\nLicense\nTrue\nlogilab-common\n\n0.62.1\n\nLGPL\n\nFalse\nlxml\n\n3.4.0\nBSD\nTrue\nmarkdown\nLinux\nMac\n\n2.5\nBSD\nFalse\nmarkupsafe\n\n0.23\n\nBSD\nTrue\nmathjax\n2.2\nApache\n\nFalse\nmatplotlib\n\n1.4.0\nPSF-based\nTrue\nmayavi\n\n4.3.1\nBSD\nFalse\nmccabe\n\n0.2.1\nExpat\nFalse\nmdp\n3.3\nBSD\nFalse\nmenuinst\nWindows\n\n1.0.4\nBDF\nTrue\nmercurial\n3.1\nGPLv2\nFalse\nmingw\nWindows\n4.7\nGPL\nTrue\nmock\n\n1.0.1\nBSD\nTrue\nmpi4py\nLinux\n\n1.3\nBSD\nTrue\nmpich2\nLinux\n\n1.4.1p1\nmpich\nlicense\nTrue\nmultimethods\n\n1.0.0\nMIT\nFalse\nmultipledispatch\n\n0.4.7\nBSD\nTrue\nnatsort\n3.5.0\nMIT\nFalse\nnetcdf4\n1.1.1\nMIT\nFalse\nnetworkx\n\n1.9.1\nBSD\nTrue\nnltk\n\n3.0.0\nApache\n2.0\n\nTrue\nnode-webkit\nMac\nWindows\n0.10.1\n\nMIT\nTrue\nnose\n\n1.3.4\nLGPL\n\nTrue\nnumba\n0.14.0\n\nnumba\nlicense\nTrue\nnumexpr\n2.3.1\nMIT\nTrue\nnumpy\n1.9.0\nBSD\nTrue\nnumpydoc\n\n0.4\nBSD\nFalse\nopenpyxl\n\n1.8.5\nMIT/Expat\nTrue\nopenssl\nLinux\nMac\n1.0.1h\n\nApache-style\n\nTrue\npandas\n\n0.14.1\n\nBSD\nTrue\npandasql\n\n0.6.1\nBSD\nFalse\nparamiko\n\n1.14.1\n\nLGPL\n\nFalse\npasslib\n1.6.2\nBSD\nFalse\npastedeploy\nLinux\nMac\n1.5.2\nMIT\nFalse\npatchelf\nLinux\n\n0.6\nGPL3\n\nFalse\npatsy\n0.3.0\nBSD\nLicense\nTrue\npep381client\n\n1.5\nAcademic\nFree\nLicense,\nversion\n3\n\nFalse\npep8\n\n1.5.7\nMIT\nLicense\nTrue\npil\n1.1.7\nPIL\nlicense\nTrue\npillow\nLinux\nMac\n\n2.5.1\nStandard\nPIL\nlicense\n\nFalse\npip\n1.5.6\nMIT\nTrue\npixman\nLinux\n\n0.26.2\n\nMIT\nTrue\nply\n3.4\nBSD\nTrue\npsutil\n\n2.1.1\nBSD\nTrue\npy\n\n1.4.25\n\nMIT\nTrue\npy2cairo\nLinux\n\n1.10.0\n\nLGPL\n2.1\nand\nMPL\n1.1\n\nTrue\npyasn1\nLinux\n\n0.1.6\nBSD\nFalse\npyaudio\nMac\n0.2.7\nMIT\nTrue\npycosat\n0.6.1\nMIT\nTrue\npycparser\n2.10\n\nBSD\nTrue\npycrypto\n\n2.6.1\nPublic\nDomain\nTrue\npycurl\nLinux\nMac\n\n7.19.5\n\nLGPL\nand\nMIT/X\n\nTrue\npyface\n\n4.4.0\nBSD\nTrue\npyflakes\n\n0.8.1\nMIT\nTrue\npygments\n\n1.6\nBSD\nTrue\npylint\n\n1.3.1\nGPL\nFalse\npymc\nLinux\n\n2.3.3\nAcademic\nFree\nLicense\nFalse\npymongo\n2.7.2\nApache\n2.0\n\nFalse\npyodbc\n\n3.0.7\nMIT\nFalse\npyopenssl\n0.14\n\nAPL2\n\nTrue\npyparsing\n2.0.1\nMIT\nTrue\npyqt\n\n4.10.4\n\nGPL\nTrue\npyreadline\nWindows\n\n2.0\nBSD\nTrue\npysal\n1.6.0\nNew\nBSD\nLicense\nFalse\npysam\nLinux\nMac\n0.6\nMIT\nFalse\npyserial\n\n2.7\nPSF\nFalse\npytables\n\n3.1.1\nBSD\nTrue\npytest\n\n2.6.3\nMIT\nTrue\npython\n\n2.7.8\nPSF\nTrue\npytz\n\n2014.7\n\nMIT\nTrue\npywin32\nWindows\n219\nPSF\nTrue\npyyaml\n\n3.11\n\nMIT\nTrue\npyzmq\n14.3.1\n\nLGPL\nand\nBSD\n\nTrue\nqt\nLinux\nMac\n\n4.8.5\nLGPL\n\nTrue\nqueuelib\n\n1.2.2\nBSD\nFalse\nreadline\nLinux\nMac\n\n6.2\nGPL\n3\nTrue\nredis\nLinux\nMac\n2.6.9\n3-clause\nBSD\n\nTrue\nredis-py\nLinux\nMac\n\n2.9.1\nMIT\nTrue\nreportlab\n3.1.8\nBSD\nFalse\nrepoze.lru\n\n0.6\nBSD\nFalse\nrequests\n\n2.4.1\nISC\nTrue\nrope\n\n0.9.4\nGPL\nTrue\nrunipy\n\n0.1.1\nBSD\nTrue\nscikit-bio\nLinux\nMac\n\n0.2.0\nBSD\nFalse\nscikit-image\n\n0.10.1\n\nModified\nBSD\n\nTrue\nscikit-learn\n\n0.15.2\n\n3-clause\nBSD\n\nTrue\nscipy\n0.14.0\n\nBSD\nTrue\nscrapy\n\n0.24.4\n\nBSD\nFalse\nsetuptools\n\n5.8\nPSF\nor\nZPL\n\nTrue\nshapely\nLinux\nMac\n1.4.1\nBSD\nFalse\nsip\nLinux\nMac\n4.15.5\n\nGPL\nTrue\nsix\n1.8.0\nMIT\nTrue\nsockjs-tornado\n\n1.0.1\nMIT\nTrue\nsphinx\n\n1.2.3\nBSD\nTrue\nspyder\n\n2.3.1\nMIT\nTrue\nsqlalchemy\n\n0.9.7\nMIT\nTrue\nsqlite\nLinux\nMac\n\n3.8.4.1\nPublic\nDomain\nTrue\nsqlparse\n\n0.1.12\n\nBSD\nFalse\nssh\n1.8.0\nLGPL\n\nFalse\nssl_match_hostname\n\n3.4.0.2\nPSF\nTrue\nstarcluster\nLinux\n0.93.3\n\nLGPL\n\nFalse\nstatsmodels\n0.5.0\n3-clause\nModified\nBSD\nTrue\nsympy\n0.7.5\nNew\nBSD\nTrue\ntheano\nLinux\n\n0.6.0\nBSD\nTrue\ntk\nLinux\nMac\n\n8.5.15\n\nBSD-style\nTrue\ntoolz\n0.7.0\nBSD\nTrue\ntornado\n4.0.2\nApache\n\nTrue\ntraits\n\n4.4.0\nBSD\nTrue\ntraitsui\n\n4.4.0\nBSD\nTrue\ntwisted\n14.0.2\n\nMIT\nFalse\nujson\n1.33\n\nBSD\nTrue\nunicodecsv\n\n0.9.4\nBSD\nTrue\nunixodbc\nLinux\n\n2.3.1\n???\nFalse\nutil-linux\nLinux\n\n2.21\n\nGPL\nTrue\nuuid\n\n1.30\n\n???\nFalse\nvenusian\n\n1.0\nBSD\nFalse\nvtk\n5.10.1\n\nBSD\nFalse\nw3lib\n1.8.1\nBSD\nFalse\nwerkzeug\n\n0.9.6\nBSD\nTrue\nwhoosh\n\n2.5.7\nBSD\nFalse\nworkerpool\nLinux\n\n0.9.2\nMIT\nFalse\nxlrd\n\n0.9.3\nBSD\nTrue\nxlsxwriter\n\n0.5.7\nBSD\nTrue\nxlutils\n1.7.1\nMIT\nFalse\nxlwings\nWindows\n0.2.2\nBSD\n3-clause\n\nTrue\nxlwt\n\n0.7.5\nBSD\nTrue\nyaml\nLinux\nMac\n\n0.1.4\nMIT\nTrue\nyt\nLinux\nMac\n\n3.0.1\nBSD\nFalse\nzeromq\nLinux\nMac\n\n4.0.4\nLGPL\n\nTrue\nzlib\nLinux\nMac\n\n1.2.7\nzlib\n\nTrue\nzope.interface\n\n4.1.1\nZope\nPublic\nLicense\nFalse",
+			"file": "/Users/cosgroma/workspace/libs/zguide/examples/Python/interface.py",
 			"settings":
 			{
-				"buffer_size": 6616,
+				"buffer_size": 4084,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/cosgroma/workspace/libs/zguide/examples/Python/rrbroker.py",
+			"settings":
+			{
+				"buffer_size": 735,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/cosgroma/workspace/libs/zguide/examples/Python/asyncrrhandlers.py",
+			"settings":
+			{
+				"buffer_size": 5632,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "Searching 99 files for \"try\"\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/bstarsrv.py:\n  121              msg = frontend.recv_multipart()\n  122              fsm.event = CLIENT_REQUEST\n  123:             try:\n  124                  run_fsm(fsm)\n  125                  frontend.send_multipart(msg)\n  ...\n  131              fsm.event = int(msg)\n  132              del msg\n  133:             try:\n  134                  run_fsm(fsm)\n  135                  fsm.peer_expiry = int(time.time() * 1000) + (2 * HEARTBEAT)\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/clone.py:\n   74  \n   75          self.pipe.send_multipart([\"GET\", key])\n   76:         try:\n   77              reply = self.pipe.recv_multipart()\n   78          except KeyboardInterrupt:\n   ..\n  210          # ------------------------------------------------------------\n  211          # Poll loop\n  212:         try:\n  213              items = dict(poller.poll(poll_timer))\n  214          except:\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/clonecli1.py:\n   25  \n   26      while True:\n   27:         try:\n   28              kvmsg = KVMsg.recv(updates)\n   29          except:\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/clonecli2.py:\n   30      snapshot.send(\"ICANHAZ?\")\n   31      while True:\n   32:         try:\n   33              kvmsg = KVMsg.recv(snapshot)\n   34          except:\n   ..\n   43      # Now apply pending updates, discard out-of-sequence messages\n   44      while True:\n   45:         try:\n   46              kvmsg = KVMsg.recv(subscriber)\n   47          except:\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/clonecli3.py:\n   34      snapshot.send(\"ICANHAZ?\")\n   35      while True:\n   36:         try:\n   37              kvmsg = KVMsg.recv(snapshot)\n   38          except:\n   ..\n   51      while True:\n   52          tickless = 1000*max(0, alarm - time.time())\n   53:         try:\n   54              items = dict(poller.poll(tickless))\n   55          except:\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/clonecli4.py:\n   36      snapshot.send_multipart([\"ICANHAZ?\", SUBTREE])\n   37      while True:\n   38:         try:\n   39              kvmsg = KVMsg.recv(snapshot)\n   40          except:\n   ..\n   54      while True:\n   55          tickless = 1000*max(0, alarm - time.time())\n   56:         try:\n   57              items = dict(poller.poll(tickless))\n   58          except:\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/clonecli5.py:\n   36      snapshot.send_multipart([\"ICANHAZ?\", SUBTREE])\n   37      while True:\n   38:         try:\n   39              kvmsg = KVMsg.recv(snapshot)\n   40          except:\n   ..\n   54      while True:\n   55          tickless = 1000*max(0, alarm - time.time())\n   56:         try:\n   57              items = dict(poller.poll(tickless))\n   58          except:\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/clonecli6.py:\n   20      clone.connect(\"tcp://localhost\", 5566)\n   21  \n   22:     try:\n   23          while True:\n   24              # Distribute as key-value message\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/clonesrv1.py:\n   23      kvmap = {}\n   24  \n   25:     try:\n   26          while True:\n   27              # Distribute as key-value message\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/clonesrv2.py:\n   29      random.seed(time.time())\n   30  \n   31:     try:\n   32          while True:\n   33              # Distribute as key-value message\n   ..\n   71      sequence = 0       # Current snapshot version number\n   72      while True:\n   73:         try:\n   74              items = dict(poller.poll())\n   75          except (zmq.ZMQError, KeyboardInterrupt):\n   ..\n   95              route = Route(snapshot, identity)\n   96  \n   97:             # For each entry in kvmap, send kvmsg to client\n   98              for k,v in kvmap.items():\n   99                  send_single(k,v,route)\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/clonesrv3.py:\n   38      poller.register(snapshot, zmq.POLLIN)\n   39      while True:\n   40:         try:\n   41              items = dict(poller.poll(1000))\n   42          except:\n   ..\n   66              route = Route(snapshot, identity)\n   67  \n   68:             # For each entry in kvmap, send kvmsg to client\n   69              for k,v in kvmap.items():\n   70                  send_single(k,v,route)\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/clonesrv4.py:\n   42      poller.register(snapshot, zmq.POLLIN)\n   43      while True:\n   44:         try:\n   45              items = dict(poller.poll(1000))\n   46          except:\n   ..\n   69              route = Route(snapshot, identity, subtree)\n   70  \n   71:             # For each entry in kvmap, send kvmsg to client\n   72              for k,v in kvmap.items():\n   73                  send_single(k,v,route)\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/clonesrv5.py:\n   75          # Run reactor until process interrupted\n   76          self.flush_callback.start()\n   77:         try:\n   78              self.loop.start()\n   79          except KeyboardInterrupt:\n   ..\n   92              route = Route(self.snapshot, identity, subtree)\n   93  \n   94:             # For each entry in kvmap, send kvmsg to client\n   95              for k,v in self.kvmap.items():\n   96                  send_single(k,v,route)\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/clonesrv6.py:\n  102          self.hugz_callback.start()\n  103          # Run bstar reactor until process interrupted\n  104:         try:\n  105              self.bstar.start()\n  106          except KeyboardInterrupt:\n  ...\n  120              route = Route(socket, identity, subtree)\n  121  \n  122:             # For each entry in kvmap, send kvmsg to client\n  123              for k,v in self.kvmap.items():\n  124                  send_single(k,v,route)\n  ...\n  242              snapshot.send_multipart([\"ICANHAZ?\", ''])\n  243              while True:\n  244:                 try:\n  245                      kvmsg = KVMsg.recv(snapshot)\n  246                  except KeyboardInterrupt:\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/dechat.py:\n   25      listener.setsockopt(zmq.SUBSCRIBE, b'')\n   26      while True:\n   27:         try:\n   28              print(listener.recv_string())\n   29          except (KeyboardInterrupt, zmq.ContextTerminated):\n   ..\n   53      print(\"starting chat on %s:9000 (%s.*)\" % (args.interface, masked))\n   54      while True:\n   55:         try:\n   56              msg = raw_input()\n   57              bcast.send_string(\"%s: %s\" % (args.user, msg))\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/eagain.py:\n   12      for count in range(10):\n   13          print(\"Sending message %i\" % count)\n   14:         try:\n   15              mailbox.send(b\"message %i\" % count)\n   16          except zmq.Again as e:\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/espresso.py:\n   28      count = 0\n   29      while True:\n   30:         try:\n   31              msg = subscriber.recv_multipart()\n   32          except zmq.ZMQError as e:\n   ..\n   51      while True:\n   52          string = \"%s-%05d\" % (uppercase[randint(0,10)], randint(0,100000))\n   53:         try:\n   54              publisher.send(string)\n   55          except zmq.ZMQError as e:\n   ..\n   70      # Print everything that arrives on pipe\n   71      while True:\n   72:         try:\n   73              print (pipe.recv_multipart())\n   74          except zmq.ZMQError as e:\n   ..\n  101      l_thread.start()\n  102  \n  103:     try:\n  104          monitored_queue(subscriber, publisher, pipe[0], 'pub', 'sub')\n  105      except KeyboardInterrupt:\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/fileio1.py:\n   21  \n   22      while True:\n   23:         try:\n   24              chunk = dealer.recv()\n   25          except zmq.ZMQError as e:\n   ..\n   58          # First frame in each message is the sender identity\n   59          # Second frame is \"fetch\" command\n   60:         try:\n   61              identity, command = router.recv_multipart()\n   62          except zmq.ZMQError as e:\n   ..\n   91  \n   92      # loop until client tells us it's done\n   93:     try:\n   94          print a.recv()\n   95      except KeyboardInterrupt:\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/fileio2.py:\n   37              credit -= 1\n   38  \n   39:         try:\n   40              chunk = dealer.recv()\n   41          except zmq.ZMQError as e:\n   ..\n   70          # First frame in each message is the sender identity\n   71          # Second frame is \"fetch\" command\n   72:         try:\n   73              msg = router.recv_multipart()\n   74          except zmq.ZMQError as e:\n   ..\n  107  \n  108      # loop until client tells us it's done\n  109:     try:\n  110          print a.recv()\n  111      except KeyboardInterrupt:\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/fileio3.py:\n   29          ])\n   30  \n   31:         try:\n   32              chunk = dealer.recv()\n   33          except zmq.ZMQError as e:\n   ..\n   60          # First frame in each message is the sender identity\n   61          # Second frame is \"fetch\" command\n   62:         try:\n   63              msg = router.recv_multipart()\n   64          except zmq.ZMQError as e:\n   ..\n   97  \n   98      # loop until client tells us it's done\n   99:     try:\n  100          print a.recv()\n  101      except KeyboardInterrupt:\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/flcliapi.py:\n  168              for server in agent.servers.values():\n  169                  tickless = server.tickless(tickless)\n  170:         try:\n  171              items = dict(poller.poll(1000 * (tickless - time.time())))\n  172          except:\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/flclient1.py:\n   14  MAX_RETRIES = 3   # Before we abandon\n   15  \n   16: def try_request(ctx, endpoint, request):\n   17:     print \"I: Trying echo service at %s...\" % endpoint\n   18      client = ctx.socket(zmq.REQ)\n   19      client.setsockopt(zmq.LINGER, 0)  # Terminate early\n   ..\n   39      print \"I: syntax: %s <endpoint> ...\" % sys.argv[0]\n   40  elif endpoints == 1:\n   41:     # For one endpoint, we retry N times\n   42      endpoint = sys.argv[1]\n   43      for retries in xrange(MAX_RETRIES):\n   44:         reply = try_request(context, endpoint, request)\n   45          if reply:\n   46              break  # Success\n   47:         print \"W: No response from %s, retrying\" % endpoint\n   48  else:\n   49:     # For multiple endpoints, try each at most once\n   50      for endpoint in sys.argv[1:]:\n   51:         reply = try_request(context, endpoint, request)\n   52          if reply:\n   53              break  # Success\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/flserver3.py:\n   25  \n   26      while True:\n   27:         try:\n   28              request = server.recv_multipart()\n   29          except:\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/interface.py:\n  102      \n  103      def __del__(self):\n  104:         try:\n  105              self.stop()\n  106          except:\n  ...\n  119      \n  120      def send_ping(self, *a, **kw):\n  121:         try:\n  122              self.udp.send(self.uuid)\n  123          except Exception as e:\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/interrupt.py:\n   16  \n   17  # SIGINT will normally raise a KeyboardInterrupt, just like any other Python call\n   18: try:\n   19      socket.recv()\n   20  except KeyboardInterrupt:\n   ..\n   24  # in which case recv will fail with EINTR\n   25  signal.signal(signal.SIGINT, signal_handler)\n   26: try:\n   27      message = socket.recv()\n   28  except zmq.ZMQError as e:\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/kvmsg.py:\n   26  \n   27      for line in line_array:\n   28:         try:\n   29              key, value = line.split(\"=\")\n   30              prop[key] = value\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/lbbroker.py:\n   29      socket.send(b\"READY\")\n   30  \n   31:     try:\n   32          while True:\n   33  \n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/lbbroker2.py:\n   28      socket.send(b\"READY\")\n   29  \n   30:     try:\n   31          while True:\n   32              \n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/lbbroker3.py:\n   37      socket.send(b\"READY\")\n   38  \n   39:     try:\n   40          while True:\n   41              \n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/lpclient.py:\n   46  \n   47          else:\n   48:             print \"W: No response from server, retrying...\"\n   49              # Socket is confused. Close and remove it.\n   50              client.setsockopt(zmq.LINGER, 0)\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/lvcache.py:\n   28      while True:\n   29  \n   30:         try:\n   31              events = dict(poller.poll(1000))\n   32          except KeyboardInterrupt:\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/mdbroker.py:\n   91          \"\"\"Main broker work happens here\"\"\"\n   92          while True:\n   93:             try:\n   94                  items = self.poller.poll(self.HEARTBEAT_INTERVAL)\n   95              except KeyboardInterrupt:\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/mdcliapi.py:\n   66          while retries > 0:\n   67              self.client.send_multipart(request)\n   68:             try:\n   69                  items = self.poller.poll(self.timeout)\n   70              except KeyboardInterrupt:\n   ..\n   77                      dump(msg)\n   78  \n   79:                 # Don't try to handle errors, just assert noisily\n   80                  assert len(msg) >= 3\n   81  \n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/mdcliapi2.py:\n   67      def recv(self):\n   68          \"\"\"Returns the reply message or None if there was no reply.\"\"\"\n   69:         try:\n   70              items = self.poller.poll(self.timeout)\n   71          except KeyboardInterrupt:\n   ..\n   79                  dump(msg)\n   80  \n   81:             # Don't try to handle errors, just assert noisily\n   82              assert len(msg) >= 4\n   83  \n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/mdclient.py:\n   15      while count < 100000:\n   16          request = \"Hello world\"\n   17:         try:\n   18              reply = client.send(\"echo\", request)\n   19          except KeyboardInterrupt:\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/mdclient2.py:\n   15      for i in xrange(requests):\n   16          request = \"Hello world\"\n   17:         try:\n   18              client.send(\"echo\", request)\n   19          except KeyboardInterrupt:\n   ..\n   23      count = 0\n   24      while count < requests:\n   25:         try:\n   26              reply = client.recv()\n   27          except KeyboardInterrupt:\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/mdwrkapi.py:\n  106          while True:\n  107              # Poll socket for a reply, with timeout\n  108:             try:\n  109                  items = self.poller.poll(self.timeout)\n  110              except KeyboardInterrupt:\n  ...\n  118  \n  119                  self.liveness = self.HEARTBEAT_LIVENESS\n  120:                 # Don't try to handle errors, just assert noisily\n  121                  assert len(msg) >= 3\n  122  \n  ...\n  149                  if self.liveness == 0:\n  150                      if self.verbose:\n  151:                         logging.warn(\"W: disconnected from broker - retrying...\")\n  152:                     try:\n  153                          time.sleep(1e-3*self.reconnect)\n  154                      except KeyboardInterrupt:\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/mspoller.py:\n   28  # Process messages from both sockets\n   29  while True:\n   30:     try:\n   31          socks = dict(poller.poll())\n   32      except KeyboardInterrupt:\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/msreader.py:\n   28      # Process any waiting tasks\n   29      while True:\n   30:         try:\n   31              msg = receiver.recv(zmq.DONTWAIT)\n   32          except zmq.Again:\n   ..\n   36      # Process any waiting weather updates\n   37      while True:\n   38:         try:\n   39              msg = subscriber.recv(zmq.DONTWAIT)\n   40          except zmq.Again:\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/pathopub.py:\n   30      while True:\n   31          # Send one random update per second\n   32:         try:\n   33              time.sleep(1)\n   34              publisher.send_multipart([\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/peering2.py:\n   17  import zmq\n   18  \n   19: try:\n   20      raw_input\n   21  except NameError:\n   ..\n   38      while True:\n   39          client.send(b\"HELLO\")\n   40:         try:\n   41              reply = client.recv()\n   42          except zmq.ZMQError:\n   ..\n   59      # Process messages as they arrive\n   60      while True:\n   61:         try:\n   62              msg = worker.recv_multipart()\n   63          except zmq.ZMQError:\n   ..\n  133      while True:\n  134          # If we have no workers anyhow, wait indefinitely\n  135:         try:\n  136              events = dict(pollerbe.poll(1000 if workers else None))\n  137          except zmq.ZMQError:\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/peering3.py:\n   47  \n   48              # wait max 10 seconds for a reply, then complain\n   49:             try:\n   50                  events = dict(poller.poll(10000))\n   51              except zmq.ZMQError:\n   ..\n   72      # Process messages as they arrive\n   73      while True:\n   74:         try:\n   75              msg = worker.recv_multipart()\n   76          except zmq.ZMQError:\n   ..\n  154      while True:\n  155          # If we have no workers anyhow, wait indefinitely\n  156:         try:\n  157              events = dict(pollerbe.poll(1000 if local_capacity else None))\n  158          except zmq.ZMQError:\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/suisnail.py:\n   55          # Send current clock (secs) to subscribers\n   56          pub.send(str(time.time()))\n   57:         try:\n   58              signal = pipe.recv(zmq.DONTWAIT)\n   59          except zmq.ZMQError as e:\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/taskvent.py:\n    9  import time\n   10  \n   11: try:\n   12      raw_input\n   13  except NameError:\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/ticlient.py:\n   59              break\n   60          else:\n   61:             print \"I: no reply yet, trying again...\"\n   62:             time.sleep(5)     #  Try again in 5 seconds\n   63      return 0\n   64  \n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/titanic.py:\n  151      client = MajorDomoClient(\"tcp://localhost:5555\", verbose)\n  152      client.timeout = 1000 # 1 sec\n  153:     client.retries = 1 # only 1 retry\n  154  \n  155      request_pipe, peer = zpipe(ctx)\n  ...\n  172              os.mkdir(TITANIC_DIR)\n  173          # We'll dispatch once per second, if there's no activity\n  174:         try:\n  175              items = poller.poll(1000)\n  176          except KeyboardInterrupt:\n  ...\n  187          #\n  188          with open(os.path.join(TITANIC_DIR, 'queue'), 'r+b') as f:\n  189:             for entry in f.readlines():\n  190                  # UUID is prefixed with '-' if still waiting\n  191:                 if entry[0] == '-':\n  192:                     uuid = entry[1:].rstrip() # rstrip '\\n' etc.\n  193                      print \"I: processing request %s\" % uuid\n  194                      if service_success(client, uuid):\n  195:                         # mark queue entry as processed\n  196                          here = f.tell()\n  197:                         f.seek(-1*len(entry), os.SEEK_CUR)\n  198                          f.write('+')\n  199                          f.seek(here, os.SEEK_SET)\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/tripping.py:\n   66  \n   67      while True:\n   68:         try:\n   69              items = dict(poller.poll())\n   70          except:\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/udpping1.py:\n   43          if timeout < 0:\n   44              timeout = 0\n   45:         try:\n   46              events = dict(poller.poll(1000* timeout))\n   47          except KeyboardInterrupt:\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/udpping2.py:\n   30          if timeout < 0:\n   31              timeout = 0\n   32:         try:\n   33              events = dict(poller.poll(1000* timeout))\n   34          except KeyboardInterrupt:\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/udpping3.py:\n    8      interface = Interface()\n    9      while True:\n   10:         try:\n   11              print(interface.recv())\n   12          except KeyboardInterrupt:\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/zhelpers.py:\n   30          print(\"[%03d]\" % len(part), end=' ')\n   31          is_text = True\n   32:         try:\n   33              print(part.decode('ascii'))\n   34          except UnicodeDecodeError:\n   ..\n   37  def socket_set_hwm(socket, hwm=-1):\n   38      \"\"\"libzmq 2/3 compatible sethwm\"\"\"\n   39:     try:\n   40          socket.sndhwm = socket.rcvhwm = hwm\n   41      except AttributeError:\n\n102 matches across 51 files\n\n\nSearching 99 files for \"except\"\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/bstar.py:\n   29  \n   30  \n   31: class FSMError(Exception):\n   32:     \"\"\"Exception class for invalid state\"\"\"\n   33      pass\n   34  \n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/bstarsrv.py:\n   29  \n   30  \n   31: class BStarException(Exception):\n   32      pass\n   33  \n   ..\n   67          return\n   68      if state is False:\n   69:         raise BStarException(msg)\n   70      elif msg == CLIENT_REQUEST:\n   71          assert fsm.peer_expiry > 0\n   ..\n   73              fsm.state = STATE_ACTIVE\n   74          else:\n   75:             raise BStarException()\n   76      else:\n   77          print(msg)\n   ..\n  124                  run_fsm(fsm)\n  125                  frontend.send_multipart(msg)\n  126:             except BStarException:\n  127                  del msg\n  128  \n  ...\n  134                  run_fsm(fsm)\n  135                  fsm.peer_expiry = int(time.time() * 1000) + (2 * HEARTBEAT)\n  136:             except BStarException:\n  137                  break\n  138          if int(time.time() * 1000) >= send_state_at:\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/clone.py:\n   76          try:\n   77              reply = self.pipe.recv_multipart()\n   78:         except KeyboardInterrupt:\n   79              return\n   80          else:\n   ..\n  212          try:\n  213              items = dict(poller.poll(poll_timer))\n  214:         except:\n  215              raise # DEBUG\n  216              break # Context has been shut down\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/clonecli1.py:\n   27          try:\n   28              kvmsg = KVMsg.recv(updates)\n   29:         except:\n   30              break # Interrupted\n   31          kvmsg.store(kvmap)\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/clonecli2.py:\n   32          try:\n   33              kvmsg = KVMsg.recv(snapshot)\n   34:         except:\n   35              break;          # Interrupted\n   36  \n   ..\n   45          try:\n   46              kvmsg = KVMsg.recv(subscriber)\n   47:         except:\n   48              break          # Interrupted\n   49          if kvmsg.sequence > sequence:\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/clonecli3.py:\n   36          try:\n   37              kvmsg = KVMsg.recv(snapshot)\n   38:         except:\n   39              return          # Interrupted\n   40  \n   ..\n   53          try:\n   54              items = dict(poller.poll(tickless))\n   55:         except:\n   56              break           # Interrupted\n   57  \n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/clonecli4.py:\n   38          try:\n   39              kvmsg = KVMsg.recv(snapshot)\n   40:         except:\n   41              raise\n   42              return          # Interrupted\n   ..\n   56          try:\n   57              items = dict(poller.poll(tickless))\n   58:         except:\n   59              break           # Interrupted\n   60  \n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/clonecli5.py:\n   38          try:\n   39              kvmsg = KVMsg.recv(snapshot)\n   40:         except:\n   41              raise\n   42              return          # Interrupted\n   ..\n   56          try:\n   57              items = dict(poller.poll(tickless))\n   58:         except:\n   59              break           # Interrupted\n   60  \n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/clonecli6.py:\n   27              clone.set(key, value, random.randint(0,30))\n   28              time.sleep(1)\n   29:     except KeyboardInterrupt:\n   30          pass\n   31  \n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/clonesrv1.py:\n   32              kvmsg.send(publisher)\n   33              kvmsg.store(kvmap)\n   34:     except KeyboardInterrupt:\n   35          print \" Interrupted\\n%d messages out\" % sequence\n   36  \n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/clonesrv2.py:\n   38              kvmsg.send(publisher)\n   39              kvmsg.send(updates)\n   40:     except KeyboardInterrupt:\n   41          print \" Interrupted\\n%d messages out\" % sequence\n   42  \n   ..\n   73          try:\n   74              items = dict(poller.poll())\n   75:         except (zmq.ZMQError, KeyboardInterrupt):\n   76              break # interrupt/context shutdown\n   77  \n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/clonesrv3.py:\n   40          try:\n   41              items = dict(poller.poll(1000))\n   42:         except:\n   43              break           # Interrupted\n   44  \n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/clonesrv4.py:\n   44          try:\n   45              items = dict(poller.poll(1000))\n   46:         except:\n   47              break           # Interrupted\n   48  \n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/clonesrv5.py:\n   77          try:\n   78              self.loop.start()\n   79:         except KeyboardInterrupt:\n   80              pass\n   81  \n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/clonesrv6.py:\n  104          try:\n  105              self.bstar.start()\n  106:         except KeyboardInterrupt:\n  107              pass\n  108  \n  ...\n  244                  try:\n  245                      kvmsg = KVMsg.recv(snapshot)\n  246:                 except KeyboardInterrupt:\n  247                      # Interrupted\n  248                      self.bstar.loop.stop()\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/dechat.py:\n   27          try:\n   28              print(listener.recv_string())\n   29:         except (KeyboardInterrupt, zmq.ContextTerminated):\n   30              break\n   31  \n   ..\n   56              msg = raw_input()\n   57              bcast.send_string(\"%s: %s\" % (args.user, msg))\n   58:         except KeyboardInterrupt:\n   59              break\n   60      bcast.close(linger=0)\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/eagain.py:\n   14          try:\n   15              mailbox.send(b\"message %i\" % count)\n   16:         except zmq.Again as e:\n   17              print(e)\n   18              break\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/espresso.py:\n   30          try:\n   31              msg = subscriber.recv_multipart()\n   32:         except zmq.ZMQError as e:\n   33              if e.errno == zmq.ETERM:\n   34                  break           # Interrupted\n   ..\n   53          try:\n   54              publisher.send(string)\n   55:         except zmq.ZMQError as e:\n   56              if e.errno == zmq.ETERM:\n   57                  break           # Interrupted\n   ..\n   72          try:\n   73              print (pipe.recv_multipart())\n   74:         except zmq.ZMQError as e:\n   75              if e.errno == zmq.ETERM:\n   76                  break           # Interrupted\n   ..\n  103      try:\n  104          monitored_queue(subscriber, publisher, pipe[0], 'pub', 'sub')\n  105:     except KeyboardInterrupt:\n  106          print (\"Interrupted\")\n  107  \n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/fileio1.py:\n   23          try:\n   24              chunk = dealer.recv()\n   25:         except zmq.ZMQError as e:\n   26              if e.errno == zmq.ETERM:\n   27                  return   # shutting down, quit\n   ..\n   60          try:\n   61              identity, command = router.recv_multipart()\n   62:         except zmq.ZMQError as e:\n   63              if e.errno == zmq.ETERM:\n   64                  return   # shutting down, quit\n   ..\n   93      try:\n   94          print a.recv()\n   95:     except KeyboardInterrupt:\n   96          pass\n   97      del a,b\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/fileio2.py:\n   39          try:\n   40              chunk = dealer.recv()\n   41:         except zmq.ZMQError as e:\n   42              if e.errno == zmq.ETERM:\n   43                  return   # shutting down, quit\n   ..\n   55      pipe.send(b\"OK\")\n   56  \n   57: # The rest of the code is exactly the same as in model 2, except\n   58  # that we set the HWM on the server's ROUTER socket to PIPELINE\n   59  # to act as a sanity check.\n   ..\n   72          try:\n   73              msg = router.recv_multipart()\n   74:         except zmq.ZMQError as e:\n   75              if e.errno == zmq.ETERM:\n   76                  return   # shutting down, quit\n   ..\n  109      try:\n  110          print a.recv()\n  111:     except KeyboardInterrupt:\n  112          pass\n  113      del a,b\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/fileio3.py:\n   31          try:\n   32              chunk = dealer.recv()\n   33:         except zmq.ZMQError as e:\n   34              if e.errno == zmq.ETERM:\n   35                  return   # shutting down, quit\n   ..\n   62          try:\n   63              msg = router.recv_multipart()\n   64:         except zmq.ZMQError as e:\n   65              if e.errno == zmq.ETERM:\n   66                  return   # shutting down, quit\n   ..\n   99      try:\n  100          print a.recv()\n  101:     except KeyboardInterrupt:\n  102          pass\n  103      del a,b\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/flcliapi.py:\n  170          try:\n  171              items = dict(poller.poll(1000 * (tickless - time.time())))\n  172:         except:\n  173              break              # Context has been shut down\n  174  \n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/flserver3.py:\n   27          try:\n   28              request = server.recv_multipart()\n   29:         except:\n   30              break # Interrupted\n   31          # Frame 0: identity of client\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/interface.py:\n  104          try:\n  105              self.stop()\n  106:         except:\n  107              pass\n  108      \n  ...\n  121          try:\n  122              self.udp.send(self.uuid)\n  123:         except Exception as e:\n  124              self.loop.stop()\n  125  \n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/interrupt.py:\n   18  try:\n   19      socket.recv()\n   20: except KeyboardInterrupt:\n   21      print(\"W: interrupt received, proceeding...\")\n   22  \n   ..\n   26  try:\n   27      message = socket.recv()\n   28: except zmq.ZMQError as e:\n   29      print(\"W: recv failed with: %s\" % e)\n   30  \n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/kvmsg.py:\n   29              key, value = line.split(\"=\")\n   30              prop[key] = value\n   31:         except ValueError as e:\n   32              #Catch empty line\n   33              pass\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/lbbroker.py:\n   42              socket.send(b\"OK\")\n   43  \n   44:     except zmq.ContextTerminated:\n   45          # context terminated so quit silently\n   46          return\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/lbbroker2.py:\n   37              socket.send_multipart([address, b'', b'OK'])\n   38  \n   39:     except zmq.ContextTerminated:\n   40          # context terminated so quit silently\n   41          return\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/lbbroker3.py:\n   46              socket.send_multipart([address, b'', b'OK'])\n   47  \n   48:     except zmq.ContextTerminated:\n   49          # context terminated so quit silently\n   50          return\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/lpserver.py:\n    2  #  Lazy Pirate server\n    3  #  Binds REQ socket to tcp://*:5555\n    4: #  Like hwserver except:\n    5  #   - echoes request as-is\n    6  #   - randomly runs slowly, or exits to simulate a crash.\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/lvcache.py:\n   30          try:\n   31              events = dict(poller.poll(1000))\n   32:         except KeyboardInterrupt:\n   33              print(\"interrupted\")\n   34              break\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/mdbroker.py:\n   93              try:\n   94                  items = self.poller.poll(self.HEARTBEAT_INTERVAL)\n   95:             except KeyboardInterrupt:\n   96                  break # Interrupted\n   97              if items:\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/mdcliapi.py:\n   68              try:\n   69                  items = self.poller.poll(self.timeout)\n   70:             except KeyboardInterrupt:\n   71                  break # interrupted\n   72  \n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/mdcliapi2.py:\n   69          try:\n   70              items = self.poller.poll(self.timeout)\n   71:         except KeyboardInterrupt:\n   72              return # interrupted\n   73  \n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/mdclient.py:\n   17          try:\n   18              reply = client.send(\"echo\", request)\n   19:         except KeyboardInterrupt:\n   20              break\n   21          else:\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/mdclient2.py:\n   17          try:\n   18              client.send(\"echo\", request)\n   19:         except KeyboardInterrupt:\n   20              print \"send interrupted, aborting\"\n   21              return\n   ..\n   25          try:\n   26              reply = client.recv()\n   27:         except KeyboardInterrupt:\n   28              break\n   29          else:\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/mdwrkapi.py:\n  108              try:\n  109                  items = self.poller.poll(self.timeout)\n  110:             except KeyboardInterrupt:\n  111                  break # Interrupted\n  112  \n  ...\n  152                      try:\n  153                          time.sleep(1e-3*self.reconnect)\n  154:                     except KeyboardInterrupt:\n  155                          break\n  156                      self.reconnect_to_broker()\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/mspoller.py:\n   30      try:\n   31          socks = dict(poller.poll())\n   32:     except KeyboardInterrupt:\n   33          break\n   34  \n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/msreader.py:\n   30          try:\n   31              msg = receiver.recv(zmq.DONTWAIT)\n   32:         except zmq.Again:\n   33              break\n   34          # process task\n   ..\n   38          try:\n   39              msg = subscriber.recv(zmq.DONTWAIT)\n   40:         except zmq.Again:\n   41              break\n   42          # process weather update\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/pathopub.py:\n   36                  b\"Off with his head!\",\n   37              ])\n   38:         except KeyboardInterrupt:\n   39              print \"interrupted\"\n   40              break\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/peering2.py:\n   19  try:\n   20      raw_input\n   21: except NameError:\n   22      # Python 3\n   23      raw_input = input\n   ..\n   40          try:\n   41              reply = client.recv()\n   42:         except zmq.ZMQError:\n   43              # interrupted\n   44              return\n   ..\n   61          try:\n   62              msg = worker.recv_multipart()\n   63:         except zmq.ZMQError:\n   64              # interrupted\n   65              return\n   ..\n  135          try:\n  136              events = dict(pollerbe.poll(1000 if workers else None))\n  137:         except zmq.ZMQError:\n  138              break  # interrupted\n  139  \n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/peering3.py:\n   49              try:\n   50                  events = dict(poller.poll(10000))\n   51:             except zmq.ZMQError:\n   52                  return # interrupted\n   53  \n   ..\n   74          try:\n   75              msg = worker.recv_multipart()\n   76:         except zmq.ZMQError:\n   77              # interrupted\n   78              return\n   ..\n  156          try:\n  157              events = dict(pollerbe.poll(1000 if local_capacity else None))\n  158:         except zmq.ZMQError:\n  159              break  # interrupted\n  160  \n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/suisnail.py:\n   57          try:\n   58              signal = pipe.recv(zmq.DONTWAIT)\n   59:         except zmq.ZMQError as e:\n   60              if e.errno == zmq.EAGAIN:\n   61                  # nothing to recv\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/taskvent.py:\n   11  try:\n   12      raw_input\n   13: except NameError:\n   14      # Python 3\n   15      raw_input = input\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/titanic.py:\n  174          try:\n  175              items = poller.poll(1000)\n  176:         except KeyboardInterrupt:\n  177              break;              # Interrupted\n  178  \n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/tripping.py:\n   68          try:\n   69              items = dict(poller.poll())\n   70:         except:\n   71              break # Interrupted\n   72  \n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/udpping1.py:\n   45          try:\n   46              events = dict(poller.poll(1000* timeout))\n   47:         except KeyboardInterrupt:\n   48              print(\"interrupted\")\n   49              break\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/udpping2.py:\n   32          try:\n   33              events = dict(poller.poll(1000* timeout))\n   34:         except KeyboardInterrupt:\n   35              print(\"interrupted\")\n   36              break\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/udpping3.py:\n   10          try:\n   11              print(interface.recv())\n   12:         except KeyboardInterrupt:\n   13              print(\"interrupted\")\n   14              break\n\n/Users/cosgroma/workspace/libs/zguide/examples/Python/zhelpers.py:\n   32          try:\n   33              print(part.decode('ascii'))\n   34:         except UnicodeDecodeError:\n   35              print(r\"0x%s\" % (binascii.hexlify(part).decode('ascii')))\n   36  \n   ..\n   39      try:\n   40          socket.sndhwm = socket.rcvhwm = hwm\n   41:     except AttributeError:\n   42          socket.hwm = hwm\n   43  \n\n88 matches across 50 files\n",
+			"settings":
+			{
+				"buffer_size": 39010,
 				"line_ending": "Unix",
-				"name": "abstract-rendering"
-			}
-		},
-		{
-			"contents": "winterstone                                                 - Framework for PyQt application\n -- LAME\nfluid-nexus                                                 - PyQt4 application that enables one to share messages and data independent of centralized data networks\n* vincent-qt                                                  - Vincent in QtWidgets applications\n--- LAME bad for realtiem\nqt-graph-helpers                                            - orangeqt ploting library\n* qPyProfiler                                                 - Graphical interface to python profiler in PyQt\n* pyqt-distutils                                              - A set of distutils extension for building Qt ui files\nqt-dataflow                                                 - A base for custom visual programming enviroments\n  -- TIGHT\nqt_backport                                                 - Makes PySide/PyQt4 code work with Qt5 (using PyQt5)\npydiq                                                       - Simple open-source DICOM browser/viewer in Python and Qt4.\npyqode.qt                                                   - Provides an abstraction layer on top of the various Qt bindings (PyQt5, PyQt4 and PySide)\nkabaret.gui                                                 - Qt based GUI package for the kabaret framework.\n-- pyqode.designer                                             - Starts Qt Designer with pyqode plugins---\nqtfaststart                                                 - Quicktime atom positioning in Python for fast streaming.\n--LibQuickUI                                                  - UI Extension to PyQt\n-- wallaby                                                     - Wallaby is a powerful yet simple framework for building Qt-based, cross-platform applications in PyQt/PySide with a CouchDB/CouchBase and Elasticsearch backend.\n--introspeqt                                                  - Simple introspector for PySide applications.\n--pycante                                                     - The hotest way to deal with PyQt\neilat-web-browser                                           - QtWebKit based web browser\nOpenGLContext_qt                                            - PyQt4/PySide context for OpenGLContext\nnyamuk                                                      - Python MQTT Client Library\nPyCon_UK_2007_PyQt_and_Qt_Designer                          - PyQt and Qt Designer examples from PyCon UK 2007.\nqte                                                         - PySide-based GUI toolkit\nqrcgen                                                      - Automated generator of Qt resource files (*.qrc), by recursive scanning of directory trees\npyqode-uic                                                  - pyQode Qt ui compiler\nPyQtdesignerplugins                                         - PyQtdesignerplugins installs Qt Designer plugins for PyQt4\nqgmap                                                       - Google Map widget for PySyde/PyQt4\npyqterm                                                     - Simple terminal/console widget for PyQt4 with vt100 support\nPyPaPi                                                      - PyPaPi                                          - Python and Qt Application Framework (PyQt and SQLAlchemy)\nqonda                                                       - A Model-View framework based on Qt Interview\nQtStuff                                                     - Useful classes for working with PySide\\PyQt . Read the documentation here:  http://qtstuff.readthedocs.org/\nPyCon_Italia_2009_PyQt_for_Desktop_and_Embedded_Devices     - Slides from the PyQt for Desktop and Embedded Devices talk at PyCon Italia 2009.\nqtest                                                       - Graphical User Interface for the unittest framework.\nqpython                                                     - An interactive Python shell with PyQt support.\nmake_qt_ui                                                  - Scripts to simplify conversion of *.ui and *.qrc files to Python\nlogview                                                     - A Qt-based log viewer for Python's standard logging package\neasymodel                                                   - Qt Models and Views made easy with general purpose Model and a Widget delegate.\nEuroPython2006_PyQt4_Examples                               - PyQt4 examples from a talk at EuroPython 2006.\npandas-qt                                                   - catches exceptions inside qt applications and writes them to a message box and into a log file\nWebtrendsQT                                                 - Webtrends SQL query tool\nQtumblr                                                     - Qt Tumblr Client based on Opentumblr\nGetting-Started-With-PyQt4                                  - An introduction to PyQt4 for Python programmers.\ntoga-qt                                                     - A Qt backend for the Toga widget toolkit.\n",
-			"settings":
-			{
-				"buffer_size": 4996,
-				"line_ending": "Unix",
-				"name": "winterstone"
-			}
-		},
-		{
-			"file": "/Users/cosgroma/workspace/libs/python/qt_extenstions/qgmap-0.2/qgmap/api_testing.html",
-			"settings":
-			{
-				"buffer_size": 1873,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "Package Control Messages\n========================\n\nTable Editor:\n------------\n\n  # Table Editor\n  \n  ## Overview\n  \n  *Table Editor* is a package for the *Sublime Text 2* and *Sublime Text 3* \n  editor for edit text tables. \n  *Table Editor* is has almost the same keys as Emacs-org mode table editor. \n  \n  *Table Editor* allow on easy way edit text table, it allows:\n  \n  - navigate with tab/shift tab \n  - insert/delete row\n  - insert/delete column\n  - auto align number cells to right, text cells to left, header cells to center\n  - move column left/right\n  - move row up/down\n  - split long cell\n  - join two rows into one\n  - convert selected CSV region into table\n  - direct support subset of wiki table syntax\n      - Simple\n      - EmacsOrgMode\n      - Pandoc(Grid Tables, Pipe Tables)\n      - Multi Markdown(support colspan in alpha status)\n      - reStructuredText\n      - Textile(support colspan and rowspan in alpha status)\n  - auto detect table syntax by view syntax\n  - switch between different table syntax on the fly\n  - temporary disable/enable table editor for current view\n  - customize table syntax with settings\n  - support CJK : Chinese, Japanese, Korean(alpha status)\n  - show demo film in scratch view\n  \n  \n  For more information see\n  \n  * Sublime Text - Select Preferences->Package Settings->Table Editor->README\n  * Online - https://github.com/vkocubinsky/SublimeTableEditor\n  \n  \n  \n  \n  \n",
-			"settings":
-			{
-				"buffer_size": 1419,
-				"line_ending": "Unix",
-				"name": "Package Control Messages",
+				"name": "Find Results",
 				"scratch": true
+			}
+		},
+		{
+			"file": "/Users/cosgroma/workspace/libs/zguide/examples/Python/bstar.py",
+			"settings":
+			{
+				"buffer_size": 8303,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "graphs/line.py",
+			"settings":
+			{
+				"buffer_size": 5632,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "graphs/time_series.py",
+			"settings":
+			{
+				"buffer_size": 1510,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "graphs/freq_series.py",
+			"settings":
+			{
+				"buffer_size": 3052,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "graphs/__init__.py",
+			"settings":
+			{
+				"buffer_size": 387,
+				"line_ending": "Unix"
 			}
 		}
 	],
 	"build_system": "Anaconda Python Builder",
 	"command_palette":
 	{
-		"height": 231.0,
+		"height": 383.0,
 		"selected_items":
 		[
+			[
+				"Dis Pa",
+				"Package Control: Disable Package"
+			],
 			[
 				"IN Pa",
 				"Package Control: Install Package"
@@ -639,10 +737,6 @@
 				"Increment Selection"
 			],
 			[
-				"Dis Pa",
-				"Package Control: Disable Package"
-			],
-			[
 				"Set SYn Jso",
 				"Set Syntax: JSON"
 			],
@@ -705,10 +799,44 @@
 	},
 	"expanded_folders":
 	[
-		"/Users/cosgroma/workspace/libs/python/modules/QtBooty"
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/graphs",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/tests",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/tests/app",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/tests/config",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/tests/graphs",
+		"/Users/cosgroma/workspace/libs/zguide",
+		"/Users/cosgroma/workspace/libs/zguide/builds",
+		"/Users/cosgroma/workspace/libs/zguide/examples",
+		"/Users/cosgroma/workspace/libs/zguide/examples/Python"
 	],
 	"file_history":
 	[
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/tests/graphs/surf_test.py",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/graphs/polar.py",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/graphs/visvis_canvas.py",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/graphs/__init__.py",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/tests/graphs/polar_test.py",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/graphs/surf.py",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/graphs/mpl_canvas.py",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/graphs/line.py",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/graphs/graph_updater.py",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/graphs/private_canvas.py",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/sandbox/graphs/private_canvas.py",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/sandbox/graphs/line.py",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/sandbox/graphs/visvis_surf.py",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/sandbox/graphs/vv_4dimensions_motion.py",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/sandbox/graphs/surface3d_demo.py",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/tests/graphs/timeseries_test.py",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/sandbox/graphs/vv_colormap.py",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/sandbox/graphs/vv_surface_render.py",
+		"/Users/cosgroma/myhist.hist",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/framework/__init__.py",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/framework/io_grid.py",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/resources/styles/style.css",
+		"/Users/cosgroma/workspace/libs/python/qt_extenstions/qgmap-0.2/qgmap/api_testing.html",
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/User/Anaconda.sublime-settings",
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/app.py",
 		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/qtbooty.sublime-project",
 		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/User/PythonImproved.sublime-settings",
 		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/User/JSON.sublime-settings",
@@ -716,9 +844,7 @@
 		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/webkit/webkit.py",
 		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/webkit/js/t.js",
 		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/webkit/t.py",
-		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/graphs/private_canvas.py",
 		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/fancybrowser/jquery.min.js",
-		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/graphs/line.py",
 		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/webkit/index.html",
 		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/webkit/rotations/index.html",
 		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/webkit/cubehelix.js",
@@ -726,11 +852,8 @@
 		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/User/docstring.py",
 		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/framework/tabs.py",
 		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/gallery/WidgetGallery.py",
-		"/Users/cosgroma/workspace/libs/python/modules/QtBooty/framework/io_grid.py",
 		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/Default/Default (OSX).sublime-keymap",
-		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/User/FileHeader.sublime-settings",
-		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/User/Anaconda.sublime-settings",
 		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/Anaconda/Anaconda.sublime-settings",
 		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/User/Python.sublime-settings",
 		"/Users/cosgroma/Library/Application Support/Sublime Text 3/.gitignore",
@@ -815,38 +938,18 @@
 		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Installed Packages/VHDL/Syntaxes/VHDL.tmLanguage",
 		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/User/Package Control.sublime-settings",
 		"/Users/cosgroma/workspace/sergeant/docs/presentations/security/test.sh",
-		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/Sublimerge Pro/Sublimerge.sublime-settings",
-		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/SublimeLinter/SublimeLinter.sublime-settings",
-		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/User/SublimeREPL.sublime-settings",
-		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/Super Calculator/Super Calculator.sublime-settings",
-		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/Super Calculator/Default (OSX).sublime-keymap",
-		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/SublimeREPL/SublimeREPL.sublime-settings",
-		"/Users/cosgroma/workspace/sandbox/python_qtbooty_testing/src/app_config.json",
-		"/Users/cosgroma/workspace/sandbox/python_qtbooty_testing/src/nmapqt.py",
-		"/Users/cosgroma/workspace/sandbox/python_qtbooty_testing/src/qtbooty_test.py",
-		"/Users/cosgroma/workspace/apps/in-development/git-forest/.dep/git-forest-list.sh",
-		"/Users/cosgroma/workspace/apps/in-development/git-forest/gitf-includes/gitf-list.sh",
-		"/Users/cosgroma/workspace/apps/in-development/git-forest/gitf-includes/gitf-shell.sh",
-		"/Users/cosgroma/workspace/apps/in-development/git-forest/gitf",
-		"/Users/cosgroma/workspace/apps/in-development/git-forest/gitf-includes/gitf-config.sh",
-		"/Users/cosgroma/etc/gitf_config.ini",
-		"/Users/cosgroma/workspace/sergeant/guis/QtBooty/graphs/PolarPlotWidget.py",
-		"/Users/cosgroma/workspace/sergeant/guis/QtBooty/private_canvas.py",
-		"/Users/cosgroma/workspace/sandbox/project-euler/001.py",
-		"/Users/cosgroma/workspace/sandbox/project-euler/002.py",
-		"/Users/cosgroma/workspace/sandbox/project-euler/003.py",
-		"/Users/cosgroma/workspace/sergeant/guis/QtBooty/diagrams/diagramscene.py",
-		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/Git/Git.sublime-settings"
+		"/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/Sublimerge Pro/Sublimerge.sublime-settings"
 	],
 	"find":
 	{
-		"height": 29.0
+		"height": 30.0
 	},
 	"find_in_files":
 	{
 		"height": 106.0,
 		"where_history":
 		[
+			"/Users/cosgroma/workspace/libs/zguide/examples/Python",
 			"/Users/cosgroma/server_workspace/sergeant/projects/test/fsbl",
 			""
 		]
@@ -856,6 +959,57 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"thread)",
+			"except",
+			"try",
+			"logger",
+			"self.logger",
+			"t,",
+			"TimeSeries",
+			"Time",
+			"angRads",
+			"angs",
+			"surface",
+			"sv",
+			"10",
+			"n",
+			"mag",
+			"Label",
+			"Label'",
+			" Label",
+			"Label",
+			"ax",
+			"surf",
+			"z",
+			"Y",
+			"y",
+			"_label",
+			"ptp",
+			"plot_type",
+			"pass",
+			"y",
+			"x",
+			"set_xlabel",
+			"Surface",
+			"z_r.ptp()*",
+			"_range",
+			"x_",
+			"_range",
+			"x_range",
+			"def",
+			"update_surface",
+			"update_interval_surface",
+			"set_boundary",
+			"self.z",
+			"self.",
+			"self",
+			"self.",
+			"get_layout",
+			"return",
+			"150",
+			"50",
+			"get_layout",
+			"groups",
 			"|        ",
 			"- ",
 			" ",
@@ -932,58 +1086,7 @@
 			"print",
 			"       \n",
 			"|    ",
-			"      ",
-			"      \n",
-			"\"",
-			"tab",
-			"outlin",
-			"return",
-			"nitems_arr",
-			"ngroups",
-			"nitems",
-			"config",
-			"u_projection",
-			"a_rotation",
-			"_setup_textures",
-			"append",
-			"moonRot",
-			"sun",
-			"earth",
-			"sun",
-			"texture",
-			"rawRefence",
-			"TEXTURE",
-			"Texture",
-			"texture",
-			"in /usr/local/",
-			"Could not find any downloads",
-			"No distributions at all ",
-			"Requirement already up-to-date:",
-			" to allow).",
-			"--allow-external",
-			"Downloading/unpacking",
-			"copyfile",
-			"Permission denied:",
-			"--allow-unverified",
-			"Requirement already up-to-date:",
-			"Cleaning up...",
-			"--allow-unverified",
-			"xlrd",
-			"--allow-unverified ",
-			"Terrain",
-			"é ",
-			"TraceMsg",
-			"Trace",
-			"MIMETypeGuessFromFile",
-			"MIMETypeFromExt",
-			"text/",
-			"304",
-			"x: 400",
-			"368",
-			"86",
-			"440",
-			"450",
-			"// PropertyAction { target: ball; property: \"direction\"; value: \"left\" "
+			"      "
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1001,24 +1104,336 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 5,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "app.py",
+					"file": "tests/graphs/surf_test.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3673,
+						"buffer_size": 2361,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								470,
-								478
+								756,
+								756
+							]
+						],
+						"settings":
+						{
+							"c_time":
+							[
+								128,
+								3,
+								99,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								113,
+								0,
+								67,
+								10,
+								7,
+								222,
+								12,
+								30,
+								6,
+								57,
+								47,
+								0,
+								0,
+								0,
+								113,
+								1,
+								133,
+								113,
+								2,
+								82,
+								113,
+								3,
+								46
+							],
+							"color_scheme": "Packages/Theme - Cyanide/Monocyanide.tmTheme",
+							"syntax": "Packages/Python Improved/PythonImproved.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1010.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 15,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "graphs/visvis_canvas.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7080,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4447,
+								4455
+							]
+						],
+						"settings":
+						{
+							"c_time":
+							[
+								128,
+								3,
+								99,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								113,
+								0,
+								67,
+								10,
+								7,
+								222,
+								12,
+								30,
+								14,
+								18,
+								28,
+								0,
+								0,
+								0,
+								113,
+								1,
+								133,
+								113,
+								2,
+								82,
+								113,
+								3,
+								46
+							],
+							"color_scheme": "Packages/Theme - Cyanide/Monocyanide.tmTheme",
+							"syntax": "Packages/Python Improved/PythonImproved.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3095.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "tests/graphs/polar_test.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2287,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1969,
+								1969
+							]
+						],
+						"settings":
+						{
+							"c_time":
+							[
+								128,
+								3,
+								99,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								113,
+								0,
+								67,
+								10,
+								7,
+								222,
+								12,
+								30,
+								18,
+								58,
+								57,
+								0,
+								0,
+								0,
+								113,
+								1,
+								133,
+								113,
+								2,
+								82,
+								113,
+								3,
+								46
+							],
+							"color_scheme": "Packages/Theme - Cyanide/Monocyanide.tmTheme",
+							"syntax": "Packages/Python Improved/PythonImproved.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1127.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 14,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "tests/graphs/timeseries_test.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1475,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								961,
+								961
+							]
+						],
+						"settings":
+						{
+							"c_time":
+							[
+								128,
+								3,
+								99,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								113,
+								0,
+								67,
+								10,
+								7,
+								222,
+								11,
+								26,
+								2,
+								44,
+								58,
+								0,
+								0,
+								0,
+								113,
+								1,
+								133,
+								113,
+								2,
+								82,
+								113,
+								3,
+								46
+							],
+							"color_scheme": "Packages/Theme - Cyanide/Monocyanide.tmTheme",
+							"syntax": "Packages/Python Improved/PythonImproved.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 553.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4101,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2442,
+								2442
 							]
 						],
 						"settings":
@@ -1075,244 +1490,27 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1779.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 4,
-			"sheets":
-			[
-				{
-					"buffer": 1,
-					"file": "/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3567,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1866,
-								1866
-							]
-						],
-						"settings":
-						{
-							"c_time":
-							[
-								128,
-								3,
-								99,
-								100,
-								97,
-								116,
-								101,
-								116,
-								105,
-								109,
-								101,
-								10,
-								100,
-								97,
-								116,
-								101,
-								116,
-								105,
-								109,
-								101,
-								10,
-								113,
-								0,
-								67,
-								10,
-								7,
-								222,
-								12,
-								11,
-								1,
-								2,
-								11,
-								0,
-								0,
-								0,
-								113,
-								1,
-								133,
-								113,
-								2,
-								82,
-								113,
-								3,
-								46
-							],
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1126.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "/Users/cosgroma/Library/Application Support/Sublime Text 3/Packages/User/Anaconda.sublime-settings",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 15154,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2217,
-								2217
-							]
-						],
-						"settings":
-						{
-							"c_time":
-							[
-								128,
-								3,
-								99,
-								100,
-								97,
-								116,
-								101,
-								116,
-								105,
-								109,
-								101,
-								10,
-								100,
-								97,
-								116,
-								101,
-								116,
-								105,
-								109,
-								101,
-								10,
-								113,
-								0,
-								67,
-								10,
-								7,
-								222,
-								12,
-								5,
-								23,
-								47,
-								7,
-								0,
-								0,
-								0,
-								113,
-								1,
-								133,
-								113,
-								2,
-								82,
-								113,
-								3,
-								46
-							],
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 989.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6616,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								155,
-								155
-							]
-						],
-						"settings":
-						{
-							"auto_name": "abstract-rendering",
-							"enable_table_editor": true,
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4996,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2905,
-								2910
-							]
-						],
-						"settings":
-						{
-							"auto_name": "winterstone",
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"word_wrap": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 143.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
 					"buffer": 5,
-					"file": "/Users/cosgroma/workspace/libs/python/qt_extenstions/qgmap-0.2/qgmap/api_testing.html",
+					"file": "/Users/cosgroma/workspace/libs/zguide/examples/Python/asyncsrv.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1873,
+						"buffer_size": 3292,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								912,
-								912
+								550,
+								556
 							]
 						],
 						"settings":
@@ -1347,10 +1545,10 @@
 								7,
 								222,
 								12,
-								11,
-								5,
-								8,
-								59,
+								10,
+								4,
+								32,
+								54,
 								0,
 								0,
 								0,
@@ -1364,12 +1562,12 @@
 								3,
 								46
 							],
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 2,
+							"syntax": "Packages/Python Improved/PythonImproved.tmLanguage",
+							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 410.0,
+						"translation.y": 2000.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -1377,30 +1575,1496 @@
 				},
 				{
 					"buffer": 6,
+					"file": "/Users/cosgroma/workspace/libs/zguide/examples/Python/espresso.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1419,
+						"buffer_size": 3052,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1419,
-								1419
+								1919,
+								1919
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"word_wrap": true
+							"c_time":
+							[
+								128,
+								3,
+								99,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								113,
+								0,
+								67,
+								10,
+								7,
+								222,
+								12,
+								10,
+								4,
+								32,
+								54,
+								0,
+								0,
+								0,
+								113,
+								1,
+								133,
+								113,
+								2,
+								82,
+								113,
+								3,
+								46
+							],
+							"syntax": "Packages/Python Improved/PythonImproved.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 85.0,
+						"translation.y": 752.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/Users/cosgroma/workspace/libs/zguide/examples/Python/interface.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4084,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								472,
+								472
+							]
+						],
+						"settings":
+						{
+							"c_time":
+							[
+								128,
+								3,
+								99,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								113,
+								0,
+								67,
+								10,
+								7,
+								222,
+								12,
+								10,
+								4,
+								32,
+								54,
+								0,
+								0,
+								0,
+								113,
+								1,
+								133,
+								113,
+								2,
+								82,
+								113,
+								3,
+								46
+							],
+							"syntax": "Packages/Python Improved/PythonImproved.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2170.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "/Users/cosgroma/workspace/libs/zguide/examples/Python/rrbroker.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 735,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"c_time":
+							[
+								128,
+								3,
+								99,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								113,
+								0,
+								67,
+								10,
+								7,
+								222,
+								12,
+								10,
+								4,
+								32,
+								54,
+								0,
+								0,
+								0,
+								113,
+								1,
+								133,
+								113,
+								2,
+								82,
+								113,
+								3,
+								46
+							],
+							"syntax": "Packages/Python Improved/PythonImproved.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 12,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "/Users/cosgroma/workspace/libs/zguide/examples/Python/asyncrrhandlers.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5632,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"c_time":
+							[
+								128,
+								3,
+								99,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								113,
+								0,
+								67,
+								10,
+								7,
+								222,
+								12,
+								10,
+								4,
+								32,
+								54,
+								0,
+								0,
+								0,
+								113,
+								1,
+								133,
+								113,
+								2,
+								82,
+								113,
+								3,
+								46
+							],
+							"syntax": "Packages/Python Improved/PythonImproved.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2551.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 39010,
+						"regions":
+						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										213,
+										216
+									],
+									[
+										398,
+										401
+									],
+									[
+										664,
+										667
+									],
+									[
+										890,
+										893
+									],
+									[
+										1090,
+										1093
+									],
+									[
+										1309,
+										1312
+									],
+									[
+										1502,
+										1505
+									],
+									[
+										1724,
+										1727
+									],
+									[
+										1903,
+										1906
+									],
+									[
+										2151,
+										2154
+									],
+									[
+										2330,
+										2333
+									],
+									[
+										2578,
+										2581
+									],
+									[
+										2757,
+										2760
+									],
+									[
+										2978,
+										2981
+									],
+									[
+										3173,
+										3176
+									],
+									[
+										3382,
+										3385
+									],
+									[
+										3575,
+										3578
+									],
+									[
+										3783,
+										3786
+									],
+									[
+										4065,
+										4068
+									],
+									[
+										4243,
+										4246
+									],
+									[
+										4525,
+										4528
+									],
+									[
+										4712,
+										4715
+									],
+									[
+										5020,
+										5023
+									],
+									[
+										5216,
+										5219
+									],
+									[
+										5534,
+										5537
+									],
+									[
+										5724,
+										5727
+									],
+									[
+										5976,
+										5979
+									],
+									[
+										6241,
+										6244
+									],
+									[
+										6484,
+										6487
+									],
+									[
+										6759,
+										6762
+									],
+									[
+										6984,
+										6987
+									],
+									[
+										7209,
+										7212
+									],
+									[
+										7392,
+										7395
+									],
+									[
+										7540,
+										7543
+									],
+									[
+										7772,
+										7775
+									],
+									[
+										7997,
+										8000
+									],
+									[
+										8181,
+										8184
+									],
+									[
+										8374,
+										8377
+									],
+									[
+										8599,
+										8602
+									],
+									[
+										8769,
+										8772
+									],
+									[
+										8949,
+										8952
+									],
+									[
+										9174,
+										9177
+									],
+									[
+										9344,
+										9347
+									],
+									[
+										9616,
+										9619
+									],
+									[
+										9855,
+										9858
+									],
+									[
+										9913,
+										9916
+									],
+									[
+										10189,
+										10192
+									],
+									[
+										10305,
+										10308
+									],
+									[
+										10454,
+										10457
+									],
+									[
+										10523,
+										10526
+									],
+									[
+										10609,
+										10612
+									],
+									[
+										10825,
+										10828
+									],
+									[
+										11032,
+										11035
+									],
+									[
+										11166,
+										11169
+									],
+									[
+										11426,
+										11429
+									],
+									[
+										11603,
+										11606
+									],
+									[
+										11799,
+										11802
+									],
+									[
+										12009,
+										12012
+									],
+									[
+										12170,
+										12173
+									],
+									[
+										12343,
+										12346
+									],
+									[
+										12548,
+										12551
+									],
+									[
+										12786,
+										12789
+									],
+									[
+										13049,
+										13052
+									],
+									[
+										13348,
+										13351
+									],
+									[
+										13542,
+										13545
+									],
+									[
+										13825,
+										13828
+									],
+									[
+										14003,
+										14006
+									],
+									[
+										14248,
+										14251
+									],
+									[
+										14511,
+										14514
+									],
+									[
+										14682,
+										14685
+									],
+									[
+										14942,
+										14945
+									],
+									[
+										15162,
+										15165
+									],
+									[
+										15429,
+										15432
+									],
+									[
+										15468,
+										15471
+									],
+									[
+										15731,
+										15734
+									],
+									[
+										15961,
+										15964
+									],
+									[
+										16145,
+										16148
+									],
+									[
+										16395,
+										16398
+									],
+									[
+										16580,
+										16583
+									],
+									[
+										16712,
+										16715
+									],
+									[
+										16883,
+										16886
+									],
+									[
+										17082,
+										17085
+									],
+									[
+										17361,
+										17364
+									],
+									[
+										17552,
+										17555
+									],
+									[
+										17751,
+										17754
+									],
+									[
+										18057,
+										18060
+									],
+									[
+										18257,
+										18260
+									],
+									[
+										18465,
+										18468
+									],
+									[
+										18522,
+										18525
+									],
+									[
+										18791,
+										18794
+									],
+									[
+										18980,
+										18983
+									],
+									[
+										19193,
+										19196
+									],
+									[
+										19311,
+										19314
+									],
+									[
+										19362,
+										19365
+									],
+									[
+										19572,
+										19575
+									],
+									[
+										19683,
+										19686
+									],
+									[
+										19917,
+										19920
+									],
+									[
+										20137,
+										20140
+									],
+									[
+										20389,
+										20392
+									],
+									[
+										20637,
+										20640
+									],
+									[
+										20891,
+										20894
+									],
+									[
+										21091,
+										21094
+									],
+									[
+										21347,
+										21353
+									],
+									[
+										21373,
+										21379
+									],
+									[
+										21536,
+										21542
+									],
+									[
+										21546,
+										21552
+									],
+									[
+										21666,
+										21672
+									],
+									[
+										21863,
+										21869
+									],
+									[
+										22031,
+										22037
+									],
+									[
+										22043,
+										22049
+									],
+									[
+										22237,
+										22243
+									],
+									[
+										22249,
+										22255
+									],
+									[
+										22503,
+										22509
+									],
+									[
+										22674,
+										22680
+									],
+									[
+										22920,
+										22926
+									],
+									[
+										23153,
+										23159
+									],
+									[
+										23309,
+										23315
+									],
+									[
+										23562,
+										23568
+									],
+									[
+										23723,
+										23729
+									],
+									[
+										23940,
+										23946
+									],
+									[
+										24118,
+										24124
+									],
+									[
+										24335,
+										24341
+									],
+									[
+										24513,
+										24519
+									],
+									[
+										24754,
+										24760
+									],
+									[
+										24967,
+										24973
+									],
+									[
+										25225,
+										25231
+									],
+									[
+										25411,
+										25417
+									],
+									[
+										25670,
+										25676
+									],
+									[
+										25890,
+										25896
+									],
+									[
+										26096,
+										26102
+									],
+									[
+										26296,
+										26302
+									],
+									[
+										26467,
+										26473
+									],
+									[
+										26734,
+										26740
+									],
+									[
+										26942,
+										26948
+									],
+									[
+										27182,
+										27188
+									],
+									[
+										27414,
+										27420
+									],
+									[
+										27620,
+										27626
+									],
+									[
+										27833,
+										27839
+									],
+									[
+										28066,
+										28072
+									],
+									[
+										28280,
+										28286
+									],
+									[
+										28508,
+										28514
+									],
+									[
+										28695,
+										28701
+									],
+									[
+										28903,
+										28909
+									],
+									[
+										29134,
+										29140
+									],
+									[
+										29337,
+										29343
+									],
+									[
+										29524,
+										29530
+									],
+									[
+										29732,
+										29738
+									],
+									[
+										29946,
+										29952
+									],
+									[
+										30133,
+										30139
+									],
+									[
+										30379,
+										30385
+									],
+									[
+										30619,
+										30625
+									],
+									[
+										30846,
+										30852
+									],
+									[
+										30975,
+										30981
+									],
+									[
+										30982,
+										30988
+									],
+									[
+										31155,
+										31161
+									],
+									[
+										31306,
+										31312
+									],
+									[
+										31553,
+										31559
+									],
+									[
+										31763,
+										31769
+									],
+									[
+										32020,
+										32026
+									],
+									[
+										32277,
+										32283
+									],
+									[
+										32546,
+										32552
+									],
+									[
+										32807,
+										32813
+									],
+									[
+										33082,
+										33088
+									],
+									[
+										33353,
+										33359
+									],
+									[
+										33592,
+										33598
+									],
+									[
+										33825,
+										33831
+									],
+									[
+										34049,
+										34055
+									],
+									[
+										34237,
+										34243
+									],
+									[
+										34482,
+										34488
+									],
+									[
+										34687,
+										34693
+									],
+									[
+										34942,
+										34948
+									],
+									[
+										35153,
+										35159
+									],
+									[
+										35322,
+										35328
+									],
+									[
+										35556,
+										35562
+									],
+									[
+										35754,
+										35760
+									],
+									[
+										35905,
+										35911
+									],
+									[
+										36075,
+										36081
+									],
+									[
+										36271,
+										36277
+									],
+									[
+										36508,
+										36514
+									],
+									[
+										36671,
+										36677
+									],
+									[
+										36874,
+										36880
+									],
+									[
+										37098,
+										37104
+									],
+									[
+										37318,
+										37324
+									],
+									[
+										37534,
+										37540
+									],
+									[
+										37771,
+										37777
+									],
+									[
+										37990,
+										37996
+									],
+									[
+										38245,
+										38251
+									],
+									[
+										38482,
+										38488
+									],
+									[
+										38723,
+										38729
+									],
+									[
+										38919,
+										38925
+									]
+								],
+								"scope": ""
+							}
+						},
+						"selection":
+						[
+							[
+								25506,
+								25411
+							]
+						],
+						"settings":
+						{
+							"detect_indentation": false,
+							"line_numbers": false,
+							"output_tag": 2,
+							"result_base_dir": "",
+							"result_file_regex": "^([A-Za-z\\\\/<].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 18353.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "/Users/cosgroma/workspace/libs/zguide/examples/Python/bstar.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8303,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"c_time":
+							[
+								128,
+								3,
+								99,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								113,
+								0,
+								67,
+								10,
+								7,
+								222,
+								12,
+								10,
+								4,
+								32,
+								54,
+								0,
+								0,
+								0,
+								113,
+								1,
+								133,
+								113,
+								2,
+								82,
+								113,
+								3,
+								46
+							],
+							"syntax": "Packages/Python Improved/PythonImproved.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 220.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "graphs/line.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5632,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								470,
+								470
+							]
+						],
+						"settings":
+						{
+							"c_time":
+							[
+								128,
+								3,
+								99,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								113,
+								0,
+								67,
+								10,
+								7,
+								222,
+								11,
+								25,
+								22,
+								27,
+								47,
+								0,
+								0,
+								0,
+								113,
+								1,
+								133,
+								113,
+								2,
+								82,
+								113,
+								3,
+								46
+							],
+							"color_scheme": "Packages/Theme - Cyanide/Monocyanide.tmTheme",
+							"syntax": "Packages/Python Improved/PythonImproved.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 757.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "graphs/time_series.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1510,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1510,
+								1510
+							]
+						],
+						"settings":
+						{
+							"c_time":
+							[
+								128,
+								3,
+								99,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								113,
+								0,
+								67,
+								10,
+								7,
+								223,
+								1,
+								10,
+								16,
+								21,
+								48,
+								0,
+								0,
+								0,
+								113,
+								1,
+								133,
+								113,
+								2,
+								82,
+								113,
+								3,
+								46
+							],
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 580.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "graphs/freq_series.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3052,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2454,
+								2454
+							]
+						],
+						"settings":
+						{
+							"c_time":
+							[
+								128,
+								3,
+								99,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								113,
+								0,
+								67,
+								10,
+								7,
+								223,
+								1,
+								10,
+								16,
+								22,
+								17,
+								0,
+								0,
+								0,
+								113,
+								1,
+								133,
+								113,
+								2,
+								82,
+								113,
+								3,
+								46
+							],
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1191.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 15,
+					"file": "graphs/__init__.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 387,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								331,
+								331
+							]
+						],
+						"settings":
+						{
+							"c_time":
+							[
+								128,
+								3,
+								99,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								113,
+								0,
+								67,
+								10,
+								7,
+								222,
+								11,
+								15,
+								17,
+								52,
+								31,
+								0,
+								0,
+								0,
+								113,
+								1,
+								133,
+								113,
+								2,
+								82,
+								113,
+								3,
+								46
+							],
+							"color_scheme": "Packages/Theme - Cyanide/Monocyanide.tmTheme",
+							"syntax": "Packages/Python Improved/PythonImproved.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 13,
 					"type": "text"
 				}
 			]
@@ -1408,7 +3072,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 29.0
+		"height": 30.0
 	},
 	"input":
 	{
@@ -1423,18 +3087,11 @@
 				0,
 				1,
 				1
-			],
-			[
-				1,
-				0,
-				2,
-				1
 			]
 		],
 		"cols":
 		[
 			0.0,
-			0.264496672019,
 			1.0
 		],
 		"rows":
@@ -1450,7 +3107,7 @@
 	},
 	"output.exec":
 	{
-		"height": 345.0
+		"height": 265.0
 	},
 	"output.find_results":
 	{
@@ -1463,7 +3120,7 @@
 	"project": "qtbooty.sublime-project",
 	"replace":
 	{
-		"height": 54.0
+		"height": 56.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1481,7 +3138,7 @@
 		[
 			[
 				"",
-				"~/workspace/apps/git-forest/git-forest.sublime-project"
+				"~/workspace/libs/python/modules/phasor/phasor.sublime-project"
 			]
 		],
 		"width": 380.0
@@ -1494,7 +3151,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 1,
+	"selected_group": 0,
 	"settings":
 	{
 	},

@@ -98,7 +98,7 @@ class PrivateMplCanvas(FigureCanvas):
         self.setParent(QtGui.QWidget(parent))
 
         if self.plot_type == PlotType.polar:
-
+            self.axes = self.fig.add_subplot(111, projection='polar')
         elif self.plot_type == PlotType.surf:
             self.axes = self.fig.add_subplot(111, projection='3d')
         elif self.plot_type == PlotType.scatter:
@@ -163,7 +163,22 @@ class PrivateMplCanvas(FigureCanvas):
             self.axes.margins(.1)
 
         elif self.plot_type == PlotType.polar:
+            svs = [1, 2, 3, 4]
+            az = np.radians([10, 45, 90, 135])
+            el = 90 - np.array([45/4, 45/3, 45/2, 45])
+            self.axes.plot(az, el, marker='D', fillstyle='full', color='r', ls='', markersize=20)
+            xtick_delta = 30
+            self.axes.set_xticks(np.radians(np.arange(0, 360, xtick_delta)))
+            ytick_delta = (np.pi/2)/2
+            yticks = np.degrees(np.arange(0, np.pi/2 + ytick_delta, ytick_delta)).astype(int)
+            self.axes.set_yticks(yticks)
+            self.axes.set_yticklabels(np.core.defchararray.add(yticks[::-1].astype(str),\
+                                      np.array(['$^\circ$']*len(yticks))))
+            self.axes.set_rmax(90.0)
+            self.axes.grid(True)
 
+            for i, txt in enumerate(svs):
+                self.axes.annotate(txt, (az[i],el[i]), size=12, ha='center', va='center',)
 
             #self.set_title("A line plot on a polar axis", va='top')
         elif self.plot_type == PlotType.surf:
