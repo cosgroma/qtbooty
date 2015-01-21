@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 # @Author: Mathew Cosgrove
 # @Date:   2014-11-25 21:43:42
-# @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-01-10 01:46:55
+# @Last Modified by:   cosgroma
+# @Last Modified time: 2015-01-20 12:48:58
 
 import sys
-sys.path.append('/Users/cosgroma/workspace/sergeant/guis')
+# sys.path.append('/home/cosgroma/workspace/sergeant/guis')
 
 from QtBooty import App
 from QtBooty import graphs
