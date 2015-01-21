@@ -3,8 +3,8 @@
 # -*- coding: utf-8 -*-
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-05 22:26:11
-# @Last Modified by:   mac
-# @Last Modified time: 2014-12-30 04:27:28
+# @Last Modified by:   Mathew Cosgrove
+# @Last Modified time: 2015-01-21 10:47:52
 
 from PyQt4 import QtGui, QtCore, Qt
 from PyQt4.QtCore import pyqtSignal, pyqtSlot
@@ -23,8 +23,8 @@ group_instance = {"box_enabled": False,
 io_instance = {"class": "", "config": ""}
 
 label_defaults = {"label": ""}
-button_defaults = {"type": "default", "label": "", "callback": None, "args": None}
-edit_defaults = {"type": "default", "label": None, "default": None, "callback": None, "args": None}
+button_defaults = {"type": "default", "label": "", "clicked": None, "args": None}
+edit_defaults = {"type": "default", "label": None, "default": None, "editingFinished": None, "args": None}
 
 slider_defaults = {"type": "default", "label": "", "range": [0, 100], "orientation": "h", "display": False, "callback": None, "args": None}
 dial_defaults = {"label": "", "value": 0, "callback": None, "args": None}
@@ -64,14 +64,16 @@ def make_label(config):
 def make_button(config):
   instance = deepcopy(button_defaults)
   instance.update(config)
+
   if instance["type"] == "radio":
     button = QtGui.QRadioButton(instance["label"])
   elif instance["type"] == "check":
     button = QtGui.QCheckBox(instance["label"])
   else:
     button = QtGui.QPushButton(instance["label"])
-  if instance["callback"] is not None:
-    button.clicked.connect(partial(instance["callback"], instance["args"]))
+
+  if instance["clicked"] is not None:
+    button.clicked.connect(partial(instance["clicked"], [button] + instance["args"]))
   return button
 
 def add_label(widget, label, position="left"):
@@ -107,8 +109,11 @@ def make_edit(config):
   else:
     edit = QtGui.QLineEdit(instance["default"])
 
+  if instance["editingFinished"] is not None:
+    edit.textEdited.connect(partial(instance["editingFinished"], [edit] + instance["args"]))
+
   if instance["label"] is not None:
-    edit = add_label(edit, instance["label"])
+    return add_label(edit, instance["label"])
 
   return edit
 
@@ -194,7 +199,7 @@ class IOGrid(QtGui.QWidget):
   def config_widget(self, config):
     self.layout = get_layout(config["layout"])
     self.setLayout(self.layout)
-
+    self.handles = dict()
     for c in config["groups"]:
       if c["box_enabled"]:
         widget = QtGui.QGroupBox(c["box_name"])
@@ -206,31 +211,43 @@ class IOGrid(QtGui.QWidget):
 
       for io in c["items"]:
         if io["class"] == "label":
+          # temp_label, container = make_label(io["config"])
+          # self.handles[io["config"]["label"]] = temp_label
+          # layout.addWidget(container)
           layout.addWidget(make_label(io["config"]))
-
         if io["class"] == "button":
+          # temp_button = make_button(io["config"])
+          # self.handles[io["config"]["label"]] = temp_button
+          # layout.addWidget(temp_button)
           layout.addWidget(make_button(io["config"]))
-
         if io["class"] == "edit":
+          # temp_edit, container = make_edit(io["config"])
+          # self.handles[io["config"]["label"]] = temp_edit
+          # layout.addWidget(container)
           layout.addWidget(make_edit(io["config"]))
-
         if io["class"] == "slider":
+          # temp_slider = make_slider(io["config"])
+          # self.handles[io["config"]["label"]] = temp_slider
+          # layout.addWidget(temp_slider)
           layout.addWidget(make_slider(io["config"]))
-
       self.layout.addWidget(widget)
 
     # Check Box
     # Drop Down
     # Combo wheel
     pass
-
+  def get_value(self, label):
+    return self.handles[label].text()
 
 # self.app_load_button.clicked.connect(self.load_unload_app)
 # Select Group bool and Layout type H, V, G
 #
-def test_callback(name):
-  print("Button pressed: %s" % name)
+def test_clicked(button):
+  print("Button pressed: %s" % button.text())
 
+def test_edit_finish(args):
+  print args[0].text()
+  print args[1]
 
 if __name__ == '__main__':
   from QtBooty import App
@@ -239,7 +256,7 @@ if __name__ == '__main__':
 
   io_grid = IOGrid()
   config = io_grid.config_init(4, [1, 3, 2, 2])
-  config["layout"] = "v"
+  config["layout"] = ["v", "na"]
   groups = config["groups"]
 
   groups[0]["box_enabled"] = False
@@ -263,7 +280,9 @@ if __name__ == '__main__':
   groups[1]["items"] = [{
       "class": "edit",
       "config": {
-        "label": "normal"
+        "label": "normal",
+        "editingFinished": test_edit_finish,
+        "args": ["test"]
         }
     },{
       "class": "edit",
@@ -280,7 +299,7 @@ if __name__ == '__main__':
       }
   ]
 
-  # button_defaults = {"type": "default", "label": "", "callback": None, "args": None}
+  # button_defaults = {"type": "default", "label": "", "clicked": None, "args": None}
   groups[2]["box_enabled"] = True
   groups[2]["box_name"] = "class::button"
   groups[2]["layout"] = ["h", "na"]
@@ -289,16 +308,16 @@ if __name__ == '__main__':
       "class": "button",
       "config": {
         "label": "button1",
-        "callback": test_callback,
-        "args":"normal_button"
+        "clicked": test_clicked,
+        "args": ["normal"]
         }
     },{
       "class": "button",
       "config": {
         "type": "radio",
         "label": "radio button",
-        "callback": test_callback,
-        "args":"radio_button"
+        "clicked": test_clicked,
+        "args": ["radio"]
         }
     }
   ]

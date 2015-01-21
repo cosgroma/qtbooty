@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 # @Author: Mathew Cosgrove
 # @Date:   2014-11-25 22:27:47
-# @Last Modified by:   cosgroma
-# @Last Modified time: 2015-01-13 03:51:11
+# @Last Modified by:   Mathew Cosgrove
+# @Last Modified time: 2015-01-21 10:59:52
 
 import pyqtgraph as pg
 from PyQt4 import QtGui, QtCore, Qt
@@ -18,7 +18,7 @@ from QtBooty.framework import IOGrid
 
 
 class PointSeries(QtGui.QWidget):
-  def __init__(self, name=None, controller=False, interval=1000, maxlen=1000,  ylim=[-1 , 1]):
+  def __init__(self, name=None, controller=False, interval=1000, maxlen=1000,  ylim=[-1 , 1], setlegend=True):
     super(PointSeries, self).__init__()
     self.maxlen = maxlen
     self.interval = interval
@@ -27,7 +27,7 @@ class PointSeries(QtGui.QWidget):
     self.line_names = dict()
 
     self.layout = QtGui.QHBoxLayout()
-    self.graph = LineGraph(name=name, maxlen=maxlen)
+    self.graph = LineGraph(name=name, maxlen=maxlen, setlegend=setlegend)
     if ylim is not None:
       self.graph.set_ylim(self.ylim)
 
@@ -40,6 +40,10 @@ class PointSeries(QtGui.QWidget):
 
   def start(self):
     self.update_timer.start()
+
+  def set_maxlen(self, maxlen):
+    self.graph.set_maxlen(maxlen)
+    self.maxlen = maxlen
 
   def set_interval(self, interval):
     self.update_timer.setInterval(interval)
@@ -133,7 +137,7 @@ class PointSeriesController(QtGui.QWidget):
           "config": {
             "type": "check",
             "label": str(n),
-            "callback": callback,
+            "clicked": callback,
             "args": n
             }
         })
@@ -143,14 +147,23 @@ class PointSeriesController(QtGui.QWidget):
 
 
 class LineGraph(pg.PlotWidget):
-  def __init__(self, name=None, maxlen=1000, ylim=[-1 , 1]):
+  def __init__(self, name=None, maxlen=1000, ylim=[-1 , 1], setlegend=True):
     super(LineGraph, self).__init__(name=name)
 
     self.maxlen = maxlen
     self.lines = dict()
-
+    self.setlegend = setlegend
     self.showGrid(x=True, y=True)
-    self.legend = self.addLegend()
+    if self.setlegend:
+      self.legend = self.addLegend()
+
+  def set_maxlen(self, maxlen):
+    self.maxlen = maxlen
+    temp = dict()
+    for k in self.lines.keys():
+      artist = self.lines[k][0]
+      temp[k] = (artist, deque(maxlen=self.maxlen))
+    self.lines = temp
 
   def set_ylim(self, ylim):
     self.setYRange(ylim[0], ylim[1])
@@ -162,6 +175,8 @@ class LineGraph(pg.PlotWidget):
     self.lines[name][1].extend(zip(x, y))
 
   def add_line(self, name, color=None, downsample=None):
+    if name in self.lines.keys():
+      return
     artist = self.plot(pen=color, downsample=downsample)
     self.legend.addItem(artist, name)
     self.lines[name] = (artist, deque(maxlen=self.maxlen))
