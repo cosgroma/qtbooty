@@ -3,7 +3,7 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-11-26 08:54:11
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2014-11-26 10:52:59
+# @Last Modified time: 2015-01-21 22:57:33
 
 
 from PyQt4 import QtCore, QtGui, QtDeclarative
@@ -12,8 +12,8 @@ class DialBinding(QtCore.QObject):
   def __init__(self):
     super(DialBinding, self).__init__()
     self.timer = QtCore.QTimer()
-    timer.setInterval(1000)
-    timer.timeout.connect(self.sliderUpdate)
+    self.timer.setInterval(1000)
+    self.timer.timeout.connect(self.sliderUpdate)
     self._sliderValue = 0
 
   def sliderUpdate(self):

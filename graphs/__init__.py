@@ -3,13 +3,14 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-11-15 17:52:31
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-01-10 01:46:28
+# @Last Modified time: 2015-01-21 11:13:39
 
 
 from mpl_canvas import MplCanvas
 from visvis_canvas import VisSurface, VisPolar
 
 from graph_updater import GraphUpdater
+from graph import Graph
 
 from line import PointSeries
 from surf import Surface

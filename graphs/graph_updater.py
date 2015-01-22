@@ -30,8 +30,8 @@ Attributes:
 """
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-30 14:23:04
-# @Last Modified by:   mac
-# @Last Modified time: 2014-12-30 14:56:05
+# @Last Modified by:   Mathew Cosgrove
+# @Last Modified time: 2015-01-21 13:45:20
 # REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
 # REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
@@ -46,6 +46,8 @@ __status__ = "Development"
 import numpy as np
 from PyQt4 import QtGui, QtCore
 from collections import deque
+
+from QtBooty import App
 
 class GraphUpdater(QtGui.QWidget):
   """docstring for GraphUpdater"""
@@ -83,9 +85,12 @@ class GraphUpdater(QtGui.QWidget):
   def set_maxlen(self, maxlen):
     self.maxlen = maxlen
 
-  def new_deque(self, name):
-    self.data[name] = deque(maxlen=self.maxlen)
-    return self.data[name]
+  def add_data(self, data, names):
+    # if not isinstance(data, numpy.ndarray)
+    for n in names:
+      if n not in self.data.keys():
+        self.data[n] = deque(maxlen=self.maxlen)
+      self.data[n].append(data)
 
   def start(self):
     self.update_timer.start()
@@ -95,3 +100,11 @@ class GraphUpdater(QtGui.QWidget):
 
   def _update(self):
     pass
+
+
+# def main():
+
+
+
+# if __name__ == '__main__':
+#   main()

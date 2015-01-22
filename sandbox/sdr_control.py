@@ -3,7 +3,7 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-11-26 08:54:11
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2014-11-26 21:51:33
+# @Last Modified time: 2015-01-21 23:12:15
 
 import sys
 sys.path.append('/Users/cosgroma/workspace/sergeant/guis')
@@ -74,7 +74,7 @@ if __name__ == '__main__':
     qmlRegisterType(Graph, 'myPyQtGraph', 1, 0, 'PyQtGraph')
 
     canvas = QDeclarativeView()
-    canvas.setSource(QUrl.fromLocalFile('sdrcontrol.qml'))
+    canvas.setSource(QUrl.fromLocalFile('qml/sdrcontrol.qml'))
 
     canvas.setResizeMode(QDeclarativeView.SizeRootObjectToView)
 
