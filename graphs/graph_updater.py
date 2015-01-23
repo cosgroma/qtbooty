@@ -31,7 +31,7 @@ Attributes:
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-30 14:23:04
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-01-22 19:44:49
+# @Last Modified time: 2015-01-23 01:54:41
 # REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
 # REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
@@ -49,25 +49,34 @@ from collections import deque
 
 from QtBooty import App
 
+
+class GraphScheduler(object):
+  """docstring for GraphScheduler"""
+  def __init__(self):
+    super(GraphScheduler, self).__init__()
+    self.graphs = []
+
+  def add_graph(self, graph, **kwargs):
+    updater = GraphUpdater(**kwargs)
+    self.graphs.append((graph, updater))
+
+  def remove_graph(self, graph):
+    self.graphs.remove(graph)
+
+  def get_statistics(self, graph):
+    pass
+
+
 class GraphUpdater(object):
   """docstring for GraphUpdater"""
-  def __init__(self, interval=1000, maxlen=100):
+  def __init__(self, maxlen=1000, interval=1000):
     super(GraphUpdater, self).__init__()
 
     self.maxlen = maxlen
     self.interval = interval
-
     # self.setup()
     self.setup_update_timers()
-
     self.config = dict()
-    self.data = deque(maxlen=self.maxlen)
-
-  # def setup(self):
-  #   self.layout = QtGui.QHBoxLayout()
-  #   size_policy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
-  #   self.setSizePolicy(size_policy)
-  #   self.setLayout(self.layout)
 
   def setup_update_timers(self):
     self.update_timer = QtCore.QTimer()
@@ -86,11 +95,13 @@ class GraphUpdater(object):
 
   def set_maxlen(self, maxlen):
     self.maxlen = maxlen
+    self.data = deque(maxlen=self.maxlen)
 
   def add_data(self, data, config):
+    if self.data == None:
+      self.data = deque(maxlen=self.maxlen)
     self.config.update(config)
     self.data.append(data)
-    # if not isinstance(data, numpy.ndarray)
 
   def start(self):
     self.update_timer.start()
@@ -100,7 +111,6 @@ class GraphUpdater(object):
 
   def _update(self):
     dmat = np.concatenate(self.data, axis=1)
-    print dmat
     self.on_update(dmat, self.config)
 
   def on_update(self, dmat, config):
