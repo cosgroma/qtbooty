@@ -31,7 +31,7 @@ Attributes:
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-30 14:23:04
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-01-21 13:45:20
+# @Last Modified time: 2015-01-22 19:44:49
 # REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
 # REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
@@ -49,23 +49,25 @@ from collections import deque
 
 from QtBooty import App
 
-class GraphUpdater(QtGui.QWidget):
+class GraphUpdater(object):
   """docstring for GraphUpdater"""
   def __init__(self, interval=1000, maxlen=100):
     super(GraphUpdater, self).__init__()
-    # self.arg = arg
+
     self.maxlen = maxlen
     self.interval = interval
-    self.data = dict()
 
-    self.setup()
+    # self.setup()
     self.setup_update_timers()
 
-  def setup(self):
-    self.layout = QtGui.QHBoxLayout()
-    size_policy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
-    self.setSizePolicy(size_policy)
-    self.setLayout(self.layout)
+    self.config = dict()
+    self.data = deque(maxlen=self.maxlen)
+
+  # def setup(self):
+  #   self.layout = QtGui.QHBoxLayout()
+  #   size_policy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
+  #   self.setSizePolicy(size_policy)
+  #   self.setLayout(self.layout)
 
   def setup_update_timers(self):
     self.update_timer = QtCore.QTimer()
@@ -85,12 +87,10 @@ class GraphUpdater(QtGui.QWidget):
   def set_maxlen(self, maxlen):
     self.maxlen = maxlen
 
-  def add_data(self, data, names):
+  def add_data(self, data, config):
+    self.config.update(config)
+    self.data.append(data)
     # if not isinstance(data, numpy.ndarray)
-    for n in names:
-      if n not in self.data.keys():
-        self.data[n] = deque(maxlen=self.maxlen)
-      self.data[n].append(data)
 
   def start(self):
     self.update_timer.start()
@@ -99,7 +99,36 @@ class GraphUpdater(QtGui.QWidget):
     self.update_timer.stop()
 
   def _update(self):
-    pass
+    dmat = np.concatenate(self.data, axis=1)
+    print dmat
+    self.on_update(dmat, self.config)
+
+  def on_update(self, dmat, config):
+    raise NotImplementedError
+
+
+
+
+# # app = App('../config/app_config.json')
+# t = np.linspace(0, 1, 8, endpoint=False)
+# # t = np.array([1])
+# r1 = np.random.randn(len(t))
+# r2 = np.random.randn(len(t))
+# npm = np.matrix([t, r1, r2])
+# data = deque(maxlen=10)
+# data.append(npm)
+# t += 1
+# npm = np.matrix([t, r1, r2])
+# data.append(npm)
+# dmat = np.concatenate(data, axis=1)
+# print dmat.shape
+# print dmat[:,]
+
+# npa = np.array(range(0,10))
+# # print dmat
+
+# print npa.shape
+
 
 
 # def main():

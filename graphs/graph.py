@@ -31,7 +31,7 @@ Attributes:
 # @Author: Mathew Cosgrove
 # @Date:   2015-01-14 01:09:36
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-01-21 11:28:33
+# @Last Modified time: 2015-01-22 19:43:06
 # REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
 # REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
@@ -45,68 +45,71 @@ __status__ = "Development"
 
 import numpy as np
 import pyqtgraph as pg
-from PyQt4 import QtGui
-from collections import deque
 
+from graph_updater import GraphUpdater
   # def add_controller(self):
   #   self.controller = PointSeriesController(self.line_names.keys(), self._controller_callback)
   #   self.layout.addWidget(self.controller)
 
-class Graph(pg.PlotWidget):
-  def __init__(self, **kwargs):
-    super(Graph, self).__init__(**kwargs)
+class Graph(GraphUpdater, pg.PlotWidget):
+  def __init__(self, legend=False):
+    super(Graph, self).__init__()
+
+    self.legend_enabled = False
     self.showGrid(x=True, y=True)
-    if kwargs['legend']:
+
+    if legend:
       self.legend = self.addLegend()
+      self.legend_enabled = True
 
-  def add_data(self, data, **kwargs):
-    # if not isinstance(data, numpy.ndarray)
-    for n in kwargs["names"]:
-      if n in sorted(self.plots.keys()):
-        if max(data.shape) > 1:
-          self.plots[n].extend(data)
-        else:
-          self.plots[n].append(data)
-      else:
-        self.add_plot()
+    self.artists = dict()
 
-  def add_plot(self, name, maxlen, **kwargs):
-    self.artists[name] = self.plot(**kwargs)
-    self.plots[name] = deque(maxlen=maxlen)
-    self.legend.addItem(artist, name)
+  def on_update(self, data, config):
+    cnt = 1
+    print data.shape
+    for n in config['names']:
+      if n not in self.artists.keys():
+        self.add_plot(n, config["plot kwargs"])
+      print cnt
+      self.artists[n].setData(x=data[0, :], y=data[cnt, :])
+      cnt += 1
 
-  def remove_plot(self, name):
-    self.removeItem(self.plot[name][0])
-    self.legend.removeItem(name)
+  def add_plot(self, name, plot_args):
+    self.artists[name] = self.plot(**plot_args)
 
-    del self.plot[name]
+    if self.legend_enabled:
+      self.legend.addItem(self.artists[name], name)
 
+# def remove_plot(self, name):
+#   self.removeItem(self.plot[name][0])
+#   self.legend.removeItem(name)
 
-  def hide_line(self, name):
-    self.legend.removeItem(name)
-    self.removeItem(self.lines[name][0])
-
-  def show_line(self, name):
-    self.addItem(self.lines[name][0])
-    self.legend.addItem(self.lines[name][0], name)
-
-  def update(self):
-    for k in sorted(self.lines.keys()):
-      artist = self.lines[k][0]
-      data = np.array(self.lines[k][1])
-      if data.size > 2:
-        artist.setData(x=data[:, 0], y=data[:, 1])
-
-  # class LineGraph(pg.PlotWidget):
-  # def __init__(self, name=None, maxlen=1000, ylim=[-1 , 1]):
-  #   super(LineGraph, self).__init__(name=name)
-
-  #   self.maxlen = maxlen
-  #   self.lines = dict()
+#   del self.plot[name]
 
 
+# def hide_line(self, name):
+#   self.legend.removeItem(name)
+#   self.removeItem(self.lines[name][0])
 
-  # def set_ylim(self, ylim):
-  #   self.setYRange(ylim[0], ylim[1])
+# def show_line(self, name):
+#   self.addItem(self.lines[name][0])
+#   self.legend.addItem(self.lines[name][0], name)
+
+# def update(self):
+#   for k in sorted(self.lines.keys()):
+#     artist = self.lines[k][0]
+#     data = np.array(self.lines[k][1])
+#     if data.size > 2:
+#       artist.setData(x=data[:, 0], y=data[:, 1])
+
+# class LineGraph(pg.PlotWidget):
+# def __init__(self, name=None, maxlen=1000, ylim=[-1 , 1]):
+#   super(LineGraph, self).__init__(name=name)
+
+#   self.maxlen = maxlen
+#   self.lines = dict()
+
+# def set_ylim(self, ylim):
+#   self.setYRange(ylim[0], ylim[1])
 
 
