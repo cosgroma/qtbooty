@@ -31,7 +31,7 @@ Attributes:
 # @Author: Mathew Cosgrove
 # @Date:   2015-01-14 01:09:36
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-01-23 01:41:38
+# @Last Modified time: 2015-01-23 10:57:39
 # REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
 # REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
@@ -82,9 +82,9 @@ from graph_updater import GraphUpdater
 #     self.layout.addWidget(self.io_grid)
 
 class Line(pg.PlotWidget):
-  def __init__(self, maxlen=1000, legend=False):
+  def __init__(self, legend=False):
     super(Line, self).__init__()
-    self.set_maxlen(maxlen)
+
     self.legend_enabled = False
     self.showGrid(x=True, y=True)
 
@@ -95,20 +95,26 @@ class Line(pg.PlotWidget):
     self.artists = dict()
 
   def update(self, data, config):
-    data = data.transpose()
+    """
+    @summary: Updates
+    @param data:
+    @param config:
+    @result:
+    """
+    # Cycle through the plot config and add the data to the artist
     for idx, plot in enumerate(config['plots'], start=1):
+      # If the plot does not exsist add it
       if plot["name"] not in self.artists.keys():
         self.add_plot(plot["name"], plot["plot kwargs"])
-
+      # Update the line artist with the new data
       self.artists[plot["name"]].setData(
         x=np.squeeze(np.asarray(data[:, 0])),
         y=np.squeeze(np.asarray(data[:, idx])))
-      cnt += 1
 
   def add_plot(self, name, plot_args):
     self.artists[name] = self.plot(**plot_args)
-
-    self.legend.addItem(self.artists[name], name) if self.legend_enabled
+    if self.legend_enabled:
+      self.legend.addItem(self.artists[name], name)
 
 # def remove_plot(self, name):
 #   self.removeItem(self.plot[name][0])

@@ -31,7 +31,7 @@ Attributes:
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-30 14:23:04
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-01-23 01:54:41
+# @Last Modified time: 2015-01-23 10:56:25
 # REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
 # REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
@@ -54,29 +54,49 @@ class GraphScheduler(object):
   """docstring for GraphScheduler"""
   def __init__(self):
     super(GraphScheduler, self).__init__()
-    self.graphs = []
+    self.updaters = []
 
   def add_graph(self, graph, **kwargs):
-    updater = GraphUpdater(**kwargs)
-    self.graphs.append((graph, updater))
+    updater = GraphUpdater(graph, **kwargs)
+    self.updaters.append(updater)
+    return updater
 
   def remove_graph(self, graph):
-    self.graphs.remove(graph)
+    self.updaters.remove(graph)
 
   def get_statistics(self, graph):
     pass
 
+  def start(self):
+    # spawn graph monitor
+
+    # Start all of the  updaters
+    for updater in self.updaters:
+      updater.start()
+
+  def stop(self):
+    # stop graph monitor
+    # Stop all the updaters
+    for updater in self.updaters:
+      updater.stop()
+
+
+
 
 class GraphUpdater(object):
   """docstring for GraphUpdater"""
-  def __init__(self, maxlen=1000, interval=1000):
+  def __init__(self, graph, maxlen=1000, interval=1000):
     super(GraphUpdater, self).__init__()
 
+    self.graph = graph
     self.maxlen = maxlen
     self.interval = interval
     # self.setup()
     self.setup_update_timers()
     self.config = dict()
+
+    self.on_update = None
+    self.data = None
 
   def setup_update_timers(self):
     self.update_timer = QtCore.QTimer()
@@ -98,10 +118,13 @@ class GraphUpdater(object):
     self.data = deque(maxlen=self.maxlen)
 
   def add_data(self, data, config):
-    if self.data == None:
+    if self.data is None:
       self.data = deque(maxlen=self.maxlen)
     self.config.update(config)
     self.data.append(data)
+
+  def set_update_callback(self, callback):
+    self.on_update = callback
 
   def start(self):
     self.update_timer.start()
@@ -111,10 +134,7 @@ class GraphUpdater(object):
 
   def _update(self):
     dmat = np.concatenate(self.data, axis=1)
-    self.on_update(dmat, self.config)
-
-  def on_update(self, dmat, config):
-    raise NotImplementedError
+    self.graph.update(dmat.transpose(), self.config)
 
 
 
