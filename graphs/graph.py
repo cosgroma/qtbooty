@@ -31,7 +31,7 @@ Attributes:
 # @Author: Mathew Cosgrove
 # @Date:   2015-01-14 01:09:36
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-01-23 10:57:39
+# @Last Modified time: 2015-01-27 22:14:51
 # REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
 # REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
@@ -48,51 +48,86 @@ import pyqtgraph as pg
 from PyQt4 import QtGui
 from QtBooty.framework import IOGrid
 from graph_updater import GraphUpdater
-  # def add_controller(self):
-  #   self.controller = PointSeriesController(self.line_names.keys(), self._controller_callback)
-  #   self.layout.addWidget(self.controller)
 
-# class LineController(QtGui.QWidget):
-#   def __init__(self, graph):
-#     super(LineController, self).__init__()
-#     self.graph = graph
-#     self.layout = QtGui.QHBoxLayout()
-#     self.setLayout(self.layout)
-#     self.io_grid = IOGrid()
-#     self.line_names = self.graph.get_names()
-#     self.config = self.io_grid.config_init(1, [len(self.line_names)])
 
-#     self.config["groups"][0]["box_enabled"] = True
-#     self.config["groups"][0]["box_name"] = "plot control"
-#     self.config["groups"][0]["layout"] = ["v", "t"]
-
-#   # def add_line_controllers(self, line_names):
-#     for n in line_names:
-#       self.config["groups"][0]["items"].append({
-#           "class": "button",
-#           "config": {
-#             "type": "check",
-#             "label": str(n),
-#             "clicked": callback,
-#             "args": n
-#             }
-#         })
-#     # self.controllers = []
-#     self.io_grid.config_widget(self.config)
-#     self.layout.addWidget(self.io_grid)
-
-class Line(pg.PlotWidget):
-  def __init__(self, legend=False):
+class Line(QtGui.QWidget):
+  def __init__(self, legend=False, controller=False):
     super(Line, self).__init__()
 
+    self.artists = dict()
+
+    self.layout = QtGui.QHBoxLayout()
+    self.setLayout(self.layout)
+
+    self.setup_graph(legend=legend)
+    self.layout.addWidget(self.graph)
+
+    self.controller_enabled = controller
+
+    if self.controller_enabled:
+      self.setup_controller()
+      self.layout.addWidget(self.controller)
+
+  def setup_graph(self, legend=False):
+    self.graph = pg.PlotWidget()
+
     self.legend_enabled = False
-    self.showGrid(x=True, y=True)
+    self.graph.showGrid(x=True, y=True)
 
     if legend:
-      self.legend = self.addLegend()
+      self.legend = self.graph.addLegend()
       self.legend_enabled = True
 
-    self.artists = dict()
+  def setup_controller(self):
+    self.controller = IOGrid()
+    self.controller_config = self.controller.config_init(1, [0])
+    self.controller_config["groups"][0]["box_enabled"] = True
+    self.controller_config["groups"][0]["box_name"] = "plot control"
+    self.controller_config["groups"][0]["checkable"] = False
+    self.controller_config["groups"][0]["layout"] = ["v", "t"]
+    self.controller.config_widget(self.controller_config)
+    # print self.controller_config
+
+  def controller_callback(self, args):
+    button = args[0]
+    name = args[1]
+    if not button.isChecked():
+      # print "diable:", name
+      self.hide_line(name)
+    else:
+      self.show_line(name)
+
+  def add_plot(self, name, plot_args):
+    self.artists[name] = self.graph.plot(**plot_args)
+    if self.legend_enabled:
+      self.legend.addItem(self.artists[name], name)
+
+    if self.controller_enabled:
+      self.controller_config["groups"][0]["items"].append({
+        "class": "button",
+        "added": False,
+        "config": {
+          "type": "check",
+          "label": str(name),
+          "clicked": self.controller_callback,
+          "enabled": True,
+          "args": [name]
+          }
+      })
+      self.controller.config_update(self.controller_config)
+
+  def remove_plot(self, name):
+    self.graph.removeItem(self.artists[name])
+    if self.legend_enabled:
+      self.legend.removeItem(name)
+
+  def hide_line(self, name):
+    self.legend.removeItem(name)
+    self.graph.removeItem(self.artists[name])
+
+  def show_line(self, name):
+    self.graph.addItem(self.artists[name])
+    self.legend.addItem(self.artists[name], name)
 
   def update(self, data, config):
     """
@@ -111,10 +146,12 @@ class Line(pg.PlotWidget):
         x=np.squeeze(np.asarray(data[:, 0])),
         y=np.squeeze(np.asarray(data[:, idx])))
 
-  def add_plot(self, name, plot_args):
-    self.artists[name] = self.plot(**plot_args)
-    if self.legend_enabled:
-      self.legend.addItem(self.artists[name], name)
+
+
+
+
+
+
 
 # def remove_plot(self, name):
 #   self.removeItem(self.plot[name][0])
@@ -149,3 +186,6 @@ class Line(pg.PlotWidget):
 #   self.setYRange(ylim[0], ylim[1])
 
 
+  # def add_controller(self):
+  #   self.controller = PointSeriesController(self.line_names.keys(), self._controller_callback)
+  #   self.layout.addWidget(self.controller)

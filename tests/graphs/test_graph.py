@@ -3,7 +3,7 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-11-25 21:43:42
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-01-23 11:03:55
+# @Last Modified time: 2015-01-27 22:10:03
 
 import sys
 # sys.path.append('/home/cosgroma/workspace/sergeant/guis')
@@ -14,7 +14,7 @@ from collections import deque
 import numpy as np
 
 app = App('../config/app_config.json')
-time_series = graphs.Line(legend=True)
+time_series = graphs.Line(legend=True, controller=True)
 
 gscheduler = graphs.GraphScheduler()
 ts_updater = gscheduler.add_graph(time_series, maxlen=1000, interval=50)
@@ -50,31 +50,9 @@ update.config = {
   }]
 }
 
-# ,{
-#     "name": "square",
-#     "plot kwargs": {
-#       "pen": 'g',
-#       "downsample": None
-#     }
-#   }
 
 app.add_widget(time_series)
 app.add_timer(update.intr, update)
 gscheduler.start()
 app.run()
 
-
-
-# app = App('../config/app_config.json')
-
-# npa = np.array(range(0, 10))
-# print dmat
-# gu = graphs.GraphUpdater()
-# gu.add_data(npa, ["npa"])
-
-# print gu.data["npa"]
-
-# graph = graphs.Graph(legend=False)
-
-# app.add_widget(graph)
-# app.run()

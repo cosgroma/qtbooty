@@ -10,6 +10,7 @@ import pyqtgraph as pg
 from scipy.stats import norm
 from phasor.analysis import Spectrum
 from QtBooty.utils import jet, cool
+from QtBooty import graphs
 
 from QtBooty import App
 
@@ -21,13 +22,23 @@ maxlen = 200
 
 app = App('../config/app_config.json')
 
+freq_series = graphs.Line(legend=False, controller=False)
+
+gscheduler = graphs.GraphScheduler()
+fs_updater = gscheduler.add_graph(freq_series, maxlen=1, interval=100)
+
+gv = pg.GraphicsView()
+gw = pg.GraphicsLayoutWidget()
+
+gw_view = gw.addViewBox()
 img = pg.ImageView()
 view = img.getView()
 view.invertY(False)
 view.setLimits(xMin=0, yMin=0, yMax=maxlen)
 imgv = img.getImageItem()
-view.addItem(imgv)
-img.getRoiPlot().hide()
+gw_view.addItem(imgv)
+hist = img.getHistogramWidget()
+# img.getRoiPlot().hide()
 
 dq = collections.deque(maxlen=maxlen)
 imgdata = np.zeros((numpoints/2 + 1, maxlen))
@@ -48,8 +59,30 @@ def update():
   dq.append(p)
   imgdata[: ,-len(dq):] = np.matrix(dq).transpose()
   imgv.setImage(imgdata, autoHistogramRange=False, autoRange=False, autoLevels=False)
+  npm = np.matrix([
+    f,
+    p
+  ])
+  fs_updater.add_data(npm, update.config)
 
-app.add_widget(img)
-app.add_timer(10, update)
+update.config = {
+  "plots":[{
+    "name": "fft",
+    "plot kwargs": {
+      "pen": 'r',
+      "downsample": None,
+      "fillLevel": 0,
+      "brush": (0, 0, 255, 80)
+    }
+  }]
+}
+# app.add_widget(img)
+# app.add_widget(view)
+
+app.add_widget(freq_series)
+app.add_widget(gw)
+app.add_widget(hist)
+app.add_timer(30, update)
 # gscheduler.start()
+gscheduler.start()
 app.run()

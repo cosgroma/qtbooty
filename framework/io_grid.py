@@ -4,7 +4,7 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-05 22:26:11
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-01-21 23:31:30
+# @Last Modified time: 2015-01-28 02:52:24
 
 from PyQt4 import QtGui, QtCore, Qt
 from PyQt4.QtCore import pyqtSignal, pyqtSlot
@@ -47,6 +47,7 @@ button_defaults = {
   "type":    "default",
   "label":   "",
   "clicked": None,
+  "enabled": False,
   "args":    None
 }
 
@@ -60,6 +61,8 @@ def make_button(config):
     button = QtGui.QCheckBox(instance["label"])
   else:
     button = QtGui.QPushButton(instance["label"])
+
+  button.setChecked(instance["enabled"])
 
   if instance["clicked"] is not None:
     button.clicked.connect(
@@ -253,7 +256,31 @@ def make_combo(config):
   return combo
   # styleComboBox.activated[str].connect(self.changeStyle)
 
+table_defaults = {
+  "label": "table",
+  "headers": [],
+  "items": [],
+  "args": None
+}
 
+# def make_table(config):
+#   instance = deepcopy(table_defaults)
+#   instance.update(config)
+#   table = QtGui.QTableWidget()
+#   self.resizeColumnsToContents()
+#   self.resizeRowsToContents()
+#   combo.setSizePolicy(
+#     QtGui.QSizePolicy(
+#       QtGui.QSizePolicy.Expanding,
+#       QtGui.QSizePolicy.Maximum
+#     )
+#   )
+#   # combo.maxVisibleItems(instance["maxVisible"])
+#   combo.addItems(instance["items"])
+#   label = QtGui.QLabel(instance["label"])
+#   label.setBuddy(combo)
+#   return combo
+  # styleComboBox.activated[str].connect(self.changeStyle)
 ############################################
 
 #    ____  ____  ________  _____     _______  ________  _______     ______
@@ -340,11 +367,14 @@ group_instance = {
   "box_name":    None,
   "layout":      None,
   "scrollable":  False,
+  "checkable":   False,
+  "added":       False,
   "items":       []
 }
 
 io_instance = {
   "class": "",
+  "added": False,
   "config": ""
 }
 
@@ -385,16 +415,18 @@ class IOGrid(QtGui.QWidget):
   def config_widget(self, config):
     self.layout = get_layout(config["layout"])
     self.setLayout(self.layout)
+    self.groups = []
 
     for c in config["groups"]:
       if c["box_enabled"]:
         widget = QtGui.QGroupBox(c["box_name"])
-        widget.setCheckable(True)
+        widget.setCheckable(c["checkable"])
       else:
         widget = QtGui.QWidget()
 
       layout = get_layout(c["layout"])
       widget.setLayout(layout)
+      self.groups.append(layout)
 
       for io in c["items"]:
         if io["class"] == "label":
@@ -408,22 +440,33 @@ class IOGrid(QtGui.QWidget):
         elif io["class"] == "combo":
           layout.addWidget(make_combo(io["config"]))
 
+        io["added"] = True
+
       if c["scrollable"]:
         scroll = QtGui.QScrollArea()
         scroll.setWidget(widget)
         scroll.setWidgetResizable(True)
         scroll.setAlignment(QtCore.Qt.AlignTop)
         scroll.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        # scroll.setFixedHeight(widget.sizeHint().height())
-        # sizehint =
-        # print dir(sizehint)
-
         widget = scroll
-        # scroll.setWidget(widget)
 
       self.layout.addWidget(widget)
 
-    # Check Box
-    # Drop Down
-    # Combo wheel
-    pass
+  def config_update(self, config):
+    for idx, c in enumerate(config["groups"]):
+      layout = self.groups[idx]
+      for io in c["items"]:
+        if io["added"]:
+          continue
+        if io["class"] == "label":
+          layout.addWidget(make_label(io["config"]))
+        elif io["class"] == "button":
+          layout.addWidget(make_button(io["config"]))
+        elif io["class"] == "edit":
+          layout.addWidget(make_edit(io["config"]))
+        elif io["class"] == "slider":
+          layout.addWidget(make_slider(io["config"]))
+        elif io["class"] == "combo":
+          layout.addWidget(make_combo(io["config"]))
+
+        io["added"] = True
