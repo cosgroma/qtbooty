@@ -4,7 +4,7 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-05 22:26:11
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-01-28 02:52:24
+# @Last Modified time: 2015-01-29 16:41:12
 
 from PyQt4 import QtGui, QtCore, Qt
 from PyQt4.QtCore import pyqtSignal, pyqtSlot
@@ -263,23 +263,28 @@ table_defaults = {
   "args": None
 }
 
-# def make_table(config):
-#   instance = deepcopy(table_defaults)
-#   instance.update(config)
-#   table = QtGui.QTableWidget()
-#   self.resizeColumnsToContents()
-#   self.resizeRowsToContents()
-#   combo.setSizePolicy(
-#     QtGui.QSizePolicy(
-#       QtGui.QSizePolicy.Expanding,
-#       QtGui.QSizePolicy.Maximum
-#     )
-#   )
-#   # combo.maxVisibleItems(instance["maxVisible"])
-#   combo.addItems(instance["items"])
-#   label = QtGui.QLabel(instance["label"])
-#   label.setBuddy(combo)
-#   return combo
+def make_table(config):
+  instance = deepcopy(table_defaults)
+  instance.update(config)
+  table = QtGui.QTableWidget()
+  #table.insertRow(1)
+  table.setHorizontalHeaderLabels(instance["headers"])
+  for idx, item in enumerate(instance["items"]):
+    print idx, item
+
+  # self.resizeColumnsToContents()
+  # self.resizeRowsToContents()
+  # combo.setSizePolicy(
+  #   QtGui.QSizePolicy(
+  #     QtGui.QSizePolicy.Expanding,
+  #     QtGui.QSizePolicy.Maximum
+  #   )
+  # )
+  # combo.maxVisibleItems(instance["maxVisible"])
+  # combo.addItems(instance["items"])
+  # label = QtGui.QLabel(instance["label"])
+  # label.setBuddy(combo)
+  return table
   # styleComboBox.activated[str].connect(self.changeStyle)
 ############################################
 
@@ -306,6 +311,8 @@ def get_layout(args):
     layout = QtGui.QVBoxLayout()
   elif name == "g":
     layout = QtGui.QGridLayout()
+  elif name == "f":
+    layout = QtGui.QFormLayout()
 
   if align == "t":
     layout.setAlignment(QtCore.Qt.AlignTop)
@@ -361,6 +368,13 @@ def add_label(widget, label, position="left", policy=None):
   container.setLayout(layout)
   return container
 
+make_funcs = {
+  "label": make_label,
+  "button": make_button,
+  "edit": make_edit,
+  "slider": make_slider,
+  "combo": make_combo
+ }
 
 group_instance = {
   "box_enabled": False,
@@ -429,16 +443,17 @@ class IOGrid(QtGui.QWidget):
       self.groups.append(layout)
 
       for io in c["items"]:
-        if io["class"] == "label":
-          layout.addWidget(make_label(io["config"]))
-        elif io["class"] == "button":
-          layout.addWidget(make_button(io["config"]))
-        elif io["class"] == "edit":
-          layout.addWidget(make_edit(io["config"]))
-        elif io["class"] == "slider":
-          layout.addWidget(make_slider(io["config"]))
-        elif io["class"] == "combo":
-          layout.addWidget(make_combo(io["config"]))
+        make_funcs[io["class"]](io["config"]))
+        # if io["class"] == "label":
+        #   layout.addWidget(make_label(io["config"]))
+        # elif io["class"] == "button":
+        #   layout.addWidget(make_button(io["config"]))
+        # elif io["class"] == "edit":
+        #   layout.addWidget(make_edit(io["config"]))
+        # elif io["class"] == "slider":
+        #   layout.addWidget(make_slider(io["config"]))
+        # elif io["class"] == "combo":
+        #   layout.addWidget(make_combo(io["config"]))
 
         io["added"] = True
 
@@ -467,6 +482,8 @@ class IOGrid(QtGui.QWidget):
         elif io["class"] == "slider":
           layout.addWidget(make_slider(io["config"]))
         elif io["class"] == "combo":
+          layout.addWidget(make_combo(io["config"]))
+        elif io["class"] == "table":
           layout.addWidget(make_combo(io["config"]))
 
         io["added"] = True

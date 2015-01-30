@@ -31,7 +31,7 @@ Attributes:
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-30 14:23:04
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-01-23 10:56:25
+# @Last Modified time: 2015-01-28 06:19:07
 # REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
 # REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
@@ -44,10 +44,8 @@ __email__ = "mathew.cosgrove@ngc.com"
 __status__ = "Development"
 
 import numpy as np
-from PyQt4 import QtGui, QtCore
+from PyQt4 import QtCore
 from collections import deque
-
-from QtBooty import App
 
 
 class GraphScheduler(object):
@@ -81,22 +79,18 @@ class GraphScheduler(object):
       updater.stop()
 
 
-
-
 class GraphUpdater(object):
   """docstring for GraphUpdater"""
-  def __init__(self, graph, maxlen=1000, interval=1000):
+  def __init__(self, graph, maxlen=1000, interval=1000, mode='concat'):
     super(GraphUpdater, self).__init__()
 
     self.graph = graph
     self.maxlen = maxlen
     self.interval = interval
-    # self.setup()
+    self.mode = mode
     self.setup_update_timers()
     self.config = dict()
-
-    self.on_update = None
-    self.data = None
+    self.data = deque(maxlen=self.maxlen)
 
   def setup_update_timers(self):
     self.update_timer = QtCore.QTimer()
@@ -115,16 +109,11 @@ class GraphUpdater(object):
 
   def set_maxlen(self, maxlen):
     self.maxlen = maxlen
-    self.data = deque(maxlen=self.maxlen)
+    self.data = deque(self.data, maxlen=self.maxlen)
 
   def add_data(self, data, config):
-    if self.data is None:
-      self.data = deque(maxlen=self.maxlen)
     self.config.update(config)
     self.data.append(data)
-
-  def set_update_callback(self, callback):
-    self.on_update = callback
 
   def start(self):
     self.update_timer.start()
@@ -133,37 +122,9 @@ class GraphUpdater(object):
     self.update_timer.stop()
 
   def _update(self):
-    dmat = np.concatenate(self.data, axis=1)
-    self.graph.update(dmat.transpose(), self.config)
-
-
-
-
-# # app = App('../config/app_config.json')
-# t = np.linspace(0, 1, 8, endpoint=False)
-# # t = np.array([1])
-# r1 = np.random.randn(len(t))
-# r2 = np.random.randn(len(t))
-# npm = np.matrix([t, r1, r2])
-# data = deque(maxlen=10)
-# data.append(npm)
-# t += 1
-# npm = np.matrix([t, r1, r2])
-# data.append(npm)
-# dmat = np.concatenate(data, axis=1)
-# print dmat.shape
-# print dmat[:,]
-
-# npa = np.array(range(0,10))
-# # print dmat
-
-# print npa.shape
-
-
-
-# def main():
-
-
-
-# if __name__ == '__main__':
-#   main()
+    if self.mode == 'concat':
+      dmat = np.concatenate(self.data, axis=1)
+      self.graph.update(dmat.transpose(), self.config)
+    elif self.mode == 'array':
+      dmat = np.array(self.data)
+      self.graph.update(dmat, self.config)

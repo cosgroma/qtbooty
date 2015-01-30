@@ -30,8 +30,8 @@ Attributes:
 """
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-30 06:57:46
-# @Last Modified by:   mac
-# @Last Modified time: 2014-12-30 15:49:17
+# @Last Modified by:   Mathew Cosgrove
+# @Last Modified time: 2015-01-28 06:08:45
 # REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
 # REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
@@ -45,12 +45,14 @@ __status__ = "Development"
 
 import sys
 from QtBooty import App
-from QtBooty.graphs import Surface
+from QtBooty.graphs import Surface, GraphScheduler
 import numpy as np
 
 app = App('../config/app_config.json')
 surface = Surface()
 
+gscheduler = GraphScheduler()
+surf_updater = gscheduler.add_graph(surface, maxlen=10, interval=100, mode="array")
 # np.histogram(nc_vals, bins=50, normed=True)
 
 X = np.arange(0, 1023, 0.5)
@@ -71,13 +73,31 @@ surface.set_lims(xlim, ylim, zlim)
 # surface.set_boundary(X, Y, Z)
 X, Y = np.meshgrid(X, Y)
 
-def update_surface():
-  surface.add_data(np.abs(np.random.normal(0, Z.ptp()/10.0, size=X.shape)))
+def update():
+  surf_updater.add_data(np.abs(np.random.normal(0, Z.ptp()/10.0, size=X.shape)), update.config)
 
 update_surface_interval = 40
 
+update.config = {
+  "plots":[{
+    "name": "cosine",
+    "plot kwargs": {
+      "pen": 'r',
+      "downsample": None,
+      "fillLevel": 0,
+      "brush": (0, 0, 255, 80)
+    }
+  },{
+    "name": "sine",
+    "plot kwargs": {
+      "pen": 'b',
+      "downsample": None
+    }
+  }]
+}
+
 app.add_widget(surface)
-app.add_timer(update_surface_interval, update_surface)
-surface.set_interval(update_surface_interval*2)
-surface.start()
+app.add_timer(update_surface_interval, update)
+# surface.set_interval(update_surface_interval*2)
+gscheduler.start()
 app.run()

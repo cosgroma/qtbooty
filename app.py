@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-05 20:56:57
-# @Last Modified by:   cosgroma
-# @Last Modified time: 2015-01-12 21:29:27
+# @Last Modified by:   Mathew Cosgrove
+# @Last Modified time: 2015-01-29 16:30:45
 
 import logging
 logger = logging.getLogger(__name__)
@@ -16,6 +16,12 @@ import json
 from PyQt4 import QtCore, QtGui
 
 
+orange = [("gradienta", "#b56c17"), ("gradientb", "#d7801a"), ("gradientc", "#ffa02f"), ("gradientd", "#ffaa00")]
+blue = [("gradienta", "#353DE7"), ("gradientb", "#484FE5"), ("gradientc", "#5B61E4"), ("gradientd", "#6E74E2")]
+blue2 = [("gradienta", "#484FE5"), ("gradientb", "#353DE7"), ("gradientc", "#222BE9"), ("gradientd", "#0F19EB")]
+green = [("gradienta", "#2CF293"), ("gradientb", "#38F296"), ("gradientc", "#45F29A"), ("gradientd", "#52F39E")]
+
+#
 class App(QtGui.QApplication):
   """
   @summary:
@@ -59,7 +65,12 @@ class App(QtGui.QApplication):
 
   def apply_style(self, name):
     with open(path.join(self.resources, 'styles', 'style.css'), "r") as style:
-      self.setStyleSheet(style.read())
+      styleSheet = style.read()
+
+      for item, value in green:
+        print item, value
+        styleSheet = styleSheet.replace((item), value)
+      self.setStyleSheet(styleSheet)
 
   def update_status(self, message):
     self.main.update_status(message)

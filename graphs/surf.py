@@ -30,8 +30,8 @@ Attributes:
 """
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-30 05:25:42
-# @Last Modified by:   mac
-# @Last Modified time: 2014-12-30 16:55:36
+# @Last Modified by:   Mathew Cosgrove
+# @Last Modified time: 2015-01-28 06:11:47
 # REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
 # REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
@@ -58,9 +58,10 @@ front_end = 'visvis'
 from QtBooty.graphs import MplCanvas, VisSurface, GraphUpdater
 
 
-class Surface(GraphUpdater):
-  def __init__(self, name=None, controller=False, interval=1000, maxlen=10):
-    super(Surface, self).__init__(interval=1000, maxlen=10)
+class Surface(QtGui.QWidget):
+  def __init__(self, name=None, controller=False):
+    super(Surface, self).__init__()
+    self.layout = QtGui.QHBoxLayout()
 
     if front_end == "visvis":
       self.graph = VisSurface(self)
@@ -68,7 +69,7 @@ class Surface(GraphUpdater):
       self.graph = MplCanvas(self, "surface")
 
     self.layout.addWidget(self.graph)
-    self.data_set = self.new_deque("surfs")
+    self.setLayout(self.layout)
 
   def set_lims(self, xlim, ylim, zlim):
     self.graph.set_lims(xlim, ylim, zlim)
@@ -79,11 +80,8 @@ class Surface(GraphUpdater):
   def set_boundary(self, x_r, y_r, z_r):
     self.graph.set_boundary(x_r, y_r, z_r)
 
-  def add_data(self, data):
-    self.data_set.append(data)
-
-  def _update(self):
-    self.graph.set_data(self.data_set[-1])
+  def update(self, data, config):
+    self.graph.set_data(data[-1])
     self.graph.update_plot()
 
 

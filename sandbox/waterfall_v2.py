@@ -28,7 +28,7 @@ app = App()
 gv = pg.GraphicsView()
 l = QtGui.QGraphicsGridLayout()
 l.setHorizontalSpacing(0)
-l.setVerticalSpacing(0)
+l.setVerticalSpacing(-30)
 
 vb = pg.ViewBox()
 vb2 = pg.ViewBox()
@@ -57,7 +57,7 @@ def update():
   f, p = spec.get_fft(acc(ts))
   ts += length/fs
   dq.append(p)
-  imgdata[: ,-len(dq):] = np.matrix(dq).transpose()
+  imgdata[:, -len(dq):] = np.matrix(dq).transpose()
   img.setImage(imgdata, autoHistogramRange=False, autoRange=False, autoLevels=False)
   p1.setData(p)
 

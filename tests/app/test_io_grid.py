@@ -3,7 +3,7 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-11-25 21:43:42
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-01-21 23:27:45
+# @Last Modified time: 2015-01-29 16:38:10
 
 import sys
 sys.path.append('/Users/cosgroma/workspace')
@@ -225,6 +225,30 @@ groups[-1]["items"] = [
   }
 ]
 
+
+groups.append(dict())
+groups[-1]["box_enabled"] = True
+groups[-1]["box_name"] = "table::default"
+groups[-1]["layout"] = ["h", "c"]
+
+# table_defaults = {
+#   "label": "table",
+#   "headers": [],
+#   "items": [],
+#   "args": None
+# }
+
+groups[-1]["items"] = [
+ {
+  "class": "table",
+    "config": {
+      "label":   "table",
+      "headers": ["one", "two"],
+      "items":   [[1, 2], [3,4], [5,6]],
+      "args":    None
+    }
+  }
+]
 config = io_grid.config_init(len(groups), [len(g["items"]) for g in groups])
 
 config["layout"] = ["v", "t"]
