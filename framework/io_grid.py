@@ -4,10 +4,18 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-05 22:26:11
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-01-29 16:41:12
+# @Last Modified time: 2015-01-30 02:03:06
 
+import PyQt4.QtGui
 from PyQt4 import QtGui, QtCore, Qt
 from PyQt4.QtCore import pyqtSignal, pyqtSlot
+
+import pyqtgraph as pg
+from pyqtgraph.Qt import QtCore, QtGui
+
+import pyqtgraph.parametertree.parameterTypes as pTypes
+from pyqtgraph.parametertree import Parameter, ParameterTree, ParameterItem, registerParameterType
+
 from copy import deepcopy
 import numpy as np
 
@@ -15,277 +23,7 @@ from functools import partial
 
 import logging
 
-o_map = {"h": QtCore.Qt.Horizontal, "v": QtCore.Qt.Vertical}
-
-
-#    ______  _____  _____  _____  _____     ______   ________  _______     ______
-#   |_   _ \|_   _||_   _||_   _||_   _|   |_   _ `.|_   __  ||_   __ \  .' ____ \
-#     | |_) | | |    | |    | |    | |       | | `. \ | |_ \_|  | |__) | | (___ \_|
-#     |  __'. | '    ' |    | |    | |   _   | |  | | |  _| _   |  __ /   _.____`.
-#    _| |__) | \ \__/ /    _| |_  _| |__/ | _| |_.' /_| |__/ | _| |  \ \_| \____) |
-#   |_______/   `.__.'    |_____||________||______.'|________||____| |___|\______.'
-#
-
-
-############################################
-# Labels
-
-label_defaults = {"label": ""}
-
-def make_label(config):
-  instance = deepcopy(label_defaults)
-  instance.update(config)
-  label = QtGui.QLabel(instance["label"])
-  return label
-
-############################################
-
-############################################
-# Buttons
-
-button_defaults = {
-  "type":    "default",
-  "label":   "",
-  "clicked": None,
-  "enabled": False,
-  "args":    None
-}
-
-def make_button(config):
-  instance = deepcopy(button_defaults)
-  instance.update(config)
-
-  if instance["type"] == "radio":
-    button = QtGui.QRadioButton(instance["label"])
-  elif instance["type"] == "check":
-    button = QtGui.QCheckBox(instance["label"])
-  else:
-    button = QtGui.QPushButton(instance["label"])
-
-  button.setChecked(instance["enabled"])
-
-  if instance["clicked"] is not None:
-    button.clicked.connect(
-      partial(
-        instance["clicked"],
-        [button] + instance["args"]
-      )
-    )
-  return button
-
-############################################
-
-############################################
-# Buttons
-edit_defaults = {
-  "type":            "default",
-  "label":           None,
-  "position":        "left",
-  "default":         None,
-  "editingFinished": None,
-  "args":            None
-}
-
-def make_edit(config):
-  instance = deepcopy(edit_defaults)
-  instance.update(config)
-
-  if instance["type"] == "datetime":
-    edit = QtGui.QDateTimeEdit()
-  elif instance["type"] == "spin":
-    edit = QtGui.QSpinBox()
-  else:
-    edit = QtGui.QLineEdit(instance["default"])
-
-  if instance["editingFinished"] is not None:
-    edit.textEdited.connect(
-      partial(
-        instance["editingFinished"],
-        [edit] + instance["args"]
-      )
-    )
-
-  if instance["label"] is not None:
-    return add_label(edit, instance["label"], position=instance["position"])
-
-  return edit
-
-############################################
-# Sliders
-
-slider_defaults = {
-  "type":         "default",
-  "label":        "",
-  "position":     "above",
-  "range":        [0, 100],
-  "orientation":  "h",
-  "policy":       None,
-  "display":      False,
-  "valueChanged": None,
-  "args":         [None]
-}
-
-
-def make_slider(config):
-  def display_slider_value(slider, display, user_callback, args):
-    units = ""
-    if user_callback is not None:
-      user_callback([slider] + args)
-      units = args[0]
-    display.setText("%s" % (str(slider.value()) + " " + units))
-
-  instance = deepcopy(slider_defaults)
-  instance.update(config)
-
-  if instance["type"] == "scroll":
-    slider = QtGui.QScrollBar(o_map[instance["orientation"]])
-  elif instance["type"] == "dial":
-    slider = QtGui.QDial()
-    slider.setNotchesVisible(True)
-  else:
-    slider = QtGui.QSlider(o_map[instance["orientation"]])
-
-  slider.setRange(instance["range"][0], instance["range"][1])
-  slider.setValue(0)
-
-  if instance["display"]:
-    display = QtGui.QLineEdit("%3s" % "0")
-    display.setAlignment(QtCore.Qt.AlignCenter)
-    slider.valueChanged.connect(
-      partial(
-        display_slider_value,
-        slider,
-        display,
-        instance["valueChanged"],
-        instance["args"]
-      )
-    )
-
-    container = QtGui.QWidget()
-
-    # container.setSizePolicy(
-    #   QtGui.QSizePolicy(
-    #     QtGui.QSizePolicy.Maximum,
-    #     QtGui.QSizePolicy.Maximum
-    #   )
-    # )
-
-    if instance["orientation"] == "h":
-      layout = QtGui.QHBoxLayout()
-
-      display.setMinimumSize(40, 30)
-
-      display.setSizePolicy(
-        QtGui.QSizePolicy(
-          QtGui.QSizePolicy.Maximum,
-          QtGui.QSizePolicy.Minimum
-        )
-      )
-      # layout = QtGui.QGridLayout()
-      layout.addWidget(display)
-      layout.addWidget(slider)
-
-
-
-      # layout.addWidget(slider)
-      # layout.addWidget(display)
-    elif instance["orientation"] == "v":
-
-      display.setMinimumSize(70, 30)
-      slider.setSizePolicy(
-        QtGui.QSizePolicy(
-          QtGui.QSizePolicy.Expanding,
-          QtGui.QSizePolicy.Expanding
-        )
-      )
-      # layout = QtGui.QVBoxLayout()
-      layout = QtGui.QGridLayout()
-      layout.addWidget(display, 0, 0, 1, 1)
-      layout.addWidget(slider, 1, 0, 8, 1)
-
-    # layout.setAlignment(QtCore.Qt.AlignCenter)
-
-    container.setLayout(layout)
-  else:
-    container = slider
-
-  if instance["label"] is not None:
-    return add_label(container,
-                     instance["label"],
-                     position=instance["position"],
-                     policy=instance["policy"])
-
-  return container
-
-############################################
-
-############################################
-# Combo
-
-combo_defaults = {
-  "label":           "combobox",
-  "items":           [],
-  "maxVisible":      10,
-  "activated":       None,
-  "indexChanged":    None,
-  "args":            None
-}
-
-# activated (int)
-# activated (const QString&)
-# currentIndexChanged (int)
-# currentIndexChanged (const QString&)
-# editTextChanged (const QString&)
-# highlighted (int)
-# highlighted (const QString&)
-
-def make_combo(config):
-  instance = deepcopy(combo_defaults)
-  instance.update(config)
-  combo = QtGui.QComboBox()
-  combo.setSizePolicy(
-    QtGui.QSizePolicy(
-      QtGui.QSizePolicy.Expanding,
-      QtGui.QSizePolicy.Maximum
-    )
-  )
-  # combo.maxVisibleItems(instance["maxVisible"])
-  combo.addItems(instance["items"])
-  label = QtGui.QLabel(instance["label"])
-  label.setBuddy(combo)
-  return combo
-  # styleComboBox.activated[str].connect(self.changeStyle)
-
-table_defaults = {
-  "label": "table",
-  "headers": [],
-  "items": [],
-  "args": None
-}
-
-def make_table(config):
-  instance = deepcopy(table_defaults)
-  instance.update(config)
-  table = QtGui.QTableWidget()
-  #table.insertRow(1)
-  table.setHorizontalHeaderLabels(instance["headers"])
-  for idx, item in enumerate(instance["items"]):
-    print idx, item
-
-  # self.resizeColumnsToContents()
-  # self.resizeRowsToContents()
-  # combo.setSizePolicy(
-  #   QtGui.QSizePolicy(
-  #     QtGui.QSizePolicy.Expanding,
-  #     QtGui.QSizePolicy.Maximum
-  #   )
-  # )
-  # combo.maxVisibleItems(instance["maxVisible"])
-  # combo.addItems(instance["items"])
-  # label = QtGui.QLabel(instance["label"])
-  # label.setBuddy(combo)
-  return table
-  # styleComboBox.activated[str].connect(self.changeStyle)
+from components import make_funcs
 ############################################
 
 #    ____  ____  ________  _____     _______  ________  _______     ______
@@ -329,54 +67,9 @@ def get_layout(args):
 
   return layout
 
-def add_label(widget, label, position="left", policy=None):
-  container = QtGui.QWidget()
-
-  if policy is not None:
-    container.setSizePolicy(
-      QtGui.QSizePolicy(
-        QtGui.QSizePolicy.Maximum,
-        QtGui.QSizePolicy.Expanding
-      )
-    )
-
-  label = QtGui.QLabel(label)
-  label.setSizePolicy(
-    QtGui.QSizePolicy(
-      QtGui.QSizePolicy.Expanding,
-      QtGui.QSizePolicy.Maximum
-    )
-  )
-
-  label.setAlignment(QtCore.Qt.AlignCenter)
-
-  if position == "above":
-    layout = QtGui.QVBoxLayout()
-    layout.addWidget(label)
-    layout.addWidget(widget)
-    # layout.setAlignment(QtCore.Qt.AlignJustify)
-  elif position == "below":
-    layout = QtGui.QVBoxLayout()
-    layout.addWidget(widget)
-    layout.addWidget(label)
-    # layout.setAlignment(QtCore.Qt.AlignVCenter)
-  else:
-    layout = QtGui.QHBoxLayout()
-    layout.addWidget(label)
-    layout.addWidget(widget)
-
-  container.setLayout(layout)
-  return container
-
-make_funcs = {
-  "label": make_label,
-  "button": make_button,
-  "edit": make_edit,
-  "slider": make_slider,
-  "combo": make_combo
- }
 
 group_instance = {
+  "name":        None,
   "box_enabled": False,
   "box_name":    None,
   "layout":      None,
@@ -387,10 +80,33 @@ group_instance = {
 }
 
 io_instance = {
+  "name":  None,
   "class": "",
   "added": False,
   "config": ""
 }
+
+
+class ComplexParameter(pTypes.GroupParameter):
+    def __init__(self, **opts):
+        opts['type'] = 'bool'
+        opts['value'] = True
+        pTypes.GroupParameter.__init__(self, **opts)
+
+        self.addChild({'name': 'A = 1/B', 'type': 'float', 'value': 7, 'suffix': 'Hz', 'siPrefix': True})
+        self.addChild({'name': 'B = 1/A', 'type': 'float', 'value': 1/7., 'suffix': 's', 'siPrefix': True})
+        self.a = self.param('A = 1/B')
+        self.b = self.param('B = 1/A')
+        self.a.sigValueChanged.connect(self.aChanged)
+        self.b.sigValueChanged.connect(self.bChanged)
+
+    def aChanged(self):
+        self.b.setValue(1.0 / self.a.value(), blockSignal=self.bChanged)
+
+    def bChanged(self):
+        self.a.setValue(1.0 / self.b.value(), blockSignal=self.aChanged)
+
+
 
 class IOGrid(QtGui.QWidget):
   """
@@ -426,12 +142,24 @@ class IOGrid(QtGui.QWidget):
       c["items"] = [deepcopy(io_instance) for n in range(0, nitems)]
     return config
 
+  def generic_callback(self, obj, instance):
+    print type(obj)
+    if isinstance(obj, PyQt4.QtGui.QSlider):
+      self.p.param(instance["name"]).setValue(obj.value())
+    else:
+      self.p.param(instance["name"]).setValue(obj.text())
+
+
   def config_widget(self, config):
     self.layout = get_layout(config["layout"])
     self.setLayout(self.layout)
     self.groups = []
 
+    self.p = Parameter.create(name='params', type='group')
+
     for c in config["groups"]:
+      # gp = pTypes.GroupParameter(**c)
+      # self.p.addChild(gp)
       if c["box_enabled"]:
         widget = QtGui.QGroupBox(c["box_name"])
         widget.setCheckable(c["checkable"])
@@ -443,19 +171,15 @@ class IOGrid(QtGui.QWidget):
       self.groups.append(layout)
 
       for io in c["items"]:
-        make_funcs[io["class"]](io["config"]))
-        # if io["class"] == "label":
-        #   layout.addWidget(make_label(io["config"]))
-        # elif io["class"] == "button":
-        #   layout.addWidget(make_button(io["config"]))
-        # elif io["class"] == "edit":
-        #   layout.addWidget(make_edit(io["config"]))
-        # elif io["class"] == "slider":
-        #   layout.addWidget(make_slider(io["config"]))
-        # elif io["class"] == "combo":
-        #   layout.addWidget(make_combo(io["config"]))
-
+        layout.addWidget(
+          make_funcs[io["class"]](
+            io["config"],
+            callback=self.generic_callback
+          )
+        )
         io["added"] = True
+        # gp.addChild(io)
+        self.p.addChild(io)
 
       if c["scrollable"]:
         scroll = QtGui.QScrollArea()
@@ -466,6 +190,7 @@ class IOGrid(QtGui.QWidget):
         widget = scroll
 
       self.layout.addWidget(widget)
+    return self.p
 
   def config_update(self, config):
     for idx, c in enumerate(config["groups"]):
@@ -473,17 +198,10 @@ class IOGrid(QtGui.QWidget):
       for io in c["items"]:
         if io["added"]:
           continue
-        if io["class"] == "label":
-          layout.addWidget(make_label(io["config"]))
-        elif io["class"] == "button":
-          layout.addWidget(make_button(io["config"]))
-        elif io["class"] == "edit":
-          layout.addWidget(make_edit(io["config"]))
-        elif io["class"] == "slider":
-          layout.addWidget(make_slider(io["config"]))
-        elif io["class"] == "combo":
-          layout.addWidget(make_combo(io["config"]))
-        elif io["class"] == "table":
-          layout.addWidget(make_combo(io["config"]))
+        layout.addWidget(
+          make_funcs[io["class"]](
+            io["config"]
+          )
+        )
 
         io["added"] = True

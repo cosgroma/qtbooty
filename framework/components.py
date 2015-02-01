@@ -31,7 +31,7 @@ Attributes:
 # @Author: Mathew Cosgrove
 # @Date:   2015-01-21 15:05:05
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-01-21 15:06:05
+# @Last Modified time: 2015-01-30 01:57:02
 # REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
 # REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
@@ -43,3 +43,345 @@ __maintainer__ = "Mathew Cosgrove"
 __email__ = "cosgroma@gmail.com"
 __status__ = "Development"
 
+from PyQt4 import QtGui, QtCore, Qt
+from PyQt4.QtCore import pyqtSignal, pyqtSlot
+
+import pyqtgraph as pg
+from pyqtgraph.Qt import QtCore, QtGui
+
+import pyqtgraph.parametertree.parameterTypes as pTypes
+from pyqtgraph.parametertree import Parameter, ParameterTree, ParameterItem, registerParameterType
+
+from copy import deepcopy
+import numpy as np
+
+from functools import partial
+
+import logging
+
+o_map = {"h": QtCore.Qt.Horizontal, "v": QtCore.Qt.Vertical}
+
+
+
+#    ______  _____  _____  _____  _____     ______   ________  _______     ______
+#   |_   _ \|_   _||_   _||_   _||_   _|   |_   _ `.|_   __  ||_   __ \  .' ____ \
+#     | |_) | | |    | |    | |    | |       | | `. \ | |_ \_|  | |__) | | (___ \_|
+#     |  __'. | '    ' |    | |    | |   _   | |  | | |  _| _   |  __ /   _.____`.
+#    _| |__) | \ \__/ /    _| |_  _| |__/ | _| |_.' /_| |__/ | _| |  \ \_| \____) |
+#   |_______/   `.__.'    |_____||________||______.'|________||____| |___|\______.'
+#
+
+
+############################################
+# Labels
+
+label_defaults = {"label": ""}
+
+def make_label(config, callback=None):
+  instance = deepcopy(label_defaults)
+  instance.update(config)
+  label = QtGui.QLabel(instance["label"])
+  return label
+
+def add_label(widget, label, position="left", policy=None):
+  container = QtGui.QWidget()
+
+  if policy is not None:
+    container.setSizePolicy(
+      QtGui.QSizePolicy(
+        QtGui.QSizePolicy.Maximum,
+        QtGui.QSizePolicy.Expanding
+      )
+    )
+
+  label = QtGui.QLabel(label)
+  label.setSizePolicy(
+    QtGui.QSizePolicy(
+      QtGui.QSizePolicy.Expanding,
+      QtGui.QSizePolicy.Maximum
+    )
+  )
+
+  label.setAlignment(QtCore.Qt.AlignCenter)
+
+  if position == "above":
+    layout = QtGui.QVBoxLayout()
+    layout.addWidget(label)
+    layout.addWidget(widget)
+    # layout.setAlignment(QtCore.Qt.AlignJustify)
+  elif position == "below":
+    layout = QtGui.QVBoxLayout()
+    layout.addWidget(widget)
+    layout.addWidget(label)
+    # layout.setAlignment(QtCore.Qt.AlignVCenter)
+  else:
+    layout = QtGui.QHBoxLayout()
+    layout.addWidget(label)
+    layout.addWidget(widget)
+
+  container.setLayout(layout)
+  return container
+
+############################################
+
+############################################
+# Buttons
+
+button_defaults = {
+  "name": None,
+  "type":    "button",
+  "label":   "",
+  "clicked": None,
+  "enabled": False,
+  "args":    None
+}
+
+def make_button(config, callback=None):
+  instance = deepcopy(button_defaults)
+  instance.update(config)
+
+  if instance["type"] == "radio":
+    button = QtGui.QRadioButton(instance["label"])
+  elif instance["type"] == "check":
+    button = QtGui.QCheckBox(instance["label"])
+  else:
+    button = QtGui.QPushButton(instance["label"])
+
+  button.setChecked(instance["enabled"])
+
+  if instance["clicked"] is not None:
+    button.clicked.connect(
+      partial(
+        instance["clicked"],
+        [button] + instance["args"]
+      )
+    )
+  else:
+    button.clicked.connect(partial(callback, button, instance))
+
+  return button
+
+############################################
+
+############################################
+# Buttons
+edit_defaults = {
+  "name": None,
+  "type":            "default",
+  "label":           None,
+  "position":        "left",
+  "default":         None,
+  "editingFinished": None,
+  "args":            None
+}
+
+def make_edit(config, callback=None):
+  instance = deepcopy(edit_defaults)
+  instance.update(config)
+  signal = None
+  if instance["type"] == "datetime":
+    edit = QtGui.QDateTimeEdit()
+    signal = edit.dateTimeChanged
+  elif instance["type"] == "spin":
+    edit = QtGui.QSpinBox()
+    signal = edit.valueChanged
+  else:
+    edit = QtGui.QLineEdit(instance["default"])
+    signal = edit.textEdited
+
+  if instance["editingFinished"] is not None:
+    edit.textEdited.connect(
+      partial(
+        instance["editingFinished"],
+        [edit] + instance["args"]
+      )
+    )
+  elif signal is not None:
+    signal.connect(partial(callback, edit, instance))
+
+  if instance["label"] is not None:
+    return add_label(edit, instance["label"], position=instance["position"])
+
+  return edit
+
+############################################
+# Sliders
+
+slider_defaults = {
+  "name": None,
+  "type":         "default",
+  "label":        "",
+  "position":     "above",
+  "range":        [0, 100],
+  "orientation":  "h",
+  "policy":       None,
+  "display":      False,
+  "valueChanged": None,
+  "args":         [None]
+}
+
+
+def make_slider(config, callback=None):
+  def display_slider_value(slider, display, user_callback, instance):
+    units = ""
+    if user_callback is not None:
+      user_callback(slider, instance)
+    display.setText("%s" % (str(slider.value()) + " " + units))
+
+  instance = deepcopy(slider_defaults)
+  instance.update(config)
+
+  if instance["type"] == "scroll":
+    slider = QtGui.QScrollBar(o_map[instance["orientation"]])
+  elif instance["type"] == "dial":
+    slider = QtGui.QDial()
+    slider.setNotchesVisible(True)
+  else:
+    slider = QtGui.QSlider(o_map[instance["orientation"]])
+
+  slider.setRange(instance["range"][0], instance["range"][1])
+  slider.setValue(0)
+
+  if instance["display"]:
+    display = QtGui.QLineEdit("%3s" % "0")
+    display.setAlignment(QtCore.Qt.AlignCenter)
+    slider.valueChanged.connect(
+      partial(
+        display_slider_value,
+        slider,
+        display,
+        callback,
+        instance
+      )
+    )
+
+    container = QtGui.QWidget()
+
+    if instance["orientation"] == "h":
+      layout = QtGui.QHBoxLayout()
+
+      display.setMinimumSize(40, 30)
+
+      display.setSizePolicy(
+        QtGui.QSizePolicy(
+          QtGui.QSizePolicy.Maximum,
+          QtGui.QSizePolicy.Minimum
+        )
+      )
+      # layout = QtGui.QGridLayout()
+      layout.addWidget(display)
+      layout.addWidget(slider)
+
+
+
+      # layout.addWidget(slider)
+      # layout.addWidget(display)
+    elif instance["orientation"] == "v":
+
+      display.setMinimumSize(70, 30)
+      slider.setSizePolicy(
+        QtGui.QSizePolicy(
+          QtGui.QSizePolicy.Expanding,
+          QtGui.QSizePolicy.Expanding
+        )
+      )
+      # layout = QtGui.QVBoxLayout()
+      layout = QtGui.QGridLayout()
+      layout.addWidget(display, 0, 0, 1, 1)
+      layout.addWidget(slider, 1, 0, 8, 1)
+
+    # layout.setAlignment(QtCore.Qt.AlignCenter)
+
+    container.setLayout(layout)
+  else:
+    container = slider
+
+  if instance["label"] is not None:
+    return add_label(container,
+                     instance["label"],
+                     position=instance["position"],
+                     policy=instance["policy"])
+
+  return container
+
+############################################
+
+############################################
+# Combo
+
+combo_defaults = {
+  "name": None,
+  "label":           "combobox",
+  "items":           [],
+  "maxVisible":      10,
+  "activated":       None,
+  "indexChanged":    None,
+  "args":            None
+}
+
+# activated (int)
+# activated (const QString&)
+# currentIndexChanged (int)
+# currentIndexChanged (const QString&)
+# editTextChanged (const QString&)
+# highlighted (int)
+# highlighted (const QString&)
+
+def make_combo(config, callback=None):
+  instance = deepcopy(combo_defaults)
+  instance.update(config)
+  combo = QtGui.QComboBox()
+  combo.setSizePolicy(
+    QtGui.QSizePolicy(
+      QtGui.QSizePolicy.Expanding,
+      QtGui.QSizePolicy.Maximum
+    )
+  )
+  # combo.maxVisibleItems(instance["maxVisible"])
+  combo.addItems(instance["items"])
+  label = QtGui.QLabel(instance["label"])
+  label.setBuddy(combo)
+  return combo
+  # styleComboBox.activated[str].connect(self.changeStyle)
+
+table_defaults = {
+  "name": None,
+  "label": "table",
+  "headers": [],
+  "items": [],
+  "args": None
+}
+
+def make_table(config, callback=None):
+  instance = deepcopy(table_defaults)
+  instance.update(config)
+  table = QtGui.QTableWidget()
+  #table.insertRow(1)
+  table.setHorizontalHeaderLabels(instance["headers"])
+  for idx, item in enumerate(instance["items"]):
+    print idx, item
+
+  # self.resizeColumnsToContents()
+  # self.resizeRowsToContents()
+  # combo.setSizePolicy(
+  #   QtGui.QSizePolicy(
+  #     QtGui.QSizePolicy.Expanding,
+  #     QtGui.QSizePolicy.Maximum
+  #   )
+  # )
+  # combo.maxVisibleItems(instance["maxVisible"])
+  # combo.addItems(instance["items"])
+  # label = QtGui.QLabel(instance["label"])
+  # label.setBuddy(combo)
+  return table
+  # styleComboBox.activated[str].connect(self.changeStyle)
+
+
+make_funcs = {
+  "label": make_label,
+  "button": make_button,
+  "edit": make_edit,
+  "slider": make_slider,
+  "combo": make_combo,
+  "table": make_table
+ }

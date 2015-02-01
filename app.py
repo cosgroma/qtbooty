@@ -3,7 +3,7 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-05 20:56:57
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-01-29 16:30:45
+# @Last Modified time: 2015-01-30 02:20:58
 
 import logging
 logger = logging.getLogger(__name__)
@@ -67,7 +67,7 @@ class App(QtGui.QApplication):
     with open(path.join(self.resources, 'styles', 'style.css'), "r") as style:
       styleSheet = style.read()
 
-      for item, value in green:
+      for item, value in blue:
         print item, value
         styleSheet = styleSheet.replace((item), value)
       self.setStyleSheet(styleSheet)

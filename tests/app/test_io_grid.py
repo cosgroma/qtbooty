@@ -3,10 +3,10 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-11-25 21:43:42
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-01-29 16:38:10
+# @Last Modified time: 2015-01-30 01:00:38
 
 import sys
-sys.path.append('/Users/cosgroma/workspace')
+sys.path.append('/home/cosgroma/workspace/libs/python/modules')
 
 from QtBooty import App
 from QtBooty import framework
@@ -16,7 +16,7 @@ app = App()
 io_grid = framework.IOGrid()
 
 groups = [dict()]
-
+groups[-1]["name"] = "class::label"
 groups[-1]["box_enabled"] = False
 groups[-1]["box_name"] = "class::label"
 groups[-1]["layout"] = ["h", "na"]
@@ -32,6 +32,7 @@ groups[-1]["items"] = [
 ]
 
 groups.append(dict())
+groups[-1]["name"] = "class::edit"
 groups[-1]["box_enabled"] = True
 groups[-1]["box_name"] = "class::edit"
 groups[-1]["layout"] = ["h", "na"]
@@ -75,8 +76,8 @@ groups[-1]["items"] = [
   }
 ]
 
-
 groups.append(dict())
+groups[-1]["name"] = "class::button"
 groups[-1]["box_enabled"] = True
 groups[-1]["box_name"] = "class::button"
 groups[-1]["layout"] = ["h", "na"]
@@ -124,6 +125,7 @@ groups[-1]["items"] = [
 # }
 
 groups.append(dict())
+
 groups[-1]["box_enabled"] = True
 groups[-1]["box_name"] = "scrollable::slider"
 groups[-1]["scrollable"] = True

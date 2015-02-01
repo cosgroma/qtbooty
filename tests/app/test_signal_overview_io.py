@@ -3,10 +3,10 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-11-25 21:43:42
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-01-21 21:30:42
+# @Last Modified time: 2015-01-30 00:17:34
 
 import sys
-sys.path.append('/Users/cosgroma/workspace')
+sys.path.append('/home/cosgroma/workspace/libs/python/modules')
 
 from QtBooty import App
 from QtBooty import framework
