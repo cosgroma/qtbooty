@@ -31,7 +31,7 @@ Attributes:
 # @Author: Mathew Cosgrove
 # @Date:   2015-01-14 01:09:36
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-02-03 08:52:13
+# @Last Modified time: 2015-02-03 09:44:01
 # REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
 # REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
@@ -49,6 +49,12 @@ from PyQt4 import QtGui
 from QtBooty.framework import IOGrid
 from graph_updater import GraphUpdater
 
+def rpen():
+  return QtGui.QPen(
+    QtGui.QColor(
+      np.random.randint(255),
+      np.random.randint(255),
+      np.random.randint(255)))
 
 class Line(QtGui.QWidget):
   def __init__(self, legend=False, controller=False, update_controller=False, size=(1,0), title=None):
@@ -98,6 +104,7 @@ class Line(QtGui.QWidget):
       self.show_line(name)
 
   def add_plot(self, name, plot_args):
+
     self.artists[name] = self.graph.plot(**plot_args)
     if self.legend_enabled:
       self.legend.addItem(self.artists[name], name)

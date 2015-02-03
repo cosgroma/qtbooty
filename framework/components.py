@@ -31,7 +31,7 @@ Attributes:
 # @Author: Mathew Cosgrove
 # @Date:   2015-01-21 15:05:05
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-02-03 06:30:46
+# @Last Modified time: 2015-02-03 11:40:33
 # REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
 # REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
@@ -328,6 +328,8 @@ combo_defaults = {
   "items":           [],
   "maxVisible":      10,
   "activated":       None,
+  "position":        "above",
+  "policy":          None,
   "indexChanged":    None,
   "args":            None
 }
@@ -353,7 +355,13 @@ def make_combo(config, callback=None):
   # combo.maxVisibleItems(instance["maxVisible"])
   combo.addItems(instance["items"])
   label = QtGui.QLabel(instance["label"])
-  label.setBuddy(combo)
+  if instance["label"] is not None:
+    return add_label(combo,
+                     instance["label"],
+                     position=instance["position"],
+                     policy=instance["policy"])
+  else:
+    label.setBuddy(combo)
   return combo
   # styleComboBox.activated[str].connect(self.changeStyle)
 
@@ -368,11 +376,17 @@ table_defaults = {
 def make_table(config, callback=None):
   instance = deepcopy(table_defaults)
   instance.update(config)
-  table = QtGui.QTableWidget()
+  table = QtGui.QTableWidget(1, len(instance["headers"]))
   #table.insertRow(1)
+
+
+
   table.setHorizontalHeaderLabels(instance["headers"])
-  for idx, item in enumerate(instance["items"]):
-    print idx, item
+
+
+
+  # for idx, item in enumerate(instance["items"]):
+  #   print idx, item
 
   # self.resizeColumnsToContents()
   # self.resizeRowsToContents()

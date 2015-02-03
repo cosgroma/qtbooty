@@ -3,7 +3,7 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-11-26 08:07:43
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-02-03 09:24:43
+# @Last Modified time: 2015-02-03 09:35:45
 import sys
 sys.path.append('/home/cosgroma/workspace/lib/python/modules')
 from PyQt4 import QtCore, QtGui
@@ -22,7 +22,7 @@ class CpuThread(QtCore.QThread):
   def run(self):
     while True:
       self.usleep(1000)
-      usage = psutil.cpu_percent(interval=False, percpu=True)
+      usage = psutil.cpu_percent(interval=1, percpu=True)
       self.cpustats.emit(usage)
 
       self.usleep(10000)
@@ -84,8 +84,8 @@ timeseries = graphs.Line(legend=True, controller=True)
 diskts = graphs.Line(legend=True, controller=True)
 
 gscheduler = graphs.GraphScheduler()
-ts_updater = gscheduler.add_graph(timeseries, maxlen=1000, interval=10)
-ds_updater = gscheduler.add_graph(diskts, maxlen=1000, interval=10)
+ts_updater = gscheduler.add_graph(timeseries, maxlen=1000, interval=1000)
+ds_updater = gscheduler.add_graph(diskts, maxlen=1000, interval=1000)
 
 plot = CpuStatsPlot(ts_updater, ds_updater)
 

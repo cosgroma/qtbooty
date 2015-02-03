@@ -1,0 +1,96 @@
+{
+  "layout": ["v", "na"],
+  "groups": [{
+    "box_enabled": true,
+    "box_name": "Filter Parameters",
+    "layout": ["h", "na"],
+    "items": [{
+      "class": "edit",
+      "name": "fs",
+      "position": "above",
+      "label": "Sample Frequency (MHz)",
+      "tool-tip": "Source Sample Frequency",
+      "dtype": "float"
+    }, {
+      "class": "combo",
+      "name": "window",
+      "items": ["hamming", "boxcar", "triang", "blackman", "hamming", "hann", "bartlett", "flattop", "parzen", "bohman", "blackmanharris", "nuttall", "barthann"],
+      "label": "Window Function",
+      "position": "above",
+      "tool-tip": "Window function to use. Default is hamming",
+      "dtype": "int",
+      "maxVisible": 4
+    }, {
+      "class": "edit",
+      "name": "taps",
+      "position": "above",
+      "label": "Filter Taps (MAX)",
+      "dtype": "int",
+      "tool-tip": "MAX Available TAP count for FIR implementation"
+    }, {
+      "class": "edit",
+      "name": "nfreqs",
+      "position": "above",
+      "label": "N-Freqs",
+      "dtype": "int",
+      "tool-tip": "The size of the interpolation mesh used to construct the filter",
+      "dtype": "int"
+    }, {
+      "class": "button",
+      "qtype": "check",
+      "label": "Asymetric",
+      "name": "asym"
+    }]
+  }, {
+    "box_enabled": true,
+    "box_name": "Filter Visual Configuration ",
+    "layout": ["h", "na"],
+    "items": [{
+      "class": "button",
+      "name": "avisual",
+      "label": "Add Selection",
+      "tool-tip": "Visually Configure Filter Stop Bands"
+    }]
+  }, {
+    "box_enabled": true,
+    "box_name": "Filter Manual Configuration",
+    "layout": ["h", "na"],
+    "items": [{
+      "class": "edit",
+      "name": "fstart",
+      "position": "above",
+      "dtype": "float",
+      "label": "Start Frequency"
+    }, {
+      "class": "edit",
+      "name": "fstop",
+      "position": "above",
+      "dtype": "float",
+      "label": "Stop Frequency"
+    }, {
+      "class": "edit",
+      "name": "atten",
+      "position": "above",
+      "dtype": "float",
+      "label": "Attenuation"
+    }, {
+      "class": "button",
+      "name": "setadd",
+      "label": "ADD to Filter",
+      "tool-tip": "Add Configuration to Filter"
+    }]
+  }, {
+    "box_enabled": true,
+    "box_name": "Filter Configuration Table",
+    "layout": ["h", "na"],
+    "items": [{
+      "class": "table",
+      "name": "ftable",
+      "position": "above",
+      "headers": ["Enable", "Start", "Stop", "Atten", "Delete"],
+      "label": "Filter Pass and Stop Band Configurations",
+      "tool-tip": "Filter Configuration Table",
+      "dtype": "float"
+    }]
+  }]
+}

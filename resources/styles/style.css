@@ -154,7 +154,9 @@ QGroupBox {
 }
 QGroupBox::title {
   text-align: top;
-  subcontrol-position: top center; /* position at the top center */
+  subcontrol-position: top left; /* position at the top center */
+  font-size: 14pt;
+  padding: 3px;
   /* spacing between items in the tool bar */
   background-color: #2d2d2d;
   /*background-color: QLinearGradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 gradientc, stop: 0.5 gradientb, stop: 1 gradienta);*/

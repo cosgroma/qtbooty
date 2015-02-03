@@ -4,7 +4,7 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-05 22:26:11
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-02-03 09:01:50
+# @Last Modified time: 2015-02-03 12:34:56
 
 import PyQt4.QtGui
 from PyQt4 import QtGui, QtCore, Qt
@@ -149,7 +149,7 @@ class IOGrid(QtGui.QWidget):
     super(IOGrid, self).__init__()
     # logging.basicConfig()
     self.logger = logging.getLogger("iogrid")
-    self.io_widgets = []
+    self.io_widgets = dict()
 
   def load_config_file(self, filename):
     return self.config_widget(json.load(open(filename, 'r')))
@@ -220,7 +220,9 @@ class IOGrid(QtGui.QWidget):
       self.groups.append(layout)
 
       for io in c["items"]:
-        layout.addWidget(make_funcs[io["class"]](io, callback=self.generic_callback))
+        iow = make_funcs[io["class"]](io, callback=self.generic_callback)
+        self.io_widgets[io["name"]] = iow
+        layout.addWidget(iow)
         io["added"] = True
         self.p.addChild(io)
 
@@ -250,3 +252,42 @@ class IOGrid(QtGui.QWidget):
         layout.addWidget(make_funcs[io["class"]](io, callback=self.generic_callback))
 
         io["added"] = True
+
+  def update_widget(self, name, data):
+    instance = self.io_widgets[name]
+    table_items = []
+    for d in data:
+      if d not in icon_lookup.keys():
+        table_items.append(QtGui.QTableWidgetItem(d))
+      else:
+        item = QtGui.QTableWidgetItem()
+        item.setFlags(QtCore.Qt.ItemIsUserCheckable |
+                          QtCore.Qt.ItemIsEnabled)
+        item.setIcon(QtGui.QIcon(icon_lookup[d]))
+        table_items.append(item)
+
+    row = instance.rowCount()
+    instance.insertRow(row)
+    for idx, item in enumerate(table_items):
+      item.setTextAlignment(QtCore.Qt.AlignCenter)
+      instance.setItem(row, idx, item)
+
+    # tableitem = instance.(1,1)
+
+    # imageName = QtCore.QFileInfo(fileName).baseName()
+    # item0 = QtGui.QTableWidgetItem(imageName)
+    # item0.setData(QtCore.Qt.UserRole, fileName)
+    # item0.setFlags(item0.flags() & ~QtCore.Qt.ItemIsEditable)
+    # tableitem.setBackgroundColor(QtGui.QColor("gray"))
+
+
+
+    # instance.setRowCount(row + 1)
+
+  def get_icon(self, description):
+    if description == "delete":
+      return
+
+icon_lookup = {
+  "delete": '../resources/deleteIcon.png'
+}
