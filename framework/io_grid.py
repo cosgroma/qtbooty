@@ -4,7 +4,7 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-05 22:26:11
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-01-30 02:03:06
+# @Last Modified time: 2015-02-03 09:01:50
 
 import PyQt4.QtGui
 from PyQt4 import QtGui, QtCore, Qt
@@ -24,6 +24,8 @@ from functools import partial
 import logging
 
 from components import make_funcs
+
+import simplejson as json
 ############################################
 
 #    ____  ____  ________  _____     _______  ________  _______     ______
@@ -34,6 +36,24 @@ from components import make_funcs
 #   |____||____||________||________||_____|  |________||____| |___|\______.'
 #
 
+layout_lookup = {
+  "h": QtGui.QHBoxLayout,
+  "v": QtGui.QVBoxLayout,
+  "g": QtGui.QGridLayout,
+  "f": QtGui.QFormLayout
+}
+
+align_lookup = {
+  "t": QtCore.Qt.AlignTop,
+  "b": QtCore.Qt.AlignBottom,
+  "l": QtCore.Qt.AlignLeft,
+  "r": QtCore.Qt.AlignRight,
+  "c": QtCore.Qt.AlignCenter,
+  "j": QtCore.Qt.AlignJustify,
+  "b": QtCore.Qt.AlignBottom,
+  "na": QtCore.Qt.AlignTop,
+}
+
 def get_layout(args):
   """
   @summary:
@@ -43,27 +63,29 @@ def get_layout(args):
   name = args[0]
   align = args[1]
 
-  if name == "h":
-    layout = QtGui.QHBoxLayout()
-  elif name == "v":
-    layout = QtGui.QVBoxLayout()
-  elif name == "g":
-    layout = QtGui.QGridLayout()
-  elif name == "f":
-    layout = QtGui.QFormLayout()
+  layout = layout_lookup[args[0]]()
+  layout.setAlignment(align_lookup[args[1]])
+  # if name == "h":
+  #   layout = QtGui.QHBoxLayout()
+  # elif name == "v":
+  #   layout = QtGui.QVBoxLayout()
+  # elif name == "g":
+  #   layout = QtGui.QGridLayout()
+  # elif name == "f":
+  #   layout = QtGui.QFormLayout()
 
-  if align == "t":
-    layout.setAlignment(QtCore.Qt.AlignTop)
-  elif align == "b":
-    layout.setAlignment(QtCore.Qt.AlignBottom)
-  elif align == "l":
-    layout.setAlignment(QtCore.Qt.AlignLeft)
-  elif align == "r":
-    layout.setAlignment(QtCore.Qt.AlignRight)
-  elif align == "c":
-    layout.setAlignment(QtCore.Qt.AlignCenter)
-  elif align == "j":
-    layout.setAlignment(QtCore.Qt.AlignJustify)
+  # if align == "t":
+  #   layout.setAlignment(QtCore.Qt.AlignTop)
+  # elif align == "b":
+  #   layout.setAlignment(QtCore.Qt.AlignBottom)
+  # elif align == "l":
+  #   layout.setAlignment(QtCore.Qt.AlignLeft)
+  # elif align == "r":
+  #   layout.setAlignment(QtCore.Qt.AlignRight)
+  # elif align == "c":
+  #   layout.setAlignment(QtCore.Qt.AlignCenter)
+  # elif align == "j":
+  #   layout.setAlignment(QtCore.Qt.AlignJustify)
 
   return layout
 
@@ -82,8 +104,7 @@ group_instance = {
 io_instance = {
   "name":  None,
   "class": "",
-  "added": False,
-  "config": ""
+  "added": False
 }
 
 
@@ -106,7 +127,19 @@ class ComplexParameter(pTypes.GroupParameter):
     def bChanged(self):
         self.a.setValue(1.0 / self.b.value(), blockSignal=self.aChanged)
 
-
+## If anything changes in the tree, print a message
+def change(param, changes):
+  print("tree changes:")
+  for param, change, data in changes:
+    # path = p.childPath(param)
+    # if path is not None:
+    #   childName = '.'.join(path)
+    # else:
+    childName = param.name()
+    print('  parameter: %s' % childName)
+    print('  change:    %s' % change)
+    print('  data:      %s' % str(data))
+    print('  ----------')
 
 class IOGrid(QtGui.QWidget):
   """
@@ -117,6 +150,12 @@ class IOGrid(QtGui.QWidget):
     # logging.basicConfig()
     self.logger = logging.getLogger("iogrid")
     self.io_widgets = []
+
+  def load_config_file(self, filename):
+    return self.config_widget(json.load(open(filename, 'r')))
+
+  def load_config(self, config):
+    return self.config_widget(config)
 
   def config_init(self, ngroups, nitems_arr):
     """
@@ -143,12 +182,21 @@ class IOGrid(QtGui.QWidget):
     return config
 
   def generic_callback(self, obj, instance):
-    print type(obj)
-    if isinstance(obj, PyQt4.QtGui.QSlider):
+    if isinstance(obj, PyQt4.QtGui.QAbstractSlider):
       self.p.param(instance["name"]).setValue(obj.value())
+    elif isinstance(obj, PyQt4.QtGui.QAbstractButton):
+      self.p.param(instance["name"]).setValue(1)
+      try:
+        self.p.param(instance["name"]).setValue(0, blockSignal=self.callback)
+      except Exception, e:
+        pass
+
     else:
       self.p.param(instance["name"]).setValue(obj.text())
 
+  def connect_changed_callback(self, callback):
+    self.callback = callback
+    self.p.sigTreeStateChanged.connect(callback)
 
   def config_widget(self, config):
     self.layout = get_layout(config["layout"])
@@ -157,9 +205,10 @@ class IOGrid(QtGui.QWidget):
 
     self.p = Parameter.create(name='params', type='group')
 
-    for c in config["groups"]:
-      # gp = pTypes.GroupParameter(**c)
-      # self.p.addChild(gp)
+    for group in config["groups"]:
+      c = deepcopy(group_instance)
+      c.update(group)
+
       if c["box_enabled"]:
         widget = QtGui.QGroupBox(c["box_name"])
         widget.setCheckable(c["checkable"])
@@ -171,25 +220,25 @@ class IOGrid(QtGui.QWidget):
       self.groups.append(layout)
 
       for io in c["items"]:
-        layout.addWidget(
-          make_funcs[io["class"]](
-            io["config"],
-            callback=self.generic_callback
-          )
-        )
+        layout.addWidget(make_funcs[io["class"]](io, callback=self.generic_callback))
         io["added"] = True
-        # gp.addChild(io)
         self.p.addChild(io)
 
       if c["scrollable"]:
+        widget2 = QtGui.QGroupBox(c["box_name"])
+        layout2 = get_layout(c["layout"])
+        widget.setTitle("")
         scroll = QtGui.QScrollArea()
         scroll.setWidget(widget)
         scroll.setWidgetResizable(True)
         scroll.setAlignment(QtCore.Qt.AlignTop)
         scroll.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        widget = scroll
+        layout2.addWidget(scroll)
+        widget2.setLayout(layout2)
+        widget = widget2
 
       self.layout.addWidget(widget)
+      # self.p.sigTreeStateChanged.connect(change)
     return self.p
 
   def config_update(self, config):
@@ -198,10 +247,6 @@ class IOGrid(QtGui.QWidget):
       for io in c["items"]:
         if io["added"]:
           continue
-        layout.addWidget(
-          make_funcs[io["class"]](
-            io["config"]
-          )
-        )
+        layout.addWidget(make_funcs[io["class"]](io, callback=self.generic_callback))
 
         io["added"] = True

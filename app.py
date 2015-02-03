@@ -3,7 +3,7 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-05 20:56:57
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-01-30 02:20:58
+# @Last Modified time: 2015-02-03 06:44:03
 
 import logging
 logger = logging.getLogger(__name__)
@@ -16,10 +16,58 @@ import json
 from PyQt4 import QtCore, QtGui
 
 
-orange = [("gradienta", "#b56c17"), ("gradientb", "#d7801a"), ("gradientc", "#ffa02f"), ("gradientd", "#ffaa00")]
-blue = [("gradienta", "#353DE7"), ("gradientb", "#484FE5"), ("gradientc", "#5B61E4"), ("gradientd", "#6E74E2")]
-blue2 = [("gradienta", "#484FE5"), ("gradientb", "#353DE7"), ("gradientc", "#222BE9"), ("gradientd", "#0F19EB")]
-green = [("gradienta", "#2CF293"), ("gradientb", "#38F296"), ("gradientc", "#45F29A"), ("gradientd", "#52F39E")]
+color_gradients = {
+  "orange": [("gradienta", "#b56c17"), ("gradientb", "#d7801a"), ("gradientc", "#ffa02f"), ("gradientd", "#ffaa00")],
+  "blue": [("gradienta", "#353DE7"), ("gradientb", "#484FE5"), ("gradientc", "#5B61E4"), ("gradientd", "#6E74E2")],
+  "blue2": [("gradienta", "#484FE5"), ("gradientb", "#353DE7"), ("gradientc", "#222BE9"), ("gradientd", "#0F19EB")],
+  "green": [("gradienta", "#2CF293"), ("gradientb", "#38F296"), ("gradientc", "#45F29A"), ("gradientd", "#52F39E")]
+}
+
+
+default_settings = {
+  "name": "Qt Booty Default",
+  "size": {
+    "policy": "unbounded",
+    "min": [
+      100,
+      100
+    ],
+    "max": [
+      480,
+      320
+    ]
+  },
+  "menu": {
+    "enabled": True,
+    "items": [{
+      "name": "File",
+      "actions": [{
+          "name": "New",
+          "shortcut": "Ctrl+N",
+          "tip" : "make a new file"
+          },{
+          "name": "Open",
+          "shortcut" : "Ctrl+O",
+          "tip" : "open an existing file"
+          }
+        ]
+      },{
+      "name": "Edit",
+      "actions": []
+      },{
+      "name": "View",
+      "actions": [{
+          "name": "CPU Statistics",
+          "shortcut" : "Ctrl+N",
+          "tip" : "view run-time CPU stats"
+          }]
+    }]
+  },
+  "status": {
+    "enabled": True
+  }
+}
+
 
 #
 class App(QtGui.QApplication):
@@ -47,6 +95,7 @@ class App(QtGui.QApplication):
       self.app_settings = json.load(open(json_file))
     else:
       logger.critical('config file fucked up : %s' % (json_file))
+      self.app_settings = default_settings
 
     self.main = MainWindow(self.app_settings)
     self.apply_style("default")
@@ -66,9 +115,10 @@ class App(QtGui.QApplication):
   def apply_style(self, name):
     with open(path.join(self.resources, 'styles', 'style.css'), "r") as style:
       styleSheet = style.read()
+      import numpy as np
+      rand_key = color_gradients.keys()[np.random.randint(len(color_gradients.keys()))]
 
-      for item, value in blue:
-        print item, value
+      for item, value in color_gradients[rand_key]:
         styleSheet = styleSheet.replace((item), value)
       self.setStyleSheet(styleSheet)
 
@@ -103,6 +153,7 @@ class MainWindow(QtGui.QMainWindow):
   def apply_settings(self):
     self.central_setup()
     self.menu_setup()
+    self.statusBar().showMessage("")
 
   def central_setup(self):
     self.setWindowTitle(self.settings["name"])
@@ -131,7 +182,7 @@ class MainWindow(QtGui.QMainWindow):
 
   def update_status(self):
     if self.settings["status"]["enabled"]:
-      self.statusBar().showMessage("")
+      self.statusBar().showMessage("test")
     # also by default added the CPU percentage and memory usage
 
   def set_close_callback(self, callback):

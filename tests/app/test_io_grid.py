@@ -3,13 +3,15 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-11-25 21:43:42
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-01-30 01:00:38
+# @Last Modified time: 2015-02-03 06:36:47
 
 import sys
 sys.path.append('/home/cosgroma/workspace/libs/python/modules')
 
 from QtBooty import App
 from QtBooty import framework
+
+config = dict()
 
 app = App()
 
@@ -25,9 +27,8 @@ groups[-1]["layout"] = ["h", "na"]
 groups[-1]["items"] = [
   {
     "class": "label",
-    "config": {
-      "label": "regular label"
-    }
+    "label": "regular label",
+    "name": "genlab"
   }
 ]
 
@@ -38,7 +39,7 @@ groups[-1]["box_name"] = "class::edit"
 groups[-1]["layout"] = ["h", "na"]
 
 # edit_defaults = {
-#   "type":            "default",
+#   "qtype":            "default",
 #   "label":           None,
 #   "position":        "left",
 #   "default":         None,
@@ -53,26 +54,33 @@ def test_edit_finish(args):
 groups[-1]["items"] = [
   {
     "class": "edit",
-    "config": {
-      "label": "normal",
+    "name": "normali",
+      "label": "normal::intv",
+      "dtype": "int",
+      "position": "above",
+      "editingFinished": test_edit_finish,
+      "args": ["test"],
+      "tool-tip": "test tip"
+  },{
+    "class": "edit",
+    "name": "normalf",
+      "label": "normal::floatv",
+      "dtype": "float",
       "position": "above",
       "editingFinished": test_edit_finish,
       "args": ["test"]
-    }
   }, {
     "class": "edit",
-    "config": {
-      "type": "datetime",
+    "name": "datetime",
+      "qtype": "datetime",
       "position": "above",
       "label": "date time"
-    }
   }, {
     "class": "edit",
-    "config": {
-      "type": "spin",
+    "name": "spin",
+      "qtype": "spin",
       "position": "above",
       "label": "spin"
-    }
   }
 ]
 
@@ -86,34 +94,31 @@ def test_clicked(button):
   print("Button pressed: %s" % button.text())
 
 # button_defaults = {
-#   "type":    "default",
+#   "qtype":    "default",
 #   "label":   "",
 #   "clicked": None,
 #   "args":    None
-# }
 
 groups[-1]["items"] = [
   {
     "class": "button",
-    "config": {
+    "name": "button1",
       "label": "button1",
       "clicked": test_clicked,
       "args": ["normal"]
-    }
   }, {
     "class": "button",
-    "config": {
-      "type": "radio",
+    "name": "radio",
+      "qtype": "radio",
       "label": "radio button",
       "clicked": test_clicked,
       "args": ["radio"]
-    }
   }
 
 ]
 
 # slider_defaults = {
-#   "type":         "default",
+#   "qtype":         "default",
 #   "label":        "",
 #   "position":     "above",
 #   "range":        [0, 100],
@@ -122,7 +127,6 @@ groups[-1]["items"] = [
 #   "display":      False,
 #   "valueChanged": None,
 #   "args":         [None]
-# }
 
 groups.append(dict())
 
@@ -139,14 +143,13 @@ for i in range(0, 10):
   groups[-1]["items"].append(
     {
       "class": "slider",
-      "config": {
+      "name": "slider%d" % i,
         "label": "slider%d" % i,
         "display": True,
         "orientation": "v",
         # "policy": "smart",
         "valueChanged": slider_callback,
         "args": ["dB"]
-      }
     }
   )
 
@@ -158,14 +161,13 @@ groups[-1]["layout"] = ["h", "na"]
 groups[-1]["items"] = [
  {
   "class": "slider",
-    "config": {
-      "type": "scroll",
+    "name": "scroll",
+      "qtype": "scroll",
       "label": "slider::scroll",
       "display": True,
       "orientation": "h",
       "valueChanged": slider_callback,
       "args": [""]
-    }
   }
 ]
 
@@ -177,24 +179,22 @@ groups[-1]["layout"] = ["h", "l"]
 groups[-1]["items"] = [
  {
   "class": "slider",
-    "config": {
-      "type": "dial",
+    "name": "dial",
+      "qtype": "dial",
       "label": "dial0",
       "display": True,
       "orientation": "v",
       "valueChanged": slider_callback,
       "args": [u"°"]
-    }
   }, {
   "class": "slider",
-    "config": {
-      "type": "dial",
+    "name": "dial1",
+      "qtype": "dial",
       "label": "dial1",
       "display": True,
       "orientation": "v",
       "valueChanged": slider_callback,
       "args": [u"°"]
-    }
   }
 ]
 
@@ -211,19 +211,17 @@ groups[-1]["layout"] = ["h", "c"]
 #   "activated":       None,
 #   "indexChanged":    None,
 #   "args":            None
-# }
 
 groups[-1]["items"] = [
  {
   "class": "combo",
-    "config": {
+    "name": "combobox",
       "label":           "combobox",
       "items":           ["one", "two", "three"],
       "maxVisible":      10,
       "activated":       None,
       "indexChanged":    None,
       "args":            None
-    }
   }
 ]
 
@@ -243,21 +241,22 @@ groups[-1]["layout"] = ["h", "c"]
 groups[-1]["items"] = [
  {
   "class": "table",
-    "config": {
+    "name": "table",
       "label":   "table",
       "headers": ["one", "two"],
       "items":   [[1, 2], [3,4], [5,6]],
       "args":    None
-    }
   }
 ]
 config = io_grid.config_init(len(groups), [len(g["items"]) for g in groups])
 
-config["layout"] = ["v", "t"]
+# config["groups"] = groups
+
+config["layout"] = ["v", "b"]
 [d.update(u) for d, u in zip(config["groups"], groups)]
 # config["groups"].update(groups)
 
-io_grid.config_widget(config)
+io_grid.load_config(config)
 app.add_widget(io_grid)
 app.run()
 

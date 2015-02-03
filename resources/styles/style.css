@@ -100,8 +100,10 @@ QPushButton {
   padding-left: 5px;
   padding-right: 5px;
 }
-QPushButton:pressed {
-  background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #2d2d2d, stop: 0.1 #2b2b2b, stop: 0.5 #292929, stop: 0.9 #282828, stop: 1 #252525);
+QPushButton:pressed, QPushButton:focus {
+  /*background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #2d2d2d, stop: 0.1 #2b2b2b, stop: 0.5 #292929, stop: 0.9 #282828, stop: 1 #252525);
+  */
+ padding: 0px;
 }
 QComboBox {
   selection-background-color: gradientd;
@@ -140,9 +142,24 @@ QComboBox::drop-down {
 QComboBox::down-arrow {
   image: url(down_arrow.png);
 }
-QGroupBox:focus {
-  border: 1px dotted QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 gradientc, stop: 1 gradientb);
+/*QGroupBox {
+  border: 1px solid QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 gradientc, stop: 1 gradientb);
+}*/
+QGroupBox {
+
+  /* spacing between items in the tool bar */
+  background-color: #2d2d2d;
+  border-bottom: 1px solid #FFFFFF;
+  /*background-color: QLinearGradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 gradientc, stop: 0.5 gradientb, stop: 1 gradienta);*/
 }
+QGroupBox::title {
+  text-align: top;
+  subcontrol-position: top center; /* position at the top center */
+  /* spacing between items in the tool bar */
+  background-color: #2d2d2d;
+  /*background-color: QLinearGradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 gradientc, stop: 0.5 gradientb, stop: 1 gradienta);*/
+}
+/**/
 QTextEdit:focus {
   border: 1px dotted QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 gradientc, stop: 1 gradientb);
 }

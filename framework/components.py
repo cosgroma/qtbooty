@@ -31,7 +31,7 @@ Attributes:
 # @Author: Mathew Cosgrove
 # @Date:   2015-01-21 15:05:05
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-01-30 01:57:02
+# @Last Modified time: 2015-02-03 06:30:46
 # REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
 # REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
@@ -129,7 +129,7 @@ def add_label(widget, label, position="left", policy=None):
 
 button_defaults = {
   "name": None,
-  "type":    "button",
+  "qtype":   "button",
   "label":   "",
   "clicked": None,
   "enabled": False,
@@ -140,9 +140,9 @@ def make_button(config, callback=None):
   instance = deepcopy(button_defaults)
   instance.update(config)
 
-  if instance["type"] == "radio":
+  if instance["qtype"] == "radio":
     button = QtGui.QRadioButton(instance["label"])
-  elif instance["type"] == "check":
+  elif instance["qtype"] == "check":
     button = QtGui.QCheckBox(instance["label"])
   else:
     button = QtGui.QPushButton(instance["label"])
@@ -167,27 +167,35 @@ def make_button(config, callback=None):
 # Buttons
 edit_defaults = {
   "name": None,
-  "type":            "default",
+  "qtype":            "default",
+  "dtype":           None,
   "label":           None,
   "position":        "left",
   "default":         None,
   "editingFinished": None,
-  "args":            None
+  "args":            None,
+  "tool-tip":        None
 }
 
 def make_edit(config, callback=None):
   instance = deepcopy(edit_defaults)
   instance.update(config)
   signal = None
-  if instance["type"] == "datetime":
+  if instance["qtype"] == "datetime":
     edit = QtGui.QDateTimeEdit()
     signal = edit.dateTimeChanged
-  elif instance["type"] == "spin":
+  elif instance["qtype"] == "spin":
     edit = QtGui.QSpinBox()
     signal = edit.valueChanged
   else:
     edit = QtGui.QLineEdit(instance["default"])
     signal = edit.textEdited
+
+  if instance["dtype"] is not None:
+    if instance["dtype"] == "int":
+      edit.setValidator(QtGui.QIntValidator(edit))
+    elif instance["dtype"] == "float":
+      edit.setValidator(QtGui.QDoubleValidator(edit))
 
   if instance["editingFinished"] is not None:
     edit.textEdited.connect(
@@ -200,7 +208,12 @@ def make_edit(config, callback=None):
     signal.connect(partial(callback, edit, instance))
 
   if instance["label"] is not None:
-    return add_label(edit, instance["label"], position=instance["position"])
+    edit = add_label(edit, instance["label"], position=instance["position"])
+
+  if instance["tool-tip"] is not None:
+    edit.setToolTip(instance["tool-tip"])
+    edit.setStatusTip(instance["tool-tip"])
+
 
   return edit
 
@@ -209,7 +222,7 @@ def make_edit(config, callback=None):
 
 slider_defaults = {
   "name": None,
-  "type":         "default",
+  "qtype":         "default",
   "label":        "",
   "position":     "above",
   "range":        [0, 100],
@@ -231,9 +244,9 @@ def make_slider(config, callback=None):
   instance = deepcopy(slider_defaults)
   instance.update(config)
 
-  if instance["type"] == "scroll":
+  if instance["qtype"] == "scroll":
     slider = QtGui.QScrollBar(o_map[instance["orientation"]])
-  elif instance["type"] == "dial":
+  elif instance["qtype"] == "dial":
     slider = QtGui.QDial()
     slider.setNotchesVisible(True)
   else:

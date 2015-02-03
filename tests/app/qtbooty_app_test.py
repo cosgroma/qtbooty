@@ -3,7 +3,7 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-11-25 21:43:42
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-01-28 08:32:07
+# @Last Modified time: 2015-02-03 06:40:01
 
 import sys
 sys.path.append('/Users/cosgroma/workspace')
@@ -31,28 +31,28 @@ app = App('../config/app_config.json')
 tabs = framework.Tabs()
 
 
-## Create flowchart, define input/output terminals
-fc = Flowchart(terminals={
-    'dataIn': {'io': 'in'},
-    'dataOut': {'io': 'out'}
-})
+# ## Create flowchart, define input/output terminals
+# fc = Flowchart(terminals={
+#     'dataIn': {'io': 'in'},
+#     'dataOut': {'io': 'out'}
+# })
 
-print dir(fc)
-# print type(fc)
-w = fc.widget()
+# print dir(fc)
+# # print type(fc)
+# w = fc.widget()
 
-for c in fc.widget().children():
-  print type(c)
-  for c1 in c.children():
-    print type(c1)
-    for c2 in c1.children():
-      print type(c2)
-      for c3 in c2.children():
-        print type(c3)
+# for c in fc.widget().children():
+#   print type(c)
+#   for c1 in c.children():
+#     print type(c1)
+#     for c2 in c1.children():
+#       print type(c2)
+#       for c3 in c2.children():
+#         print type(c3)
 ## Add flowchart control panel to the main window
 # layout.addWidget(fc.widget(), 0, 0, 2, 1)
 
-app.add_widget(w)
+# app.add_widget(w)
 
 # app.add_timer(500, psutil_data_update)
 # cpu_usage.start()

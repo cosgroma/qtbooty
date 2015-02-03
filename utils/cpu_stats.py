@@ -3,27 +3,102 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-11-26 08:07:43
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2014-12-05 22:24:31
-
+# @Last Modified time: 2015-02-03 09:24:43
+import sys
+sys.path.append('/home/cosgroma/workspace/lib/python/modules')
+from PyQt4 import QtCore, QtGui
+from QtBooty import App
 from QtBooty import graphs
+import psutil
+import numpy as np
 
-class CpuStats():
-  cpu_usage = graphs.TimeSeries(interval=1000, ylim=[0,100])
-  app.add_widget(cpu_usage)
+class CpuThread(QtCore.QThread):
+  cpustats = QtCore.pyqtSignal(list)
+  diskstats = QtCore.pyqtSignal(list)
+  def __init__(self, parent=None):
+    super(CpuThread, self).__init__(parent)
+    self.start(QtCore.QThread.LowPriority)
+    self.count = 0.0
+  def run(self):
+    while True:
+      self.usleep(1000)
+      usage = psutil.cpu_percent(interval=False, percpu=True)
+      self.cpustats.emit(usage)
 
-  psutil.cpu_percent(interval=None)
-  start_time = time.time()
+      self.usleep(10000)
+      disk = psutil.disk_io_counters()
+      self.diskstats.emit([disk.read_count, disk.write_count])
 
-  for p in range(0, psutil.cpu_count()):
-    cpu_usage.add_line(p, color='r')
+class CpuStatsPlot(object):
+  """docstring for CpuStatsPlot"""
+  def __init__(self, ts_updater, disk_updater):
+    super(CpuStatsPlot, self).__init__()
+    self.cputhread = CpuThread()
+    self.ts_updater = ts_updater
+    self.plotconfig = dict()
+    self.diskplotconfig = dict()
+    self.cputhread.cpustats.connect(self.updatePlot)
+    self.cputhread.diskstats.connect(self.updateDisk)
+    self.count = 0.0
+    self.configured = False
+    self.diskplotconfig["plots"] = [
+      {"name":"readcount", "plot kwargs": {"pen": "r"}},
+      {"name":"write_count", "plot kwargs": {"pen": "b"}}]
+    self.disk_updater = disk_updater
+  def updateDisk(self, diskio):
+    npm = np.matrix([
+      [self.count],
+      [diskio[0]],
+      [diskio[1]]
+      ])
+    self.disk_updater.add_data(npm, self.diskplotconfig)
+  def updatePlot(self, usage):
+    if not self.configured:
+      self.plotconfig["plots"] = []
+      for i in range(0, len(usage)):
+        self.plotconfig["plots"].append({
+          "name": "cpu%d" % i,
+          "plot kwargs": {
+            "pen": QtGui.QPen(
+              QtGui.QColor(
+                np.random.randint(255),
+                np.random.randint(255),
+                np.random.randint(255)
+              )
+            ), "downsample": None
+          }
+        })
+      self.configured = True
+    npm = np.zeros((len(usage) + 1, 1))
 
-  def psutil_data_update():
-    usage = psutil.cpu_percent(interval=None, percpu=True)
-    t = time.time() - start_time
-    for p in range(0, psutil.cpu_count()):
-      cpu_usage.add_data_point(p, t, usage[p])
+    self.count += 1.0
+    npm[:, 0] = self.count
+    npm[1:, 0] = usage
+    self.ts_updater.add_data(npm, self.plotconfig)
 
 
+
+app = App('../tests/config/app_config.json')
+
+timeseries = graphs.Line(legend=True, controller=True)
+diskts = graphs.Line(legend=True, controller=True)
+
+gscheduler = graphs.GraphScheduler()
+ts_updater = gscheduler.add_graph(timeseries, maxlen=1000, interval=10)
+ds_updater = gscheduler.add_graph(diskts, maxlen=1000, interval=10)
+
+plot = CpuStatsPlot(ts_updater, ds_updater)
+
+app.add_widget(timeseries)
+app.add_widget(diskts)
+gscheduler.start()
+app.run()
+
+
+# time.sleep(10)
+
+
+# thread.join()
 # 'AccessDenied'
 # 'BOOT_TIME'
 # 'CONN_CLOSE'

@@ -3,10 +3,10 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-11-25 21:43:42
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-01-27 22:10:03
+# @Last Modified time: 2015-02-03 08:40:41
 
 import sys
-# sys.path.append('/home/cosgroma/workspace/sergeant/guis')
+sys.path.append('/home/cosgroma/workspace/libs/python/modules')
 
 from QtBooty import App
 from QtBooty import graphs

@@ -31,7 +31,7 @@ Attributes:
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-30 14:23:04
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-01-28 06:19:07
+# @Last Modified time: 2015-02-03 08:56:22
 # REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
 # REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
@@ -122,6 +122,7 @@ class GraphUpdater(object):
     self.update_timer.stop()
 
   def _update(self):
+
     if self.mode == 'concat':
       dmat = np.concatenate(self.data, axis=1)
       self.graph.update(dmat.transpose(), self.config)

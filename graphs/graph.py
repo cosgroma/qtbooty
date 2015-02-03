@@ -31,7 +31,7 @@ Attributes:
 # @Author: Mathew Cosgrove
 # @Date:   2015-01-14 01:09:36
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-01-28 06:20:35
+# @Last Modified time: 2015-02-03 08:52:13
 # REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
 # REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
@@ -51,7 +51,7 @@ from graph_updater import GraphUpdater
 
 
 class Line(QtGui.QWidget):
-  def __init__(self, legend=False, controller=False, update_controller=False):
+  def __init__(self, legend=False, controller=False, update_controller=False, size=(1,0), title=None):
     super(Line, self).__init__()
 
     self.artists = dict()
@@ -106,13 +106,12 @@ class Line(QtGui.QWidget):
       self.controller_config["groups"][0]["items"].append({
         "class": "button",
         "added": False,
-        "config": {
-          "type": "check",
-          "label": str(name),
-          "clicked": self.controller_callback,
-          "enabled": True,
-          "args": [name]
-          }
+        "name": str(name),
+        "qtype": "check",
+        "label": str(name),
+        "clicked": self.controller_callback,
+        "enabled": True,
+        "args": [name]
       })
       self.controller.config_update(self.controller_config)
 
