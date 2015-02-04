@@ -4,7 +4,7 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-05 22:26:11
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-02-03 20:11:49
+# @Last Modified time: 2015-02-03 21:32:48
 
 from copy import deepcopy
 from functools import partial
@@ -165,12 +165,7 @@ class IOGrid(QtGui.QWidget):
     for gconf in config["groups"]:
       if not gconf["enabled"]: continue
       group = deepcopy(group_default)
-
-      print group
-
       group.update(gconf)
-
-      print group
 
       if group["box_enabled"]:
         widget = QtGui.QGroupBox(group["group_name"])
@@ -187,7 +182,6 @@ class IOGrid(QtGui.QWidget):
         self.io_widgets[io["name"]] = iow
         layout.addWidget(iow)
         io["added"] = True
-        print "added", io["name"]
         self.p.addChild(io)
 
       if group["scrollable"]:
@@ -203,11 +197,10 @@ class IOGrid(QtGui.QWidget):
         widget2.setLayout(layout2)
         widget = widget2
 
-    if hasattr(config, "group_layout_params"):
-      self.layout.addWidget(widget,
-        *config["group_layout_params"][group["group_name"]])
-    else:
-      self.layout.addWidget(widget)
+      if "group_layout_params" in config.keys():
+        self.layout.addWidget(widget, *config["group_layout_params"][group["group_name"]])
+      else:
+        self.layout.addWidget(widget)
 
     #
       # self.p.sigTreeStateChanged.connect(change)
