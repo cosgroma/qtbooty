@@ -17,7 +17,7 @@ QWidget {
   background-color: #323232;
 }
 QWidget:item:hover {
-  background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 gradientc, stop: 1 #ca0619);
+  background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 gradientc, stop: 1 gradientd);
   color: #000000;
 }
 QWidget:item:selected {
@@ -396,3 +396,4 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled {
 
 /*QString styleSheet = ...;
 styleSheet.replace("myColor", "#DFDFE0");*/
+/*QTableWidget::setShowGrid,*/

@@ -3,7 +3,7 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-11-25 21:43:42
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-02-02 23:48:02
+# @Last Modified time: 2015-02-03 20:18:20
 
 import sys
 
@@ -12,7 +12,7 @@ from QtBooty import framework
 
 app = App()
 io_grid = framework.IOGrid()
-p = io_grid.load_config_file('../config/io_grid.json')
+p = io_grid.load_config_file('../config/io_grid_test2.json')
 
 
 ## If anything changes in the tree, print a message

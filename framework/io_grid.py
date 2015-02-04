@@ -4,28 +4,30 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-05 22:26:11
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-02-03 15:15:16
-
-import PyQt4.QtGui
-from PyQt4 import QtGui, QtCore, Qt
-from PyQt4.QtCore import pyqtSignal, pyqtSlot
-
-import pyqtgraph as pg
-from pyqtgraph.Qt import QtCore, QtGui
-
-import pyqtgraph.parametertree.parameterTypes as pTypes
-from pyqtgraph.parametertree import Parameter, ParameterTree, ParameterItem, registerParameterType
+# @Last Modified time: 2015-02-03 20:11:49
 
 from copy import deepcopy
+from functools import partial
+import logging
+
+import simplejson as json
 import numpy as np
 
-from functools import partial
+from PyQt4 import QtGui, QtCore, Qt
+from pyqtgraph.Qt import QtCore, QtGui
 
-import logging
+from PyQt4.QtCore import pyqtSignal, pyqtSlot
+import PyQt4.QtGui
+
+
+import pyqtgraph as pg
+
+from pyqtgraph.parametertree import Parameter, ParameterTree, ParameterItem, registerParameterType
+import pyqtgraph.parametertree.parameterTypes as pTypes
+
 
 from components import make_funcs
 
-import simplejson as json
 ############################################
 
 #    ____  ____  ________  _____     _______  ________  _______     ______
@@ -59,10 +61,11 @@ icon_lookup = {
 }
 
 
-group_instance = {
+group_default = {
   "name":        None,
+  "enabled":     True,
   "box_enabled": False,
-  "group_name":    None,
+  "group_name":  None,
   "layout":      None,
   "scrollable":  False,
   "checkable":   False,
@@ -80,25 +83,6 @@ io_instance = {
   "dtype":    None
 }
 
-
-# class ComplexParameter(pTypes.GroupParameter):
-#     def __init__(self, **opts):
-#         opts['type'] = 'bool'
-#         opts['value'] = True
-#         pTypes.GroupParameter.__init__(self, **opts)
-
-#         self.addChild({'name': 'A = 1/B', 'type': 'float', 'value': 7, 'suffix': 'Hz', 'siPrefix': True})
-#         self.addChild({'name': 'B = 1/A', 'type': 'float', 'value': 1/7., 'suffix': 's', 'siPrefix': True})
-#         self.a = self.param('A = 1/B')
-#         self.b = self.param('B = 1/A')
-#         self.a.sigValueChanged.connect(self.aChanged)
-#         self.b.sigValueChanged.connect(self.bChanged)
-
-#     def aChanged(self):
-#         self.b.setValue(1.0 / self.a.value(), blockSignal=self.bChanged)
-
-#     def bChanged(self):
-#         self.a.setValue(1.0 / self.b.value(), blockSignal=self.aChanged)
 
 ## If anything changes in the tree, print a message
 def change(param, changes):
@@ -147,7 +131,7 @@ class IOGrid(QtGui.QWidget):
         (ngroups, nitems_arr)
       )
 
-    config["groups"] = [deepcopy(group_instance) for i in range(ngroups)]
+    config["groups"] = [deepcopy(group_default) for i in range(ngroups)]
 
     # populated a set of default item configurations for each group
     for c, nitems in zip(config["groups"], nitems_arr):
@@ -174,34 +158,41 @@ class IOGrid(QtGui.QWidget):
   def config_widget(self, config):
     self.layout = get_layout(config["layout"])
     self.setLayout(self.layout)
-    self.groups = []
+    # self.groups = []
 
     self.p = Parameter.create(name='params', type='group')
 
-    for group in config["groups"]:
-      c = deepcopy(group_instance)
-      c.update(group)
+    for gconf in config["groups"]:
+      if not gconf["enabled"]: continue
+      group = deepcopy(group_default)
 
-      if c["box_enabled"]:
-        widget = QtGui.QGroupBox(c["group_name"])
-        widget.setCheckable(c["checkable"])
+      print group
+
+      group.update(gconf)
+
+      print group
+
+      if group["box_enabled"]:
+        widget = QtGui.QGroupBox(group["group_name"])
+        widget.setCheckable(group["checkable"])
       else:
         widget = QtGui.QWidget()
 
-      layout = get_layout(c["layout"])
+      layout = get_layout(group["layout"])
       widget.setLayout(layout)
-      self.groups.append(layout)
+      # self.groups.append(layout)
 
-      for io in c["items"]:
+      for io in group["items"]:
         iow = make_funcs[io["class"]](io, callback=self.generic_callback)
         self.io_widgets[io["name"]] = iow
         layout.addWidget(iow)
         io["added"] = True
+        print "added", io["name"]
         self.p.addChild(io)
 
-      if c["scrollable"]:
-        widget2 = QtGui.QGroupBox(c["box_name"])
-        layout2 = get_layout(c["layout"])
+      if group["scrollable"]:
+        widget2 = QtGui.QGroupBox(group["group_name"])
+        layout2 = get_layout(group["layout"])
         widget.setTitle("")
         scroll = QtGui.QScrollArea()
         scroll.setWidget(widget)
@@ -212,7 +203,13 @@ class IOGrid(QtGui.QWidget):
         widget2.setLayout(layout2)
         widget = widget2
 
+    if hasattr(config, "group_layout_params"):
+      self.layout.addWidget(widget,
+        *config["group_layout_params"][group["group_name"]])
+    else:
       self.layout.addWidget(widget)
+
+    #
       # self.p.sigTreeStateChanged.connect(change)
     return self.p
 
@@ -220,47 +217,56 @@ class IOGrid(QtGui.QWidget):
     for idx, c in enumerate(config["groups"]):
       layout = self.groups[idx]
       for io in c["items"]:
-        if io["added"]:
-          continue
+        if io["added"]: continue
         layout.addWidget(make_funcs[io["class"]](io, callback=self.generic_callback))
-
         io["added"] = True
 
   def update_widget(self, name, data):
-    instance = self.io_widgets[name]
-    table_items = []
-    for d in data:
-      if d not in icon_lookup.keys():
-        table_items.append(QtGui.QTableWidgetItem(d))
-      else:
-        item = QtGui.QTableWidgetItem()
-        item.setFlags(QtCore.Qt.ItemIsUserCheckable |
-                          QtCore.Qt.ItemIsEnabled)
-        item.setIcon(QtGui.QIcon(icon_lookup[d]))
-        table_items.append(item)
+    self.update_table_widget(name, data)
 
-    row = instance.rowCount()
-    instance.insertRow(row)
-    for idx, item in enumerate(table_items):
+  def update_table_widget(self, name, data):
+    def new_table_item(label=""):
+      item = QtGui.QTableWidgetItem(label)
       item.setTextAlignment(QtCore.Qt.AlignCenter)
-      instance.setItem(row, idx, item)
+      item.setFlags(item.flags() & ~QtCore.Qt.ItemIsEditable)
+      return item
 
-    # tableitem = instance.(1,1)
+    table = self.io_widgets[name]
+    row = table.rowCount()
+    table.insertRow(row)
 
-    # imageName = QtCore.QFileInfo(fileName).baseName()
-    # item0 = QtGui.QTableWidgetItem(imageName)
-    # item0.setData(QtCore.Qt.UserRole, fileName)
-    # item0.setFlags(item0.flags() & ~QtCore.Qt.ItemIsEditable)
-    # tableitem.setBackgroundColor(QtGui.QColor("gray"))
+    item = new_table_item()
+    table.setItem(row, 0, item)
 
+    cellLayout = QtGui.QHBoxLayout()
 
+    enWidget = QtGui.QComboBox()
+    enWidget.addItems(["a", "b", "c"])
+    edWidget = QtGui.QPushButton("EDIT")
+    edWidget.setSizePolicy(
+      QtGui.QSizePolicy(
+        QtGui.QSizePolicy.Preferred,
+        QtGui.QSizePolicy.Preferred
+      )
+    )
 
-    # instance.setRowCount(row + 1)
+    cellLayout.addWidget(enWidget)
+    # cellLayout.addWidget(edWidget)
+    cellWidget = enWidget
+    # cellWidget = QtGui.QWidget()
+    # cellWidget.setLayout(cellLayout)
+    table.setCellWidget(row, 0, cellWidget)
+
+    for idx, d in enumerate(data, start=1):
+      item = new_table_item(d)
+      table.setItem(row, idx, item)
+
+    item.setIcon(QtGui.QIcon(icon_lookup["delete"]))
+    table.setItem(row, len(d) + 1, item)
 
   def get_icon(self, description):
     if description == "delete":
       return
-
 
 
 

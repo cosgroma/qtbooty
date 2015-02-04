@@ -36,7 +36,17 @@ class FilterDesigner(object):
     return self.iogrid
 
   def get_plot_widget(self):
-    return self.tabs
+    box = QtGui.QGroupBox()
+    self.tabs.setSizePolicy(
+      QtGui.QSizePolicy(
+        QtGui.QSizePolicy.Preferred,
+        QtGui.QSizePolicy.Preferred
+      )
+    )
+    bl = QtGui.QGridLayout()
+    bl.addWidget(self.tabs)
+    box.setLayout(bl)
+    return box
 
   def setup_plots(self):
 
@@ -68,8 +78,7 @@ class FilterDesigner(object):
         fset = [
           self.params["fstart"],
           self.params["fstop"],
-          self.params["atten"],
-          "delete"
+          self.params["atten"]
         ]
         self.iogrid.update_widget("ftable", fset)
       elif param.name() == "visual":
