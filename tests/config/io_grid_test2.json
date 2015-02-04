@@ -1,0 +1,58 @@
+{
+  "layout": ["h", "na"],
+  "groups": [
+  {
+    "enabled": true,
+    "box_enabled": true,
+    "group_name": "signal::controller",
+    "layout": [
+      "h",
+      "na"
+    ],
+    "items": [
+    {
+      "class": "slider",
+      "name": "power0",
+      "label": "Power",
+      "display": true,
+      "orientation": "h",
+      "args": [
+        "dB"
+      ]
+    },
+    {
+      "class": "slider",
+      "name": "doppler1",
+      "qtype": "dial",
+      "label": "Doppler",
+      "display": true,
+      "orientation": "h",
+      "range": [-5000.0,
+        5000.0
+      ],
+      "policy": "smart",
+      "args": [
+        "Hz"
+      ]
+    }]
+  },
+  {
+    "enabled": true,
+    "box_enabled": true,
+    "group_name": "signal::test",
+    "layout": [
+      "h",
+      "na"
+    ],
+    "items": [
+    {
+      "class": "edit",
+      "name": "normali2",
+      "label": "normal::inth",
+      "dtype": "int",
+      "position": "abohe",
+      "args": ["test"],
+      "tool-tip": "test tip"
+    }]
+  }]
+}

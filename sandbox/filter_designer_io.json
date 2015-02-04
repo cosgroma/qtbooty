@@ -39,48 +39,7 @@
       "name": "asym",
       "class": "button",
       "qtype": "check",
-      "label": "Asymetric",
-    }]
-  }, {
-    "box_enabled": true,
-    "group_name": "Filter Parameters",
-    "layout": ["h", "na"],
-    "items": [{
-      "name": "fs",
-      "class": "edit",
-      "position": "above",
-      "label": "Sample Frequency (MHz)",
-      "tool-tip": "Source Sample Frequency",
-      "dtype": "float"
-    }, {
-      "name": "window_function",
-      "class": "combo",
-      "items": ["hamming", "boxcar", "triang", "blackman", "hamming", "hann", "bartlett", "flattop", "parzen", "bohman", "blackmanharris", "nuttall", "barthann"],
-      "label": "Window Function",
-      "position": "above",
-      "tool-tip": "Window function to use. Default is hamming",
-      "dtype": "string",
-      "maxVisible": 4
-    }, {
-      "name": "taps",
-      "class": "edit",
-      "position": "above",
-      "label": "Filter Taps (MAX)",
-      "dtype": "int",
-      "tool-tip": "MAX Available TAP count for FIR implementation"
-    }, {
-      "name": "nfreqs",
-      "class": "edit",
-      "position": "above",
-      "label": "N-Freqs",
-      "tool-tip": "The size of the interpolation mesh used to construct the filter",
-      "default": "optional",
-      "dtype": "int"
-    }, {
-      "name": "asym",
-      "class": "button",
-      "qtype": "check",
-      "label": "Asymetric",
+      "label": "Asymetric"
     }]
   }, {
     "box_enabled": true,
