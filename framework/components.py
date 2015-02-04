@@ -31,7 +31,7 @@ Attributes:
 # @Author: Mathew Cosgrove
 # @Date:   2015-01-21 15:05:05
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-02-03 21:25:08
+# @Last Modified time: 2015-02-04 03:29:12
 # REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
 # REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
@@ -81,9 +81,25 @@ def set_common_policy(widget, policy=None):
   widget.setSizePolicy(
       QtGui.QSizePolicy(
         QtGui.QSizePolicy.MinimumExpanding,
-        QtGui.QSizePolicy.Minimum
+        QtGui.QSizePolicy.Preferred
       )
     )
+  # print type(widget)
+  # bound = widget.sizeHint().boundedTo(QtCore.QSize(1000,1000))
+  # size = widget.size()
+  # expand = widget.sizeHint().expandedTo(widget.minimumSizeHint())
+  # print "bound", bound, "size:", size, "expand", expand
+  # print bound, widget.minimumSize()
+  # widget.resize(widget.minimumSize())
+
+  # if isinstance(widget, PyQt4.QtGui.QPushButton):
+
+
+  # if bound.isValid() and
+  # QtCore.QSize.boundedTo(widget.sizeHint()).height()
+  # qsize = QtCore.QSize()
+  # if qsize.boundedTo(widget.sizeHint()).height() < 50:
+  #   widget.setMaximumHeight(50)
 
 def make_label(config, callback=None):
   instance = deepcopy(label_defaults)
@@ -95,22 +111,9 @@ def make_label(config, callback=None):
 def add_label(widget, label, position="left", policy=None):
   container = QtGui.QWidget()
   set_common_policy(container)
-  # if policy is not None:
-  #   container.setSizePolicy(
-  #     QtGui.QSizePolicy(
-  #       QtGui.QSizePolicy.MinimumExpanding,
-  #       QtGui.QSizePolicy.Minimum
-  #     )
-  #   )
 
   label = QtGui.QLabel(label)
   set_common_policy(label)
-  # label.setSizePolicy(
-  #   QtGui.QSizePolicy(
-  #     QtGui.QSizePolicy.MinimumExpanding,
-  #     QtGui.QSizePolicy.Minimum
-  #   )
-  # )
 
   label.setAlignment(QtCore.Qt.AlignCenter)
 
@@ -118,12 +121,10 @@ def add_label(widget, label, position="left", policy=None):
     layout = QtGui.QVBoxLayout()
     layout.addWidget(label)
     layout.addWidget(widget)
-    # layout.setAlignment(QtCore.Qt.AlignJustify)
   elif position == "below":
     layout = QtGui.QVBoxLayout()
     layout.addWidget(widget)
     layout.addWidget(label)
-    # layout.setAlignment(QtCore.Qt.AlignVCenter)
   else:
     layout = QtGui.QHBoxLayout()
     layout.addWidget(label)
@@ -168,13 +169,6 @@ def make_button(config, callback=None):
     )
   else:
     button.clicked.connect(partial(callback, button, instance))
-
-  # button.setSizePolicy(
-  #   QtGui.QSizePolicy(
-  #     QtGui.QSizePolicy.MinimumExpanding,
-  #     QtGui.QSizePolicy.Minimum
-  #   )
-  # )
   set_common_policy(button)
   return button
 
@@ -208,13 +202,6 @@ def make_edit(config, callback=None):
     edit = QtGui.QLineEdit(instance["default"])
     signal = edit.textEdited
 
-  # edit.setSizePolicy(
-  #   QtGui.QSizePolicy(
-  #     QtGui.QSizePolicy.MinimumExpanding,
-  #     QtGui.QSizePolicy.Minimum
-  #   )
-  # )
-
   if instance["dtype"] is not None:
     if instance["dtype"] == "int":
       edit.setValidator(QtGui.QIntValidator(edit))
@@ -230,6 +217,8 @@ def make_edit(config, callback=None):
     )
   elif signal is not None:
     signal.connect(partial(callback, edit, instance))
+
+  # edit.cursorPositionChanged.connect(partial(callback, edit, instance))
 
   if instance["label"] is not None:
     edit = add_label(edit, instance["label"], position=instance["position"])
@@ -298,7 +287,7 @@ def make_slider(config, callback=None):
     if instance["orientation"] == "h":
       layout = QtGui.QHBoxLayout()
 
-      display.setMinimumSize(40, 30)
+      display.setMaximumSize(40, 30)
 
       display.setSizePolicy(
         QtGui.QSizePolicy(
@@ -306,14 +295,10 @@ def make_slider(config, callback=None):
           QtGui.QSizePolicy.Minimum
         )
       )
-      # layout = QtGui.QGridLayout()
+
       layout.addWidget(display)
       layout.addWidget(slider)
 
-
-
-      # layout.addWidget(slider)
-      # layout.addWidget(display)
     elif instance["orientation"] == "v":
 
       display.setMinimumSize(70, 30)
@@ -360,27 +345,16 @@ combo_defaults = {
   "args":            None
 }
 
-# activated (int)
-# activated (const QString&)
-# currentIndexChanged (int)
-# currentIndexChanged (const QString&)
-# editTextChanged (const QString&)
-# highlighted (int)
-# highlighted (const QString&)
-
 def make_combo(config, callback=None):
   instance = deepcopy(combo_defaults)
   instance.update(config)
   combo = QtGui.QComboBox()
-
-  # combo.setSizePolicy(
-  #   QtGui.QSizePolicy(
-  #     QtGui.QSizePolicy.MinimumExpanding,
-  #     QtGui.QSizePolicy.Minimum
-  #   )
-  # )
   # combo.maxVisibleItems(instance["maxVisible"])
   combo.addItems(instance["items"])
+
+  if callback is not None:
+    combo.currentIndexChanged.connect(partial(callback, combo, instance))
+
   label = QtGui.QLabel(instance["label"])
   if instance["label"] is not None:
     combo = add_label(combo,
@@ -406,36 +380,22 @@ table_defaults = {
 def make_table(config, callback=None):
   instance = deepcopy(table_defaults)
   instance.update(config)
-  table = QtGui.QTableWidget(20, len(instance["headers"]))
+  table = QtGui.QTableWidget(0, len(instance["headers"]))
   #table.insertRow(1)
   # table.setAlignment(QtCore.Qt.AlignCenter)
   table.setHorizontalHeaderLabels(instance["headers"])
-  # table.setSizePolicy(
-  #     QtGui.QSizePolicy(
-  #       QtGui.QSizePolicy.MinimumExpanding,
-  #       QtGui.QSizePolicy.Minimum
-  #     )
-  #   )
-  set_common_policy(table)
 
-
-  # for idx, item in enumerate(instance["items"]):
-  #   print idx, item
-
-  # self.resizeColumnsToContents()
-  # self.resizeRowsToContents()
-  # combo.setSizePolicy(
-  #   QtGui.QSizePolicy(
-  #     QtGui.QSizePolicy.MinimumExpanding,
-  #     QtGui.QSizePolicy.Minimum
-  #   )
-  # )
-  # combo.maxVisibleItems(instance["maxVisible"])
-  # combo.addItems(instance["items"])
-  # label = QtGui.QLabel(instance["label"])
-  # label.setBuddy(combo)
+  header = table.horizontalHeader()
+  vertical = table.verticalHeader()
+  # header.setStretchLastSection(True)
+  # header.setResizeMode(QtGui.QHeaderView.ResizeToContents)
+  header.setResizeMode(QtGui.QHeaderView.Stretch)
+  # vertical.setResizeMode(QtGui.QHeaderView.Fixed)
+  header.setCascadingSectionResizes(True)
+  # vertical.setCascadingSectionResizes(True)
+# QHeaderView.resizeSections (self, ResizeMode mode)
   return table
-  # styleComboBox.activated[str].connect(self.changeStyle)
+
 
 
 make_funcs = {

@@ -2,24 +2,38 @@
   "layout": ["g", "j"],
   "group_layout_params":
   {
-    "Filter Description Table":     [0, 0, 3, 2],
+    "Filter Coefficent Generation": [3, 1, 1, 1],
+    "Filter Description Table":     [4, 1, 4, 1],
     "Filter Definition":            [3, 0, 3, 1],
     "Implementation Constraints":   [6, 0, 1, 1],
-    "Manual Filter Configuration":  [3, 1, 3, 2],
-    "Visual Filter Configuration ": [6, 1, 1, 1]
+    "Manual Filter Configuration":  [3, 2, 3, 2],
+    "Visual Filter Configuration": [6, 2, 1, 1]
   },
   "groups": [
   {
     "enabled": true,
     "box_enabled": true,
+    "group_name": "Filter Coefficent Generation",
+    "layout": ["v", "j"],
+    "items": [
+    {
+      "name": "filtload",
+      "class": "button",
+      "label": "Load Filter Coefficents",
+      "dtype": "float"
+    }]
+  },
+  {
+    "enabled": true,
+    "box_enabled": true,
     "group_name": "Filter Description Table",
-    "layout": ["h", "j"],
+    "layout": ["v", "j"],
     "items": [
     {
       "name": "ftable",
       "class": "table",
       "position": "above",
-      "headers": ["Enable/Edit", "Start", "Stop", "Atten", "Delete"],
+      "headers": ["Enable-Edit-Delete", "Start Freq.", "Stop Freq.", "Attenuation"],
       "label": "Filter Pass and Stop Band Configurations",
       "tool-tip": "Filter Description Table",
       "dtype": "float"
@@ -85,7 +99,7 @@
   {
     "enabled": true,
     "box_enabled": true,
-    "group_name": "Visual Filter Configuration ",
+    "group_name": "Visual Filter Configuration",
     "layout": ["v", "j"],
     "items": [
     {

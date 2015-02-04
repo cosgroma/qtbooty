@@ -1,57 +1,62 @@
 {
-  "layout": ["h", "na"],
-  "groups": [
-  {
+  "layout": ["v", "na"],
+  "groups": [{
     "enabled": true,
     "box_enabled": true,
-    "group_name": "signal::controller",
-    "layout": [
-      "h",
-      "na"
-    ],
-    "items": [
-    {
+    "group_name": "h::slider::vertical",
+    "layout": ["h", "na"],
+    "items": [{
       "class": "slider",
-      "name": "power0",
+      "name": "slider1",
       "label": "Power",
       "display": true,
-      "orientation": "h",
-      "args": [
-        "dB"
-      ]
-    },
-    {
+      "orientation": "v"
+    }, {
       "class": "slider",
-      "name": "doppler1",
+      "name": "dial1",
       "qtype": "dial",
       "label": "Doppler",
       "display": true,
-      "orientation": "h",
-      "range": [-5000.0,
-        5000.0
-      ],
-      "policy": "smart",
-      "args": [
-        "Hz"
-      ]
+      "orientation": "v",
+      "range": [-5000.0, 5000.0]
     }]
-  },
-  {
+  }, {
+    "enabled": true,
+    "box_enabled": true,
+    "group_name": "h::button::above",
+    "layout": ["h", "na"],
+    "items": [{
+      "class": "slider",
+      "name": "slider2",
+      "label": "Power",
+      "position": "above",
+      "display": true,
+      "orientation": "h"
+    }]
+  }, {
+    "enabled": true,
+    "box_enabled": true,
+    "group_name": "h::button::above",
+    "layout": ["h", "na"],
+    "items": [{
+      "class": "button",
+      "name": "button1",
+      "label": "normal",
+      "dtype": "int",
+      "position": "above",
+      "tool-tip": "test tip"
+    }]
+  }, {
     "enabled": true,
     "box_enabled": true,
     "group_name": "signal::test",
-    "layout": [
-      "h",
-      "na"
-    ],
-    "items": [
-    {
+    "layout": ["h", "na"],
+    "items": [{
       "class": "edit",
-      "name": "normali2",
+      "name": "normali3",
       "label": "normal::inth",
       "dtype": "int",
-      "position": "abohe",
-      "args": ["test"],
+      "position": "above",
       "tool-tip": "test tip"
     }]
   }]

@@ -4,7 +4,7 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-05 22:26:11
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-02-03 21:32:48
+# @Last Modified time: 2015-02-04 03:53:59
 
 from copy import deepcopy
 from functools import partial
@@ -57,7 +57,9 @@ align_lookup = {
 }
 
 icon_lookup = {
-  "delete": '../resources/deleteIcon.png'
+  "enable": '../resources/enable2.png',
+  "edit": '../resources/edit.png',
+  "delete": '../resources/delete.png',
 }
 
 
@@ -142,12 +144,13 @@ class IOGrid(QtGui.QWidget):
     if isinstance(obj, PyQt4.QtGui.QAbstractSlider):
       self.p.param(instance["name"]).setValue(obj.value())
     elif isinstance(obj, PyQt4.QtGui.QAbstractButton):
-      self.p.param(instance["name"]).setValue(1)
-      try:
-        self.p.param(instance["name"]).setValue(0, blockSignal=self.callback)
-      except Exception, e:
-        pass
-
+      # print dir(self.p.param(instance["name"]))
+      curval = self.p.param(instance["name"]).value()
+      curval = 0 if curval is None else curval
+      self.p.param(instance["name"]).setValue(1 ^ curval)
+      # self.p.param(instance["name"]).setValue(0, blockSignal=self.callback)
+    elif isinstance(obj, PyQt4.QtGui.QComboBox):
+      self.p.param(instance["name"]).setValue(obj.itemText(obj.currentIndex()))
     else:
       self.p.param(instance["name"]).setValue(obj.text())
 
@@ -158,8 +161,8 @@ class IOGrid(QtGui.QWidget):
   def config_widget(self, config):
     self.layout = get_layout(config["layout"])
     self.setLayout(self.layout)
-    # self.groups = []
-
+    self.groups = []
+    self.group_names = dict()
     self.p = Parameter.create(name='params', type='group')
 
     for gconf in config["groups"]:
@@ -167,15 +170,17 @@ class IOGrid(QtGui.QWidget):
       group = deepcopy(group_default)
       group.update(gconf)
 
+
       if group["box_enabled"]:
         widget = QtGui.QGroupBox(group["group_name"])
+        self.group_names[group["group_name"]] = widget
         widget.setCheckable(group["checkable"])
       else:
         widget = QtGui.QWidget()
 
       layout = get_layout(group["layout"])
       widget.setLayout(layout)
-      # self.groups.append(layout)
+      self.groups.append(layout)
 
       for io in group["items"]:
         iow = make_funcs[io["class"]](io, callback=self.generic_callback)
@@ -214,8 +219,24 @@ class IOGrid(QtGui.QWidget):
         layout.addWidget(make_funcs[io["class"]](io, callback=self.generic_callback))
         io["added"] = True
 
-  def update_widget(self, name, data):
-    self.update_table_widget(name, data)
+  def set_groups_enabled(self, names, enable):
+    for name in names:
+      self.group_names[name].setEnabled(enable)
+
+  def update_widget(self, name, data, changed):
+    # If we aren't tracking a handle to this then bail
+    if not name in self.io_widgets.keys(): return
+    # Otherwise we redirect the update toward particular object types
+    if isinstance(self.io_widgets[name], PyQt4.QtGui.QTableWidget):
+      print "running update for table"
+      self.update_table_widget(name, data)
+    # Everything is at some point a QWidget, here we look at they type of change
+    elif isinstance(self.io_widgets[name], PyQt4.QtGui.QWidget):
+      for c in self.io_widgets[name].children():
+        if isinstance(c, PyQt4.QtGui.QLineEdit):
+          c.setText(str(data))
+    else:
+        print type(self.io_widgets[name])
 
   def update_table_widget(self, name, data):
     def new_table_item(label=""):
@@ -224,43 +245,44 @@ class IOGrid(QtGui.QWidget):
       item.setFlags(item.flags() & ~QtCore.Qt.ItemIsEditable)
       return item
 
+    def new_button(name, height):
+      button = QtGui.QPushButton()
+      button.setIcon(QtGui.QIcon(icon_lookup[name]))
+      button.setMinimumHeight(height)
+      return button
+
+    def control_buttons(item, height):
+      controlLayout = QtGui.QHBoxLayout()
+      controlLayout.setAlignment(QtCore.Qt.AlignVCenter)
+
+      controlWidget = QtGui.QWidget()
+      controlWidget.setMinimumHeight(height)
+      controlWidget.setContentsMargins(0, -5, 0, 5)
+
+      control_buttons = ["enable", "edit", "delete"]
+
+      for cb in control_buttons:
+        instance = {"name": "%s.%d" % (cb, row)}
+        button = new_button(cb, height)
+        button.clicked.connect(partial(self.generic_callback, button, instance))
+        controlLayout.addWidget(button)
+        self.p.addChild(instance)
+
+      controlWidget.setLayout(controlLayout)
+      return controlWidget
+
     table = self.io_widgets[name]
     row = table.rowCount()
     table.insertRow(row)
+    height = table.rowHeight(row)*.8
 
     item = new_table_item()
     table.setItem(row, 0, item)
-
-    cellLayout = QtGui.QHBoxLayout()
-
-    enWidget = QtGui.QComboBox()
-    enWidget.addItems(["a", "b", "c"])
-    edWidget = QtGui.QPushButton("EDIT")
-    edWidget.setSizePolicy(
-      QtGui.QSizePolicy(
-        QtGui.QSizePolicy.Preferred,
-        QtGui.QSizePolicy.Preferred
-      )
-    )
-
-    cellLayout.addWidget(enWidget)
-    # cellLayout.addWidget(edWidget)
-    cellWidget = enWidget
-    # cellWidget = QtGui.QWidget()
-    # cellWidget.setLayout(cellLayout)
-    table.setCellWidget(row, 0, cellWidget)
+    table.setCellWidget(row, 0, control_buttons(item, height))
 
     for idx, d in enumerate(data, start=1):
       item = new_table_item(d)
       table.setItem(row, idx, item)
-
-    item.setIcon(QtGui.QIcon(icon_lookup["delete"]))
-    table.setItem(row, len(d) + 1, item)
-
-  def get_icon(self, description):
-    if description == "delete":
-      return
-
 
 
 def get_layout(args):

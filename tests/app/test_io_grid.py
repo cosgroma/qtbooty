@@ -3,7 +3,7 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-11-25 21:43:42
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-02-03 19:48:17
+# @Last Modified time: 2015-02-03 21:41:08
 
 import sys
 sys.path.append('/home/cosgroma/workspace/libs/python/modules')
@@ -125,7 +125,7 @@ groups[-1]["items"] = [
 #   "label":        "",
 #   "position":     "above",
 #   "range":        [0, 100],
-#   "orientation":  "h",
+#   "orientation":  "v",
 #   "policy":       "expand",
 #   "display":      False,
 #   "valueChanged": None,
@@ -150,7 +150,7 @@ for i in range(0, 10):
       "name": "slider%d" % i,
         "label": "slider%d" % i,
         "display": True,
-        "orientation": "h",
+        "orientation": "v",
         # "policy": "smart",
         "valueChanged": slider_callback,
         "args": ["dB"]
@@ -170,7 +170,7 @@ groups[-1]["items"] = [
       "qtype": "scroll",
       "label": "slider::scroll",
       "display": True,
-      "orientation": "h",
+      "orientation": "v",
       "valueChanged": slider_callback,
       "args": [""]
   }
@@ -189,7 +189,7 @@ groups[-1]["items"] = [
       "qtype": "dial",
       "label": "dial0",
       "display": True,
-      "orientation": "h",
+      "orientation": "v",
       "valueChanged": slider_callback,
       "args": [u"°"]
   }, {
@@ -198,7 +198,7 @@ groups[-1]["items"] = [
       "qtype": "dial",
       "label": "dial1",
       "display": True,
-      "orientation": "h",
+      "orientation": "v",
       "valueChanged": slider_callback,
       "args": [u"°"]
   }
@@ -264,7 +264,7 @@ groups[-1]["items"] = [
 config = io_grid.config_init(len(groups), [len(g["items"]) for g in groups])
 # config= dict()
 # config["groups"] = groups
-config["layout"] = ["h", "b"]
+config["layout"] = ["v", "b"]
 [d.update(u) for d, u in zip(config["groups"], groups)]
 # print config
 # # config["groups"].update(groups)

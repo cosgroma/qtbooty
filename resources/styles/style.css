@@ -106,6 +106,7 @@ QPushButton:pressed, QPushButton:focus {
  padding: 0px;
 }
 QComboBox {
+  color: #040404;
   selection-background-color: gradientd;
   background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #565656, stop: 0.1 #525252, stop: 0.5 #4e4e4e, stop: 0.9 #4a4a4a, stop: 1 #464646);
   border-style: solid;
@@ -113,17 +114,18 @@ QComboBox {
   border-radius: 5;
 }
 QComboBox:hover, QPushButton:hover {
-  border: 2px solid QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 gradientc, stop: 1 gradientb);
+  border: 1px solid QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 gradientc, stop: 1 gradientb);
 }
 QComboBox:on {
   padding-top: 3px;
   padding-left: 4px;
   background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #2d2d2d, stop: 0.1 #2b2b2b, stop: 0.5 #292929, stop: 0.9 #282828, stop: 1 #252525);
   selection-background-color: gradientd;
+  color: #151515;
 }
 QComboBox QAbstractItemView {
-  border: 2px solid darkgray;
-  selection-background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 gradientc, stop: 1 gradientb);
+  border: 1px solid darkgray;
+  selection-background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 gradientc, stop: 1 gradientd);
 }
 QComboBox::drop-down {
   subcontrol-origin: padding;
@@ -155,7 +157,7 @@ QGroupBox {
 QGroupBox::title {
   text-align: top;
   subcontrol-position: top left; /* position at the top center */
-  font-size: 14pt;
+  font-size: 18pt;
   padding: 3px;
   /* spacing between items in the tool bar */
   background-color: #2d2d2d;
@@ -358,6 +360,14 @@ QTabBar::tab:!selected:hover {
   border-top-right-radius: 3px;
   background-color: QLinearGradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 1 #212121, stop: 0.4 #343434, stop: 0.2 #343434, stop: 0.1 gradientd);
 }
+QTabBar::tab:selected {
+  /*border-top: 2px solid gradientd;
+    padding-bottom: 3px;*/
+
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  background-color: QLinearGradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 1 #212121, stop: 0.4 #343434, stop: 0.2 #343434, stop: 0.1 gradienta);
+}
 QRadioButton::indicator:checked, QRadioButton::indicator:unchecked {
   color: #b1b1b1;
   background-color: #323232;
@@ -390,6 +400,11 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled {
 }
 
  QGraphicsPixmapItem {
+  background-color: gradientd;
+  border: 1px solid red;
+}
+
+QPushButton::QTabelCellButton {
   background-color: gradientd;
   border: 1px solid red;
 }
