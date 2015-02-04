@@ -3,7 +3,7 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-11-25 21:43:42
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-02-03 06:36:47
+# @Last Modified time: 2015-02-03 21:41:08
 
 import sys
 sys.path.append('/home/cosgroma/workspace/libs/python/modules')
@@ -19,8 +19,9 @@ io_grid = framework.IOGrid()
 
 groups = [dict()]
 groups[-1]["name"] = "class::label"
+groups[-1]["enabled"] = True
 groups[-1]["box_enabled"] = False
-groups[-1]["box_name"] = "class::label"
+groups[-1]["group_name"] = "class::label"
 groups[-1]["layout"] = ["h", "na"]
 
 # label_defaults = {"label": ""}
@@ -34,8 +35,9 @@ groups[-1]["items"] = [
 
 groups.append(dict())
 groups[-1]["name"] = "class::edit"
+groups[-1]["enabled"] = True
 groups[-1]["box_enabled"] = True
-groups[-1]["box_name"] = "class::edit"
+groups[-1]["group_name"] = "class::edit"
 groups[-1]["layout"] = ["h", "na"]
 
 # edit_defaults = {
@@ -86,8 +88,9 @@ groups[-1]["items"] = [
 
 groups.append(dict())
 groups[-1]["name"] = "class::button"
+groups[-1]["enabled"] = True
 groups[-1]["box_enabled"] = True
-groups[-1]["box_name"] = "class::button"
+groups[-1]["group_name"] = "class::button"
 groups[-1]["layout"] = ["h", "na"]
 
 def test_clicked(button):
@@ -122,7 +125,7 @@ groups[-1]["items"] = [
 #   "label":        "",
 #   "position":     "above",
 #   "range":        [0, 100],
-#   "orientation":  "h",
+#   "orientation":  "v",
 #   "policy":       "expand",
 #   "display":      False,
 #   "valueChanged": None,
@@ -130,8 +133,9 @@ groups[-1]["items"] = [
 
 groups.append(dict())
 
+groups[-1]["enabled"] = True
 groups[-1]["box_enabled"] = True
-groups[-1]["box_name"] = "scrollable::slider"
+groups[-1]["group_name"] = "scrollable::slider"
 groups[-1]["scrollable"] = True
 groups[-1]["layout"] = ["h", "c"]
 
@@ -154,8 +158,9 @@ for i in range(0, 10):
   )
 
 groups.append(dict())
+groups[-1]["enabled"] = True
 groups[-1]["box_enabled"] = True
-groups[-1]["box_name"] = "slider::scroll"
+groups[-1]["group_name"] = "slider::scroll"
 groups[-1]["layout"] = ["h", "na"]
 
 groups[-1]["items"] = [
@@ -165,15 +170,16 @@ groups[-1]["items"] = [
       "qtype": "scroll",
       "label": "slider::scroll",
       "display": True,
-      "orientation": "h",
+      "orientation": "v",
       "valueChanged": slider_callback,
       "args": [""]
   }
 ]
 
 groups.append(dict())
+groups[-1]["enabled"] = True
 groups[-1]["box_enabled"] = True
-groups[-1]["box_name"] = "slider::dials"
+groups[-1]["group_name"] = "slider::dials"
 groups[-1]["layout"] = ["h", "l"]
 
 groups[-1]["items"] = [
@@ -199,8 +205,9 @@ groups[-1]["items"] = [
 ]
 
 groups.append(dict())
+groups[-1]["enabled"] = True
 groups[-1]["box_enabled"] = True
-groups[-1]["box_name"] = "combobox::default"
+groups[-1]["group_name"] = "combobox::default"
 groups[-1]["layout"] = ["h", "c"]
 
 # combo_defaults = {
@@ -227,8 +234,9 @@ groups[-1]["items"] = [
 
 
 groups.append(dict())
+groups[-1]["enabled"] = True
 groups[-1]["box_enabled"] = True
-groups[-1]["box_name"] = "table::default"
+groups[-1]["group_name"] = "table::default"
 groups[-1]["layout"] = ["h", "c"]
 
 # table_defaults = {
@@ -248,15 +256,20 @@ groups[-1]["items"] = [
       "args":    None
   }
 ]
+
+# for g in groups:
+#   print g["enabled"], g["group_name"]
+
+# print len(groups)
 config = io_grid.config_init(len(groups), [len(g["items"]) for g in groups])
-
+# config= dict()
 # config["groups"] = groups
-
 config["layout"] = ["v", "b"]
 [d.update(u) for d, u in zip(config["groups"], groups)]
-# config["groups"].update(groups)
+# print config
+# # config["groups"].update(groups)
 
-io_grid.load_config(config)
+io_grid.config_widget(config)
 app.add_widget(io_grid)
 app.run()
 
