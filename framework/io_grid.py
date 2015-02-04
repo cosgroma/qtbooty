@@ -4,7 +4,7 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-05 22:26:11
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-02-03 12:34:56
+# @Last Modified time: 2015-02-03 15:15:16
 
 import PyQt4.QtGui
 from PyQt4 import QtGui, QtCore, Qt
@@ -54,46 +54,15 @@ align_lookup = {
   "na": QtCore.Qt.AlignTop,
 }
 
-def get_layout(args):
-  """
-  @summary:
-  @param name:
-  @result:
-  """
-  name = args[0]
-  align = args[1]
-
-  layout = layout_lookup[args[0]]()
-  layout.setAlignment(align_lookup[args[1]])
-  # if name == "h":
-  #   layout = QtGui.QHBoxLayout()
-  # elif name == "v":
-  #   layout = QtGui.QVBoxLayout()
-  # elif name == "g":
-  #   layout = QtGui.QGridLayout()
-  # elif name == "f":
-  #   layout = QtGui.QFormLayout()
-
-  # if align == "t":
-  #   layout.setAlignment(QtCore.Qt.AlignTop)
-  # elif align == "b":
-  #   layout.setAlignment(QtCore.Qt.AlignBottom)
-  # elif align == "l":
-  #   layout.setAlignment(QtCore.Qt.AlignLeft)
-  # elif align == "r":
-  #   layout.setAlignment(QtCore.Qt.AlignRight)
-  # elif align == "c":
-  #   layout.setAlignment(QtCore.Qt.AlignCenter)
-  # elif align == "j":
-  #   layout.setAlignment(QtCore.Qt.AlignJustify)
-
-  return layout
+icon_lookup = {
+  "delete": '../resources/deleteIcon.png'
+}
 
 
 group_instance = {
   "name":        None,
   "box_enabled": False,
-  "box_name":    None,
+  "group_name":    None,
   "layout":      None,
   "scrollable":  False,
   "checkable":   False,
@@ -102,30 +71,34 @@ group_instance = {
 }
 
 io_instance = {
-  "name":  None,
-  "class": "",
-  "added": False
+  "name":     None,
+  "class":    "",
+  "added":    False,
+  "label":    None,
+  "tool-tip": None,
+  "default":  None,
+  "dtype":    None
 }
 
 
-class ComplexParameter(pTypes.GroupParameter):
-    def __init__(self, **opts):
-        opts['type'] = 'bool'
-        opts['value'] = True
-        pTypes.GroupParameter.__init__(self, **opts)
+# class ComplexParameter(pTypes.GroupParameter):
+#     def __init__(self, **opts):
+#         opts['type'] = 'bool'
+#         opts['value'] = True
+#         pTypes.GroupParameter.__init__(self, **opts)
 
-        self.addChild({'name': 'A = 1/B', 'type': 'float', 'value': 7, 'suffix': 'Hz', 'siPrefix': True})
-        self.addChild({'name': 'B = 1/A', 'type': 'float', 'value': 1/7., 'suffix': 's', 'siPrefix': True})
-        self.a = self.param('A = 1/B')
-        self.b = self.param('B = 1/A')
-        self.a.sigValueChanged.connect(self.aChanged)
-        self.b.sigValueChanged.connect(self.bChanged)
+#         self.addChild({'name': 'A = 1/B', 'type': 'float', 'value': 7, 'suffix': 'Hz', 'siPrefix': True})
+#         self.addChild({'name': 'B = 1/A', 'type': 'float', 'value': 1/7., 'suffix': 's', 'siPrefix': True})
+#         self.a = self.param('A = 1/B')
+#         self.b = self.param('B = 1/A')
+#         self.a.sigValueChanged.connect(self.aChanged)
+#         self.b.sigValueChanged.connect(self.bChanged)
 
-    def aChanged(self):
-        self.b.setValue(1.0 / self.a.value(), blockSignal=self.bChanged)
+#     def aChanged(self):
+#         self.b.setValue(1.0 / self.a.value(), blockSignal=self.bChanged)
 
-    def bChanged(self):
-        self.a.setValue(1.0 / self.b.value(), blockSignal=self.aChanged)
+#     def bChanged(self):
+#         self.a.setValue(1.0 / self.b.value(), blockSignal=self.aChanged)
 
 ## If anything changes in the tree, print a message
 def change(param, changes):
@@ -210,7 +183,7 @@ class IOGrid(QtGui.QWidget):
       c.update(group)
 
       if c["box_enabled"]:
-        widget = QtGui.QGroupBox(c["box_name"])
+        widget = QtGui.QGroupBox(c["group_name"])
         widget.setCheckable(c["checkable"])
       else:
         widget = QtGui.QWidget()
@@ -288,6 +261,10 @@ class IOGrid(QtGui.QWidget):
     if description == "delete":
       return
 
-icon_lookup = {
-  "delete": '../resources/deleteIcon.png'
-}
+
+
+
+def get_layout(args):
+  layout = layout_lookup[args[0]]()
+  layout.setAlignment(align_lookup[args[1]])
+  return layout

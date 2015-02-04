@@ -72,10 +72,10 @@ class FilterDesigner(object):
           "delete"
         ]
         self.iogrid.update_widget("ftable", fset)
-      # if param.name() == "visual":
-      #   region1 = pg.LinearRegionItem(brush=(254, 10, 100, 50))
-      #   region1.sigRegionChanged.connect(partial(region_update, region))
-      #   minX, maxX = region.getRegion()
+      elif param.name() == "visual":
+        region1 = pg.LinearRegionItem(brush=(254, 10, 100, 50))
+        region1.sigRegionChanged.connect(partial(region_update, region))
+        minX, maxX = region.getRegion()
 
   def create_filter(self, **kwargs):
     self.config.update(kwargs)

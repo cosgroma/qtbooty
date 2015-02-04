@@ -2,90 +2,131 @@
   "layout": ["v", "na"],
   "groups": [{
     "box_enabled": true,
-    "box_name": "Filter Parameters",
+    "group_name": "Filter Parameters",
     "layout": ["h", "na"],
     "items": [{
-      "class": "edit",
       "name": "fs",
+      "class": "edit",
       "position": "above",
       "label": "Sample Frequency (MHz)",
       "tool-tip": "Source Sample Frequency",
       "dtype": "float"
     }, {
+      "name": "window_function",
       "class": "combo",
-      "name": "window",
       "items": ["hamming", "boxcar", "triang", "blackman", "hamming", "hann", "bartlett", "flattop", "parzen", "bohman", "blackmanharris", "nuttall", "barthann"],
       "label": "Window Function",
       "position": "above",
       "tool-tip": "Window function to use. Default is hamming",
-      "dtype": "int",
+      "dtype": "string",
       "maxVisible": 4
     }, {
-      "class": "edit",
       "name": "taps",
+      "class": "edit",
       "position": "above",
       "label": "Filter Taps (MAX)",
       "dtype": "int",
       "tool-tip": "MAX Available TAP count for FIR implementation"
     }, {
-      "class": "edit",
       "name": "nfreqs",
+      "class": "edit",
       "position": "above",
       "label": "N-Freqs",
-      "dtype": "int",
       "tool-tip": "The size of the interpolation mesh used to construct the filter",
+      "default": "optional",
       "dtype": "int"
     }, {
+      "name": "asym",
       "class": "button",
       "qtype": "check",
       "label": "Asymetric",
-      "name": "asym"
     }]
   }, {
     "box_enabled": true,
-    "box_name": "Filter Visual Configuration ",
+    "group_name": "Filter Parameters",
     "layout": ["h", "na"],
     "items": [{
+      "name": "fs",
+      "class": "edit",
+      "position": "above",
+      "label": "Sample Frequency (MHz)",
+      "tool-tip": "Source Sample Frequency",
+      "dtype": "float"
+    }, {
+      "name": "window_function",
+      "class": "combo",
+      "items": ["hamming", "boxcar", "triang", "blackman", "hamming", "hann", "bartlett", "flattop", "parzen", "bohman", "blackmanharris", "nuttall", "barthann"],
+      "label": "Window Function",
+      "position": "above",
+      "tool-tip": "Window function to use. Default is hamming",
+      "dtype": "string",
+      "maxVisible": 4
+    }, {
+      "name": "taps",
+      "class": "edit",
+      "position": "above",
+      "label": "Filter Taps (MAX)",
+      "dtype": "int",
+      "tool-tip": "MAX Available TAP count for FIR implementation"
+    }, {
+      "name": "nfreqs",
+      "class": "edit",
+      "position": "above",
+      "label": "N-Freqs",
+      "tool-tip": "The size of the interpolation mesh used to construct the filter",
+      "default": "optional",
+      "dtype": "int"
+    }, {
+      "name": "asym",
       "class": "button",
+      "qtype": "check",
+      "label": "Asymetric",
+    }]
+  }, {
+    "box_enabled": true,
+    "group_name": "Filter Visual Configuration ",
+    "layout": ["h", "na"],
+    "items": [{
       "name": "avisual",
+      "class": "button",
       "label": "Add Selection",
       "tool-tip": "Visually Configure Filter Stop Bands"
     }]
   }, {
     "box_enabled": true,
-    "box_name": "Filter Manual Configuration",
+    "group_name": "Filter Manual Configuration",
     "layout": ["h", "na"],
     "items": [{
-      "class": "edit",
       "name": "fstart",
+      "class": "edit",
       "position": "above",
       "dtype": "float",
       "label": "Start Frequency"
     }, {
-      "class": "edit",
       "name": "fstop",
+      "class": "edit",
       "position": "above",
       "dtype": "float",
       "label": "Stop Frequency"
     }, {
-      "class": "edit",
       "name": "atten",
+      "class": "edit",
       "position": "above",
       "dtype": "float",
       "label": "Attenuation"
     }, {
-      "class": "button",
       "name": "setadd",
+      "class": "button",
       "label": "ADD to Filter",
       "tool-tip": "Add Configuration to Filter"
     }]
   }, {
     "box_enabled": true,
-    "box_name": "Filter Configuration Table",
+    "group_name": "Filter Configuration Table",
     "layout": ["h", "na"],
     "items": [{
-      "class": "table",
       "name": "ftable",
+      "class": "table",
       "position": "above",
       "headers": ["Enable", "Start", "Stop", "Atten", "Delete"],
       "label": "Filter Pass and Stop Band Configurations",
