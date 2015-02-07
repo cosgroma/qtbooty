@@ -23,11 +23,19 @@ class FilterDesigner(object):
 
     self.coeffs = []
     self.config = {
-      "taps":    100,
-      "cutoff":  [.5],
+      "numtaps":    1,
+      "freq":  [],
+      "gain":  [],
       "window":  "hamming"
     }
-
+    self.freqset = None
+    # self.freqset = np.array([[0.0, 0.0, 0.0]])
+    # self.freqset = np.array(
+    #   [
+    #     [1.0e6, 2.0e6, 80],
+    #     [3.0e6, 4.0e6, 90],
+    #   ]
+    # )
   def setup_control(self):
 
     self.iogrid = framework.IOGrid()
@@ -40,10 +48,13 @@ class FilterDesigner(object):
       "Manual Filter Configuration",
       "Filter Description Table",
       "Visual Filter Configuration",
-      "Filter Coefficent Generation"
+      "Filter Coefficent Load"
     ], False)
 
     self.iogrid.connect_changed_callback(self.onParamChange)
+
+    for v in self.params.getValues():
+      print v, self.params[v]
 
   def get_io_widget(self):
     return self.iogrid
@@ -81,9 +92,20 @@ class FilterDesigner(object):
     self.tabs.add_tab(self.pw3, 'Impulse Response')
 
 
-  def create_filter(self, **kwargs):
-    self.config.update(kwargs)
-    self.coeffs = signal.firwin(**self.config)
+  def create_filter(self):
+
+    atten0Hz = self.params["filtzero"]
+    fptdim = self.freqset.shape[0]
+    self.freq = [0.0]
+    self.gain = [10**(atten0Hz/10.0)]
+    for i in range(0, fptdim):
+      self.freq.append(self.freqset[i, 0])
+      self.gain.append(10**(-self.freqset[i, 2]/10.0))
+
+    # print self.freq
+    # print self.gain
+    # self.coeffs = signal.firwin(100, cutoff=[.5])
+    self.coeffs = signal.firwin2(**self.config)
 
   def compute_freq_response(self):
     self.freq, self.mag = signal.freqz(self.coeffs)
@@ -98,14 +120,13 @@ class FilterDesigner(object):
     self.response = signal.lfilter(self.coeffs, 1, impulse)
 
   def update(self):
-
-    pass
-
-  def update_plot(self):
+    self.create_filter()
+    self.compute_freq_response()
+    self.impulse_response()
 
     self.pw1.plot(self.freq, 20*np.log10(np.abs(self.mag)), pen='r')
     self.pw2.plot(self.freq, self.angles, pen='g')
-    self.pw3.plot(self.t, self.impluse, pen=(200, 200, 200), symbolBrush=(255, 0, 0), symbolPen='w')
+    self.pw3.plot(self.t, self.response, pen=(200, 200, 200), symbolBrush=(255, 0, 0), symbolPen='w')
 
 
   def onParamChange(self, param, changes):
@@ -136,15 +157,19 @@ class FilterDesigner(object):
           print "fs =", self.params["fs"]
           print "window_function =", self.params["window_function"]
 
+          self.config['numtaps'] = self.params["taps"]
+
         elif self.params["taps"] in [None, ""] or self.params["fs"] in [None, ""]:
 
           self.iogrid.set_groups_enabled([
             "Manual Filter Configuration",
             "Filter Description Table",
             "Visual Filter Configuration",
-            "Filter Coefficent Generation"
+            "Filter Coefficent Load"
           ], False)
 
+      elif param.name() == "filtzero":
+        pass
       elif param.name() == "setadd":
 
         fset = [
@@ -152,19 +177,22 @@ class FilterDesigner(object):
           self.params["fstop"],
           self.params["atten"]
         ]
+        if self.freqset is None:
+          self.freqset = np.array([fset])
+        else:
+          self.freqset = np.append(self.freqset, [fset], axis=0)
 
-        region = pg.LinearRegionItem()
-
-        region.setZValue(10)
-
-        region.setRegion([self.params["fstart"], self.params["fstop"]])
-        self.pw1.addItem(region)
+        print "freqset", self.freqset
 
         self.iogrid.update_widget("ftable", fset, change)
         self.params["fstart"] = self.params["fstop"] = self.params["atten"] = ""
 
-
-        p2.addItem(region, ignoreBounds=True)
+        # region = pg.LinearRegionItem()
+        # region.setZValue(10)
+        # region.setRegion([self.params["fstart"], self.params["fstop"]])
+        # self.pw1.addItem(region)
+        # p2.addItem(region, ignoreBounds=True)
+        # self.update()
 
       elif param.name() == "params":
 
@@ -175,7 +203,7 @@ class FilterDesigner(object):
         # region1 = pg.LinearRegionItem(brush=(254, 10, 100, 50))
         # region1.sigRegionParamChanged.connect(partial(region_update, region))object
         # minX, maxX = region.getRegion()
-        print "runnint update widget"
+        print "running update widget"
         self.iogrid.update_widget(param.name(), data, change)
 
 
@@ -188,5 +216,7 @@ iogrid = fdesign.get_io_widget()
 
 app.add_widget(tabs)
 app.add_widget(iogrid)
+
+# fdesign.update()
 
 app.run()

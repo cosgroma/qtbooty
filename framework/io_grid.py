@@ -4,7 +4,7 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-05 22:26:11
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-02-04 03:53:59
+# @Last Modified time: 2015-02-06 07:53:56
 
 from copy import deepcopy
 from functools import partial
@@ -152,7 +152,12 @@ class IOGrid(QtGui.QWidget):
     elif isinstance(obj, PyQt4.QtGui.QComboBox):
       self.p.param(instance["name"]).setValue(obj.itemText(obj.currentIndex()))
     else:
-      self.p.param(instance["name"]).setValue(obj.text())
+      # if instance["dtype"] is not None:
+      #   value = eval("%s(%s)" % (instance["dtype"], obj.text()))
+      #   print value
+      # else:
+      value = obj.text()
+      self.p.param(instance["name"]).setValue(value)
 
   def connect_changed_callback(self, callback):
     self.callback = callback
@@ -183,11 +188,11 @@ class IOGrid(QtGui.QWidget):
       self.groups.append(layout)
 
       for io in group["items"]:
+        self.p.addChild(io)
         iow = make_funcs[io["class"]](io, callback=self.generic_callback)
         self.io_widgets[io["name"]] = iow
         layout.addWidget(iow)
         io["added"] = True
-        self.p.addChild(io)
 
       if group["scrollable"]:
         widget2 = QtGui.QGroupBox(group["group_name"])

@@ -31,7 +31,7 @@ Attributes:
 # @Author: Mathew Cosgrove
 # @Date:   2015-01-21 15:05:05
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-02-04 03:29:12
+# @Last Modified time: 2015-02-06 21:12:29
 # REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
 # REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
@@ -182,7 +182,9 @@ edit_defaults = {
   "dtype":           None,
   "label":           None,
   "position":        "left",
-  "default":         None,
+  "default":         "",
+  "min": 0,
+  "max": 100,
   "editingFinished": None,
   "args":            None,
   "tool-tip":        None
@@ -192,14 +194,18 @@ def make_edit(config, callback=None):
   instance = deepcopy(edit_defaults)
   instance.update(config)
   signal = None
+
   if instance["qtype"] == "datetime":
     edit = QtGui.QDateTimeEdit()
     signal = edit.dateTimeChanged
   elif instance["qtype"] == "spin":
     edit = QtGui.QSpinBox()
+
+    edit.setMinimum(instance['min'])
+    edit.setMaximum(instance['max'])
     signal = edit.valueChanged
   else:
-    edit = QtGui.QLineEdit(instance["default"])
+    edit = QtGui.QLineEdit(str(instance["default"]))
     signal = edit.textEdited
 
   if instance["dtype"] is not None:
@@ -218,6 +224,7 @@ def make_edit(config, callback=None):
   elif signal is not None:
     signal.connect(partial(callback, edit, instance))
 
+  callback(edit, instance)
   # edit.cursorPositionChanged.connect(partial(callback, edit, instance))
 
   if instance["label"] is not None:

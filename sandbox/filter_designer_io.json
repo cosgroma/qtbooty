@@ -2,18 +2,19 @@
   "layout": ["g", "j"],
   "group_layout_params":
   {
-    "Filter Coefficent Generation": [3, 1, 1, 1],
-    "Filter Description Table":     [4, 1, 4, 1],
-    "Filter Definition":            [3, 0, 3, 1],
-    "Implementation Constraints":   [6, 0, 1, 1],
-    "Manual Filter Configuration":  [3, 2, 3, 2],
-    "Visual Filter Configuration": [6, 2, 1, 1]
+    "Filter Definition":            [0, 0, 3, 1],
+    "Implementation Constraints":   [3, 0, 1, 1],
+
+    "Filter Coefficent Load":       [0, 1, 1, 1],
+    "Filter Description Table":     [1, 1, 4, 1],
+    "Manual Filter Configuration":  [0, 2, 3, 1],
+    "Visual Filter Configuration":  [3, 2, 1, 1]
   },
   "groups": [
   {
     "enabled": true,
     "box_enabled": true,
-    "group_name": "Filter Coefficent Generation",
+    "group_name": "Filter Coefficent Load",
     "layout": ["v", "j"],
     "items": [
     {
@@ -33,7 +34,7 @@
       "name": "ftable",
       "class": "table",
       "position": "above",
-      "headers": ["Enable-Edit-Delete", "Start Freq.", "Stop Freq.", "Attenuation"],
+      "headers": ["Enable-Edit-Delete", "Start Freq (MHz)", "Stop Freq (MHz)", "Attenuation"],
       "label": "Filter Pass and Stop Band Configurations",
       "tool-tip": "Filter Description Table",
       "dtype": "float"
@@ -66,9 +67,11 @@
     {
       "name": "taps",
       "class": "edit",
+      "qtype": "spin",
       "position": "above",
       "label": "Filter Taps (MAX)",
-      "dtype": "int",
+      "min" : 1,
+      "max" : 1e6,
       "tool-tip": "MAX Available TAP count for FIR implementation"
     }]
   },
@@ -83,16 +86,25 @@
       "class": "edit",
       "position": "above",
       "policy": "tight",
-      "label": "N-Freqs",
+      "label": "N-Freqs (optional)",
       "tool-tip": "The size of the interpolation mesh used to construct the filter",
-      "default": "optional",
+      "default": 0,
       "dtype": "int"
+    },
+    {
+      "name": "filtzero",
+      "class": "edit",
+      "position": "above",
+      "label": "Zero Point Attenuation (dB)",
+      "dtype": "int",
+      "default": 0,
+      "tool-tip": "Attenuation at 0 Hz"
     },
     {
       "name": "asym",
       "class": "button",
       "qtype": "check",
-      "label": "Asymetric",
+      "label": "Asymetric (optional)",
       "tool-tip": "Filter Symetry Requirement"
     }]
   },
@@ -106,7 +118,7 @@
       "name": "avisual",
       "class": "button",
       "label": "Add Selection",
-      "tool-tip": "Visually Configure Filter Stop Bands"
+      "tool-tip": "Visually Configure Filter Bands"
     }]
   },
   {
@@ -120,21 +132,21 @@
       "class": "edit",
       "position": "above",
       "dtype": "float",
-      "label": "Start Frequency"
+      "label": "Start Frequency (MHz)"
     },
     {
       "name": "fstop",
       "class": "edit",
       "position": "above",
       "dtype": "float",
-      "label": "Stop Frequency"
+      "label": "Stop Frequency (MHz)"
     },
     {
       "name": "atten",
       "class": "edit",
       "position": "above",
       "dtype": "float",
-      "label": "Attenuation"
+      "label": "Attenuation (dB)"
     },
     {
       "name": "setadd",
