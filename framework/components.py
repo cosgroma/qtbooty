@@ -31,7 +31,7 @@ Attributes:
 # @Author: Mathew Cosgrove
 # @Date:   2015-01-21 15:05:05
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-02-06 21:12:29
+# @Last Modified time: 2015-02-07 13:15:39
 # REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
 # REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
@@ -43,21 +43,21 @@ __maintainer__ = "Mathew Cosgrove"
 __email__ = "cosgroma@gmail.com"
 __status__ = "Development"
 
-from PyQt4 import QtGui, QtCore, Qt
-from PyQt4.QtCore import pyqtSignal, pyqtSlot
-
-import pyqtgraph as pg
-from pyqtgraph.Qt import QtCore, QtGui
-
-import pyqtgraph.parametertree.parameterTypes as pTypes
-from pyqtgraph.parametertree import Parameter, ParameterTree, ParameterItem, registerParameterType
+import logging
 
 from copy import deepcopy
 import numpy as np
-
 from functools import partial
 
-import logging
+from PyQt4 import QtGui
+from PyQt4 import QtCore
+# from PyQt4 import Qt
+
+# import pyqtgraph as pg
+# from pyqtgraph.Qt import QtCore, QtGui
+
+# import pyqtgraph.parametertree.parameterTypes as pTypes
+# from pyqtgraph.parametertree import Parameter, ParameterTree, ParameterItem, registerParameterType
 
 o_map = {"h": QtCore.Qt.Horizontal, "v": QtCore.Qt.Vertical}
 
@@ -139,12 +139,14 @@ def add_label(widget, label, position="left", policy=None):
 # Buttons
 
 button_defaults = {
-  "name": None,
-  "qtype":   "button",
-  "label":   "",
-  "clicked": None,
-  "enabled": False,
-  "args":    None
+  "name":     None,
+  "qtype":    "button",
+  'type':     'bool',
+  "label":    "",
+  "clicked":  None,
+  "enabled":  False,
+  "args":     None,
+  "tool-tip": None
 }
 
 def make_button(config, callback=None):
@@ -177,14 +179,14 @@ def make_button(config, callback=None):
 ############################################
 # Buttons
 edit_defaults = {
-  "name": None,
-  "qtype":            "default",
-  "dtype":           None,
+  "name":            None,
+  "qtype":           "edit",
+  "type":            "text",
   "label":           None,
   "position":        "left",
   "default":         "",
-  "min": 0,
-  "max": 100,
+  "min":             0,
+  "max":             100,
   "editingFinished": None,
   "args":            None,
   "tool-tip":        None
@@ -200,18 +202,15 @@ def make_edit(config, callback=None):
     signal = edit.dateTimeChanged
   elif instance["qtype"] == "spin":
     edit = QtGui.QSpinBox()
-
     edit.setMinimum(instance['min'])
     edit.setMaximum(instance['max'])
     signal = edit.valueChanged
   else:
     edit = QtGui.QLineEdit(str(instance["default"]))
     signal = edit.textEdited
-
-  if instance["dtype"] is not None:
-    if instance["dtype"] == "int":
+    if instance["type"] == "int":
       edit.setValidator(QtGui.QIntValidator(edit))
-    elif instance["dtype"] == "float":
+    elif instance["type"] == "float":
       edit.setValidator(QtGui.QDoubleValidator(edit))
 
   if instance["editingFinished"] is not None:
@@ -242,16 +241,17 @@ def make_edit(config, callback=None):
 # Sliders
 
 slider_defaults = {
-  "name": None,
-  "qtype":         "default",
-  "label":        "",
-  "position":     "above",
-  "range":        [0, 100],
-  "orientation":  "h",
-  "policy":       None,
-  "display":      False,
-  "valueChanged": None,
-  "args":         [None]
+  "name":          None,
+  "type":          "int",
+  "qtype":         "slider",
+  "label":         "",
+  "position":      "above",
+  "range":         [0, 100],
+  "orientation":   "h",
+  "policy":        None,
+  "display":       False,
+  "valueChanged":  None,
+  "args":          [None]
 }
 
 
@@ -294,7 +294,7 @@ def make_slider(config, callback=None):
     if instance["orientation"] == "h":
       layout = QtGui.QHBoxLayout()
 
-      display.setMaximumSize(40, 30)
+      # display.setMaximumSize(40, 30)
 
       display.setSizePolicy(
         QtGui.QSizePolicy(
@@ -308,7 +308,7 @@ def make_slider(config, callback=None):
 
     elif instance["orientation"] == "v":
 
-      display.setMinimumSize(70, 30)
+      # display.setMinimumSize(70, 30)
       slider.setSizePolicy(
         QtGui.QSizePolicy(
           QtGui.QSizePolicy.MinimumExpanding,
@@ -327,10 +327,11 @@ def make_slider(config, callback=None):
     container = slider
 
   if instance["label"] is not None:
-    container = add_label(container,
-                     instance["label"],
-                     position=instance["position"],
-                     policy=instance["policy"])
+    container = add_label(
+      container,
+      instance["label"],
+      position=instance["position"],
+      policy=instance["policy"])
 
   set_common_policy(container)
   return container
@@ -341,7 +342,8 @@ def make_slider(config, callback=None):
 # Combo
 
 combo_defaults = {
-  "name": None,
+  "name":            None,
+  "type":            "text",
   "label":           "combobox",
   "items":           [],
   "maxVisible":      10,

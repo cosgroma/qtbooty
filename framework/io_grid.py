@@ -4,7 +4,12 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-05 22:26:11
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-02-06 07:53:56
+# @Last Modified time: 2015-02-07 13:46:24
+
+import logging
+import pyutils
+pyutils.setup_logging()
+logger = logging.getLogger(__name__)
 
 from copy import deepcopy
 from functools import partial
@@ -27,6 +32,10 @@ import pyqtgraph.parametertree.parameterTypes as pTypes
 
 
 from components import make_funcs
+
+from pyutils import is_number
+
+from tabs import Tabs
 
 ############################################
 
@@ -63,10 +72,18 @@ icon_lookup = {
 }
 
 
+config_defaults = {
+  "layout": ["h", "na"],
+  "tabs_enabled": False,
+  "groups": []
+}
+
 group_default = {
   "name":        None,
   "enabled":     True,
   "box_enabled": False,
+  "tabs_enabled": False,
+  "splitter_enabled": False,
   "group_name":  None,
   "layout":      None,
   "scrollable":  False,
@@ -82,7 +99,7 @@ io_instance = {
   "label":    None,
   "tool-tip": None,
   "default":  None,
-  "dtype":    None
+  "type":    None
 }
 
 
@@ -107,7 +124,7 @@ class IOGrid(QtGui.QWidget):
   def __init__(self):
     super(IOGrid, self).__init__()
     # logging.basicConfig()
-    self.logger = logging.getLogger("iogrid")
+    self.logger = logging.getLogger(__name__)
     self.io_widgets = dict()
 
   def load_config_file(self, filename):
@@ -116,35 +133,34 @@ class IOGrid(QtGui.QWidget):
   def load_config(self, config):
     return self.config_widget(config)
 
-  def config_init(self, ngroups, nitems_arr):
-    """
-    @summary:
-    @param ngroups:
-    @param nitems_arr:
-    @result:
-    """
-    # Set default config layout for self widget
-    config = {"layout": ["h", "na"]}
+  # def config_init(self, ngroups, nitems_arr):
+  #   """
+  #   @summary:
+  #   @param ngroups:
+  #   @param nitems_arr:
+  #   @result:
+  #   """
+  #   # Set default config layout for self widget
+  #   config = {"layout"}
 
-    # populated the default groups, check if well formed
-    if not ngroups == len(nitems_arr):
-      self.logger.error(
-        "nitems_arr length (%d) doest not match ngroups (%d)" %
-        (ngroups, nitems_arr)
-      )
+  #   # populated the default groups, check if well formed
+  #   if not ngroups == len(nitems_arr):
+  #     self.logger.error(
+  #       "nitems_arr length (%d) doest not match ngroups (%d)" %
+  #       (ngroups, nitems_arr)
+  #     )
 
-    config["groups"] = [deepcopy(group_default) for i in range(ngroups)]
+  #   config["groups"] = [deepcopy(group_default) for i in range(ngroups)]
 
-    # populated a set of default item configurations for each group
-    for c, nitems in zip(config["groups"], nitems_arr):
-      c["items"] = [deepcopy(io_instance) for n in range(0, nitems)]
-    return config
+  #   # populated a set of default item configurations for each group
+  #   for c, nitems in zip(config["groups"], nitems_arr):
+  #     c["items"] = [deepcopy(io_instance) for n in range(0, nitems)]
+  #   return config
 
   def generic_callback(self, obj, instance):
     if isinstance(obj, PyQt4.QtGui.QAbstractSlider):
       self.p.param(instance["name"]).setValue(obj.value())
     elif isinstance(obj, PyQt4.QtGui.QAbstractButton):
-      # print dir(self.p.param(instance["name"]))
       curval = self.p.param(instance["name"]).value()
       curval = 0 if curval is None else curval
       self.p.param(instance["name"]).setValue(1 ^ curval)
@@ -152,23 +168,32 @@ class IOGrid(QtGui.QWidget):
     elif isinstance(obj, PyQt4.QtGui.QComboBox):
       self.p.param(instance["name"]).setValue(obj.itemText(obj.currentIndex()))
     else:
-      # if instance["dtype"] is not None:
-      #   value = eval("%s(%s)" % (instance["dtype"], obj.text()))
-      #   print value
-      # else:
-      value = obj.text()
+      if instance["type"] in ["int", "float"] and is_number(obj.text()):
+        value = eval("%s(%s)" % (instance["type"], obj.text()))
+      else:
+        value = obj.text()
+
       self.p.param(instance["name"]).setValue(value)
 
   def connect_changed_callback(self, callback):
     self.callback = callback
     self.p.sigTreeStateChanged.connect(callback)
+    # self.p.sigValueChanged.connect(callback)
 
-  def config_widget(self, config):
+  def config_widget(self, user_config):
+    config = deepcopy(config_defaults)
+    config.update(user_config)
+
     self.layout = get_layout(config["layout"])
     self.setLayout(self.layout)
     self.groups = []
     self.group_names = dict()
     self.p = Parameter.create(name='params', type='group')
+
+    if config["tabs_enabled"]:
+      tabs = Tabs()
+      self.layout.addWidget(tabs)
+
 
     for gconf in config["groups"]:
       if not gconf["enabled"]: continue
@@ -183,6 +208,11 @@ class IOGrid(QtGui.QWidget):
       else:
         widget = QtGui.QWidget()
 
+      if group["splitter_enabled"]:
+        splitter = QtGui.QSplitter()
+        splitter.setStretchFactor(0, 0)
+        splitter.setStretchFactor(1, 1)
+
       layout = get_layout(group["layout"])
       widget.setLayout(layout)
       self.groups.append(layout)
@@ -191,8 +221,14 @@ class IOGrid(QtGui.QWidget):
         self.p.addChild(io)
         iow = make_funcs[io["class"]](io, callback=self.generic_callback)
         self.io_widgets[io["name"]] = iow
-        layout.addWidget(iow)
+        if group["splitter_enabled"]:
+          splitter.addWidget(iow)
+        else:
+          layout.addWidget(iow)
+
         io["added"] = True
+        # if instance["type"] is not None:
+        #   self.p.[io["name"]]
 
       if group["scrollable"]:
         widget2 = QtGui.QGroupBox(group["group_name"])
@@ -207,12 +243,16 @@ class IOGrid(QtGui.QWidget):
         widget2.setLayout(layout2)
         widget = widget2
 
-      if "group_layout_params" in config.keys():
+      if config['tabs_enabled']:
+        tabs.add_tab(widget, group["group_name"])
+      elif "group_layout_params" in config.keys():
         self.layout.addWidget(widget, *config["group_layout_params"][group["group_name"]])
+      elif group["splitter_enabled"]:
+        self.layout.addWidget(splitter)
       else:
         self.layout.addWidget(widget)
 
-    #
+
       # self.p.sigTreeStateChanged.connect(change)
     return self.p
 
@@ -224,18 +264,22 @@ class IOGrid(QtGui.QWidget):
         layout.addWidget(make_funcs[io["class"]](io, callback=self.generic_callback))
         io["added"] = True
 
+
+  # def get_widget(self):
   def set_groups_enabled(self, names, enable):
     for name in names:
       self.group_names[name].setEnabled(enable)
 
-  def update_widget(self, name, data, changed):
+  def update_widget(self, name, data, changed, controls=["enable", "edit", "delete"]):
     # If we aren't tracking a handle to this then bail
-    if not name in self.io_widgets.keys(): return
+    if name not in self.io_widgets.keys():
+      return
+
     # Otherwise we redirect the update toward particular object types
     if isinstance(self.io_widgets[name], PyQt4.QtGui.QTableWidget):
-      print "running update for table"
-      self.update_table_widget(name, data)
-    # Everything is at some point a QWidget, here we look at they type of change
+      self.update_table_widget(name, data, controls=controls)
+
+    # Everything is at some point a QWidget, here we look at the type of change
     elif isinstance(self.io_widgets[name], PyQt4.QtGui.QWidget):
       for c in self.io_widgets[name].children():
         if isinstance(c, PyQt4.QtGui.QLineEdit):
@@ -243,7 +287,7 @@ class IOGrid(QtGui.QWidget):
     else:
         print type(self.io_widgets[name])
 
-  def update_table_widget(self, name, data):
+  def update_table_widget(self, name, data, controls=["enable", "edit", "delete"]):
     def new_table_item(label=""):
       item = QtGui.QTableWidgetItem(label)
       item.setTextAlignment(QtCore.Qt.AlignCenter)
@@ -264,9 +308,7 @@ class IOGrid(QtGui.QWidget):
       controlWidget.setMinimumHeight(height)
       controlWidget.setContentsMargins(0, -5, 0, 5)
 
-      control_buttons = ["enable", "edit", "delete"]
-
-      for cb in control_buttons:
+      for cb in controls:
         instance = {"name": "%s.%d" % (cb, row)}
         button = new_button(cb, height)
         button.clicked.connect(partial(self.generic_callback, button, instance))
@@ -283,9 +325,14 @@ class IOGrid(QtGui.QWidget):
 
     item = new_table_item()
     table.setItem(row, 0, item)
-    table.setCellWidget(row, 0, control_buttons(item, height))
 
-    for idx, d in enumerate(data, start=1):
+    idx = 0
+    if controls:
+      table.setCellWidget(row, 0, control_buttons(item, height))
+      idx = 1
+
+
+    for idx, d in enumerate(data, start=idx):
       item = new_table_item(d)
       table.setItem(row, idx, item)
 

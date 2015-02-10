@@ -3,19 +3,19 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-11-25 21:43:42
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-02-03 01:57:06
+# @Last Modified time: 2015-02-07 07:20:17
 
 import sys
 # sys.path.append('/home/cosgroma/workspace/sergeant/guis')
 
 from QtBooty import App
-from QtBooty import graphs
+from QtBooty import graph
 from collections import deque
 import numpy as np
 
 app = App('../config/app_config.json')
-magnitude_plot = graphs.Line(legend=False, controller=False)
-phase_plot = graphs.Line(legend=False, controller=False)
+magnitude_plot = graph.Line(legend=False, controller=False)
+phase_plot = graph.Line(legend=False, controller=False)
 
 # gscheduler = graphs.GraphScheduler()
 # mag_updater = gscheduler.add_graph(magnitude_plot, maxlen=1000, interval=50)

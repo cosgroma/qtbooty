@@ -1,0 +1,31 @@
+{
+  "layout": ["h", "na"],
+  "groups": [
+  {
+    "enabled": true,
+    "box_enabled": true,
+    "group_name": "signal::controller",
+    "layout": ["v", "t"],
+    "items": [
+    {
+      "class": "slider",
+      "name": "power0",
+      "label": "Power",
+      "display": true,
+      "orientation": "v",
+      "policy": "smart",
+      "args": ["dB"]
+    },
+    {
+      "class": "slider",
+      "name": "doppler1",
+      "qtype": "dial",
+      "label": "Doppler",
+      "display": true,
+      "orientation": "v",
+      "range": [-5000.0,5000.0],
+      "policy": "smart",
+      "args": ["Hz"]
+    }]
+  }]
+}

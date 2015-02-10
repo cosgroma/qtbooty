@@ -3,16 +3,17 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-05 20:56:57
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-02-03 06:44:03
+# @Last Modified time: 2015-02-07 06:54:18
 
 import logging
 logger = logging.getLogger(__name__)
 
-import os
-from os import path
 import sys
-# import logging
+import os
+
+from os import path
 import json
+
 from PyQt4 import QtCore, QtGui
 
 
