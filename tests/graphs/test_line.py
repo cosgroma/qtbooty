@@ -3,7 +3,7 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-11-25 21:43:42
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-02-07 07:38:37
+# @Last Modified time: 2015-02-10 07:12:09
 
 import logging
 import pyutils
@@ -20,7 +20,7 @@ from QtBooty import graph
 
 
 app = App('../config/app_config.json')
-time_series = graph.Line(legend=True, controller=True)
+time_series = graph.Line(legend=True, controller=False)
 
 gscheduler = graph.GraphScheduler()
 ts_updater = gscheduler.add_graph(time_series, maxlen=1000, interval=50)
@@ -40,18 +40,12 @@ update.t = np.linspace(0, update.intr/1000.0, 10, endpoint=False)
 
 update.config = {
   "plots":[{
-    "name": "cosine",
+    "name": "correlation",
     "plot kwargs": {
       "pen": 'r',
       "downsample": None,
       "fillLevel": 0,
       "brush": (0, 0, 255, 80)
-    }
-  },{
-    "name": "sine",
-    "plot kwargs": {
-      "pen": 'b',
-      "downsample": None
     }
   }]
 }
