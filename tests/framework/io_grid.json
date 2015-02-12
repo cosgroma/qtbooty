@@ -51,6 +51,7 @@
       "name": "normali2",
       "label": "normal::intv",
       "dtype": "int",
+      "type": "float",
       "position": "above",
       "args": ["test"],
       "tool-tip": "test tip"

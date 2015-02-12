@@ -31,7 +31,7 @@ Attributes:
 # @Author: Mathew Cosgrove
 # @Date:   2015-01-14 01:09:36
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-02-07 06:55:13
+# @Last Modified time: 2015-02-12 06:33:54
 # REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
 # REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
@@ -72,7 +72,12 @@ class Line(QtGui.QWidget):
     self.layout.addWidget(self.graph)
 
     self.controller_enabled = controller
-
+    self.setSizePolicy(
+      QtGui.QSizePolicy(
+        QtGui.QSizePolicy.MinimumExpanding,
+        QtGui.QSizePolicy.Preferred
+      )
+    )
     if self.controller_enabled:
       self.setup_controller()
       self.layout.addWidget(self.controller)
@@ -89,13 +94,16 @@ class Line(QtGui.QWidget):
 
   def setup_controller(self):
     self.controller = IOGrid()
-    self.controller_config = self.controller.config_init(1, [0])
-    self.controller_config["groups"][0]["box_enabled"] = True
-    self.controller_config["groups"][0]["box_name"] = "plot control"
-    self.controller_config["groups"][0]["checkable"] = False
-    self.controller_config["groups"][0]["layout"] = ["v", "t"]
+    # self.controller_config = self.controller.config_init(1, [0])
+    # self.controller_config["groups"][0]["box_enabled"] = True
+    # self.controller_config["groups"][0]["box_name"] = "plot control"
+    # self.controller_config["groups"][0]["checkable"] = False
+    # self.controller_config["groups"][0]["layout"] = ["v", "t"]
     self.controller.config_widget(self.controller_config)
     # print self.controller_config
+
+  def link_xaxis(self, graph):
+    self.graph.getViewBox().setXLink(graph.getViewBox())
 
   def controller_callback(self, args):
     button = args[0]

@@ -31,7 +31,7 @@ Attributes:
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-30 14:23:04
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-02-09 23:10:27
+# @Last Modified time: 2015-02-12 05:34:25
 # REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
 # REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
@@ -42,6 +42,11 @@ __version__ = "0.0.1"
 __maintainer__ = "Mathew Cosgrove"
 __email__ = "mathew.cosgrove@ngc.com"
 __status__ = "Development"
+
+import logging
+import pyutils
+pyutils.setup_logging()
+logger = logging.getLogger(__name__)
 
 import numpy as np
 from PyQt4 import QtCore
@@ -91,6 +96,7 @@ class GraphUpdater(object):
     self.setup_update_timers()
     self.config = dict()
     self.data = deque(maxlen=self.maxlen)
+    self.cnt = 0
 
   def setup_update_timers(self):
     self.update_timer = QtCore.QTimer()
@@ -122,9 +128,13 @@ class GraphUpdater(object):
     self.update_timer.stop()
 
   def _update(self):
-    if self.data is None:
+    if not self.data or len(self.data) == 0:
       return
 
+    # if self.cnt % 1000 == 0:
+    #   logger.info("data is = %s" % (self.data))
+
+    # self.cnt += 1
     if self.mode == 'concat':
       dmat = np.concatenate(self.data, axis=1)
       self.graph.update(dmat.transpose(), self.config)

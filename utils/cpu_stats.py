@@ -3,7 +3,7 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-11-26 08:07:43
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-02-03 09:35:45
+# @Last Modified time: 2015-02-10 13:59:09
 import sys
 sys.path.append('/home/cosgroma/workspace/lib/python/modules')
 from PyQt4 import QtCore, QtGui
@@ -80,7 +80,7 @@ class CpuStatsPlot(object):
 
 app = App('../tests/config/app_config.json')
 
-timeseries = graphs.Line(legend=True, controller=True)
+timeseries = graphs.Line(legend=True, controller=False)
 diskts = graphs.Line(legend=True, controller=True)
 
 gscheduler = graphs.GraphScheduler()

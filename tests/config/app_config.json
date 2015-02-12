@@ -2,6 +2,7 @@
   "name": "Qt Booty Test",
   "size": {
     "policy": "unbounded",
+    "layout": "h",
     "min": [100, 100],
     "max": [480, 320]
   },

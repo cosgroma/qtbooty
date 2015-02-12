@@ -4,12 +4,14 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-05 22:26:11
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-02-07 13:46:24
+# @Last Modified time: 2015-02-12 05:25:03
 
 import logging
 import pyutils
 pyutils.setup_logging()
 logger = logging.getLogger(__name__)
+
+import os
 
 from copy import deepcopy
 from functools import partial
@@ -66,7 +68,7 @@ align_lookup = {
 }
 
 icon_lookup = {
-  "enable": '../resources/enable2.png',
+  "enable": os.path.join(os.path.dirname(__file__), 'icons', 'enable2.png'),
   "edit": '../resources/edit.png',
   "delete": '../resources/delete.png',
 }
@@ -285,7 +287,7 @@ class IOGrid(QtGui.QWidget):
         if isinstance(c, PyQt4.QtGui.QLineEdit):
           c.setText(str(data))
     else:
-        print type(self.io_widgets[name])
+      print type(self.io_widgets[name])
 
   def update_table_widget(self, name, data, controls=["enable", "edit", "delete"]):
     def new_table_item(label=""):
@@ -296,7 +298,11 @@ class IOGrid(QtGui.QWidget):
 
     def new_button(name, height):
       button = QtGui.QPushButton()
-      button.setIcon(QtGui.QIcon(icon_lookup[name]))
+      icon = icon_lookup[name]
+      if os.path.isfile(icon):
+        button.setIcon(QtGui.QIcon(icon))
+      else:
+        logger.info("icon file does not exist: %s" % (icon))
       button.setMinimumHeight(height)
       return button
 
@@ -335,6 +341,8 @@ class IOGrid(QtGui.QWidget):
     for idx, d in enumerate(data, start=idx):
       item = new_table_item(d)
       table.setItem(row, idx, item)
+
+    table.sortItems(1, order=QtCore.Qt.AscendingOrder)
 
 
 def get_layout(args):

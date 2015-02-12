@@ -31,7 +31,7 @@ Attributes:
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-30 05:25:42
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-02-07 07:13:45
+# @Last Modified time: 2015-02-10 13:41:52
 # REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
 # REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
@@ -49,16 +49,17 @@ backend = 'visvis'
 
 import numpy as np
 
-try:
-  from PySide import QtGui, QtCore
-  backend = 'pyside'
-except ImportError:
-  from PyQt4 import QtGui, QtCore
+# try:
+#   from PySide import QtGui, QtCore
+#   backend = 'pyside'
+# except ImportError:
+
+from PyQt4 import QtGui, QtCore
 
 if backend == "visvis":
   from backend.visvis_be import VisSurface
-else:
-  from backend.mpl_be import MplCanvas
+# else:
+#   from backend.mpl_be import MplCanvas
 
 # from graph_utils import GraphUpdater
 
@@ -67,10 +68,10 @@ class Surface(QtGui.QWidget):
     super(Surface, self).__init__()
     self.layout = QtGui.QHBoxLayout()
 
-    if backend == "visvis":
-      self.graph = VisSurface(self)
-    else:
-      self.graph = MplCanvas(self, "surface")
+    # if backend == "visvis":
+    self.graph = VisSurface(self)
+    # else:
+    #   self.graph = MplCanvas(self, "surface")
 
     self.layout.addWidget(self.graph)
     self.setLayout(self.layout)
@@ -93,7 +94,7 @@ if __name__ == '__main__':
   # Create the App
   import sys
   app = QtGui.QApplication(sys.argv)
-  surf = Surface(interval=3000)
+  surf = Surface()
 
   X = np.arange(511, 513, 0.5)
   Y = np.arange(-700, 700, 100)

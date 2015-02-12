@@ -3,7 +3,7 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-05 20:56:57
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-02-07 06:54:18
+# @Last Modified time: 2015-02-12 05:34:46
 
 import logging
 logger = logging.getLogger(__name__)
@@ -26,41 +26,35 @@ color_gradients = {
 
 
 default_settings = {
-  "name": "Qt Booty Default",
+  "name": "Default Settings File",
   "size": {
+    "layout": "g",
     "policy": "unbounded",
-    "min": [
-      100,
-      100
-    ],
-    "max": [
-      480,
-      320
-    ]
+    "min": [100, 100],
+    "max": [480, 320]
   },
   "menu": {
     "enabled": True,
     "items": [{
       "name": "File",
       "actions": [{
-          "name": "New",
-          "shortcut": "Ctrl+N",
-          "tip" : "make a new file"
-          },{
-          "name": "Open",
-          "shortcut" : "Ctrl+O",
-          "tip" : "open an existing file"
-          }
-        ]
-      },{
+        "name": "New",
+        "shortcut": "Ctrl+N",
+        "tip": "make a new file"
+        }, {
+        "name": "Open",
+        "shortcut" : "Ctrl+O",
+        "tip": "open an existing file"
+        }]
+      }, {
       "name": "Edit",
       "actions": []
-      },{
+      }, {
       "name": "View",
       "actions": [{
           "name": "CPU Statistics",
-          "shortcut" : "Ctrl+N",
-          "tip" : "view run-time CPU stats"
+          "shortcut": "Ctrl+N",
+          "tip": "view run-time CPU stats"
           }]
     }]
   },
@@ -69,6 +63,12 @@ default_settings = {
   }
 }
 
+layout_lookup = {
+  "h": QtGui.QHBoxLayout,
+  "v": QtGui.QVBoxLayout,
+  "g": QtGui.QGridLayout,
+  "f": QtGui.QFormLayout
+}
 
 #
 class App(QtGui.QApplication):
@@ -101,8 +101,14 @@ class App(QtGui.QApplication):
     self.main = MainWindow(self.app_settings)
     self.apply_style("default")
 
-  def add_widget(self, widget, params=None):
-    self.main.layout.addWidget(widget)
+  def add_widget(self, widget, *args):
+    logger.debug('widget args : %s' % (args, ))
+    if args is not None:
+      if self.main.settings["size"]["layout"] == "g":
+        logger.debug('main is grid layout')
+        self.main.layout.addWidget(widget, *args)
+    else:
+      self.main.layout.addWidget(widget)
 
   def add_timer(self, interval, callback):
     timer = QtCore.QTimer()
@@ -144,8 +150,8 @@ class MainWindow(QtGui.QMainWindow):
     # Setup the minimum structure before you process settings
     self.central = QtGui.QWidget()
     self.setCentralWidget(self.central)
-    self.layout = QtGui.QVBoxLayout()
-    self.central.setLayout(self.layout)
+
+
 
     # Process user settings
     if self.settings is not None:
@@ -158,12 +164,16 @@ class MainWindow(QtGui.QMainWindow):
 
   def central_setup(self):
     self.setWindowTitle(self.settings["name"])
+
+
     if self.settings["size"]["policy"] == "bounded":
       self.setMinimumSize(self.settings["size"]["min"][0],
                           self.settings["size"]["min"][1])
       self.resize(self.settings["size"]["max"][0],
                   self.settings["size"]["max"][1])
 
+    self.layout = layout_lookup[self.settings["size"]["layout"]]()
+    self.central.setLayout(self.layout)
   def menu_setup(self):
     if self.settings["menu"]["enabled"]:
       self.menus = dict()

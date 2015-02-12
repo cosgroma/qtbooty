@@ -31,7 +31,7 @@ Attributes:
 # @Author: Mathew Cosgrove
 # @Date:   2015-01-21 15:05:05
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-02-07 13:15:39
+# @Last Modified time: 2015-02-11 21:13:12
 # REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
 # REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
@@ -405,6 +405,18 @@ def make_table(config, callback=None):
 # QHeaderView.resizeSections (self, ResizeMode mode)
   return table
 
+widget_defaults = {
+  "name": None,
+  "label": "table"
+}
+
+def make_widget(config, callback=None):
+  instance = deepcopy(widget_defaults)
+  instance.update(config)
+
+  widget = QtGui.QWidget()
+  set_common_policy(widget)
+  return widget
 
 
 make_funcs = {
@@ -413,5 +425,6 @@ make_funcs = {
   "edit": make_edit,
   "slider": make_slider,
   "combo": make_combo,
-  "table": make_table
+  "table": make_table,
+  "widget": make_widget
  }
