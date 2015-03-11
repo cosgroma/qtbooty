@@ -12,6 +12,24 @@ class Tabs(QtGui.QWidget):
     self.layout.addWidget(self.widget)
     self.setLayout(self.layout)
 
+    self.setSizePolicy(
+      QtGui.QSizePolicy(
+        QtGui.QSizePolicy.MinimumExpanding,
+        QtGui.QSizePolicy.Maximum
+      )
+    )
+    self.widget.setMaximumWidth(900)
+    self.widget.setMinimumWidth(300)
+
+    # self.widget.setMaximumWidth(900)?
+    self.widget.setMinimumHeight(300)
+    self.widget.setSizePolicy(
+      QtGui.QSizePolicy(
+        QtGui.QSizePolicy.MinimumExpanding,
+        QtGui.QSizePolicy.Maximum
+      )
+    )
+    self.setMaximumWidth(1200)
   def add_tab(self, widget, name=None):
     self.widget.addTab(widget, name)
 

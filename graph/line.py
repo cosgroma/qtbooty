@@ -31,7 +31,7 @@ Attributes:
 # @Author: Mathew Cosgrove
 # @Date:   2015-01-14 01:09:36
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-02-12 06:33:54
+# @Last Modified time: 2015-02-12 12:54:31
 # REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
 # REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
@@ -75,16 +75,24 @@ class Line(QtGui.QWidget):
     self.setSizePolicy(
       QtGui.QSizePolicy(
         QtGui.QSizePolicy.MinimumExpanding,
-        QtGui.QSizePolicy.Preferred
+        QtGui.QSizePolicy.MinimumExpanding
       )
     )
+
+    # self.setMaximumWidth(1200)
     if self.controller_enabled:
       self.setup_controller()
       self.layout.addWidget(self.controller)
 
   def setup_graph(self, legend=False):
     self.graph = pg.PlotWidget()
-
+    self.graph.setSizePolicy(
+      QtGui.QSizePolicy(
+        QtGui.QSizePolicy.MinimumExpanding,
+        QtGui.QSizePolicy.MinimumExpanding
+      )
+    )
+    # self.graph.setMaximumWidth(1000)
     self.legend_enabled = False
     self.graph.showGrid(x=True, y=True)
 
