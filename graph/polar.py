@@ -30,8 +30,8 @@ Attributes:
 """
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-30 13:47:49
-# @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-02-07 07:48:27
+# @Last Modified by:   cosgrma
+# @Last Modified time: 2015-08-05 07:48:10
 # REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
 # REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
@@ -56,14 +56,18 @@ if backend == "visvis":
 else:
   from backend.mpl_be import MplCanvas
 
-class Polar(GraphUpdater):
-  def __init__(self, name=None, controller=False, interval=1000, maxlen=100):
-    super(Polar, self).__init__(interval=interval, maxlen=maxlen)
+
+class Polar(QtGui.QWidget):
+
+  def __init__(self, name=None, controller=False):
+    super(Polar, self).__init__()
     if backend == "visvis":
       self.graph = VisPolar(self)
     else:
       self.graph = MplCanvas(self)
+    self.layout = QtGui.QHBoxLayout()
     self.layout.addWidget(self.graph)
+    self.setLayout(self.layout)
 
   def add_line(self, name, color):
     self.graph.add_line(name, color)
@@ -74,11 +78,12 @@ class Polar(GraphUpdater):
   def set_lims(self, theta, range):
     self.graph.set_lims(theta, range)
 
-  def _update(self):
+  # def update(self, data, config):
+  def update(self):
     self.graph.update_plot()
 
 # if __name__ == '__main__':
-#   # Create the App
+# Create the App
 #   import sys
 #   app = QtGui.QApplication(sys.argv)
 
@@ -99,14 +104,12 @@ class Polar(GraphUpdater):
 #   vpolar.set_ylabel('dB')
 
 #   svset = range(0, 1)
-#   angs = 0.1 + np.linspace(-90, 90, 181)  # 0.1+ get rid of singularity
+# angs = 0.1 + np.linspace(-90, 90, 181)  # 0.1+ get rid of singularity
 
 #   for sv in svset:
 #     vpolar.add_line(sv, colorset[sv])
 #     vpolar.add_pointset(sv, zip(angs + sv*20, get_mags(sv, angs)))
 #   vpolar.update_plot()
-
-
 
 
 # class Polar(QtGui.QWidget):
@@ -157,7 +160,7 @@ class Polar(GraphUpdater):
 #   a parent. This is required to add the widget to a Qt application.
 #   """
 #   def __init__(self, parent=None, name=None, width=10, height=10, dpi=10, rows=None, cols=None):
-#     # Initialize the Figure Canvas
+# Initialize the Figure Canvas
 #     self.fig = Figure()
 #     FigureCanvas.__init__(self, self.fig)
 #     self.setParent(QtGui.QWidget(parent))

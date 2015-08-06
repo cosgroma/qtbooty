@@ -30,8 +30,8 @@ Attributes:
 """
 # @Author: Mathew Cosgrove
 # @Date:   2015-01-14 01:09:36
-# @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-02-12 12:54:31
+# @Last Modified by:   cosgrma
+# @Last Modified time: 2015-07-29 08:36:11
 # REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
 # REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
@@ -52,46 +52,54 @@ from PyQt4 import QtGui
 import numpy as np
 from QtBooty.framework import IOGrid
 
+
 def rpen():
   return QtGui.QPen(
-    QtGui.QColor(
-      np.random.randint(255),
-      np.random.randint(255),
-      np.random.randint(255)))
+      QtGui.QColor(
+          np.random.randint(255),
+          np.random.randint(255),
+          np.random.randint(255)))
+
 
 class Line(QtGui.QWidget):
-  def __init__(self, legend=False, controller=False, update_controller=False, size=(1,0), title=None):
+
+  def __init__(self, legend=False, controller=False, update_controller=False, size=(1, 0), title=None, range=None):
     super(Line, self).__init__()
 
     self.artists = dict()
 
     self.layout = QtGui.QHBoxLayout()
-    self.setLayout(self.layout)
 
-    self.setup_graph(legend=legend)
+    self.setup_graph(legend=legend, range=range)
     self.layout.addWidget(self.graph)
 
     self.controller_enabled = controller
-    self.setSizePolicy(
-      QtGui.QSizePolicy(
-        QtGui.QSizePolicy.MinimumExpanding,
-        QtGui.QSizePolicy.MinimumExpanding
-      )
-    )
-
+    # self.setSizePolicy(
+    #     QtGui.QSizePolicy(
+    #         QtGui.QSizePolicy.MinimumExpanding,
+    #         QtGui.QSizePolicy.MinimumExpanding
+    #     )
+    # )
+    self.setLayout(self.layout)
     # self.setMaximumWidth(1200)
     if self.controller_enabled:
-      self.setup_controller()
+      # self.setup_controller()
       self.layout.addWidget(self.controller)
 
-  def setup_graph(self, legend=False):
+  def setup_graph(self, legend=False, range=None):
     self.graph = pg.PlotWidget()
-    self.graph.setSizePolicy(
-      QtGui.QSizePolicy(
-        QtGui.QSizePolicy.MinimumExpanding,
-        QtGui.QSizePolicy.MinimumExpanding
-      )
-    )
+    if range is not None:
+      if range['y_range'] != "auto":
+        self.graph.setYRange(*range['y_range'])
+      if range['x_range'] != "auto":
+        self.graph.setYRange(*range['x_range'])
+
+    # self.graph.setSizePolicy(
+    #     QtGui.QSizePolicy(
+    #         QtGui.QSizePolicy.MinimumExpanding,
+    #         QtGui.QSizePolicy.MinimumExpanding
+    #     )
+    # )
     # self.graph.setMaximumWidth(1000)
     self.legend_enabled = False
     self.graph.showGrid(x=True, y=True)
@@ -102,12 +110,13 @@ class Line(QtGui.QWidget):
 
   def setup_controller(self):
     self.controller = IOGrid()
+    self.controller.load_config()
     # self.controller_config = self.controller.config_init(1, [0])
     # self.controller_config["groups"][0]["box_enabled"] = True
     # self.controller_config["groups"][0]["box_name"] = "plot control"
     # self.controller_config["groups"][0]["checkable"] = False
     # self.controller_config["groups"][0]["layout"] = ["v", "t"]
-    self.controller.config_widget(self.controller_config)
+    # self.controller.config_widget(self.controller_config)
     # print self.controller_config
 
   def link_xaxis(self, graph):
@@ -130,14 +139,14 @@ class Line(QtGui.QWidget):
 
     if self.controller_enabled:
       self.controller_config["groups"][0]["items"].append({
-        "class": "button",
-        "added": False,
-        "name": str(name),
-        "qtype": "check",
-        "label": str(name),
-        "clicked": self.controller_callback,
-        "enabled": True,
-        "args": [name]
+          "class": "button",
+          "added": False,
+          "name": str(name),
+          "qtype": "check",
+          "label": str(name),
+          "clicked": self.controller_callback,
+          "enabled": True,
+          "args": [name]
       })
       self.controller.config_update(self.controller_config)
 
@@ -168,14 +177,8 @@ class Line(QtGui.QWidget):
         self.add_plot(plot["name"], plot["plot kwargs"])
       # Update the line artist with the new data
       self.artists[plot["name"]].setData(
-        x=np.squeeze(np.asarray(data[:, 0])),
-        y=np.squeeze(np.asarray(data[:, idx])))
-
-
-
-
-
-
+          x=np.squeeze(np.asarray(data[:, 0])),
+          y=np.squeeze(np.asarray(data[:, idx])))
 
 
 # def remove_plot(self, name):
@@ -209,7 +212,6 @@ class Line(QtGui.QWidget):
 
 # def set_ylim(self, ylim):
 #   self.setYRange(ylim[0], ylim[1])
-
 
   # def add_controller(self):
   #   self.controller = PointSeriesController(self.line_names.keys(), self._controller_callback)

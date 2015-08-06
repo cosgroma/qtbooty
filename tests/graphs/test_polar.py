@@ -30,8 +30,8 @@ Attributes:
 """
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-30 06:57:46
-# @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-02-07 07:19:04
+# @Last Modified by:   cosgrma
+# @Last Modified time: 2015-08-05 07:51:54
 # REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
 # REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
@@ -58,6 +58,7 @@ polar.set_lims(0, (0, 90))
 polar.add_line('1', 'r')
 polar.add_line('2', 'b')
 
+
 def get_mag(ang):
   # Define magnitude
   angRad = np.pi * ang / 180.0
@@ -67,17 +68,20 @@ def get_mag(ang):
 ang = 0
 ang_delta = 5
 
+
 def update_polar():
   global ang
   ang += ang_delta
   mag = get_mag(ang)
   polar.add_point('1', (ang, mag))
   polar.add_point('2', (ang + 10, mag))
+  polar.update()
 
 update_polar_interval = 5
 
 app.add_widget(polar)
 app.add_timer(update_polar_interval, update_polar)
-polar.set_interval(update_polar_interval*2)
-polar.start()
+
+# polar.set_interval(update_polar_interval*2)
+# polar.start()
 app.run()

@@ -30,8 +30,8 @@ Attributes:
 """
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-30 06:57:46
-# @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-02-07 07:39:58
+# @Last Modified by:   cosgrma
+# @Last Modified time: 2015-08-05 08:43:44
 # REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
 # REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
@@ -57,11 +57,11 @@ app = App('../config/app_config.json')
 surface = Surface()
 
 gscheduler = GraphScheduler()
-surf_updater = gscheduler.add_graph(surface, maxlen=10, interval=100, mode="array")
+surf_updater = gscheduler.add_graph(surface, maxlen=1, interval=10, mode="array")
 # np.histogram(nc_vals, bins=50, normed=True)
 
-X = np.arange(0, 1023, 0.5)
-Y = np.arange(-7000, 7000, 1000)
+X = np.arange(0, 1023, 1)
+Y = np.arange(-3000, 3000, 1000)
 Z = np.arange(0, 10e6, 1e6)
 
 # X = np.arange(-5, 5, 1)
@@ -78,29 +78,35 @@ surface.set_lims(xlim, ylim, zlim)
 # surface.set_boundary(X, Y, Z)
 X, Y = np.meshgrid(X, Y)
 
+
 def update():
-  surf_updater.add_data(np.abs(np.random.normal(0, Z.ptp()/10.0, size=X.shape)), update.config)
+  data = np.abs(np.random.normal(0, Z.ptp() / 20.0, size=X.shape))
+  # data[500, 3000] = 80e3
+  data[3, 500:520] = 4000000
+  data[3, 512:513] = 8000000
+  surf_updater.add_data(data, update.config)
 
 update_surface_interval = 40
 
 update.config = {
-  "plots":[{
-    "name": "cosine",
-    "plot kwargs": {
-      "pen": 'r',
-      "downsample": None,
-      "fillLevel": 0,
-      "brush": (0, 0, 255, 80)
-    }
-  },{
-    "name": "sine",
-    "plot kwargs": {
-      "pen": 'b',
-      "downsample": None
-    }
-  }]
+    "plots": [{
+        "name": "cosine",
+        "plot kwargs": {
+            "pen": 'r',
+            "downsample": None,
+            "fillLevel": 0,
+            "brush": (0, 0, 255, 80)
+        }
+    }, {
+        "name": "sine",
+        "plot kwargs": {
+            "pen": 'b',
+            "downsample": None
+        }
+    }]
 }
 
+surf2 = Surface()
 app.add_widget(surface)
 app.add_timer(update_surface_interval, update)
 # surface.set_interval(update_surface_interval*2)

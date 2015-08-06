@@ -62,7 +62,6 @@ from PyQt4 import QtCore
 o_map = {"h": QtCore.Qt.Horizontal, "v": QtCore.Qt.Vertical}
 
 
-
 #    ______  _____  _____  _____  _____     ______   ________  _______     ______
 #   |_   _ \|_   _||_   _||_   _||_   _|   |_   _ `.|_   __  ||_   __ \  .' ____ \
 #     | |_) | | |    | |    | |    | |       | | `. \ | |_ \_|  | |__) | | (___ \_|
@@ -77,13 +76,14 @@ o_map = {"h": QtCore.Qt.Horizontal, "v": QtCore.Qt.Vertical}
 
 label_defaults = {"label": ""}
 
+
 def set_common_policy(widget, policy=None):
   widget.setSizePolicy(
       QtGui.QSizePolicy(
-        QtGui.QSizePolicy.MinimumExpanding,
-        QtGui.QSizePolicy.Preferred
+          QtGui.QSizePolicy.MinimumExpanding,
+          QtGui.QSizePolicy.Preferred
       )
-    )
+  )
   # print type(widget)
   # bound = widget.sizeHint().boundedTo(QtCore.QSize(1000,1000))
   # size = widget.size()
@@ -94,12 +94,12 @@ def set_common_policy(widget, policy=None):
 
   # if isinstance(widget, PyQt4.QtGui.QPushButton):
 
-
   # if bound.isValid() and
   # QtCore.QSize.boundedTo(widget.sizeHint()).height()
   # qsize = QtCore.QSize()
   # if qsize.boundedTo(widget.sizeHint()).height() < 50:
   #   widget.setMaximumHeight(50)
+
 
 def make_label(config, callback=None):
   instance = deepcopy(label_defaults)
@@ -107,6 +107,7 @@ def make_label(config, callback=None):
   label = QtGui.QLabel(instance["label"])
 
   return label
+
 
 def add_label(widget, label, position="left", policy=None):
   container = QtGui.QWidget()
@@ -139,15 +140,16 @@ def add_label(widget, label, position="left", policy=None):
 # Buttons
 
 button_defaults = {
-  "name":     None,
-  "qtype":    "button",
-  'type':     'bool',
-  "label":    "",
-  "clicked":  None,
-  "enabled":  False,
-  "args":     None,
-  "tool-tip": None
+    "name": None,
+    "qtype": "button",
+    'type': 'bool',
+    "label": "",
+    "clicked": None,
+    "enabled": False,
+    "args": None,
+    "tool-tip": None
 }
+
 
 def make_button(config, callback=None):
   instance = deepcopy(button_defaults)
@@ -164,10 +166,10 @@ def make_button(config, callback=None):
 
   if instance["clicked"] is not None:
     button.clicked.connect(
-      partial(
-        instance["clicked"],
-        [button] + instance["args"]
-      )
+        partial(
+            instance["clicked"],
+            [button] + instance["args"]
+        )
     )
   else:
     button.clicked.connect(partial(callback, button, instance))
@@ -179,18 +181,19 @@ def make_button(config, callback=None):
 ############################################
 # Buttons
 edit_defaults = {
-  "name":            None,
-  "qtype":           "edit",
-  "type":            "text",
-  "label":           None,
-  "position":        "left",
-  "default":         "",
-  "min":             0,
-  "max":             100,
-  "editingFinished": None,
-  "args":            None,
-  "tool-tip":        None
+    "name": None,
+    "qtype": "edit",
+    "type": "text",
+    "label": None,
+    "position": "left",
+    "default": "",
+    "min": 0,
+    "max": 100,
+    "editingFinished": None,
+    "args": None,
+    "tool-tip": None
 }
+
 
 def make_edit(config, callback=None):
   instance = deepcopy(edit_defaults)
@@ -215,10 +218,10 @@ def make_edit(config, callback=None):
 
   if instance["editingFinished"] is not None:
     edit.textEdited.connect(
-      partial(
-        instance["editingFinished"],
-        [edit] + instance["args"]
-      )
+        partial(
+            instance["editingFinished"],
+            [edit] + instance["args"]
+        )
     )
   elif signal is not None:
     signal.connect(partial(callback, edit, instance))
@@ -241,17 +244,17 @@ def make_edit(config, callback=None):
 # Sliders
 
 slider_defaults = {
-  "name":          None,
-  "type":          "int",
-  "qtype":         "slider",
-  "label":         "",
-  "position":      "above",
-  "range":         [0, 100],
-  "orientation":   "h",
-  "policy":        None,
-  "display":       False,
-  "valueChanged":  None,
-  "args":          [None]
+    "name": None,
+    "type": "int",
+    "qtype": "slider",
+    "label": "",
+    "position": "above",
+    "range": [0, 100],
+    "orientation": "h",
+    "policy": None,
+    "display": False,
+    "valueChanged": None,
+    "args": [None]
 }
 
 
@@ -280,13 +283,13 @@ def make_slider(config, callback=None):
     display = QtGui.QLineEdit("%3s" % "0")
     display.setAlignment(QtCore.Qt.AlignCenter)
     slider.valueChanged.connect(
-      partial(
-        display_slider_value,
-        slider,
-        display,
-        callback,
-        instance
-      )
+        partial(
+            display_slider_value,
+            slider,
+            display,
+            callback,
+            instance
+        )
     )
 
     container = QtGui.QWidget()
@@ -297,10 +300,10 @@ def make_slider(config, callback=None):
       # display.setMaximumSize(40, 30)
 
       display.setSizePolicy(
-        QtGui.QSizePolicy(
-          QtGui.QSizePolicy.MinimumExpanding,
-          QtGui.QSizePolicy.Minimum
-        )
+          QtGui.QSizePolicy(
+              QtGui.QSizePolicy.MinimumExpanding,
+              QtGui.QSizePolicy.Minimum
+          )
       )
 
       layout.addWidget(display)
@@ -310,10 +313,10 @@ def make_slider(config, callback=None):
 
       # display.setMinimumSize(70, 30)
       slider.setSizePolicy(
-        QtGui.QSizePolicy(
-          QtGui.QSizePolicy.MinimumExpanding,
-          QtGui.QSizePolicy.Minimum
-        )
+          QtGui.QSizePolicy(
+              QtGui.QSizePolicy.MinimumExpanding,
+              QtGui.QSizePolicy.Minimum
+          )
       )
       # layout = QtGui.QVBoxLayout()
       layout = QtGui.QGridLayout()
@@ -328,10 +331,10 @@ def make_slider(config, callback=None):
 
   if instance["label"] is not None:
     container = add_label(
-      container,
-      instance["label"],
-      position=instance["position"],
-      policy=instance["policy"])
+        container,
+        instance["label"],
+        position=instance["position"],
+        policy=instance["policy"])
 
   set_common_policy(container)
   return container
@@ -342,17 +345,18 @@ def make_slider(config, callback=None):
 # Combo
 
 combo_defaults = {
-  "name":            None,
-  "type":            "text",
-  "label":           "combobox",
-  "items":           [],
-  "maxVisible":      10,
-  "activated":       None,
-  "position":        "above",
-  "policy":          None,
-  "indexChanged":    None,
-  "args":            None
+    "name": None,
+    "type": "text",
+    "label": "combobox",
+    "items": [],
+    "maxVisible": 10,
+    "activated": None,
+    "position": "above",
+    "policy": None,
+    "indexChanged": None,
+    "args": None
 }
+
 
 def make_combo(config, callback=None):
   instance = deepcopy(combo_defaults)
@@ -367,9 +371,9 @@ def make_combo(config, callback=None):
   label = QtGui.QLabel(instance["label"])
   if instance["label"] is not None:
     combo = add_label(combo,
-                     instance["label"],
-                     position=instance["position"],
-                     policy=instance["policy"])
+                      instance["label"],
+                      position=instance["position"],
+                      policy=instance["policy"])
   else:
     label.setBuddy(combo)
 
@@ -379,18 +383,19 @@ def make_combo(config, callback=None):
   # styleComboBox.activated[str].connect(self.changeStyle)
 
 table_defaults = {
-  "name": None,
-  "label": "table",
-  "headers": [],
-  "items": [],
-  "args": None
+    "name": None,
+    "label": "table",
+    "headers": [],
+    "items": [],
+    "args": None
 }
+
 
 def make_table(config, callback=None):
   instance = deepcopy(table_defaults)
   instance.update(config)
   table = QtGui.QTableWidget(0, len(instance["headers"]))
-  #table.insertRow(1)
+  # table.insertRow(1)
   # table.setAlignment(QtCore.Qt.AlignCenter)
   table.setHorizontalHeaderLabels(instance["headers"])
 
@@ -406,9 +411,10 @@ def make_table(config, callback=None):
   return table
 
 widget_defaults = {
-  "name": None,
-  "label": "table"
+    "name": None,
+    "label": "table"
 }
+
 
 def make_widget(config, callback=None):
   instance = deepcopy(widget_defaults)
@@ -420,11 +426,11 @@ def make_widget(config, callback=None):
 
 
 make_funcs = {
-  "label": make_label,
-  "button": make_button,
-  "edit": make_edit,
-  "slider": make_slider,
-  "combo": make_combo,
-  "table": make_table,
-  "widget": make_widget
- }
+    "label": make_label,
+    "button": make_button,
+    "edit": make_edit,
+    "slider": make_slider,
+    "combo": make_combo,
+    "table": make_table,
+    "widget": make_widget
+}

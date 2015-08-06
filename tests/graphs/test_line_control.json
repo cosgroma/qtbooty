@@ -1,0 +1,35 @@
+{
+  "layout": ["h", "na"],
+  "groups": [
+  {
+    "enabled": true,
+    "box_enabled": true,
+    "group_name": "signal::controller",
+    "layout": [
+      "v",
+      "t"
+    ],
+    "items": [
+    {
+      "class": "button",
+      "name": "I",
+      "label": "InPhase",
+      "display": true,
+      "orientation": "v",
+      "policy": "smart",
+      "args": [
+        ""
+      ]
+    },{
+      "class": "button",
+      "name": "Q",
+      "label": "QnPhase",
+      "display": true,
+      "orientation": "v",
+      "policy": "smart",
+      "args": [
+        ""
+      ]
+    }]
+  }]
+}

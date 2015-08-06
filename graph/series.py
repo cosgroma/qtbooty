@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 # @Author: Mathew Cosgrove
 # @Date:   2014-11-25 22:27:47
-# @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-01-21 10:59:52
+# @Last Modified by:   cosgrma
+# @Last Modified time: 2015-08-05 07:37:07
 
 import pyqtgraph as pg
 from PyQt4 import QtGui, QtCore, Qt
@@ -14,11 +14,13 @@ pg.setConfigOption('foreground', 'w')
 from collections import deque
 import numpy as np
 
+import random as r
 from QtBooty.framework import IOGrid
 
 
 class PointSeries(QtGui.QWidget):
-  def __init__(self, name=None, controller=False, interval=1000, maxlen=1000,  ylim=[-1 , 1], setlegend=True):
+
+  def __init__(self, name=None, controller=False, interval=1000, maxlen=1000, ylim=[-1, 1], setlegend=True):
     super(PointSeries, self).__init__()
     self.maxlen = maxlen
     self.interval = interval
@@ -28,6 +30,7 @@ class PointSeries(QtGui.QWidget):
 
     self.layout = QtGui.QHBoxLayout()
     self.graph = LineGraph(name=name, maxlen=maxlen, setlegend=setlegend)
+
     if ylim is not None:
       self.graph.set_ylim(self.ylim)
 
@@ -74,7 +77,9 @@ class PointSeries(QtGui.QWidget):
     self.controller = PointSeriesController(self.line_names.keys(), self._controller_callback)
     self.layout.addWidget(self.controller)
 
-  def _controller_callback(self, name):
+  def _controller_callback(self, args):
+    pyobj = args[0]
+    name = args[1]
     if self.line_names[name]:
       self.hide_line(name)
     else:
@@ -83,15 +88,15 @@ class PointSeries(QtGui.QWidget):
   def run_test(self, interval=50, dynamic=False, freqs=[1]):
     if dynamic:
       self.test_waves = []
-      n = 0
-
+      self.n = 0
+      self.freqs = freqs
       for f in freqs:
         self.test_waves.append(f)
-        n += 1
-        self.add_line(f, color=QtGui.QPen(QtGui.QColor(2**n, 2**(n+1), 2**(n+2))))
+        self.n += 1
+        self.add_line(f, color=QtGui.QPen(QtGui.QColor(r.randint(0, 255), r.randint(0, 255), r.randint(0, 255))))
 
       self.t = 0
-      self.dt = (interval/1000.0)
+      self.dt = (interval / 1000.0)
       self.set_interval(interval)
 
       self.data_timer = QtCore.QTimer()
@@ -102,52 +107,76 @@ class PointSeries(QtGui.QWidget):
       self.update_timer.start()
 
     else:
-
       t = np.linspace(0, 1, 1000)
       f = freqs[0]
       for n in range(1, 6):
-        self.add_line(n, color=QtGui.QPen(QtGui.QColor(2**n, 2**(n+1), 2**(n+2))))
-        y = np.sin(2*np.pi*n*f*t)
+        self.add_line(n, color=QtGui.QPen(QtGui.QColor(r.randint(0, 255), r.randint(0, 255), r.randint(0, 255))))
+        y = np.sin(2 * np.pi * n * f * t)
         self.add_data_set(n, t, y)
       self.graph.update()
 
   def _dynamic_update(self):
     self.t += self.dt
     for f in self.test_waves:
-      ys = np.sin(2*np.pi*f*self.t)
+      ys = np.sin(2 * np.pi * f * self.t)
       self.add_data_point(f, self.t, ys)
+
+    if self.t % 5 < 2 * self.dt:
+      self.n += 1
+
+      f = self.freqs[-1] + self.freqs[0]
+      self.freqs.append(f)
+      self.test_waves.append(f)
+      self.controller.io_config["groups"][0]["items"].append({
+          "class": "button",
+          "qtype": "check",
+          "label": str(f),
+          "name": "check_" + str(f),
+          "clicked": self._controller_callback,
+          "args": [f]
+      })
+      self.controller.io_grid.config_update(self.controller.io_config)
+      self.add_line(f, color=QtGui.QPen(QtGui.QColor(r.randint(0, 64), r.randint(0, 64) * 2, r.randint(0, 64) * 4)))
 
 
 class PointSeriesController(QtGui.QWidget):
+
   def __init__(self, line_names, callback):
     super(PointSeriesController, self).__init__()
     self.layout = QtGui.QHBoxLayout()
     self.setLayout(self.layout)
     self.io_grid = IOGrid()
-    self.config = self.io_grid.config_init(1, [len(line_names)])
 
-    self.config["groups"][0]["box_enabled"] = True
-    self.config["groups"][0]["box_name"] = "plot control"
-    self.config["groups"][0]["layout"] = ["v", "t"]
-
-  # def add_line_controllers(self, line_names):
+    io_config_layout = {
+        "layout": ["v", "na"],
+        "groups": [{
+            "enabled": True,
+            "box_enabled": True,
+            "group_name": "Plot Control",
+            "layout": ["v", "t"],
+            "items": []
+        }]
+    }
+    # def add_line_controllers(self, line_names):
     for n in line_names:
-      self.config["groups"][0]["items"].append({
+      io_config_layout["groups"][0]["items"].append({
           "class": "button",
-          "config": {
-            "type": "check",
-            "label": str(n),
-            "clicked": callback,
-            "args": n
-            }
-        })
-    # self.controllers = []
-    self.io_grid.config_widget(self.config)
+          "qtype": "check",
+          "label": str(n),
+          "name": "check_" + str(n),
+          "clicked": callback,
+          "args": [n]
+      })
+    self.params, self.io_config = self.io_grid.load_config(io_config_layout)
     self.layout.addWidget(self.io_grid)
+
+  def onChange(self, param, changes):
+    pass
 
 
 class LineGraph(pg.PlotWidget):
-  def __init__(self, name=None, maxlen=1000, ylim=[-1 , 1], setlegend=True):
+
+  def __init__(self, name=None, maxlen=1000, ylim=[-1, 1], setlegend=True):
     super(LineGraph, self).__init__(name=name)
 
     self.maxlen = maxlen
@@ -156,6 +185,13 @@ class LineGraph(pg.PlotWidget):
     self.showGrid(x=True, y=True)
     if self.setlegend:
       self.legend = self.addLegend()
+
+    self.setSizePolicy(
+        QtGui.QSizePolicy(
+            QtGui.QSizePolicy.MinimumExpanding,
+            QtGui.QSizePolicy.MinimumExpanding
+        )
+    )
 
   def set_maxlen(self, maxlen):
     self.maxlen = maxlen
@@ -208,7 +244,6 @@ if __name__ == "__main__":
   import sys
   app = QtGui.QApplication(sys.argv)
   time_series = PointSeries(interval=50, maxlen=100)
-
   time_series.run_test(interval=50, dynamic=True, freqs=[.1, .2, .3])
   time_series.add_controller()
   time_series.show()

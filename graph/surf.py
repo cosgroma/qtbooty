@@ -30,8 +30,8 @@ Attributes:
 """
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-30 05:25:42
-# @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-02-10 13:41:52
+# @Last Modified by:   cosgrma
+# @Last Modified time: 2015-08-05 08:22:39
 # REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
 # REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
@@ -63,7 +63,9 @@ if backend == "visvis":
 
 # from graph_utils import GraphUpdater
 
+
 class Surface(QtGui.QWidget):
+
   def __init__(self, name=None, controller=False):
     super(Surface, self).__init__()
     self.layout = QtGui.QHBoxLayout()
@@ -96,13 +98,13 @@ if __name__ == '__main__':
   app = QtGui.QApplication(sys.argv)
   surf = Surface()
 
-  X = np.arange(511, 513, 0.5)
-  Y = np.arange(-700, 700, 100)
-  Z = np.arange(0, 10e3, 1e3)
+  # X = np.arange(511, 513, 0.5)
+  # Y = np.arange(-700, 700, 100)
+  # Z = np.arange(0, 10e3, 1e3)
 
-  xlim = (np.min(X), np.max(X))
-  ylim = (np.min(Y), np.max(Y))
-  zlim = (np.min(Z), np.max(Z))
+  # xlim = (np.min(X), np.max(X))
+  # ylim = (np.min(Y), np.max(Y))
+  # zlim = (np.min(Z), np.max(Z))
 
   # X = np.arange(0, 1023, 0.5)
   # Y = np.arange(-7000, 7000, 1000)
@@ -113,11 +115,11 @@ if __name__ == '__main__':
   # Z = np.arange(0, 10, 1)
 
   # surf.set_boundary(X, Y, Z)
-  surf.set_xymesh(X, Y)
-  surf.set_lims(xlim, ylim, zlim)
-  X, Y = np.meshgrid(X, Y)
-  surf.add_data(np.abs(np.random.normal(0, Z.ptp()/10.0, size=X.shape)))
-  surf._update()
-  surf.start()
+  # surf.set_xymesh(X, Y)
+  # surf.set_lims(xlim, ylim, zlim)
+  # X, Y = np.meshgrid(X, Y)
+  # surf.add_data(np.abs(np.random.normal(0, Z.ptp() / 10.0, size=X.shape)))
+  # surf._update()
+  # surf.start()
   surf.show()
   sys.exit(app.exec_())

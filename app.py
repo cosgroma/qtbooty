@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-05 20:56:57
-# @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-02-12 05:34:46
+# @Last Modified by:   cosgrma
+# @Last Modified time: 2015-07-28 08:17:42
 
 import logging
 logger = logging.getLogger(__name__)
@@ -18,63 +18,67 @@ from PyQt4 import QtCore, QtGui
 
 
 color_gradients = {
-  "orange": [("gradienta", "#b56c17"), ("gradientb", "#d7801a"), ("gradientc", "#ffa02f"), ("gradientd", "#ffaa00")],
-  "blue": [("gradienta", "#353DE7"), ("gradientb", "#484FE5"), ("gradientc", "#5B61E4"), ("gradientd", "#6E74E2")],
-  "blue2": [("gradienta", "#484FE5"), ("gradientb", "#353DE7"), ("gradientc", "#222BE9"), ("gradientd", "#0F19EB")],
-  "green": [("gradienta", "#2CF293"), ("gradientb", "#38F296"), ("gradientc", "#45F29A"), ("gradientd", "#52F39E")]
+    "orange": [("gradienta", "#b56c17"), ("gradientb", "#d7801a"), ("gradientc", "#ffa02f"), ("gradientd", "#ffaa00")],
+    "blue": [("gradienta", "#353DE7"), ("gradientb", "#484FE5"), ("gradientc", "#5B61E4"), ("gradientd", "#6E74E2")],
+    "blue2": [("gradienta", "#484FE5"), ("gradientb", "#353DE7"), ("gradientc", "#222BE9"), ("gradientd", "#0F19EB")],
+    "green": [("gradienta", "#2CF293"), ("gradientb", "#38F296"), ("gradientc", "#45F29A"), ("gradientd", "#52F39E")]
 }
 
 
 default_settings = {
-  "name": "Default Settings File",
-  "size": {
-    "layout": "g",
-    "policy": "unbounded",
-    "min": [100, 100],
-    "max": [480, 320]
-  },
-  "menu": {
-    "enabled": True,
-    "items": [{
-      "name": "File",
-      "actions": [{
-        "name": "New",
-        "shortcut": "Ctrl+N",
-        "tip": "make a new file"
+    "name": "Default Settings File",
+    "size": {
+        "layout": "g",
+        "policy": "unbounded",
+        "min": [100, 100],
+        "max": [480, 320]
+    },
+    "menu": {
+        "enabled": True,
+        "items": [{
+            "name": "File",
+            "actions": [{
+                "name": "New",
+                "shortcut": "Ctrl+N",
+                "tip": "make a new file"
+            }, {
+                "name": "Open",
+                "shortcut": "Ctrl+O",
+                "tip": "open an existing file"
+            }]
         }, {
-        "name": "Open",
-        "shortcut" : "Ctrl+O",
-        "tip": "open an existing file"
+            "name": "Edit",
+            "actions": []
+        }, {
+            "name": "View",
+            "actions": [{
+                "name": "CPU Statistics",
+                "shortcut": "Ctrl+N",
+                "tip": "view run-time CPU stats"
+            }]
         }]
-      }, {
-      "name": "Edit",
-      "actions": []
-      }, {
-      "name": "View",
-      "actions": [{
-          "name": "CPU Statistics",
-          "shortcut": "Ctrl+N",
-          "tip": "view run-time CPU stats"
-          }]
-    }]
-  },
-  "status": {
-    "enabled": True
-  }
+    },
+    "status": {
+        "enabled": True
+    }
 }
 
 layout_lookup = {
-  "h": QtGui.QHBoxLayout,
-  "v": QtGui.QVBoxLayout,
-  "g": QtGui.QGridLayout,
-  "f": QtGui.QFormLayout
+    "h": QtGui.QHBoxLayout,
+    "v": QtGui.QVBoxLayout,
+    "g": QtGui.QGridLayout,
+    "f": QtGui.QFormLayout
 }
 
 #
+
+
 class App(QtGui.QApplication):
+
   """
   @summary:
   """
+
   def __init__(self, json_file=None):
     """
     @summary:
@@ -103,7 +107,8 @@ class App(QtGui.QApplication):
 
   def add_widget(self, widget, *args):
     logger.debug('widget args : %s' % (args, ))
-    if args is not None:
+    if len(args) > 0:
+      print("main is grid")
       if self.main.settings["size"]["layout"] == "g":
         logger.debug('main is grid layout')
         self.main.layout.addWidget(widget, *args)
@@ -140,6 +145,7 @@ class App(QtGui.QApplication):
 
 
 class MainWindow(QtGui.QMainWindow):
+
   def __init__(self, settings=None):
     super(MainWindow, self).__init__()
     self.settings = settings
@@ -150,8 +156,6 @@ class MainWindow(QtGui.QMainWindow):
     # Setup the minimum structure before you process settings
     self.central = QtGui.QWidget()
     self.setCentralWidget(self.central)
-
-
 
     # Process user settings
     if self.settings is not None:
@@ -165,7 +169,6 @@ class MainWindow(QtGui.QMainWindow):
   def central_setup(self):
     self.setWindowTitle(self.settings["name"])
 
-
     if self.settings["size"]["policy"] == "bounded":
       self.setMinimumSize(self.settings["size"]["min"][0],
                           self.settings["size"]["min"][1])
@@ -174,6 +177,7 @@ class MainWindow(QtGui.QMainWindow):
 
     self.layout = layout_lookup[self.settings["size"]["layout"]]()
     self.central.setLayout(self.layout)
+
   def menu_setup(self):
     if self.settings["menu"]["enabled"]:
       self.menus = dict()
@@ -209,4 +213,3 @@ if __name__ == '__main__':
   # app.main.menus["File"].actions["New"].triggered.connect(test_trigger)
   app.run()
   print("test", )
-

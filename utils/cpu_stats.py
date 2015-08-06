@@ -2,23 +2,26 @@
 # -*- coding: utf-8 -*-
 # @Author: Mathew Cosgrove
 # @Date:   2014-11-26 08:07:43
-# @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-02-10 13:59:09
+# @Last Modified by:   cosgrma
+# @Last Modified time: 2015-07-29 13:38:44
 import sys
 sys.path.append('/home/cosgroma/workspace/lib/python/modules')
 from PyQt4 import QtCore, QtGui
-from QtBooty import App
-from QtBooty import graphs
+from QtBooty.app import App
+from QtBooty.graph import graph
 import psutil
 import numpy as np
+
 
 class CpuThread(QtCore.QThread):
   cpustats = QtCore.pyqtSignal(list)
   diskstats = QtCore.pyqtSignal(list)
+
   def __init__(self, parent=None):
     super(CpuThread, self).__init__(parent)
     self.start(QtCore.QThread.LowPriority)
     self.count = 0.0
+
   def run(self):
     while True:
       self.usleep(1000)
@@ -29,8 +32,11 @@ class CpuThread(QtCore.QThread):
       disk = psutil.disk_io_counters()
       self.diskstats.emit([disk.read_count, disk.write_count])
 
+
 class CpuStatsPlot(object):
+
   """docstring for CpuStatsPlot"""
+
   def __init__(self, ts_updater, disk_updater):
     super(CpuStatsPlot, self).__init__()
     self.cputhread = CpuThread()
@@ -42,31 +48,33 @@ class CpuStatsPlot(object):
     self.count = 0.0
     self.configured = False
     self.diskplotconfig["plots"] = [
-      {"name":"readcount", "plot kwargs": {"pen": "r"}},
-      {"name":"write_count", "plot kwargs": {"pen": "b"}}]
+        {"name": "readcount", "plot kwargs": {"pen": "r"}},
+        {"name": "write_count", "plot kwargs": {"pen": "b"}}]
     self.disk_updater = disk_updater
+
   def updateDisk(self, diskio):
     npm = np.matrix([
-      [self.count],
-      [diskio[0]],
-      [diskio[1]]
-      ])
+        [self.count],
+        [diskio[0]],
+        [diskio[1]]
+    ])
     self.disk_updater.add_data(npm, self.diskplotconfig)
+
   def updatePlot(self, usage):
     if not self.configured:
       self.plotconfig["plots"] = []
       for i in range(0, len(usage)):
         self.plotconfig["plots"].append({
-          "name": "cpu%d" % i,
-          "plot kwargs": {
-            "pen": QtGui.QPen(
-              QtGui.QColor(
-                np.random.randint(255),
-                np.random.randint(255),
-                np.random.randint(255)
-              )
-            ), "downsample": None
-          }
+            "name": "cpu%d" % i,
+            "plot kwargs": {
+                "pen": QtGui.QPen(
+                    QtGui.QColor(
+                        np.random.randint(255),
+                        np.random.randint(255),
+                        np.random.randint(255)
+                    )
+                ), "downsample": None
+            }
         })
       self.configured = True
     npm = np.zeros((len(usage) + 1, 1))
@@ -75,7 +83,6 @@ class CpuStatsPlot(object):
     npm[:, 0] = self.count
     npm[1:, 0] = usage
     self.ts_updater.add_data(npm, self.plotconfig)
-
 
 
 app = App('../tests/config/app_config.json')

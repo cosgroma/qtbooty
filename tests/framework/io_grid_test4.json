@@ -1,0 +1,22 @@
+{
+    "layout": ["h", "na"],
+    "groups": [{
+        "enabled": true,
+        "box_enabled": true,
+        "group_name": "data selection",
+        "layout": ["v", "t"],
+        "items": [{
+            "class": "button",
+            "name": "power0",
+            "qtype": "radio"
+        }, {
+            "class": "button",
+            "name": "power1",
+            "qtype": "radio"
+        }, {
+            "class": "button",
+            "name": "power2",
+            "qtype": "radio"
+        }]
+    }]
+}
