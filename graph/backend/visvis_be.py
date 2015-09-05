@@ -31,7 +31,7 @@ Attributes:
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-30 14:18:27
 # @Last Modified by:   cosgrma
-# @Last Modified time: 2015-08-05 08:51:18
+# @Last Modified time: 2015-09-02 06:01:02
 # REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
 # REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
@@ -71,8 +71,8 @@ class VisBaseCanvas(QtGui.QWidget):
       # print self.fig._widget.colorCount(), self.fig._widget.colormap()
       self.setLayout(self.layout)
 
-      self.setSizePolicy(QtGui.QSizePolicy(QtGui.QSizePolicy.MinimumExpanding,
-                                           QtGui.QSizePolicy.MinimumExpanding))
+      # self.setSizePolicy(QtGui.QSizePolicy(QtGui.QSizePolicy.MinimumExpanding,
+      #                                      QtGui.QSizePolicy.MinimumExpanding))
 
       self.updateGeometry()
 

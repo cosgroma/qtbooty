@@ -4,7 +4,7 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-05 22:26:11
 # @Last Modified by:   cosgrma
-# @Last Modified time: 2015-08-05 07:32:31
+# @Last Modified time: 2015-09-02 06:00:05
 
 import logging
 import pyutils
@@ -210,12 +210,12 @@ class IOGrid(QtGui.QWidget):
 
       if group["box_enabled"]:
         widget = QtGui.QGroupBox(group["group_name"])
-        widget.setSizePolicy(
-            QtGui.QSizePolicy(
-                QtGui.QSizePolicy.Maximum,
-                QtGui.QSizePolicy.Maximum
-            )
-        )
+        # widget.setSizePolicy(
+        #     QtGui.QSizePolicy(
+        #         QtGui.QSizePolicy.Maximum,
+        #         QtGui.QSizePolicy.Maximum
+        #     )
+        # )
         self.group_names[group["group_name"]] = widget
         widget.setCheckable(group["checkable"])
       else:
@@ -275,10 +275,17 @@ class IOGrid(QtGui.QWidget):
         if "added" in io.keys() and io["added"]:
           continue
         self.p.addChild(io)
-        layout.addWidget(make_funcs[io["class"]](io, callback=self.generic_callback))
+        iow = make_funcs[io["class"]](io, callback=self.generic_callback)
+        self.io_widgets[io["name"]] = iow
+        layout.addWidget(iow)
         io["added"] = True
 
+  # def config_remove_io(self, name):
+  #   self.p.removeChild(io)
+  #     self.io_widgets[io["name"]]
+  #   pass
   # def get_widget(self):
+
   def set_groups_enabled(self, names, enable):
     for name in names:
       self.group_names[name].setEnabled(enable)
@@ -297,8 +304,6 @@ class IOGrid(QtGui.QWidget):
       for c in self.io_widgets[name].children():
         if isinstance(c, PyQt4.QtGui.QLineEdit):
           c.setText(str(data))
-    else:
-      print type(self.io_widgets[name])
 
   def update_table_widget(self, name, data, controls=["enable", "edit", "delete"]):
     def new_table_item(label=""):

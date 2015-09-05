@@ -30,8 +30,8 @@ Attributes:
 """
 # @Author: Mathew Cosgrove
 # @Date:   2015-01-21 15:05:05
-# @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2015-02-11 21:13:12
+# @Last Modified by:   cosgrma
+# @Last Modified time: 2015-09-02 06:19:47
 # REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
 # REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
@@ -78,12 +78,19 @@ label_defaults = {"label": ""}
 
 
 def set_common_policy(widget, policy=None):
-  widget.setSizePolicy(
-      QtGui.QSizePolicy(
-          QtGui.QSizePolicy.MinimumExpanding,
-          QtGui.QSizePolicy.Preferred
-      )
-  )
+  # widget.setSizePolicy(
+  #     QtGui.QSizePolicy(
+  #         QtGui.QSizePolicy.MinimumExpanding,
+  #         QtGui.QSizePolicy.Preferred
+  #     )
+  # )
+  # sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.MinimumExpanding, QtGui.QSizePolicy.Preferred)
+  sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
+  sizePolicy.setHorizontalStretch(0)
+  sizePolicy.setVerticalStretch(0)
+  # sizePolicy.setHeightForWidth(widget.sizePolicy().hasHeightForWidth())
+  widget.setSizePolicy(sizePolicy)
+
   # print type(widget)
   # bound = widget.sizeHint().boundedTo(QtCore.QSize(1000,1000))
   # size = widget.size()

@@ -3,7 +3,7 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-05 20:56:57
 # @Last Modified by:   cosgrma
-# @Last Modified time: 2015-07-28 08:17:42
+# @Last Modified time: 2015-09-04 05:53:23
 
 import logging
 logger = logging.getLogger(__name__)
@@ -26,7 +26,7 @@ color_gradients = {
 
 
 default_settings = {
-    "name": "Default Settings File",
+    "name": "",
     "size": {
         "layout": "g",
         "policy": "unbounded",
@@ -34,7 +34,7 @@ default_settings = {
         "max": [480, 320]
     },
     "menu": {
-        "enabled": True,
+        "enabled": False,
         "items": [{
             "name": "File",
             "actions": [{
@@ -59,7 +59,7 @@ default_settings = {
         }]
     },
     "status": {
-        "enabled": True
+        "enabled": False
     }
 }
 
@@ -95,12 +95,19 @@ class App(QtGui.QApplication):
     self.app_settings = None
 
     # Process the app configuration file
-    if json_file is not None and os.path.isfile(json_file):
-      self.json_file = json_file
-      self.app_settings = json.load(open(json_file))
-    else:
-      logger.critical('config file fucked up : %s' % (json_file))
+    if json_file is None:
+      logger.info('No user configuration, using default settings: %s' % (json_file))
       self.app_settings = default_settings
+    elif not os.path.isfile(json_file):
+      logger.critical('Configuration file does not exist: %s, using default setting' % (json_file))
+      self.app_settings = default_settings
+    else:
+      try:
+        self.json_file = json_file
+        self.app_settings = json.load(open(json_file))
+      except Exception as ValueError:
+        logger.critical('Configuration file (%s) contains malfored json reverting to default setting' % (json_file))
+        self.app_settings = default_settings
 
     self.main = MainWindow(self.app_settings)
     self.apply_style("default")
@@ -108,7 +115,6 @@ class App(QtGui.QApplication):
   def add_widget(self, widget, *args):
     logger.debug('widget args : %s' % (args, ))
     if len(args) > 0:
-      print("main is grid")
       if self.main.settings["size"]["layout"] == "g":
         logger.debug('main is grid layout')
         self.main.layout.addWidget(widget, *args)

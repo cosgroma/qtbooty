@@ -31,7 +31,7 @@ Attributes:
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-30 06:57:46
 # @Last Modified by:   cosgrma
-# @Last Modified time: 2015-08-05 08:43:44
+# @Last Modified time: 2015-08-07 16:51:02
 # REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
 # REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
@@ -61,7 +61,7 @@ surf_updater = gscheduler.add_graph(surface, maxlen=1, interval=10, mode="array"
 # np.histogram(nc_vals, bins=50, normed=True)
 
 X = np.arange(0, 1023, 1)
-Y = np.arange(-3000, 3000, 1000)
+Y = np.arange(-3000, 3000, 500)
 Z = np.arange(0, 10e6, 1e6)
 
 # X = np.arange(-5, 5, 1)

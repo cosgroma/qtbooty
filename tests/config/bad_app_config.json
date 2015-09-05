@@ -1,0 +1,37 @@
+{
+  "name": "Qt Booty Test",
+  "size": {
+    "policy": "unbounded",
+    "layout": "h",
+    "min": [100, 100],
+    "max": [480, 320]
+  },
+  "menu": {
+    "enabled": true,
+    "items": [{
+      "name": "File",
+      "actions": [
+        "name": "New",
+        "shortcut": "Ctrl+N",
+        "tip": "make a new file"
+      }, {
+        "name": "Open",
+        "shortcut": "Ctrl+O",
+        "tip": "open an existing file"
+      }]
+    }, {
+      "name": "Edit",
+      "actions": []
+    }, {
+      "name": "View",
+      "actions": [{
+        "name": "CPU Statistics",
+        "shortcut": "Ctrl+N",
+        "tip": "view run-time CPU stats"
+      }]
+    }]
+  },
+  "status": {
+    "enabled": true
+  }
+}
