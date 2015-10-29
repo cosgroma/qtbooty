@@ -14,6 +14,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=drawing"></script>
     <script>
     var map;
+    var flightPath;
     // var pos_error;
     function initialize() {
         var customMapType = new google.maps.StyledMapType([{
@@ -43,7 +44,8 @@
         var mapOptions = {
             center: new google.maps.LatLng(37.5, -122.2),
             zoom: 20,
-            mapTypeIds: [google.maps.MapTypeId.ROADMAP, customMapTypeId]
+            mapTypeId: google.maps.MapTypeId.HYBRID,
+            tilt: 0
         };
 
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
@@ -52,14 +54,14 @@
 
         var drawingManager = new google.maps.drawing.DrawingManager({
             drawingMode: google.maps.drawing.OverlayType.POLYGON,
-            drawingControl: true,
+            drawingControl: false,
             drawingControlOptions: {
                 position: google.maps.ControlPosition.TOP_CENTER,
                 drawingModes: [google.maps.drawing.OverlayType.POLYGON]
             },
             polygonOptions: {
-                editable: true,
-                draggable: true
+                editable: false,
+                draggable: false
             },
         });
         drawingManager.setMap(map);
@@ -74,6 +76,28 @@
                 self.polygoncomplete(xy.lat(), xy.lng(), i);
             });
         });
+
+        flightPath = new google.maps.Polyline({
+            geodesic: true,
+            strokeColor: '#FF0000',
+            strokeOpacity: 1.0,
+            strokeWeight: 2
+        });
+
+        flightPath.setMap(map);
+
+    }
+
+    function addPath(lat, lng) {
+        // get existing path
+        var path = flightPath.getPath();
+        // add new point
+        path.push(new google.maps.LatLng(lat, lng));
+        if (path.getLength() > 10) {
+            path.removeAt(0);
+        }
+        // update the polyline with the updated path
+        flightPath.setPath(path);
     }
 
     function addMarker(lat, lng) {
@@ -83,6 +107,7 @@
             map: map
         });
     }
+
     var pos_error;
     function addErrorCircle(lat, lng, radius) {
         if (pos_error != null)
