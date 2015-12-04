@@ -1,0 +1,24 @@
+{
+  "layout": ["h", "na"],
+  "groups": [{
+    "enabled": true,
+    "box_enabled": true,
+    "group_name": "Serial Output",
+    "layout": ["v", "t"],
+    "items": [{
+      "class": "edit",
+      "name": "console_output",
+      "qtype": "window",
+      "use-callback": false
+    }, {
+      "class": "combo",
+      "name": "combobox15",
+      "label": "combobox",
+      "items": ["one", "two", "three"],
+      "maxVisible": 10,
+      "activated": "",
+      "indexChanged": "",
+      "args": [""]
+    }]
+  }]
+}

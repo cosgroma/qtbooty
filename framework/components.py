@@ -31,7 +31,7 @@ Attributes:
 # @Author: Mathew Cosgrove
 # @Date:   2015-01-21 15:05:05
 # @Last Modified by:   cosgrma
-# @Last Modified time: 2015-09-02 06:19:47
+# @Last Modified time: 2015-12-04 05:22:26
 # REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
 # REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
@@ -78,6 +78,18 @@ label_defaults = {"label": ""}
 
 
 def set_common_policy(widget, policy=None):
+
+  if policy == "V-Expand":
+    sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.MinimumExpanding)
+    sizePolicy.setHorizontalStretch(0)
+    sizePolicy.setVerticalStretch(0)
+  else:
+    sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
+    sizePolicy.setHorizontalStretch(0)
+    sizePolicy.setVerticalStretch(0)
+
+  widget.setSizePolicy(sizePolicy)
+
   # widget.setSizePolicy(
   #     QtGui.QSizePolicy(
   #         QtGui.QSizePolicy.MinimumExpanding,
@@ -85,12 +97,7 @@ def set_common_policy(widget, policy=None):
   #     )
   # )
   # sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.MinimumExpanding, QtGui.QSizePolicy.Preferred)
-  sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
-  sizePolicy.setHorizontalStretch(0)
-  sizePolicy.setVerticalStretch(0)
   # sizePolicy.setHeightForWidth(widget.sizePolicy().hasHeightForWidth())
-  widget.setSizePolicy(sizePolicy)
-
   # print type(widget)
   # bound = widget.sizeHint().boundedTo(QtCore.QSize(1000,1000))
   # size = widget.size()
@@ -98,9 +105,7 @@ def set_common_policy(widget, policy=None):
   # print "bound", bound, "size:", size, "expand", expand
   # print bound, widget.minimumSize()
   # widget.resize(widget.minimumSize())
-
   # if isinstance(widget, PyQt4.QtGui.QPushButton):
-
   # if bound.isValid() and
   # QtCore.QSize.boundedTo(widget.sizeHint()).height()
   # qsize = QtCore.QSize()
@@ -198,7 +203,9 @@ edit_defaults = {
     "max": 100,
     "editingFinished": None,
     "args": None,
-    "tool-tip": None
+    "tool-tip": None,
+    "read-only": False,
+    "use-callback": True
 }
 
 
@@ -206,7 +213,7 @@ def make_edit(config, callback=None):
   instance = deepcopy(edit_defaults)
   instance.update(config)
   signal = None
-
+  size_policy = None
   if instance["qtype"] == "datetime":
     edit = QtGui.QDateTimeEdit()
     signal = edit.dateTimeChanged
@@ -215,6 +222,12 @@ def make_edit(config, callback=None):
     edit.setMinimum(instance['min'])
     edit.setMaximum(instance['max'])
     signal = edit.valueChanged
+  elif instance["qtype"] == "window":
+    edit = QtGui.QPlainTextEdit()
+    edit.setMinimumSize(QtCore.QSize(270, 200))
+    edit.setReadOnly(True)
+    signal = None
+    size_policy = "V-Expand"
   else:
     edit = QtGui.QLineEdit(str(instance["default"]))
     signal = edit.textEdited
@@ -233,7 +246,8 @@ def make_edit(config, callback=None):
   elif signal is not None:
     signal.connect(partial(callback, edit, instance))
 
-  callback(edit, instance)
+  if instance["use-callback"]:
+    callback(edit, instance)
   # edit.cursorPositionChanged.connect(partial(callback, edit, instance))
 
   if instance["label"] is not None:
@@ -243,7 +257,7 @@ def make_edit(config, callback=None):
     edit.setToolTip(instance["tool-tip"])
     edit.setStatusTip(instance["tool-tip"])
 
-  set_common_policy(edit)
+  set_common_policy(edit, policy=size_policy)
 
   return edit
 
