@@ -31,7 +31,7 @@ Attributes:
 # @Author: Mathew Cosgrove
 # @Date:   2015-01-14 01:09:36
 # @Last Modified by:   cosgrma
-# @Last Modified time: 2015-07-29 08:36:11
+# @Last Modified time: 2016-02-03 11:21:52
 # REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
 # REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
@@ -132,7 +132,13 @@ class Line(QtGui.QWidget):
       self.show_line(name)
 
   def add_plot(self, name, plot_args):
-
+    if plot_args is None:
+      plot_args = {
+          "pen": 'r',
+          "downsample": None,
+          "fillLevel": 0,
+          "brush": (0, 0, 255, 80)
+      }
     self.artists[name] = self.graph.plot(**plot_args)
     if self.legend_enabled:
       self.legend.addItem(self.artists[name], name)

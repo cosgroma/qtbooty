@@ -3,7 +3,7 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-11-25 22:27:47
 # @Last Modified by:   cosgrma
-# @Last Modified time: 2015-09-02 06:01:44
+# @Last Modified time: 2016-02-03 11:33:50
 
 import pyqtgraph as pg
 from PyQt4 import QtGui, QtCore, Qt
@@ -60,6 +60,8 @@ class PointSeries(QtGui.QWidget):
 
   def add_data_set(self, name, x, y):
     self.graph.add_data_set(name, x, y)
+    if self.interval == 0:
+      self.graph.update()
 
   def add_line(self, name, color=None, downsample=None):
     if self.controller is not None:

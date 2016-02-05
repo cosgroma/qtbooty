@@ -3,7 +3,7 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-05 20:56:57
 # @Last Modified by:   cosgrma
-# @Last Modified time: 2015-09-04 05:53:23
+# @Last Modified time: 2016-02-03 01:58:41
 
 import logging
 logger = logging.getLogger(__name__)
@@ -201,10 +201,9 @@ class MainWindow(QtGui.QMainWindow):
     if self.close_callback is not None:
       self.close_callback()
 
-  def update_status(self):
+  def update_status(self, message):
     if self.settings["status"]["enabled"]:
-      self.statusBar().showMessage("test")
-    # also by default added the CPU percentage and memory usage
+      self.statusBar().showMessage(message)
 
   def set_close_callback(self, callback):
     self.close_callback = callback

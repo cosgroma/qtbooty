@@ -4,7 +4,7 @@
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-05 22:26:11
 # @Last Modified by:   cosgrma
-# @Last Modified time: 2015-09-02 06:00:05
+# @Last Modified time: 2016-02-03 03:02:53
 
 import logging
 import pyutils
@@ -172,6 +172,14 @@ class IOGrid(QtGui.QWidget):
       curval = self.p.param(instance["name"]).value()
       curval = 0 if curval is None else curval
       self.p.param(instance["name"]).setValue(1 ^ curval)
+      # self.p.param(instance["name"]).setCheckable(True)
+      # print(type(curval))
+      # if curval == 1:
+      #   setchecked = True
+      # else:
+      #   setchecked = False
+      # obj.setChecked(setchecked)
+      # sef.p.
       # self.p.param(instance["name"]).setValue(0, blockSignal=self.callback)
     elif isinstance(obj, PyQt4.QtGui.QComboBox):
       self.p.param(instance["name"]).setValue(obj.itemText(obj.currentIndex()))
