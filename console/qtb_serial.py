@@ -14,29 +14,36 @@ baudRates = ['9600',
 
 class SerialWidget(QWidget):
 
-  def __init__(self, *args):
+  def __init__(self, port=None, baud=None, connect_on_start=False):
     super(SerialWidget, self).__init__()
     self.ser = None
-    # sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.MinimumExpanding, QtGui.QSizePolicy.MinimumExpanding)
-    # sizePolicy.setHorizontalStretch(1)
-    # sizePolicy.setVerticalStretch(1)
-    # self.setSizePolicy(sizePolicy)
     self.reader = CReader()
     self.writer = CWriter()
-
-    # QMainWindow.__init__(*(self, ) + args)
     self.ui = Ui_MainWindow()
     self.setupUi()
-    self.printInfo("Ready...")
+    self.connected = False
+
+    if port is not None:
+      curIndex = self.ui.portsComboBox.findText(port)
+      if curIndex > -1:
+        self.ui.portsComboBox.setCurrentIndex(curIndex)
+        self.port = port
+    if baud is not None and baud in baudRates:
+      self.ui.baudRateComboBox.setCurrentIndex(self.ui.baudRateComboBox.findText(baud))
+      self.baud = baud
+
+    if connect_on_start and self.baud is not None and self.port is not None:
+      self.connect()
 
   def setupUi(self):
     self.ui.setupUi(self)
     self.ui.baudRateComboBox.addItems(baudRates)
     self.refreshPorts()
-    QObject.connect(self.ui.exitPushButton, SIGNAL("clicked()"), self, SLOT("close()"))
+
+    # QObject.connect(self.ui.exitPushButton, SIGNAL("clicked()"), self, SLOT("close()"))
     QObject.connect(self.ui.refreshPortsPushButton, SIGNAL("clicked()"), self.refreshPorts)
     QObject.connect(self.ui.connectPushButton, SIGNAL("clicked()"), self.connect)
-    QObject.connect(self.ui.disconnectPushButton, SIGNAL("clicked()"), self.disconnect)
+    # QObject.connect(self.ui.disconnectPushButton, SIGNAL("clicked()"), self.disconnect)
     QObject.connect(self.ui.cmdLineEdit, SIGNAL("returnPressed()"), self.processCmd)
 
     QObject.connect(self.reader, SIGNAL("newData(QString)"), self.updateLog)
@@ -65,29 +72,29 @@ class SerialWidget(QWidget):
     self.ui.portsComboBox.addItems(sorted(self.getWinPorts()))
 
   def connect(self):
-    self.disconnect()
-    try:
-      self.printInfo("Connecting to %s with %s baud rate." %
-                     (self.getSelectedPort(), self.getSelectedBaudRate()))
-      self.ser = serial.Serial(str(self.getSelectedPort()),
-                               int(self.getSelectedBaudRate()))
-      self.startReader(self.ser)
-      self.printInfo("Connected successfully.")
-    except:
-      self.ser = None
-      self.printError("Failed to connect!")
-
-  def disconnect(self):
-    self.stopThreads()
-    if self.ser is None:
-      return
-    try:
+    if self.connected:
+      self.connected = False
+      self.stopThreads()
+      self.ui.connectPushButton.setText("connect")
+      self.ui.connectPushButton.setDown(False)
       if self.ser.isOpen:
         self.ser.close()
-        self.printInfo("Disconnected successfully.")
-    except:
-      self.printError("Failed to disconnect!")
-    self.ser = None
+        self.setWindowTitle("disconnected")
+      self.ser = None
+    else:
+      self.ui.connectPushButton.setDown(True)
+      self.ui.connectPushButton.setText("disconnect")
+      self.setWindowTitle("%s:%s" % (self.getSelectedPort(), self.getSelectedBaudRate()))
+      try:
+        # self.ui.setWindowTitle("%s:%s" % (self.getSelectedPort(), self.getSelectedBaudRate()))
+        self.ser = serial.Serial(str(self.getSelectedPort()), int(self.getSelectedBaudRate()))
+        self.ser.write("\n")
+        self.connected = True
+        self.startReader(self.ser)
+      except:
+        self.ser = None
+        self.connected = False
+        self.printError("ERROR")
 
   def startReader(self, ser):
     self.reader.start(ser)
@@ -118,17 +125,27 @@ class SerialWidget(QWidget):
 
   def updateLog(self, text):
     self.ui.logPlainTextEdit.moveCursor(QTextCursor.End)
-    self.ui.logPlainTextEdit.insertPlainText(text)
+    # print([text])
+    ptext = str(text)
+    if '\n' in ptext:
+      ptext = '\n'.join(filter(None, ptext.splitlines()))
+    if (len(ptext) < 4 and '->' in ptext) or "[vxWorks *]#" in ptext:
+      ptext = '\n' + ptext + '\n'
+    else:
+      ptext += '\n'
+    # if not '->' == ptext[0:1] and ptext[-1] is not '\n':
+    #   ptext += '\n'
+    # print([ptext])
+    self.ui.logPlainTextEdit.insertPlainText(ptext)
     self.ui.logPlainTextEdit.moveCursor(QTextCursor.End)
 
   def processCmd(self):
     cmd = self.ui.cmdLineEdit.text()
-    self.printCmd(cmd)
     self.writer.start(self.ser, cmd)
     self.ui.cmdLineEdit.clear()
 
   def closeEvent(self, event):
-    self.disconnect()
+    pass
 
 
 class CReader(QThread):
@@ -171,6 +188,6 @@ class CWriter(QThread):
 
 if __name__ == "__main__":
   app = QApplication(sys.argv)
-  mainWindow = SerialWidget()
+  mainWindow = SerialWidget(port="COM5", baud="115200", connect_on_start=True)
   mainWindow.show()
   sys.exit(app.exec_())
