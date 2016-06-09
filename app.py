@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-05 20:56:57
-# @Last Modified by:   cosgrma
-# @Last Modified time: 2016-02-03 01:58:41
+# @Last Modified by:   Mathew Cosgrove
+# @Last Modified time: 2016-04-13 03:34:50
 
 import logging
 logger = logging.getLogger(__name__)
@@ -217,4 +217,3 @@ if __name__ == '__main__':
   # app.add_close_callback(close_test)
   # app.main.menus["File"].actions["New"].triggered.connect(test_trigger)
   app.run()
-  print("test", )

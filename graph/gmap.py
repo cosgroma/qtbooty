@@ -30,8 +30,8 @@ Attributes:
 """
 # @Author: Mathew Cosgrove
 # @Date:   2015-09-04 03:23:23
-# @Last Modified by:   cosgrma
-# @Last Modified time: 2016-02-03 01:15:43
+# @Last Modified by:   Mathew Cosgrove
+# @Last Modified time: 2016-04-13 04:11:48
 # REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
 # REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
@@ -45,11 +45,21 @@ __status__ = "Development"
 
 import os
 import socket
-import getpass
-import keyring
-from PyQt4 import QtCore, QtGui, QtWebKit, QtNetwork
 
 import logging
+import pyutils
+pyutils.setup_logging()
+logger = logging.getLogger(__name__)
+
+from PyQt4 import QtCore, QtGui, QtWebKit, QtNetwork
+
+import getpass
+
+try:
+  import keyring
+except ImportError:
+
+  raise ImportError('<any message you want here>')
 
 
 class GMap(QtGui.QWidget):
