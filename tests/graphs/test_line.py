@@ -2,12 +2,16 @@
 # -*- coding: utf-8 -*-
 # @Author: Mathew Cosgrove
 # @Date:   2014-11-25 21:43:42
-# @Last Modified by:   cosgrma
-# @Last Modified time: 2015-09-02 06:03:25
+# @Last Modified by:   Mathew Cosgrove
+# @Last Modified time: 2016-06-16 23:52:21
 
 import logging
-import pyutils
-pyutils.setup_logging()
+try:
+  import pyutils
+  pyutils.setup_logging()
+except:
+  pass
+
 logger = logging.getLogger()
 
 import os
@@ -15,8 +19,11 @@ os.environ['QT_API'] = 'pyqt'
 
 import numpy as np
 
-from QtBooty import App
-from QtBooty import graph
+import sys
+sys.path.append(os.path.dirname(os.path.join(os.path.dirname(__file__), "../../qtbooty")))
+
+from qtbooty import App
+from qtbooty import graph
 
 controller_config = {
     "layout": ["h", "na"],

@@ -30,8 +30,8 @@ Attributes:
 """
 # @Author: Mathew Cosgrove
 # @Date:   2014-12-30 06:57:46
-# @Last Modified by:   cosgrma
-# @Last Modified time: 2015-08-07 16:51:02
+# @Last Modified by:   Mathew Cosgrove
+# @Last Modified time: 2016-06-16 23:53:07
 # REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
 # REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
@@ -44,13 +44,20 @@ __email__ = "mathew.cosgrove@ngc.com"
 __status__ = "Development"
 
 import logging
-import pyutils
-pyutils.setup_logging()
+try:
+  import pyutils
+  pyutils.setup_logging()
+except:
+  pass
+
 logger = logging.getLogger()
 
 import sys
-from QtBooty import App
-from QtBooty.graph import Surface, GraphScheduler
+import os
+sys.path.append(os.path.dirname(os.path.join(os.path.dirname(__file__), "../../qtbooty")))
+
+from qtbooty import App
+from qtbooty.graph import Surface, GraphScheduler
 import numpy as np
 
 app = App('../config/app_config.json')

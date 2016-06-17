@@ -2,13 +2,15 @@
 # -*- coding: utf-8 -*-
 # @Author: Mathew Cosgrove
 # @Date:   2014-11-25 21:43:42
-# @Last Modified by:   cosgrma
-# @Last Modified time: 2015-07-29 03:22:17
+# @Last Modified by:   Mathew Cosgrove
+# @Last Modified time: 2016-06-17 00:00:04
 
 import sys
+import os
+sys.path.append(os.path.dirname(os.path.join(os.path.dirname(__file__), "../../qtbooty")))
 
-from QtBooty import App
-from QtBooty import framework
+from qtbooty import App
+from qtbooty import framework
 
 # If anything changes in the tree, print a message
 

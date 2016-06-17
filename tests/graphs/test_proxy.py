@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 
+import sys
 import os
+sys.path.append(os.path.dirname(os.path.join(os.path.dirname(__file__), "../../qtbooty")))
+
 import socket
 import getpass
 import keyring

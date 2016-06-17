@@ -10,7 +10,7 @@ Example:
   sections. Sections support any reStructuredText formatting, including
   literal blocks::
 
-      $ python test_polar.py
+      $ python rtd.py
 
 Section breaks are created by simply resuming unindented text. Section breaks
 are also implicitly created anytime a new section starts.
@@ -29,62 +29,50 @@ Attributes:
 
 """
 # @Author: Mathew Cosgrove
-# @Date:   2014-12-30 06:57:46
+# @Date:   2015-09-04 03:23:23
 # @Last Modified by:   Mathew Cosgrove
-# @Last Modified time: 2016-06-16 23:52:38
-# REF: http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html#example-google
-# REF: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
+# @Last Modified time: 2016-06-16 23:50:46
+
 
 __author__ = "Mathew Cosgrove"
 __copyright__ = ""
 __license__ = ""
 __version__ = "0.0.1"
 __maintainer__ = "Mathew Cosgrove"
-__email__ = "mathew.cosgrove@ngc.com"
+__email__ = "cosgroma@gmail.com"
 __status__ = "Development"
 
-import sys
-import os
-sys.path.append(os.path.dirname(os.path.join(os.path.dirname(__file__), "../../qtbooty")))
-
-from qtbooty import App
-from qtbooty.graph import Polar
-import numpy as np
-
-app = App('../config/app_config.json')
-
-polar = Polar()
-polar.set_lims(0, (0, 90))
-# polar.set_xlabel('degrees')
-# polar.set_ylabel('dB')
-
-polar.add_line('1', 'r')
-polar.add_line('2', 'b')
+from PyQt4 import QtCore, QtGui, QtWebKit, QtNetwork
 
 
-def get_mag(ang):
-  # Define magnitude
-  angRad = np.pi * ang / 180.0
-  mag = 10 * np.log10(np.abs(np.sin(10 * angRad) / angRad)) + angRad
-  return mag
+class DocsWidget(QtGui.QWidget):
 
-ang = 0
-ang_delta = 5
+  """docstring for DocsWidget"""
 
+  def __init__(self):
+    super(DocsWidget, self).__init__()
 
-def update_polar():
-  global ang
-  ang += ang_delta
-  mag = get_mag(ang)
-  polar.add_point('1', (ang, mag))
-  polar.add_point('2', (ang + 10, mag))
-  polar.update()
+    self.web = QtWebKit.QWebView(self)
+    self.layout = QtGui.QVBoxLayout(self)
+    self.layout.addWidget(self.web)
 
-update_polar_interval = 5
+    # self.web.page().mainFrame().setScrollBarPolicy(QtCore.Qt.Vertical, QtCore.Qt.ScrollBarAsNeeded)
 
-app.add_widget(polar)
-app.add_timer(update_polar_interval, update_polar)
+  def load_page(self, page=None):
+    if page is None:
+      page = 'C:\\cygwin64\\home\\cosgrma\\workspace\\sandbox\\sphix-test\\_build\\html\\index.html'
 
-# polar.set_interval(update_polar_interval*2)
-# polar.start()
-app.run()
+    self.web.load(QtCore.QUrl.fromLocalFile(QtCore.QFileInfo(page).absoluteFilePath()))
+
+if __name__ == '__main__':
+  import random
+  import logging
+  import pyutils
+  pyutils.setup_logging()
+  logger = logging.getLogger()
+  from qtbooty import App
+  app = App('config/bad_app_config.json')
+  docswidget = DocsWidget()
+  app.add_widget(docswidget)
+  docswidget.load_page('C:\\cygwin64\\home\\cosgrma\\workspace\\sandbox\\sphix-test\\_build\\html\\index.html')
+  app.run()
